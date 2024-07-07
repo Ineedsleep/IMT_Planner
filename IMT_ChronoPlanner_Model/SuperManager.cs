@@ -35,6 +35,7 @@ public class SuperManager
     public Rarity Rarity { get; set; }
     public Areas Area { get; set; }
     
+    public byte Priority { get; set; }
     
 }
 
