@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Automation.Provider;
 using System.Windows.Input;
-using IMT_ChronoPlanner.Models;
+using IMT_ChronoPlanner_DAL;
+using IMT_ChronoPlanner_Model;
 using MVVM;
 
 namespace IMT_ChronoPlanner.ViewModels;
@@ -21,8 +21,7 @@ public class SuperManagerViewModel : INotifyPropertyChanged
     public bool Promoted { get; set; }
     public byte Level { get; set; }
     public List<Element> Elements { get; set; }
-    public string Equipment { get; set; }
-
+    public Equipment Equipment { get; set; }
     public ICommand SaveCommand { get; set; }
     
     

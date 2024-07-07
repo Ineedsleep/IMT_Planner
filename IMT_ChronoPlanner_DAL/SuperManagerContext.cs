@@ -1,9 +1,9 @@
-﻿using IMT_ChronoPlanner.Models;
+﻿using IMT_ChronoPlanner_Model;
 using Microsoft.EntityFrameworkCore;
 
 
 
-namespace IMT_ChronoPlanner
+namespace IMT_ChronoPlanner_DAL
 {
     public class SuperManagerContext : DbContext
     {

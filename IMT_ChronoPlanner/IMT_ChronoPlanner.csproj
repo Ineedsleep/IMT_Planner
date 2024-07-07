@@ -11,7 +11,6 @@
     <ItemGroup>
       <PackageReference Include="EntityFramework" Version="6.5.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0-preview.5.24306.3" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0-preview.5.24306.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -29,6 +28,16 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+      <Page Update="Views\UserControls\ChronoPlannerControl.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\UserControls\SuperManagerControl.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
     <ItemGroup>
@@ -36,7 +45,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\IMT_ChronoPlanner_DAL\IMT_ChronoPlanner_DAL.csproj" />
+      <ProjectReference Include="..\IMT_ChronoPlanner_Model\IMT_ChronoPlanner_Model.csproj" />
       <ProjectReference Include="MVVM\MVVM.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Database\" />
+      <Folder Include="Models\" />
     </ItemGroup>
 
 </Project>

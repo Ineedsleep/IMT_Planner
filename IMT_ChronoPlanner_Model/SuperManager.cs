@@ -1,21 +1,21 @@
 ﻿using System.Net.Security;
 using System.Collections.Generic;
-using IMT_ChronoPlanner.Models;
-
-namespace IMT_ChronoPlanner;
+namespace IMT_ChronoPlanner_Model;
 
 
 public class SuperManager
 {
-    public SuperManager(string name, byte rank, bool promoted, byte level, List<Element> elements, string equipment, double multiplier)
+    public SuperManager(string name, byte rank, bool promoted, byte level, Rarity rarity, Areas area, List<Element> elements, Equipment equipment, double passiveMultiplier)
     {
         Name = name;
         Rank = rank;
         Promoted = promoted;
         Level = level;
+        Rarity = rarity;
+        Area = area;
         Elements = elements;
         Equipment = equipment;
-        Multiplier = multiplier;
+        PassiveMultiplier = passiveMultiplier;
     }
     public SuperManager(string name)
     {
@@ -30,9 +30,12 @@ public class SuperManager
     public bool Promoted { get; set; }
     public byte Level { get; set; }
     public List<Element> Elements { get; set; }
-    public string Equipment { get; set; }
+    public Equipment Equipment { get; set; }
+    public double PassiveMultiplier { get; set; }
+    public Rarity Rarity { get; set; }
+    public Areas Area { get; set; }
     
-    public double Multiplier { get; set; }
+    
 }
 
 

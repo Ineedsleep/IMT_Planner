@@ -1,6 +1,6 @@
 ﻿using System.Net.Security;
 
-namespace IMT_ChronoPlanner.Models;
+namespace IMT_ChronoPlanner_Model;
 
 public class MineEntity
 {

@@ -1,8 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using IMT_ChronoPlanner.Models;
-
+using IMT_ChronoPlanner_Model;
 namespace IMT_ChronoPlanner.ViewModels;
 
 public class ChronoPlannerViewModel  : INotifyPropertyChanged

@@ -1,11 +1,11 @@
 ﻿using System.Windows.Controls;
 using IMT_ChronoPlanner.ViewModels;
 
-namespace IMT_ChronoPlanner.Views;
+namespace IMT_ChronoPlanner.Views.UserControls;
 
-public partial class ChronoPlanner : UserControl
+public partial class ChronoPlannerControl : UserControl
 {
-    public ChronoPlanner()
+    public ChronoPlannerControl()
     {
         InitializeComponent();
         DataContext = new ChronoPlannerViewModel();

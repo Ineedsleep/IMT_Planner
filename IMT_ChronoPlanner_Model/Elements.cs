@@ -1,4 +1,4 @@
-﻿namespace IMT_ChronoPlanner.Models;
+﻿namespace IMT_ChronoPlanner_Model;
 
 public enum Element
 {
@@ -50,4 +50,19 @@ public enum Equipment
     EpicStrawHat,
     EdgarFloatie,
     KrampusHat
+}
+
+public enum Areas
+{
+    Elevator, 
+    Warehouse,
+    Mineshaft
+}
+
+public enum Rarity
+{
+    Common,
+    Rare,
+    Epic,
+    Legendary
 }

@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMT_ChronoPlanner", "IMT_Ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM", "IMT_ChronoPlanner\MVVM\MVVM.csproj", "{0A5794FC-FA6C-4412-8C15-786C33852CAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMT_ChronoPlanner_Model", "IMT_ChronoPlanner_Model\IMT_ChronoPlanner_Model.csproj", "{C6728AA3-79E0-468D-AF1C-8EBE35C48646}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMT_ChronoPlanner_DAL", "IMT_ChronoPlanner_DAL\IMT_ChronoPlanner_DAL.csproj", "{EA24EFBB-DA8A-4978-BE7D-47B352460697}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{0A5794FC-FA6C-4412-8C15-786C33852CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A5794FC-FA6C-4412-8C15-786C33852CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A5794FC-FA6C-4412-8C15-786C33852CAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6728AA3-79E0-468D-AF1C-8EBE35C48646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6728AA3-79E0-468D-AF1C-8EBE35C48646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6728AA3-79E0-468D-AF1C-8EBE35C48646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6728AA3-79E0-468D-AF1C-8EBE35C48646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA24EFBB-DA8A-4978-BE7D-47B352460697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA24EFBB-DA8A-4978-BE7D-47B352460697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA24EFBB-DA8A-4978-BE7D-47B352460697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA24EFBB-DA8A-4978-BE7D-47B352460697}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
