@@ -9,13 +9,6 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <ObjectDataProvider MethodName="GetValues"
-                            ObjectType="{x:Type sys:Enum}"
-                            x:Key="ElementValues">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="imtChronoPlannerModel:Element" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
         <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="MinWidth" Value="200"/>
             <Setter Property="MaxWidth" Value="200"/>
@@ -60,8 +53,8 @@
         <TextBox Text="{Binding Equipment}" Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" />
         
         <Label Content="Equipment" Grid.Row="5" Grid.Column="0" />
-        <ComboBox ItemsSource="{Binding Source={StaticResource ElementValues}}" MinWidth="200" Grid.Row="5" Grid.Column="1" />
-        
+        <!-- <ComboBox ItemsSource="{Binding Source={StaticResource ElementValues}}" MinWidth="200" Grid.Row="5" Grid.Column="1" /> -->
+        <!-- -->
         <Button Command="{Binding SaveCommand}" Content="Save" Grid.Row="6" Grid.Column="2" />
     </Grid>
 </UserControl>

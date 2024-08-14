@@ -73,7 +73,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <!-- You may need to adapt this line to present your 'Element' object's properties correctly -->
-                                <TextBlock Text="{Binding Element}"/>
+                                <TextBlock Text="{Binding Element.Name}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

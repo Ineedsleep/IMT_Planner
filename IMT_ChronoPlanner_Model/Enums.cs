@@ -1,17 +1,5 @@
 ﻿namespace IMT_ChronoPlanner_Model;
 
-public enum Element
-{
-    Nature,
-    Frost,
-    Flame,
-    Light,
-    Dark,
-    Wind,
-    Sand,
-    Water
-}
-
 public enum Equipment
 {
     CommonGloves,

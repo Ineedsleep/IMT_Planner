@@ -29,7 +29,7 @@ public class ChronoPlannerViewModel  : INotifyPropertyChanged
       var testi = new ObservableCollection<MineEntity>();
       for (int i = 0; i < 50; i++)
       {
-          testi.Add(new MineEntity(i +1,1,0,0,Element.Nature, new SuperManager("Sam_" + i.ToString())));
+          testi.Add(new MineEntity(i +1,1,0,0,new Element(), new SuperManager()));
       }
       return testi;
     }

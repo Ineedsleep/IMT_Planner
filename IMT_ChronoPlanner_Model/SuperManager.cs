@@ -5,7 +5,7 @@ namespace IMT_ChronoPlanner_Model;
 
 public class SuperManager
 {
-    public SuperManager(string name, byte rank, bool promoted, byte level, Rarity rarity, Areas area, List<Element> elements, Equipment equipment, double passiveMultiplier)
+    public SuperManager(string name, byte rank, bool promoted, byte level, Rarity rarity, Areas area, List<Element> elements, Equipment equipment, double passiveMultiplier, ICollection<SuperManagerElement> superManagerElements)
     {
         Name = name;
         Rank = rank;
@@ -16,15 +16,43 @@ public class SuperManager
         Elements = elements;
         Equipment = equipment;
         PassiveMultiplier = passiveMultiplier;
+        SuperManagerElements = superManagerElements;
     }
-    public SuperManager(string name)
+    public SuperManager(string name, ICollection<SuperManagerElement> superManagerElements)
     {
         Name = name;
+        SuperManagerElements = superManagerElements;
     }
+    public SuperManager(ICollection<SuperManagerElement> superManagerElements)
+    {
+        SuperManagerElements = superManagerElements;
+    }
+    
+    public SuperManager(string name, byte rank, bool promoted, byte level, Rarity rarity, Areas area,
+        List<Element> elements, Equipment equipment, double passiveMultiplier, byte priority, ICollection<SuperManagerElement> superManagerElements)
+    {
+        Name = name;
+        Rank = rank;
+        Promoted = promoted;
+        Level = level;
+        Rarity = rarity;
+        Area = area;
+        Elements = elements;
+        Equipment = equipment;
+        PassiveMultiplier = passiveMultiplier;
+        Priority = priority;
+        SuperManagerElements = superManagerElements;
+    }
+
     public SuperManager()
     {
     }
 
+    public int SuperManagerId { get; set; }
+    // Other properties...
+
+    // Navigation property
+    public ICollection<SuperManagerElement> SuperManagerElements { get; set; }
     public string Name { get; set; }
     public byte Rank { get; set; }
     public bool Promoted { get; set; }
