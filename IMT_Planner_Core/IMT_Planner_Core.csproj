@@ -34,17 +34,6 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Views\WPF\UserControls\ChronoPlannerControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-      <Page Update="Views\WPF\UserControls\SuperManagerControl.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
-      <Page Update="Views\WPF\MainWindow.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
     </ItemGroup>
 
     <ItemGroup>

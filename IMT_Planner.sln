@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMT_Planner_Model", "IMT_Pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMT_Planner_DAL", "IMT_Planner_DAL\IMT_Planner_DAL.csproj", "{EA24EFBB-DA8A-4978-BE7D-47B352460697}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMT_Planner_ViewModels", "IMT_Planner_ViewModels\IMT_Planner_ViewModels.csproj", "{225019D8-8E92-4D07-A583-020E30663464}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{EA24EFBB-DA8A-4978-BE7D-47B352460697}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA24EFBB-DA8A-4978-BE7D-47B352460697}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA24EFBB-DA8A-4978-BE7D-47B352460697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{225019D8-8E92-4D07-A583-020E30663464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{225019D8-8E92-4D07-A583-020E30663464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{225019D8-8E92-4D07-A583-020E30663464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{225019D8-8E92-4D07-A583-020E30663464}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
