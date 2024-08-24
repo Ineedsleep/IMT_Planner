@@ -5,7 +5,8 @@ namespace IMT_ChronoPlanner_Model;
 
 public class SuperManager
 {
-    public SuperManager(string name, byte rank, bool promoted, byte level, Rarity rarity, Areas area, List<Element> elements, Equipment equipment, double passiveMultiplier, ICollection<SuperManagerElement> superManagerElements)
+    public SuperManager(string name, Rank rank, bool promoted
+        , byte level, Rarity rarity, Areas area, Equipment equipment, double passiveMultiplier, ICollection<SuperManagerElement> superManagerElements)
     {
         Name = name;
         Rank = rank;
@@ -13,7 +14,6 @@ public class SuperManager
         Level = level;
         Rarity = rarity;
         Area = area;
-        Elements = elements;
         Equipment = equipment;
         PassiveMultiplier = passiveMultiplier;
         SuperManagerElements = superManagerElements;
@@ -28,8 +28,9 @@ public class SuperManager
         SuperManagerElements = superManagerElements;
     }
     
-    public SuperManager(string name, byte rank, bool promoted, byte level, Rarity rarity, Areas area,
-        List<Element> elements, Equipment equipment, double passiveMultiplier, byte priority, ICollection<SuperManagerElement> superManagerElements)
+    public SuperManager(string name, Rank rank, bool promoted, byte level, Rarity rarity, Areas area, 
+        Equipment equipment, double passiveMultiplier, byte priority
+        , ICollection<SuperManagerElement> superManagerElements)
     {
         Name = name;
         Rank = rank;
@@ -37,7 +38,6 @@ public class SuperManager
         Level = level;
         Rarity = rarity;
         Area = area;
-        Elements = elements;
         Equipment = equipment;
         PassiveMultiplier = passiveMultiplier;
         Priority = priority;
@@ -49,15 +49,12 @@ public class SuperManager
     }
 
     public int SuperManagerId { get; set; }
-    // Other properties...
-
-    // Navigation property
     public ICollection<SuperManagerElement> SuperManagerElements { get; set; }
     public string Name { get; set; }
-    public byte Rank { get; set; }
+    public Rank Rank { get; set; }
     public bool Promoted { get; set; }
     public byte Level { get; set; }
-    public List<Element> Elements { get; set; }
+    public int CurrentFragments { get; set; }
     public Equipment Equipment { get; set; }
     public double PassiveMultiplier { get; set; }
     public Rarity Rarity { get; set; }

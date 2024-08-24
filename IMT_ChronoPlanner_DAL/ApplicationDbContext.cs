@@ -1,6 +1,6 @@
 ﻿using IMT_ChronoPlanner_Model;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 
 namespace IMT_ChronoPlanner_DAL
@@ -43,26 +43,51 @@ namespace IMT_ChronoPlanner_DAL
                 new Element { ElementId = 8, Name = "Water", Description = "Water description" }
             );
             
-            
-            modelBuilder.Entity<SuperManager>(entity => 
+            modelBuilder.Entity<SuperManager>(entity =>
             {
-                entity.HasKey(sm => sm.Name);
-        
-                entity.Property(sm => sm.Rank);
-        
+                entity.HasKey(sm => sm.SuperManagerId);
+
+                entity.Property(sm => sm.Name).IsRequired();
+                var rankConverter = new ValueConverter<Rank, int>(
+                    v => v.CurrentRank, // Convert from Rank to int
+                    v => new Rank(v) // Convert from int to Rank
+                );
+                // You might need to define a ValueConverter for Rank class
+                // depending on how you have implemented it
+                entity.Property(sm => sm.Rank)
+                    .HasConversion(rankConverter);
+
                 entity.Property(sm => sm.Promoted);
-        
+
                 entity.Property(sm => sm.Level);
-        
-                entity.Property(sm => sm.Equipment);
-        
-                // entity.Property(sm => sm.Elements)
-                //     .HasConversion(
-                //         v => string.Join(',', v),
-                //         v => v.Split(',', StringSplitOptions.RemoveEmptyEntries)
-                //             .Select(str => Enum.Parse<Element>(str))
-                //             .ToList());
+
+                var rarityConverter = new ValueConverter<Rarity, string>(
+                    v => v.ToString(),
+                    v => (Rarity) Enum.Parse(typeof(Rarity), v));
+
+                var areaConverter = new ValueConverter<Areas, string>(
+                    v => v.ToString(),
+                    v => (Areas) Enum.Parse(typeof(Areas), v));
+                // Similar to Rank, you may need a ValueConverter for Rarity and Areas
+                entity.Property(sm => sm.Rarity)
+                    .HasConversion(rarityConverter);
+                entity.Property(sm => sm.Area)
+                    .HasConversion(areaConverter);
+
+          
+                // ValueConversion could be needed for Equipment, depending on its definition
+                var equipmentConverter = new ValueConverter<Equipment, string>(
+                    v => v.ToString(),
+                    v => (Equipment) Enum.Parse(typeof(Equipment), v));
+                entity.Property(sm => sm.Equipment).HasConversion(equipmentConverter);
+
+                entity.Property(sm => sm.PassiveMultiplier);
+
+                entity.Property(sm => sm.Priority);
+                
             });
+            
+            
         }
     }
 }

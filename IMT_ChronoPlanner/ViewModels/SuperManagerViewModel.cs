@@ -15,7 +15,7 @@ public class SuperManagerViewModel : INotifyPropertyChanged
     }
 
     public string Name { get; set; } // Implement PropertyChanged event in setters
-    public byte Rank { get; set; }    // Implement PropertyChanged event in setters
+    public Rank Rank { get; set; }    // Implement PropertyChanged event in setters
     public bool Promoted { get; set; }
     public byte Level { get; set; }
     public List<Element> Elements { get; set; }
