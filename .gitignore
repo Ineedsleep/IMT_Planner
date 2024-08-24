@@ -1,0 +1,57 @@
+# .gitignore for a C# project using JetBrains Rider and Visual Studio
+##
+## JetBrains Rider
+.idea/
+*.sln.iml
+
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+x64/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+## Visual Studio
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Use of the VS Designer files
+*.cache
+*.designer.cs
+*.designer.vb
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*- [Oo]ld.tlog
+
+# Web publish and publish profiles
+*.publishproj
+*.pubxml
+*.pubxml.user
+
+# Other Visual Studio files
+code_metrics/
+[Rr]elease.psmdcp
+sql/
+*.VC.db
+*.VC.VC.opendb
+
+# TFS 2012 Local Workspace
+*$tf/
+
+# Visual Studio cache/options directory
+.vs/
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
+
+# EOF - .gitignore
