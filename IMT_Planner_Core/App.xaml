@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:IMT_Planner"
              
-            >
-    <!-- ToDo: Startup Uri otherwise The App doesn't Start-->
+             StartupUri="/Views/WPF/MainWindow.xaml">
     <!-- StartupUri="MainWindow.xaml"> -->
     <Application.Resources>
         <ResourceDictionary>
@@ -12,4 +11,4 @@
     </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
-
+</Application>
