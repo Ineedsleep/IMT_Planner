@@ -47,4 +47,8 @@
       <ProjectReference Include="..\IMT_Planner_ViewModels\IMT_Planner_ViewModels.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Views\Converter\" />
+    </ItemGroup>
+
 </Project>

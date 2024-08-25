@@ -7,9 +7,13 @@
                      xmlns:sys="clr-namespace:System;assembly=System.Runtime"
                      xmlns:imtChronoPlannerModel="clr-namespace:IMT_Planner_Model;assembly=IMT_Planner_Model"
                      xmlns:userControls="clr-namespace:IMT_Planner.Views.WPF.UserControls"
+                     xmlns:converter="clr-namespace:IMT_Planner.Views.Converter"
+                     xmlns:global="clr-namespace:"
                      mc:Ignorable="d"
                      Title="MainWindow" MinHeight="600" MinWidth="1600">
-    
+    <Window.Resources>
+        <converter:LevelToBrushConverter x:Key="LevelToBrushConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -29,15 +33,39 @@
              <ItemsControl x:Name="ItemsControlSuperManager" ItemsSource="{Binding SuperManagerCollection}">
                  <ItemsControl.ItemTemplate>
                      <DataTemplate>
-                         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Padding="10" Margin="5">
-                             <StackPanel Orientation="Vertical">
-                                 <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" />
-                                 <TextBlock Text="{Binding Rarity}" />
-                                 <TextBlock Text="{Binding Area}" />
-                                 <TextBlock Text="{Binding Rank}" />
-                                 <TextBlock Text="{Binding Level}" />
-                                 <TextBlock Text="{Binding Promoted}" />
-                             </StackPanel>
+                         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Padding="10" Margin="5" 
+                                 Background="{Binding Level, Converter={StaticResource LevelToBrushConverter}}">
+                             <Grid>
+                                 <Grid.RowDefinitions>
+                                     <RowDefinition Height="1.5*"/>
+                                     <RowDefinition Height="Auto"/>
+                                     <RowDefinition Height="Auto"/>
+                                     <RowDefinition Height="Auto"/>
+                                     <RowDefinition Height="Auto"/>
+                                     <RowDefinition Height="Auto"/>
+                                 </Grid.RowDefinitions>
+                                 <Grid.ColumnDefinitions>
+                                     <ColumnDefinition Width="Auto" />
+                                     <ColumnDefinition Width="*" />
+                                 </Grid.ColumnDefinitions>
+
+                                 <TextBlock FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Text="{Binding Name}" Grid.ColumnSpan="2"/>
+
+                                 <TextBlock FontWeight="Bold" Text="Rarity: " HorizontalAlignment="Left" Grid.Row="1"/>
+                                 <TextBlock Text="{Binding Rarity}" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1"/>
+
+                                 <TextBlock FontWeight="Bold" Text="Area: " HorizontalAlignment="Left" Grid.Row="2"/>
+                                 <TextBlock Text="{Binding Area}" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2"/>
+
+                                 <TextBlock FontWeight="Bold" Text="Rank: " HorizontalAlignment="Left" Grid.Row="3"/>
+                                 <TextBlock Text="{Binding Rank}" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3"/>
+
+                                 <TextBlock FontWeight="Bold" Text="Level: " HorizontalAlignment="Left" Grid.Row="4"/>
+                                 <TextBlock Text="{Binding Level}" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="4"/>
+
+                                 <TextBlock FontWeight="Bold" Text="Promoted: " HorizontalAlignment="Left" Grid.Row="5"/>
+                                 <TextBlock Text="{Binding Promoted}" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="5"/>
+                             </Grid>
                          </Border>
                      </DataTemplate>
                  </ItemsControl.ItemTemplate>

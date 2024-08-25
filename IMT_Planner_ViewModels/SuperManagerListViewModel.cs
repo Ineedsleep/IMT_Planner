@@ -24,7 +24,7 @@ public class SuperManagerListViewModel: ObservableObject
 
     public SuperManagerListViewModel()
     {
-        SuperManagerCollection = new ObservableCollection<SuperManagerViewModel>();
+        SuperManagerCollection = new ObservableCollection<SuperManagerViewModel> ();
         _superManagerService = new SuperManagerService();
         LoadCommand = new RelayCommand<string>(async path => await LoadSuperManagersAsync(path));
         SaveCommand = new RelayCommand(SaveSuperManager);

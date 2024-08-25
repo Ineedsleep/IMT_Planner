@@ -10,6 +10,8 @@ namespace IMT_Planner_ViewModels;
 public class SuperManagerViewModel : ObservableObject
 {
     private IMT_Planner_Model.SuperManager _superManager;
+    private string _group;
+
     public SuperManager SuperManager
     {
         get { return _superManager; }
@@ -19,7 +21,17 @@ public class SuperManagerViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
-    
+
+    public string Group
+    {
+        get => _group;
+        set
+        {
+            _group = value;
+            OnPropertyChanged();
+        }
+    }
+
     public string? Name
     {
         get { return _superManager.Name; }
@@ -45,7 +57,7 @@ public class SuperManagerViewModel : ObservableObject
             }
         }
     }
-    
+
     public Areas Area
     {
         get => SuperManager.Area;
@@ -58,7 +70,7 @@ public class SuperManagerViewModel : ObservableObject
             }
         }
     }
-    
+
     public Rank? Rank
     {
         get => SuperManager.Rank;
@@ -71,7 +83,7 @@ public class SuperManagerViewModel : ObservableObject
             }
         }
     }
-    
+
     public byte Level
     {
         get => SuperManager.Level;
@@ -85,22 +97,22 @@ public class SuperManagerViewModel : ObservableObject
         }
     }
 
-    public bool Promoted 
+    public bool Promoted
     {
         get => SuperManager.Promoted;
-        set 
-        { 
-            if(SuperManager.Promoted != value) 
+        set
+        {
+            if (SuperManager.Promoted != value)
             {
                 SuperManager.Promoted = value;
                 OnPropertyChanged(nameof(Promoted));
             }
         }
     }
-    
+
     //ToDo: Add Elements, and more here
-    
-    
+
+
     public IRelayCommand UpdateNameCommand { get; }
 
     public SuperManagerViewModel()
@@ -108,6 +120,7 @@ public class SuperManagerViewModel : ObservableObject
         SuperManager = new SuperManager();
         UpdateNameCommand = new RelayCommand(UpdateName);
     }
+
     public SuperManagerViewModel(SuperManager superManager)
     {
         SuperManager = superManager;
@@ -118,9 +131,11 @@ public class SuperManagerViewModel : ObservableObject
     {
         SuperManager.Name = "New Name";
     }
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected virtual void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+    protected virtual void OnPropertyChanged(
+        [System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
     }
