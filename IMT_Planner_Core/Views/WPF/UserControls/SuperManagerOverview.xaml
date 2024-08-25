@@ -1,0 +1,193 @@
+<UserControl x:Class="IMT_Planner.Views.WPF.UserControls.SuperManagerOverview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls"
+             xmlns:converter="clr-namespace:IMT_Planner.Views.Converter"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="1600">
+    <UserControl.Resources>
+        <converter:LevelToBrushConverter x:Key="LevelToBrushConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Border
+            Grid.Column="0"
+            Margin="10,00,0,10"
+            BorderBrush="{DynamicResource MahApps.Brushes.Red}"
+            BorderThickness="1">
+            <ItemsControl x:Name="ItemsControlSuperManager" ItemsSource="{Binding SuperManagerCollection}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Margin="12"
+                            Padding="8"
+                            Background="{Binding Level, Converter={StaticResource LevelToBrushConverter}}"
+                            BorderBrush="Black"
+                            BorderThickness="1"
+                            CornerRadius="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1.5*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                    Grid.ColumnSpan="2"
+                                    HorizontalAlignment="Center"
+                                    FontSize="16"
+                                    FontWeight="Bold" MaxWidth="100"
+                                    Text="{Binding Name}" />
+
+                                <TextBlock
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Left"
+                                    FontWeight="Bold"
+                                    Text="Rarity: " />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    Text="{Binding Rarity}" />
+
+                                <TextBlock
+                                    Grid.Row="2"
+                                    HorizontalAlignment="Left"
+                                    FontWeight="Bold"
+                                    Text="Area: " />
+                                <TextBlock
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    Text="{Binding Area}" />
+
+                                <TextBlock
+                                    Grid.Row="3"
+                                    HorizontalAlignment="Left"
+                                    FontWeight="Bold"
+                                    Text="Rank: " />
+                                <TextBlock
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    Text="{Binding Rank}" />
+
+                                <TextBlock
+                                    Grid.Row="4"
+                                    HorizontalAlignment="Left"
+                                    FontWeight="Bold"
+                                    Text="Level: " />
+                                <TextBlock
+                                    Grid.Row="4"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    Text="{Binding Level}" />
+
+                                <TextBlock
+                                    Grid.Row="5"
+                                    HorizontalAlignment="Left"
+                                    FontWeight="Bold"
+                                    Text="Promoted: " />
+                                <TextBlock
+                                    Grid.Row="5"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    Text="{Binding Promoted}" />
+                                <Grid Grid.Row="6" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Content="SE" FontSize="16" FontStyle="Oblique"
+                                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <ItemsControl Grid.Column="1" ItemsSource="{Binding SEElements}"
+                                                  HorizontalAlignment="Right">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Image Width="24" Height="24" Source="{Binding ImagePath}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+
+                                <Grid Grid.Row="7" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Content="PE" FontSize="16" FontStyle="Oblique"
+                                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <ItemsControl Grid.Column="1" ItemsSource="{Binding PEElements}"
+                                                  HorizontalAlignment="Right">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Image Width="24" Height="24" Source="{Binding ImagePath}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+
+                                <Grid Grid.Row="8" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Content="NVE" FontSize="16" FontStyle="Oblique"
+                                           VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <ItemsControl Grid.Column="1" ItemsSource="{Binding NVEElements}"
+                                                  HorizontalAlignment="Right">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Image Width="24" Height="24" Source="{Binding ImagePath}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Border>
+    </Grid>
+</UserControl>

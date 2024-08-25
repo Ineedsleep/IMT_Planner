@@ -48,7 +48,7 @@ namespace IMT_Planner_DAL
                 entity.HasKey(sm => sm.SuperManagerId);
 
                 entity.Property(sm => sm.Name).IsRequired();
-                var rankConverter = new ValueConverter<Rank, int>(
+                var rankConverter = new ValueConverter<Rank?, int>(
                     v => v.CurrentRank, // Convert from Rank to int
                     v => new Rank(v) // Convert from int to Rank
                 );

@@ -17,219 +17,37 @@
         <converter:LevelToBrushConverter x:Key="LevelToBrushConverter" />
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <!--  Define columns  -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Margin="10,00,0,10"
-            BorderBrush="{DynamicResource MahApps.Brushes.Red}"
-            BorderThickness="1">
-            <ItemsControl x:Name="ItemsControlSuperManager" ItemsSource="{Binding SuperManagerCollection}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border
-                            Margin="5"
-                            Padding="10"
-                            Background="{Binding Level, Converter={StaticResource LevelToBrushConverter}}"
-                            BorderBrush="Black"
-                            BorderThickness="1"
-                            CornerRadius="10">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1.5*" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+<userControls:SuperManagerOverview/>
 
-                                <TextBlock
-                                    Grid.ColumnSpan="2"
-                                    HorizontalAlignment="Center"
-                                    FontSize="16"
-                                    FontWeight="Bold"
-                                    Text="{Binding Name}" />
+<GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
 
-                                <TextBlock
-                                    Grid.Row="1"
-                                    HorizontalAlignment="Left"
-                                    FontWeight="Bold"
-                                    Text="Rarity: " />
-                                <TextBlock
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    Text="{Binding Rarity}" />
+<userControls:SuperManagerControl Grid.Column="2"></userControls:SuperManagerControl>
 
-                                <TextBlock
-                                    Grid.Row="2"
-                                    HorizontalAlignment="Left"
-                                    FontWeight="Bold"
-                                    Text="Area: " />
-                                <TextBlock
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    Text="{Binding Area}" />
-
-                                <TextBlock
-                                    Grid.Row="3"
-                                    HorizontalAlignment="Left"
-                                    FontWeight="Bold"
-                                    Text="Rank: " />
-                                <TextBlock
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    Text="{Binding Rank}" />
-
-                                <TextBlock
-                                    Grid.Row="4"
-                                    HorizontalAlignment="Left"
-                                    FontWeight="Bold"
-                                    Text="Level: " />
-                                <TextBlock
-                                    Grid.Row="4"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    Text="{Binding Level}" />
-
-                                <TextBlock
-                                    Grid.Row="5"
-                                    HorizontalAlignment="Left"
-                                    FontWeight="Bold"
-                                    Text="Promoted: " />
-                                <TextBlock
-                                    Grid.Row="5"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    Text="{Binding Promoted}" />
-                            <Grid Grid.Row="6" Grid.ColumnSpan="2">
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="auto"/>
-        <ColumnDefinition Width="*"/>
-    </Grid.ColumnDefinitions>
-
-    <Label Grid.Column="0" Content="SE" FontSize="16" FontStyle="Oblique" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-    <ItemsControl Grid.Column="1" ItemsSource="{Binding SEElements}" HorizontalAlignment="Right">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal"/>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Image Width="24" Height="24" Source="{Binding ImagePath}" />
-                </Grid>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
-</Grid>
-
-<Grid Grid.Row="7" Grid.ColumnSpan="2">
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="1*"/>
-        <ColumnDefinition Width="3*"/>
-    </Grid.ColumnDefinitions>
-
-    <Label Grid.Column="0" Content="PE" FontSize="16" FontStyle="Oblique" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-    <ItemsControl Grid.Column="1" ItemsSource="{Binding PEElements}" HorizontalAlignment="Right">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal"/>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Image Width="24" Height="24" Source="{Binding ImagePath}" />
-                </Grid>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
-</Grid>
-
-<Grid Grid.Row="8" Grid.ColumnSpan="2">
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="auto"/>
-        <ColumnDefinition Width="*"/>
-    </Grid.ColumnDefinitions>
-
-    <Label Grid.Column="0" Content="NVE" FontSize="16" FontStyle="Oblique" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-    <ItemsControl Grid.Column="1" ItemsSource="{Binding NVEElements}" HorizontalAlignment="Right">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal"/>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Image Width="24" Height="24" Source="{Binding ImagePath}" />
-                </Grid>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
-</Grid>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-            <!-- <TabControl> -->
-            <!--     <TabItem Header="Chrono"> -->
-            <!--         <userControls:ChronoPlannerControl/> -->
-            <!--     </TabItem> -->
-            <!--     <TabItem Header="SuperManager"> -->
-            <!--         <userControls:SuperManagerControl/> -->
-            <!--     </TabItem> -->
-            <!--     <TabItem Header="Stuff"> -->
-            <!--         <userControls:SuperManagerControl/> -->
-            <!--     </TabItem> -->
-            <!-- </TabControl> -->
-        </Border>
-        <StackPanel
-            Grid.Column="1"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Orientation="Horizontal">
-            <Button
-                Width="100"
-                Height="50"
-                Margin="5"
-                Command="{Binding LoadCommand}"
-                Content="Load" />
-            <Button
-                Width="100"
-                Height="50"
-                Margin="5"
-                Command="{Binding SaveCommand}"
-                Content="Save" />
-        </StackPanel>
+<StackPanel Grid.Column="2"
+    HorizontalAlignment="Right"
+    VerticalAlignment="Bottom"
+    Orientation="Horizontal">
+    <Button
+        Width="100"
+        Height="50"
+        Margin="5"
+        Command="{Binding LoadCommand}"
+        Content="Load" />
+    <Button
+        Width="100"
+        Height="50"
+        Margin="5"
+        Command="{Binding SaveCommand}"
+        Content="Save" />
+</StackPanel>
     </Grid>
+    
 
 
 </Window>
