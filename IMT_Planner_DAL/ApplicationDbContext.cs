@@ -33,14 +33,14 @@ namespace IMT_Planner_DAL
         
             // Elements data seeding
             modelBuilder.Entity<Element>().HasData(
-                new Element { ElementId = 1, Name = "Nature", Description = "Nature description" },
-                new Element { ElementId = 2, Name = "Frost", Description = "Frost description" },
-                new Element { ElementId = 3, Name = "Flame", Description = "Flame description" },
-                new Element { ElementId = 4, Name = "Light", Description = "Light description" },
-                new Element { ElementId = 5, Name = "Dark", Description = "Dark description" },
-                new Element { ElementId = 6, Name = "Wind", Description = "Wind description" },
-                new Element { ElementId = 7, Name = "Sand", Description = "Sand description" },
-                new Element { ElementId = 8, Name = "Water", Description = "Water description" }
+                new Element { ElementId = 1, Name = "Nature"},
+                new Element { ElementId = 2, Name = "Frost" },
+                new Element { ElementId = 3, Name = "Flame" },
+                new Element { ElementId = 4, Name = "Light" },
+                new Element { ElementId = 5, Name = "Dark" },
+                new Element { ElementId = 6, Name = "Wind" },
+                new Element { ElementId = 7, Name = "Sand" },
+                new Element { ElementId = 8, Name = "Water" }
             );
             
             modelBuilder.Entity<SuperManager>(entity =>

@@ -51,4 +51,23 @@
       <Folder Include="Views\Converter\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\Elements\Nature.png" />
+      <Resource Include="Resources\Elements\Nature.png" />
+      <None Remove="Resources\Elements\Dark.png" />
+      <Resource Include="Resources\Elements\Dark.png" />
+      <None Remove="Resources\Elements\Flame.png" />
+      <Resource Include="Resources\Elements\Flame.png" />
+      <None Remove="Resources\Elements\Frost.png" />
+      <Resource Include="Resources\Elements\Frost.png" />
+      <None Remove="Resources\Elements\Light.png" />
+      <Resource Include="Resources\Elements\Light.png" />
+      <None Remove="Resources\Elements\Sand.png" />
+      <Resource Include="Resources\Elements\Sand.png" />
+      <None Remove="Resources\Elements\Water.png" />
+      <Resource Include="Resources\Elements\Water.png" />
+      <None Remove="Resources\Elements\Wind.png" />
+      <Resource Include="Resources\Elements\Wind.png" />
+    </ItemGroup>
+
 </Project>

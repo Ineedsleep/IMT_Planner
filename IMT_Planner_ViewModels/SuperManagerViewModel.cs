@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
@@ -11,7 +12,12 @@ public class SuperManagerViewModel : ObservableObject
 {
     private IMT_Planner_Model.SuperManager _superManager;
     private string _group;
+    private ObservableCollection<SuperManagerElementViewModel> _elements = new ObservableCollection<SuperManagerElementViewModel>();
 
+    public ObservableCollection<SuperManagerElementViewModel> SEElements { get; set; } =
+        new ObservableCollection<SuperManagerElementViewModel>();
+    public ObservableCollection<SuperManagerElementViewModel> NVEElements { get; set; }  = new ObservableCollection<SuperManagerElementViewModel>();
+    public ObservableCollection<SuperManagerElementViewModel> PEElements { get; set; } = new ObservableCollection<SuperManagerElementViewModel>();
     public SuperManager SuperManager
     {
         get { return _superManager; }
@@ -110,6 +116,16 @@ public class SuperManagerViewModel : ObservableObject
         }
     }
 
+    public ObservableCollection<SuperManagerElementViewModel> Elements
+    {
+        get => _elements;
+        set
+        {
+            if (Equals(value, _elements)) return;
+            _elements = value;
+            OnPropertyChanged();
+        }
+    }
     //ToDo: Add Elements, and more here
 
 
@@ -124,19 +140,54 @@ public class SuperManagerViewModel : ObservableObject
     public SuperManagerViewModel(SuperManager superManager)
     {
         SuperManager = superManager;
+        var testi = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Nature"),"SE"));
+        var testi1 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Frost"),"SE"));
+        var testi2 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Flame"),"SE"));
+        var testi3 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Light"),"SE"));
+        var testi4 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Dark"),"PE"));
+        var testi5 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Wind"),"PE"));
+        var testi6 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Sand"),"NVE"));
+        var testi7 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Water"),"NVE"));
+            Elements.Add(testi);
+            Elements.Add(testi1);
+            Elements.Add(testi2);
+            Elements.Add(testi3);
+            Elements.Add(testi4);
+            Elements.Add(testi5);
+            Elements.Add(testi6);
+            Elements.Add(testi7);
+            DistributeElements();
         UpdateNameCommand = new RelayCommand(UpdateName);
     }
+    private void DistributeElements()
+    {
+        // Clear current collections
+        SEElements.Clear();
+        NVEElements.Clear();
+        PEElements.Clear();
 
+        // Distribute elements based on their effectiveness
+        foreach (var element in Elements)
+        {
+            switch (element.EffectivenessType)
+            {
+                case "SE":
+                    SEElements.Add(element);
+                    break;
+                case "PE":
+                    PEElements.Add(element);
+                    break;
+                case "NVE":
+                    NVEElements.Add(element);
+                    break;
+             
+            }
+        }
+    }
     private void UpdateName()
     {
         SuperManager.Name = "New Name";
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected virtual void OnPropertyChanged(
-        [System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-    }
 }

@@ -1,10 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>IMT_Planner_Model</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\Elements\Dark.png" />
+      <None Remove="Resources\Elements\Flame.png" />
+      <None Remove="Resources\Elements\Frost.png" />
+      <None Remove="Resources\Elements\Light.png" />
+      <None Remove="Resources\Elements\Nature.png" />
+      <None Remove="Resources\Elements\Sand.png" />
+      <None Remove="Resources\Elements\Water.png" />
+      <None Remove="Resources\Elements\Wind.png" />
+      <None Remove="Resources\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Resources\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Resources\**" />
+    </ItemGroup>
 
 </Project>

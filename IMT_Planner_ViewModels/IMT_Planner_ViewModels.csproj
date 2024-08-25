@@ -3,8 +3,13 @@
     <PropertyGroup>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <TargetFrameworks>net8.0-windows;net8.0</TargetFrameworks>
+        <TargetFramework>net8.0-windows</TargetFramework>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Images\Nature.ico" />
+      <None Remove="Images\Nature.png" />
+    </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\IMT_Planner_Model\IMT_Planner_Model.csproj" />
@@ -13,10 +18,6 @@
     <ItemGroup>
       <PackageReference Include="CsvHelper" Version="33.0.1" />
       <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>
