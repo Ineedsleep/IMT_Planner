@@ -25,9 +25,14 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services)
     {
+        
         // Register your services and ViewModels here
-        services.AddSingleton<IMT_Planner_ViewModels.SuperManagerViewModel>();
+        services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerService>();
+        
+        
+        services.AddTransient<IMT_Planner_ViewModels.SuperManagerViewModel>();
         services.AddSingleton<IMT_Planner_ViewModels.SuperManagerListViewModel>();
+        services.AddSingleton<IMT_Planner_ViewModels.SuperManagerElementViewModel>();
         // Add other services or view models as needed.
     }
 

@@ -22,19 +22,14 @@ public class SuperManagerListViewModel: ObservableObject
             OnPropertyChanged();
         }
     }
-
-    public SuperManagerListViewModel()
+    
+    public SuperManagerListViewModel(SuperManagerService smService)
     {
-        SuperManagerCollection = new ObservableCollection<SuperManagerViewModel> ();
-        _superManagerService = new SuperManagerService();
+        _superManagerService = smService;
+        _superManagerCollection = new ObservableCollection<SuperManagerViewModel> ();
         LoadCommand = new RelayCommand<string>(async path => await LoadSuperManagersAsync(path));
         SaveCommand = new RelayCommand(SaveSuperManager);
-        // Load SuperManagerViewModel items into SuperManagerCollection here. For example:
-        // SuperManagerCollection.Add(new SuperManagerViewModel(manager1));
-        // SuperManagerCollection.Add(new SuperManagerViewModel(manager2));
-        // ... And so on, for each SuperManager object you have.
     }
-    
     private void SaveSuperManager()
     {
         Console.WriteLine("Hello World");

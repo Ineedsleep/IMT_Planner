@@ -5,11 +5,21 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Threading.Tasks;
 using IMT_Planner_Model;
+using IMT_Planner_ViewModels.Services;
 
 namespace IMT_Planner_ViewModels;
 
 public class SuperManagerViewModel : ObservableObject
 {
+    
+    private readonly SuperManagerService _superManagerService;
+    public SuperManagerViewModel(SuperManagerService superManagerService)
+    {
+        _superManagerService = superManagerService;
+    }
+    
+    
+    
     private IMT_Planner_Model.SuperManager _superManager;
     private string _group;
     private ObservableCollection<SuperManagerElementViewModel> _elements = new ObservableCollection<SuperManagerElementViewModel>();
