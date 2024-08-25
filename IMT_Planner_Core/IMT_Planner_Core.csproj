@@ -12,6 +12,7 @@
     <ItemGroup>
       <PackageReference Include="EntityFramework" Version="6.5.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0-preview.5.24306.3" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.7.24405.7" />
     </ItemGroup>
 
     <ItemGroup>
@@ -43,6 +44,7 @@
     <ItemGroup>
       <ProjectReference Include="..\IMT_Planner_DAL\IMT_Planner_DAL.csproj" />
       <ProjectReference Include="..\IMT_Planner_Model\IMT_Planner_Model.csproj" />
+      <ProjectReference Include="..\IMT_Planner_ViewModels\IMT_Planner_ViewModels.csproj" />
     </ItemGroup>
 
 </Project>

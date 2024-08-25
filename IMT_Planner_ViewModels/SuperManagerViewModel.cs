@@ -7,7 +7,7 @@ using IMT_Planner_Model;
 
 namespace IMT_Planner_ViewModels;
 
-public class SuperManagerViewModel : System.ComponentModel.INotifyPropertyChanged
+public class SuperManagerViewModel : ObservableObject
 {
     private IMT_Planner_Model.SuperManager _superManager;
     public SuperManager SuperManager
@@ -20,7 +20,7 @@ public class SuperManagerViewModel : System.ComponentModel.INotifyPropertyChange
         }
     }
     
-    public string Name
+    public string? Name
     {
         get { return _superManager.Name; }
         set
@@ -59,7 +59,7 @@ public class SuperManagerViewModel : System.ComponentModel.INotifyPropertyChange
         }
     }
     
-    public Rank Rank
+    public Rank? Rank
     {
         get => SuperManager.Rank;
         set
@@ -106,6 +106,11 @@ public class SuperManagerViewModel : System.ComponentModel.INotifyPropertyChange
     public SuperManagerViewModel()
     {
         SuperManager = new SuperManager();
+        UpdateNameCommand = new RelayCommand(UpdateName);
+    }
+    public SuperManagerViewModel(SuperManager superManager)
+    {
+        SuperManager = superManager;
         UpdateNameCommand = new RelayCommand(UpdateName);
     }
 

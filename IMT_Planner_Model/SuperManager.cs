@@ -5,8 +5,8 @@ namespace IMT_Planner_Model;
 
 public class SuperManager
 {
-    public SuperManager(string name, Rank rank, bool promoted
-        , byte level, Rarity rarity, Areas area, Equipment equipment, double passiveMultiplier, ICollection<SuperManagerElement> superManagerElements)
+    public SuperManager(string? name, Rank? rank, bool promoted
+        , byte level, Rarity rarity, Areas area, Equipment equipment, double passiveMultiplier, ICollection<SuperManagerElement>? superManagerElements)
     {
         Name = name;
         Rank = rank;
@@ -18,19 +18,29 @@ public class SuperManager
         PassiveMultiplier = passiveMultiplier;
         SuperManagerElements = superManagerElements;
     }
-    public SuperManager(string name, ICollection<SuperManagerElement> superManagerElements)
+    
+    public SuperManager(string? name, Rank? rank, bool promoted
+        ,Rarity rarity, Areas area)
+    {
+        Name = name;
+        Rank = rank;
+        Promoted = promoted;
+        Rarity = rarity;
+        Area = area;
+    }
+    public SuperManager(string? name, ICollection<SuperManagerElement>? superManagerElements)
     {
         Name = name;
         SuperManagerElements = superManagerElements;
     }
-    public SuperManager(ICollection<SuperManagerElement> superManagerElements)
+    public SuperManager(ICollection<SuperManagerElement>? superManagerElements)
     {
         SuperManagerElements = superManagerElements;
     }
     
-    public SuperManager(string name, Rank rank, bool promoted, byte level, Rarity rarity, Areas area, 
+    public SuperManager(string? name, Rank? rank, bool promoted, byte level, Rarity rarity, Areas area, 
         Equipment equipment, double passiveMultiplier, byte priority
-        , ICollection<SuperManagerElement> superManagerElements)
+        , ICollection<SuperManagerElement>? superManagerElements)
     {
         Name = name;
         Rank = rank;
@@ -49,9 +59,9 @@ public class SuperManager
     }
 
     public int SuperManagerId { get; set; }
-    public ICollection<SuperManagerElement> SuperManagerElements { get; set; }
-    public string Name { get; set; }
-    public Rank Rank { get; set; }
+    public ICollection<SuperManagerElement>? SuperManagerElements { get; set; }
+    public string? Name { get; set; }
+    public Rank? Rank { get; set; }
     public bool Promoted { get; set; }
     public byte Level { get; set; }
     public int CurrentFragments { get; set; }

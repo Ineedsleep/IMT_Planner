@@ -8,27 +8,61 @@
                      xmlns:imtChronoPlannerModel="clr-namespace:IMT_Planner_Model;assembly=IMT_Planner_Model"
                      xmlns:userControls="clr-namespace:IMT_Planner.Views.WPF.UserControls"
                      mc:Ignorable="d"
-                     Title="MainWindow" Height="450" Width="800">
+                     Title="MainWindow" MinHeight="600" MinWidth="1600">
     
     <Grid>
-         <Border
-            Grid.Column="0"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Define columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border
+            Grid.Column="0" Grid.ColumnSpan="2"
             Margin="10,00,0,10"
             BorderBrush="{DynamicResource MahApps.Brushes.Red}"
             BorderThickness="1">
-      
-             <TabControl>
-                 <TabItem Header="Chrono">
-                     <userControls:ChronoPlannerControl/>
-                 </TabItem>
-                 <TabItem Header="SuperManager">
-                     <userControls:SuperManagerControl/>
-                 </TabItem>
-                 <TabItem Header="Stuff">
-                     <userControls:SuperManagerControl/>
-                 </TabItem>
-             </TabControl>
+             <ItemsControl x:Name="ItemsControlSuperManager" ItemsSource="{Binding SuperManagerCollection}">
+                 <ItemsControl.ItemTemplate>
+                     <DataTemplate>
+                         <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Padding="10" Margin="5">
+                             <StackPanel Orientation="Vertical">
+                                 <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" />
+                                 <TextBlock Text="{Binding Rarity}" />
+                                 <TextBlock Text="{Binding Area}" />
+                                 <TextBlock Text="{Binding Rank}" />
+                                 <TextBlock Text="{Binding Level}" />
+                                 <TextBlock Text="{Binding Promoted}" />
+                             </StackPanel>
+                         </Border>
+                     </DataTemplate>
+                 </ItemsControl.ItemTemplate>
+                 <ItemsControl.ItemsPanel>
+                     <ItemsPanelTemplate>
+                         <WrapPanel Orientation="Horizontal" />
+                     </ItemsPanelTemplate>
+                 </ItemsControl.ItemsPanel>
+             </ItemsControl>
+             <!-- <TabControl> -->
+             <!--     <TabItem Header="Chrono"> -->
+             <!--         <userControls:ChronoPlannerControl/> -->
+             <!--     </TabItem> -->
+             <!--     <TabItem Header="SuperManager"> -->
+             <!--         <userControls:SuperManagerControl/> -->
+             <!--     </TabItem> -->
+             <!--     <TabItem Header="Stuff"> -->
+             <!--         <userControls:SuperManagerControl/> -->
+             <!--     </TabItem> -->
+             <!-- </TabControl> -->
              </Border>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Bottom">
+            <Button Command="{Binding LoadCommand}" Content="Load" Width="100" Height="50" Margin="5"/>
+            <Button Command="{Binding SaveCommand}" Content="Save" Width="100" Height="50" Margin="5"/>
+        </StackPanel>
     </Grid>
     
 
