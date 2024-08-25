@@ -13,17 +13,16 @@
     MinWidth="1600"
     MinHeight="600"
     mc:Ignorable="d">
-    <Window.Resources>
-        <converter:LevelToBrushConverter x:Key="LevelToBrushConverter" />
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+<ScrollViewer>
+    <userControls:SuperManagerOverview/>
+</ScrollViewer>
 
-<userControls:SuperManagerOverview/>
 
 <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
 

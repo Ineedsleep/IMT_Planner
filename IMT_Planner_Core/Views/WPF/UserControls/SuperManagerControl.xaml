@@ -5,28 +5,55 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:imtChronoPlannerModel="clr-namespace:IMT_Planner_Model;assembly=IMT_Planner_Model"
              xmlns:local="clr-namespace:IMT_Planner.Views"
+             xmlns:rules="clr-namespace:IMT_Planner.Views.WPF.Rules"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <StackPanel x:Name="EditManagerPanel" Grid.Column="2" Margin="10">
+        <StackPanel x:Name="EditManagerPanel"  Margin="10" MaxWidth="400">
   
             <!-- Editor for Name property -->
             <GroupBox Header="Name">
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
-
+            <GroupBox Header="Level">
+                <TextBox>
+                    <TextBox.Text>
+                        <Binding Path="Level" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <rules:RangeValidationRule Minimum="1" Maximum="50" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </GroupBox>
+            
+            <GroupBox Header="Rank" MaxWidth="400">
+                <TextBox>
+                    <TextBox.Text>
+                        <Binding Path="Rank" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <rules:RangeValidationRule Minimum="1" Maximum="5" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </GroupBox>
             <!-- Editor for Rarity property -->
             <GroupBox Header="Rarity">
-                <ComboBox SelectedItem="{Binding Rarity, UpdateSourceTrigger=PropertyChanged}">
-                    <!-- List all possible Rarity values here -->
-                </ComboBox>
+                <ComboBox ItemsSource="{Binding Rarities}" SelectedItem="{Binding Rarity, UpdateSourceTrigger=PropertyChanged}"/>
+            </GroupBox>
+            <GroupBox Header="Area">
+                <ComboBox ItemsSource="{Binding Areas}" SelectedItem="{Binding Area, UpdateSourceTrigger=PropertyChanged}"/>
+            </GroupBox>
+            <GroupBox Header="Promoted">
+                <CheckBox IsChecked="{Binding Promoted}" />
             </GroupBox>
 
             <!-- Other properties editors go here -->
 
             <!-- Command button for UpdateName -->
-            <Button Command="{Binding UpdateNameCommand}">Update Name</Button>
+            <Button Command="{Binding UpdateCommand}">Update</Button>
 
         </StackPanel>
     </Grid>

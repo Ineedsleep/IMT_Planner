@@ -129,12 +129,12 @@ public class SuperManagerViewModel : ObservableObject
     //ToDo: Add Elements, and more here
 
 
-    public IRelayCommand UpdateNameCommand { get; }
+    public IRelayCommand UpdateCommand { get; }
 
     public SuperManagerViewModel()
     {
         SuperManager = new SuperManager();
-        UpdateNameCommand = new RelayCommand(UpdateName);
+        UpdateCommand = new RelayCommand(Update);
     }
 
     public SuperManagerViewModel(SuperManager superManager)
@@ -157,7 +157,7 @@ public class SuperManagerViewModel : ObservableObject
             Elements.Add(testi6);
             Elements.Add(testi7);
             DistributeElements();
-        UpdateNameCommand = new RelayCommand(UpdateName);
+        UpdateCommand = new RelayCommand(Update);
     }
     private void DistributeElements()
     {
@@ -184,10 +184,16 @@ public class SuperManagerViewModel : ObservableObject
             }
         }
     }
-    private void UpdateName()
+    private void Update()
     {
         SuperManager.Name = "New Name";
     }
-
-
+    public IEnumerable<Rarity> Rarities
+    {
+        get { return Enum.GetValues(typeof(Rarity)).Cast<Rarity>(); }
+    }
+    public IEnumerable<Areas> Areas
+    {
+        get { return Enum.GetValues(typeof(Areas)).Cast<Areas>(); }
+    }
 }

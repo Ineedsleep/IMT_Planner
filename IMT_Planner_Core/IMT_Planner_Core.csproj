@@ -49,6 +49,7 @@
 
     <ItemGroup>
       <Folder Include="Views\Converter\" />
+      <Folder Include="Views\WPF\Rules\" />
     </ItemGroup>
 
     <ItemGroup>

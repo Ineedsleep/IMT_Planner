@@ -8,7 +8,9 @@
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1600">
     <UserControl.Resources>
-        <converter:LevelToBrushConverter x:Key="LevelToBrushConverter" />
+        <converter:RankToBrushConverter x:Key="RankToBrushConverter" />
+        <converter:MaxToBrushConverter x:Key="MaxToBrushConverter" />
+        <converter:RarityToBackgroundConverter x:Key="RarityToBackgroundConverter" />
     </UserControl.Resources>
     <Grid>
         <Border
@@ -22,10 +24,16 @@
                         <Border
                             Margin="12"
                             Padding="8"
-                            Background="{Binding Level, Converter={StaticResource LevelToBrushConverter}}"
-                            BorderBrush="Black"
-                            BorderThickness="1"
+                            BorderBrush="{Binding Rank.CurrentRank, Converter={StaticResource RankToBrushConverter}}"
+                            Background="{Binding Path=Rarity, Converter={StaticResource RarityToBackgroundConverter}}"
+                            BorderThickness="2"  
                             CornerRadius="10">
+                            <!-- <Border.Background> -->
+                            <!--     <MultiBinding Converter="{StaticResource MaxToBrushConverter}"> -->
+                            <!--         <Binding Path="Level"/> -->
+                            <!--         <Binding Path="Promoted"/> -->
+                            <!--     </MultiBinding> -->
+                            <!-- </Border.Background> -->
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1.5*" />
@@ -81,7 +89,7 @@
                                     Grid.Row="3"
                                     Grid.Column="1"
                                     HorizontalAlignment="Right"
-                                    Text="{Binding Rank}" />
+                                    Text="{Binding Rank.CurrentRank}" />
 
                                 <TextBlock
                                     Grid.Row="4"

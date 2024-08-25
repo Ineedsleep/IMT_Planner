@@ -8,7 +8,7 @@ public class Rank
         get => _currentRank;
         set
         {
-            if (value is < 5 and < 0)
+            if (value is >= 0 and <= 5 )
                 _currentRank = value;
         }
     }
@@ -49,7 +49,6 @@ public class Rank
     // Constructor that initializes the rank to zero
     public Rank()
     {
-        CurrentRank = 0;
     }
 
     public Rank(int rank)

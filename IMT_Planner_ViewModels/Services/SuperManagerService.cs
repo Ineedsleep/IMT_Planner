@@ -53,23 +53,18 @@ public class RankConverter : CsvHelper.TypeConversion.ITypeConverter
     public object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
     {   if (string.IsNullOrEmpty(text))
         {
-            return null; // Return null or a default Rank instance depending on your requirements
+            Rank defaultRank = new Rank(99);
+            return defaultRank;
         }
         // The logic to create a Rank instance from a string
         int rankValue = int.Parse(text);
         Rank rank = new Rank(rankValue);  // Assuming Rank class has a constructor that accepts an integer
         return rank;
     }
-    public object ConvertFromInt(int text, IReaderRow row, MemberMapData memberMapData)
-    {
-        // The logic to create a Rank instance from a string
-        int rankValue =text;
-        Rank rank = new Rank(rankValue);  // Assuming Rank class has a constructor that accepts an integer
-        return rank;
-    }
+    
     public string ConvertToString(object value, IWriterRow row, MemberMapData memberMapData)
     {
         Rank rank = (Rank)value;
-        return rank.ToString();  // Assuming Rank class has a suitable ToString() method to represent it as a string
+        return rank.CurrentRank.ToString();  // Assuming Rank class has a suitable ToString() method to represent it as a string
     }
 }
