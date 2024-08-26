@@ -19,32 +19,27 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-<ScrollViewer>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Column="0" DockPanel.Dock="Top" Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Command="{Binding SaveCommand}" Header="_Save"/>
+                <MenuItem Command="{Binding LoadCommand}" Header="_Load"/>
+            </MenuItem>
+        </Menu>
+        
+<ScrollViewer Grid.Column="0" Grid.Row="1">
     <userControls:SuperManagerOverview/>
 </ScrollViewer>
 
 
-<GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+<GridSplitter Grid.Row="1" Grid.Column="1"  Width="5" HorizontalAlignment="Stretch"/>
 
-<userControls:SuperManagerControl Grid.Column="2"></userControls:SuperManagerControl>
+<userControls:SuperManagerControl Grid.Row="1"  Grid.Column="2"></userControls:SuperManagerControl>
 
-<StackPanel Grid.Column="2"
-    HorizontalAlignment="Right"
-    VerticalAlignment="Bottom"
-    Orientation="Horizontal">
-    <Button
-        Width="100"
-        Height="50"
-        Margin="5"
-        Command="{Binding LoadCommand}"
-        Content="Load" />
-    <Button
-        Width="100"
-        Height="50"
-        Margin="5"
-        Command="{Binding SaveCommand}"
-        Content="Save" />
-</StackPanel>
+
     </Grid>
     
 

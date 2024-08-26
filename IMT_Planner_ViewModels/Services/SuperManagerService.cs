@@ -9,6 +9,35 @@ namespace IMT_Planner_ViewModels.Services;
 
 public class SuperManagerService
 {
+    
+    // Holds the instance of SuperManager
+    private SuperManager _superManager;
+
+    public SuperManager CurrentSuperManager
+    {
+        get => _superManager;
+        set
+        {
+            _superManager = value;
+            NotifySuperManagerChanged();
+        }
+    }
+
+    // This event will be invoked whenever CurrentSuperManager is modified
+    public event Action SuperManagerChanged;
+
+    private void NotifySuperManagerChanged() => SuperManagerChanged?.Invoke();
+    
+    // Add methods to manipulate the model here. 
+    // For example, suppose SuperManager has a method to update its status
+    public void UpdateName(string newName)
+    {
+        _superManager.Name = newName;
+        NotifySuperManagerChanged();
+    }
+    
+    
+    
     public async Task<IEnumerable<SuperManager>> LoadSuperManagersFromFileAsync(string filePath)
     {
         filePath = "C:\\Users\\Tower\\Downloads\\SM_Sheet.csv";
