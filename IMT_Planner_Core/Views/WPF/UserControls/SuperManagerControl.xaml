@@ -31,7 +31,7 @@
             <GroupBox Header="Rank" MaxWidth="400">
                 <TextBox>
                     <TextBox.Text>
-                        <Binding Path="Rank" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="Rank.CurrentRank" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <rules:RangeValidationRule Minimum="1" Maximum="5" />
                             </Binding.ValidationRules>
