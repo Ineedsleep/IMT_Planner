@@ -12,29 +12,59 @@ namespace IMT_Planner_ViewModels;
 public class SuperManagerViewModel : ObservableObject
 {
     
+    private string _group;
+    public IRelayCommand UpdateCommand { get; }
+
+
     private readonly SuperManagerService _superManagerService;
     public SuperManagerViewModel(SuperManagerService superManagerService)
     {
         _superManagerService = superManagerService;
-    }
-    
-    
-    
-    private IMT_Planner_Model.SuperManager _superManager;
-    private string _group;
-    private ObservableCollection<SuperManagerElementViewModel> _elements = new ObservableCollection<SuperManagerElementViewModel>();
+        _superManagerService.SuperManagerChanged -= HandleSuperManagerChanged;
+        _superManagerService.SuperManagerChanged += HandleSuperManagerChanged;
+        UpdateCommand = new RelayCommand(Update);
+    }  
 
-    public ObservableCollection<SuperManagerElementViewModel> SEElements { get; set; } =
-        new ObservableCollection<SuperManagerElementViewModel>();
-    public ObservableCollection<SuperManagerElementViewModel> NVEElements { get; set; }  = new ObservableCollection<SuperManagerElementViewModel>();
-    public ObservableCollection<SuperManagerElementViewModel> PEElements { get; set; } = new ObservableCollection<SuperManagerElementViewModel>();
-    public SuperManager SuperManager
+
+    
+    private void HandleSuperManagerChanged(string obj)
     {
-        get { return _superManager; }
+        OnPropertyChanged(obj);
+        OnPropertyChanged(nameof(PEElements));
+        OnPropertyChanged(nameof(NVEElements));
+        OnPropertyChanged(nameof(SEElements));
+        OnPropertyChanged(nameof(CurrentSuperManager));
+        OnPropertyChanged(nameof(Group));
+        OnPropertyChanged(nameof(Name));
+        OnPropertyChanged(nameof(Rarity));
+        OnPropertyChanged(nameof(Area));
+        OnPropertyChanged(nameof(Rank));
+        OnPropertyChanged(nameof(Level));
+        OnPropertyChanged(nameof(Promoted));
+    }
+
+
+    public ObservableCollection<SuperManagerElementViewModel> SEElements
+    {
+        get => _superManagerService.SEElements;
+    } 
+
+    public ObservableCollection<SuperManagerElementViewModel> NVEElements
+    {
+        get => _superManagerService.NVEElements;
+    }  
+    public ObservableCollection<SuperManagerElementViewModel> PEElements
+    {
+        get => _superManagerService.PEElements;
+    }
+
+    public SuperManager CurrentSuperManager
+    {
+        get { return _superManagerService.CurrentSuperManager; }
         set
         {
-            _superManager = value;
-            OnPropertyChanged();
+            _superManagerService.CurrentSuperManager = value;
+
         }
     }
 
@@ -50,12 +80,12 @@ public class SuperManagerViewModel : ObservableObject
 
     public string? Name
     {
-        get { return _superManager.Name; }
+        get { return CurrentSuperManager?.Name; }
         set
         {
-            if (_superManager.Name != value)
+            if (CurrentSuperManager.Name != value)
             {
-                _superManager.Name = value;
+                CurrentSuperManager.Name = value;
                 OnPropertyChanged();
             }
         }
@@ -63,12 +93,12 @@ public class SuperManagerViewModel : ObservableObject
 
     public Rarity Rarity
     {
-        get => SuperManager.Rarity;
+        get => CurrentSuperManager.Rarity;
         set
         {
-            if (SuperManager.Rarity != value)
+            if (CurrentSuperManager.Rarity != value)
             {
-                SuperManager.Rarity = value;
+                CurrentSuperManager.Rarity = value;
                 OnPropertyChanged(nameof(Rarity));
             }
         }
@@ -76,12 +106,12 @@ public class SuperManagerViewModel : ObservableObject
 
     public Areas Area
     {
-        get => SuperManager.Area;
+        get => CurrentSuperManager.Area;
         set
         {
-            if (SuperManager.Area != value)
+            if (CurrentSuperManager.Area != value)
             {
-                SuperManager.Area = value;
+                CurrentSuperManager.Area = value;
                 OnPropertyChanged(nameof(Area));
             }
         }
@@ -89,12 +119,12 @@ public class SuperManagerViewModel : ObservableObject
 
     public Rank? Rank
     {
-        get => SuperManager.Rank;
+        get => CurrentSuperManager.Rank;
         set
         {
-            if (SuperManager.Rank != value)
+            if (CurrentSuperManager.Rank != value)
             {
-                SuperManager.Rank = value;
+                CurrentSuperManager.Rank = value;
                 OnPropertyChanged(nameof(Rank));
             }
         }
@@ -102,102 +132,31 @@ public class SuperManagerViewModel : ObservableObject
 
     public byte Level
     {
-        get => SuperManager.Level;
+        get => CurrentSuperManager.Level;
         set
         {
-            if (SuperManager.Level != value)
+            if (CurrentSuperManager.Level != value)
             {
-                SuperManager.Level = value;
+                CurrentSuperManager.Level = value;
                 OnPropertyChanged(nameof(Level));
             }
         }
     }
 
+    //Enum Values for Comboboxes
     public bool Promoted
     {
-        get => SuperManager.Promoted;
+        get => CurrentSuperManager.Promoted;
         set
         {
-            if (SuperManager.Promoted != value)
+            if (CurrentSuperManager.Promoted != value)
             {
-                SuperManager.Promoted = value;
+                CurrentSuperManager.Promoted = value;
                 OnPropertyChanged(nameof(Promoted));
             }
         }
     }
-
-    public ObservableCollection<SuperManagerElementViewModel> Elements
-    {
-        get => _elements;
-        set
-        {
-            if (Equals(value, _elements)) return;
-            _elements = value;
-            OnPropertyChanged();
-        }
-    }
-    //ToDo: Add Elements, and more here
-
-
-    public IRelayCommand UpdateCommand { get; }
-
-    public SuperManagerViewModel()
-    {
-        SuperManager = new SuperManager();
-        UpdateCommand = new RelayCommand(Update);
-    }
-
-    public SuperManagerViewModel(SuperManager superManager)
-    {
-        SuperManager = superManager;
-        var testi = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Nature"),"SE"));
-        var testi1 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Frost"),"SE"));
-        var testi2 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Flame"),"SE"));
-        var testi3 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Light"),"SE"));
-        var testi4 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Dark"),"PE"));
-        var testi5 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Wind"),"PE"));
-        var testi6 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Sand"),"NVE"));
-        var testi7 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Water"),"NVE"));
-            Elements.Add(testi);
-            Elements.Add(testi1);
-            Elements.Add(testi2);
-            Elements.Add(testi3);
-            Elements.Add(testi4);
-            Elements.Add(testi5);
-            Elements.Add(testi6);
-            Elements.Add(testi7);
-            DistributeElements();
-        UpdateCommand = new RelayCommand(Update);
-    }
-    private void DistributeElements()
-    {
-        // Clear current collections
-        SEElements.Clear();
-        NVEElements.Clear();
-        PEElements.Clear();
-
-        // Distribute elements based on their effectiveness
-        foreach (var element in Elements)
-        {
-            switch (element.EffectivenessType)
-            {
-                case "SE":
-                    SEElements.Add(element);
-                    break;
-                case "PE":
-                    PEElements.Add(element);
-                    break;
-                case "NVE":
-                    NVEElements.Add(element);
-                    break;
-             
-            }
-        }
-    }
-    private void Update()
-    {
-        SuperManager.Name = "New Name";
-    }
+    
     public IEnumerable<Rarity> Rarities
     {
         get { return Enum.GetValues(typeof(Rarity)).Cast<Rarity>(); }
@@ -205,5 +164,11 @@ public class SuperManagerViewModel : ObservableObject
     public IEnumerable<Areas> Areas
     {
         get { return Enum.GetValues(typeof(Areas)).Cast<Areas>(); }
+    }
+    
+    //Command Methods
+    private void Update()
+    {
+        CurrentSuperManager.Name = "New Name";
     }
 }

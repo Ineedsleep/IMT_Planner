@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using IMT_Planner_Model;
 using IMT_Planner_ViewModels.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
@@ -8,40 +9,53 @@ namespace IMT_Planner_ViewModels;
 
 public class SuperManagerListViewModel: ObservableObject
 {
-    private ObservableCollection<SuperManagerViewModel> _superManagerCollection;   
+    private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection;   
     private readonly SuperManagerService _superManagerService;
     public ICommand SaveCommand { get; private set; }
     public ICommand LoadCommand { get; private set; }
 
-    public ObservableCollection<SuperManagerViewModel> SuperManagerCollection
+    public ObservableCollection<SuperManagerCardViewModel> SuperManagerCollection
     {
-        get { return _superManagerCollection; }
+        get { return _superManagerService.SuperManagerCollection; }
         set
         {
-            _superManagerCollection = value;
+            _superManagerService.SuperManagerCollection = value;
             OnPropertyChanged();
         }
     }
     
     public SuperManagerListViewModel(SuperManagerService smService)
     {
+        
         _superManagerService = smService;
-        _superManagerCollection = new ObservableCollection<SuperManagerViewModel> ();
-        LoadCommand = new RelayCommand<string>(async path => await LoadSuperManagersAsync(path));
+        _superManagerService.SuperManagerChanged -= HandleSuperManagerChanged;
+        _superManagerService.SuperManagerChanged += HandleSuperManagerChanged;
+        _superManagerCollection = new ObservableCollection<SuperManagerCardViewModel> ();
+        LoadCommand = new RelayCommand<string>(async path => LoadSuperManagersAsync(path));
         SaveCommand = new RelayCommand(SaveSuperManager);
+        SelectSuperManagerCommand = new RelayCommand<SuperManagerCardViewModel>(SelectSuperManagerViewModel);
     }
+    public IRelayCommand SelectSuperManagerCommand { get; }
+    
+
+    private void SelectSuperManagerViewModel(SuperManagerCardViewModel superManagerViewModel)
+    {
+        _superManagerService.UpdateSelectedSuperManager(superManagerViewModel);
+    }
+    private void HandleSuperManagerChanged(string name)
+    {
+       OnPropertyChanged(name);
+    }
+    
     private void SaveSuperManager()
     {
         Console.WriteLine("Hello World");
         // Implement saving a SuperManager here
     }
 
-    private async Task LoadSuperManagersAsync(string filePath)
-    {
-        var superManagers = await _superManagerService.LoadSuperManagersFromFileAsync(filePath);
-        foreach (var superManager in superManagers)
-        {
-            SuperManagerCollection.Add(new SuperManagerViewModel(superManager));
-        }
+    private void LoadSuperManagersAsync(string filePath)
+    {    
+        filePath = "C:\\Users\\Tower\\Downloads\\SM_Sheet.csv";
+         _superManagerService.LoadSuperManagersFromFileAsync(filePath);
     }
 }
