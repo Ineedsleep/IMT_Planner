@@ -9,25 +9,37 @@ using IMT_Planner_ViewModels.Services;
 
 namespace IMT_Planner_ViewModels;
 
-public class SuperManagerViewModel : ObservableObject
+public class SuperManagerDetailsViewModel : ObservableObject
 {
     
     private string _group;
     public IRelayCommand UpdateCommand { get; }
 
 
-    private readonly SuperManagerService _superManagerService;
-    public SuperManagerViewModel(SuperManagerService superManagerService)
+    private readonly SuperManagerSelectionService _superManagerSelectionService;
+    private readonly SuperManagerRepositoryService _repositoryService;
+
+    public SuperManagerDetailsViewModel(SuperManagerSelectionService superManagerSelectionService, SuperManagerRepositoryService repositoryService)
     {
-        _superManagerService = superManagerService;
-        _superManagerService.SuperManagerChanged -= HandleSuperManagerChanged;
-        _superManagerService.SuperManagerChanged += HandleSuperManagerChanged;
+        _superManagerSelectionService = superManagerSelectionService;
+        _repositoryService = repositoryService;
+        _superManagerSelectionService.SuperManagerChanged -= HandleSuperManagerSelectionChanged;
+        _superManagerSelectionService.SuperManagerChanged += HandleSuperManagerSelectionChanged;
         UpdateCommand = new RelayCommand(Update);
+
+        try
+        {
+            _superManagerSelectionService.CreateSuperManagerCollection(_repositoryService.GetAllSuperManagers());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }  
 
 
     
-    private void HandleSuperManagerChanged(string obj)
+    private void HandleSuperManagerSelectionChanged(string obj)
     {
         OnPropertyChanged(obj);
         OnPropertyChanged(nameof(PEElements));
@@ -46,24 +58,24 @@ public class SuperManagerViewModel : ObservableObject
 
     public ObservableCollection<SuperManagerElementViewModel> SEElements
     {
-        get => _superManagerService.SEElements;
+        get => _superManagerSelectionService.SEElements;
     } 
 
     public ObservableCollection<SuperManagerElementViewModel> NVEElements
     {
-        get => _superManagerService.NVEElements;
+        get => _superManagerSelectionService.NVEElements;
     }  
     public ObservableCollection<SuperManagerElementViewModel> PEElements
     {
-        get => _superManagerService.PEElements;
+        get => _superManagerSelectionService.PEElements;
     }
 
     public SuperManager CurrentSuperManager
     {
-        get { return _superManagerService.CurrentSuperManager; }
+        get { return _superManagerSelectionService.CurrentSuperManager; }
         set
         {
-            _superManagerService.CurrentSuperManager = value;
+            _superManagerSelectionService.CurrentSuperManager = value;
 
         }
     }

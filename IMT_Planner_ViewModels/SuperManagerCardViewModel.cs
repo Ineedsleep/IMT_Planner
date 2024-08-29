@@ -126,74 +126,15 @@ public class SuperManagerCardViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
-    //ToDo: Add Elements, and more here
-
-
-    public IRelayCommand UpdateCommand { get; }
 
     public SuperManagerCardViewModel()
     {
         SuperManager = new SuperManager();
-        UpdateCommand = new RelayCommand(Update);
     }
 
     public SuperManagerCardViewModel(SuperManager superManager)
     {
         SuperManager = superManager;
-        var testi = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Nature"),"SE"));
-        var testi1 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Frost"),"SE"));
-        var testi2 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Flame"),"SE"));
-        var testi3 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Light"),"SE"));
-        var testi4 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Dark"),"PE"));
-        var testi5 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Wind"),"PE"));
-        var testi6 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Sand"),"NVE"));
-        var testi7 = new SuperManagerElementViewModel(new SuperManagerElement(SuperManager, new Element("Water"),"NVE"));
-            Elements.Add(testi);
-            Elements.Add(testi1);
-            Elements.Add(testi2);
-            Elements.Add(testi3);
-            Elements.Add(testi4);
-            Elements.Add(testi5);
-            Elements.Add(testi6);
-            Elements.Add(testi7);
-            DistributeElements();
-        UpdateCommand = new RelayCommand(Update);
     }
-    private void DistributeElements()
-    {
-        // Clear current collections
-        SEElements.Clear();
-        NVEElements.Clear();
-        PEElements.Clear();
-
-        // Distribute elements based on their effectiveness
-        foreach (var element in Elements)
-        {
-            switch (element.EffectivenessType)
-            {
-                case "SE":
-                    SEElements.Add(element);
-                    break;
-                case "PE":
-                    PEElements.Add(element);
-                    break;
-                case "NVE":
-                    NVEElements.Add(element);
-                    break;
-             
-            }
-        }
-    }
-    private void Update()
-    {
-        SuperManager.Name = "New Name";
-    }
-    public IEnumerable<Rarity> Rarities
-    {
-        get { return Enum.GetValues(typeof(Rarity)).Cast<Rarity>(); }
-    }
-    public IEnumerable<Areas> Areas
-    {
-        get { return Enum.GetValues(typeof(Areas)).Cast<Areas>(); }
-    }
+    
 }

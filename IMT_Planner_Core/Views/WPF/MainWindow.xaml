@@ -37,7 +37,7 @@
 
 <GridSplitter Grid.Row="1" Grid.Column="1"  Width="5" HorizontalAlignment="Stretch"/>
 
-<userControls:SuperManagerControl Grid.Row="1"  Grid.Column="2"></userControls:SuperManagerControl>
+<userControls:SuperManagerDetailsControl Grid.Row="1"  Grid.Column="2"></userControls:SuperManagerDetailsControl>
 
 
     </Grid>

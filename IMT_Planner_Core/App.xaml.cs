@@ -1,9 +1,12 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using IMT_Planner_DAL;
+using IMT_Planner_DAL.Context;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
-
+using IMT_Planner_DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace IMT_Planner;
 /// <summary>
@@ -25,15 +28,24 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services)
     {
-        
+        //Repos
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddDbContext<ApplicationDbContext>(options =>
+        {
+            options.UseSqlite("Data Source=IMT_Planner.db");
+        });
         // Register your services and ViewModels here
-        services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerService>();
+        services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerSelectionService>();
+        services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerRepositoryService>();
         
         
-        services.AddTransient<IMT_Planner_ViewModels.SuperManagerViewModel>();
+        services.AddTransient<IMT_Planner_ViewModels.SuperManagerDetailsViewModel>();
         services.AddSingleton<IMT_Planner_ViewModels.SuperManagerListViewModel>();
         services.AddSingleton<IMT_Planner_ViewModels.SuperManagerElementViewModel>();
         // Add other services or view models as needed.
+        
+        
+
     }
 
 }

@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\IMT_Planner_DAL\IMT_Planner_DAL.csproj" />
       <ProjectReference Include="..\IMT_Planner_Model\IMT_Planner_Model.csproj" />
     </ItemGroup>
 

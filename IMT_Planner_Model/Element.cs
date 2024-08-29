@@ -20,13 +20,6 @@ public class Element
 
 public class SuperManagerElement
 {
-    public SuperManagerElement(SuperManager manager, Element element, string effectivenessType)
-    {
-        SuperManager = manager;
-        Element = element;
-        EffectivenessType = effectivenessType;
-    }
-
     public int SuperManagerId { get; set; }
     public SuperManager SuperManager { get; set; }
     public int ElementId { get; set; }

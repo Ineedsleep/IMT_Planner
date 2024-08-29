@@ -10,26 +10,26 @@ namespace IMT_Planner_ViewModels;
 public class SuperManagerListViewModel: ObservableObject
 {
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection;   
-    private readonly SuperManagerService _superManagerService;
+    private readonly SuperManagerSelectionService _superManagerSelectionService;
     public ICommand SaveCommand { get; private set; }
     public ICommand LoadCommand { get; private set; }
 
     public ObservableCollection<SuperManagerCardViewModel> SuperManagerCollection
     {
-        get { return _superManagerService.SuperManagerCollection; }
+        get { return _superManagerSelectionService.SuperManagerCollection; }
         set
         {
-            _superManagerService.SuperManagerCollection = value;
+            _superManagerSelectionService.SuperManagerCollection = value;
             OnPropertyChanged();
         }
     }
     
-    public SuperManagerListViewModel(SuperManagerService smService)
+    public SuperManagerListViewModel(SuperManagerSelectionService smSelectionService)
     {
         
-        _superManagerService = smService;
-        _superManagerService.SuperManagerChanged -= HandleSuperManagerChanged;
-        _superManagerService.SuperManagerChanged += HandleSuperManagerChanged;
+        _superManagerSelectionService = smSelectionService;
+        _superManagerSelectionService.SuperManagerChanged -= HandleSuperManagerSelectionChanged;
+        _superManagerSelectionService.SuperManagerChanged += HandleSuperManagerSelectionChanged;
         _superManagerCollection = new ObservableCollection<SuperManagerCardViewModel> ();
         LoadCommand = new RelayCommand<string>(async path => LoadSuperManagersAsync(path));
         SaveCommand = new RelayCommand(SaveSuperManager);
@@ -40,9 +40,9 @@ public class SuperManagerListViewModel: ObservableObject
 
     private void SelectSuperManagerViewModel(SuperManagerCardViewModel superManagerViewModel)
     {
-        _superManagerService.UpdateSelectedSuperManager(superManagerViewModel);
+        _superManagerSelectionService.UpdateSelectedSuperManager(superManagerViewModel);
     }
-    private void HandleSuperManagerChanged(string name)
+    private void HandleSuperManagerSelectionChanged(string name)
     {
        OnPropertyChanged(name);
     }
@@ -56,6 +56,6 @@ public class SuperManagerListViewModel: ObservableObject
     private void LoadSuperManagersAsync(string filePath)
     {    
         filePath = "C:\\Users\\Tower\\Downloads\\SM_Sheet.csv";
-         _superManagerService.LoadSuperManagersFromFileAsync(filePath);
+         _superManagerSelectionService.LoadSuperManagersFromFileAsync(filePath);
     }
 }

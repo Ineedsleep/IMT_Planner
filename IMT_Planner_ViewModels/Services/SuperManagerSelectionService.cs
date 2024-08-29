@@ -10,7 +10,7 @@ using IMT_Planner_ViewModels.Helper;
 
 namespace IMT_Planner_ViewModels.Services;
 
-public class SuperManagerService
+public class SuperManagerSelectionService
 {
     // Holds the instance of SuperManager
     private SuperManager _superManager;
@@ -22,12 +22,12 @@ public class SuperManagerService
     public ObservableCollection<SuperManagerElementViewModel> PEElements { get; private set; }= new();
     
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection = new();
-    private SuperManagerViewModel _selectedSuperManager;
+    private SuperManagerDetailsViewModel _selectedSuperManagerDetails;
 
     public SuperManager CurrentSuperManager
     {
         get
-        {
+        { 
             if (_superManager != null) 
                 return _superManager;
             return new SuperManager();
@@ -53,16 +53,16 @@ public class SuperManagerService
         }
     }
 
-    public SuperManagerViewModel SelectedSuperManager { 
+    public SuperManagerDetailsViewModel SelectedSuperManagerDetails { 
         get
         {
             
-            return _selectedSuperManager;
+            return _selectedSuperManagerDetails;
         }
         set
         {
-            _selectedSuperManager = value;
-            NotifySuperManagerChanged(nameof(SelectedSuperManager));
+            _selectedSuperManagerDetails = value;
+            NotifySuperManagerChanged(nameof(SelectedSuperManagerDetails));
         } }
 
     private ObservableCollection<SuperManagerCardViewModel> AdjustFilter(ObservableCollection<SuperManagerCardViewModel> superManagerCollection)
@@ -70,6 +70,13 @@ public class SuperManagerService
         return superManagerCollection;
     }
 
+    public void CreateSuperManagerCollection(IEnumerable<SuperManager> collection)
+    {
+        foreach (var sm in collection)
+        {
+            SuperManagerCollection.Add(new SuperManagerCardViewModel(sm));
+        }
+    }
     // This event will be invoked whenever CurrentSuperManager is modified
     // Define event
     public event Action<string> SuperManagerChanged;
@@ -87,31 +94,31 @@ public class SuperManagerService
 
     private void PrepSuperManager()
     {
-        var testi = new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Nature"),
-            "SE"));
-        var testi1 =
-            new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Frost"), "SE"));
-        var testi2 =
-            new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Flame"), "SE"));
-        var testi3 =
-            new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Light"), "SE"));
-        var testi4 = new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Dark"), "PE"));
-        var testi5 = new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Wind"), "PE"));
-        var testi6 =
-            new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Sand"), "NVE"));
-        var testi7 =
-            new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Water"), "NVE"));
-
-        ICollection<SuperManagerElementViewModel> elements = new List<SuperManagerElementViewModel>();
-        elements.Add(testi);
-        elements.Add(testi1);
-        elements.Add(testi2);
-        elements.Add(testi3);
-        elements.Add(testi4);
-        elements.Add(testi5);
-        elements.Add(testi6);
-        elements.Add(testi7);
-        DistributeElements(elements);
+        // var testi = new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Nature"),
+        //     "SE"));
+        // var testi1 =
+        //     new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Frost"), "SE"));
+        // var testi2 =
+        //     new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Flame"), "SE"));
+        // var testi3 =
+        //     new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Light"), "SE"));
+        // var testi4 = new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Dark"), "PE"));
+        // var testi5 = new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Wind"), "PE"));
+        // var testi6 =
+        //     new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Sand"), "NVE"));
+        // var testi7 =
+        //     new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Water"), "NVE"));
+        //
+        // ICollection<SuperManagerElementViewModel> elements = new List<SuperManagerElementViewModel>();
+        // elements.Add(testi);
+        // elements.Add(testi1);
+        // elements.Add(testi2);
+        // elements.Add(testi3);
+        // elements.Add(testi4);
+        // elements.Add(testi5);
+        // elements.Add(testi6);
+        // elements.Add(testi7);
+        // DistributeElements(elements);
     }
 
     private void DistributeElements(ICollection<SuperManagerElementViewModel> elements)
@@ -140,13 +147,11 @@ public class SuperManagerService
     {
         try
         {
-            IEnumerable<SuperManager> testi = ReadAndParseCsv(filePath);
-            ObservableCollection<SuperManagerCardViewModel> tmp = new ObservableCollection<SuperManagerCardViewModel>();
-            foreach (var sm in testi)
+            IEnumerable<SuperManager> csvContent = ReadAndParseCsv(filePath);
+            foreach (var sm in csvContent)
             {
-                tmp.Add(new SuperManagerCardViewModel(sm));
+                SuperManagerCollection.Add(new SuperManagerCardViewModel(sm));
             }
-            SuperManagerCollection = tmp;
         } 
         catch (Exception ex)
         {

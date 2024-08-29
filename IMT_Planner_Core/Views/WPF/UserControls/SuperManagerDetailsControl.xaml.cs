@@ -5,11 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IMT_Planner.Views.WPF.UserControls;
 
-public partial class SuperManagerControl : UserControl
+public partial class SuperManagerDetailsControl : UserControl
 {
-    public SuperManagerControl()
+    public SuperManagerDetailsControl()
     {
         InitializeComponent();
-        DataContext = ((App)Application.Current).ServiceProvider.GetService<SuperManagerViewModel>();
+        DataContext = ((App)Application.Current).ServiceProvider.GetService<SuperManagerDetailsViewModel>();
     }
 }
