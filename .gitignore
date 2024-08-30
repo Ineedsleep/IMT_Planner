@@ -29,6 +29,7 @@ msbuild.wrn
 *.designer.cs
 *.designer.vb
 
+
 # Files built by Visual Studio
 *_i.c
 *_p.c
@@ -45,6 +46,7 @@ code_metrics/
 sql/
 *.VC.db
 *.VC.VC.opendb
+*.db
 
 # TFS 2012 Local Workspace
 *$tf/
