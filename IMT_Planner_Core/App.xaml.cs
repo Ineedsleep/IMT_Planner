@@ -24,13 +24,21 @@ public partial class App : Application
         ServiceProvider = serviceCollection.BuildServiceProvider();
 
         base.OnStartup(e);
+
+        using(var scope = ServiceProvider.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<IMTPlannerDbContext>();
+            dbContext.Database.Migrate();
+        }
+        
     }
 
     private void ConfigureServices(IServiceCollection services)
     {
         //Repos
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddDbContext<ApplicationDbContext>(options =>
+
+        services.AddDbContext<IMTPlannerDbContext>(options =>
         {
             options.UseSqlite("Data Source=IMT_Planner.db");
         });

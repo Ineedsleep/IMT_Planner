@@ -5,10 +5,10 @@ namespace IMT_Planner_DAL.Repositories;
 
 public class Repository<T> : IRepository<T> where T : class
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IMTPlannerDbContext _context;
     private readonly DbSet<T> _dbSet;
 
-    public Repository(ApplicationDbContext context)
+    public Repository(IMTPlannerDbContext context)
     {        _context = context;
              _dbSet = context.Set<T>();
 

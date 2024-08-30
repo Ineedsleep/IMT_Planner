@@ -4,13 +4,12 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace IMT_Planner_DAL.EF_Core;
 
-public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<IMTPlannerDbContext>
 {
-    public ApplicationDbContext CreateDbContext(string[] args)
+    public IMTPlannerDbContext CreateDbContext(string[] args)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<IMTPlannerDbContext>();
         optionsBuilder.UseSqlite("Data Source=IMT_Planner.db");
-
-        return new ApplicationDbContext(optionsBuilder.Options);
+        return new IMTPlannerDbContext(optionsBuilder.Options);
     }
 }
