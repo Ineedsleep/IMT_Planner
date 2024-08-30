@@ -11,8 +11,10 @@ public class SuperManagerListViewModel: ObservableObject
 {
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection;   
     private readonly SuperManagerSelectionService _superManagerSelectionService;
+    private readonly SuperManagerRepositoryService _repositoryService;
     public ICommand SaveCommand { get; private set; }
     public ICommand LoadCommand { get; private set; }
+    public ICommand ImportCommand { get; private set; }
 
     public ObservableCollection<SuperManagerCardViewModel> SuperManagerCollection
     {
@@ -24,17 +26,26 @@ public class SuperManagerListViewModel: ObservableObject
         }
     }
     
-    public SuperManagerListViewModel(SuperManagerSelectionService smSelectionService)
+    public SuperManagerListViewModel(SuperManagerSelectionService smSelectionService, SuperManagerRepositoryService repositoryService)
     {
         
         _superManagerSelectionService = smSelectionService;
+        _repositoryService = repositoryService;
         _superManagerSelectionService.SuperManagerChanged -= HandleSuperManagerSelectionChanged;
         _superManagerSelectionService.SuperManagerChanged += HandleSuperManagerSelectionChanged;
         _superManagerCollection = new ObservableCollection<SuperManagerCardViewModel> ();
         LoadCommand = new RelayCommand<string>(async path => LoadSuperManagersAsync(path));
+        ImportCommand = new RelayCommand<string>(async path => ImportSuperManagers());
         SaveCommand = new RelayCommand(SaveSuperManager);
         SelectSuperManagerCommand = new RelayCommand<SuperManagerCardViewModel>(SelectSuperManagerViewModel);
     }
+
+    private void ImportSuperManagers()
+    {
+        var tmp = SuperManagerCollection.Select(s => s.SuperManager);
+        _repositoryService.ImportSuperManagers(tmp);
+    }
+
     public IRelayCommand SelectSuperManagerCommand { get; }
     
 

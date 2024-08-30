@@ -27,6 +27,7 @@
             <MenuItem Header="_File">
                 <MenuItem Command="{Binding SaveCommand}" Header="_Save"/>
                 <MenuItem Command="{Binding LoadCommand}" Header="_Load"/>
+                <MenuItem Command="{Binding ImportCommand}" Header="_Import"/>
             </MenuItem>
         </Menu>
         

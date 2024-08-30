@@ -12,6 +12,7 @@ namespace IMT_Planner_ViewModels.Services;
 
 public class SuperManagerSelectionService
 {
+
     // Holds the instance of SuperManager
     private SuperManager _superManager;
 
@@ -24,6 +25,10 @@ public class SuperManagerSelectionService
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection = new();
     private SuperManagerDetailsViewModel _selectedSuperManagerDetails;
 
+
+    public SuperManagerSelectionService()
+    {
+    }
     public SuperManager CurrentSuperManager
     {
         get

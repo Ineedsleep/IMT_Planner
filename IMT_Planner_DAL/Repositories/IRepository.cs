@@ -1,3 +1,5 @@
+using IMT_Planner_Model;
+
 namespace IMT_Planner_DAL.Repositories;
 
 public interface IRepository<T> where T : class
@@ -9,4 +11,5 @@ public interface IRepository<T> where T : class
     void Delete(T entity);
 
     // other needed methods...
+    void InsertMany(IEnumerable<T> superManagers);
 }

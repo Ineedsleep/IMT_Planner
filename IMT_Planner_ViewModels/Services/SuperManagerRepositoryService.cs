@@ -29,7 +29,10 @@ public class SuperManagerRepositoryService
     {
         _repository.Insert(superManager);
     }
-
+    public void ImportSuperManagers(IEnumerable<SuperManager> superManagers)
+    {
+        _repository.InsertMany(superManagers);
+    }
     // Updates an existing SuperManager
     public void UpdateSuperManager(SuperManager superManager)
     {

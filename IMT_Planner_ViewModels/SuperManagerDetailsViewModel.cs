@@ -181,6 +181,6 @@ public class SuperManagerDetailsViewModel : ObservableObject
     //Command Methods
     private void Update()
     {
-        CurrentSuperManager.Name = "New Name";
+        _repositoryService.UpdateSuperManager(CurrentSuperManager);
     }
 }
