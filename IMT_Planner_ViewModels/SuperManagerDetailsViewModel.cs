@@ -182,5 +182,6 @@ public class SuperManagerDetailsViewModel : ObservableObject
     private void Update()
     {
         _repositoryService.UpdateSuperManager(CurrentSuperManager);
+        _superManagerSelectionService.UpdateCard(CurrentSuperManager);
     }
 }

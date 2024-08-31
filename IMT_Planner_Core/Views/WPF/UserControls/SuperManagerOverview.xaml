@@ -95,7 +95,7 @@
                                     Grid.Row="3"
                                     Grid.Column="1"
                                     HorizontalAlignment="Right"
-                                    Text="{Binding Rank.CurrentRank}" />
+                                    Text="{Binding Rank.CurrentRank, UpdateSourceTrigger=PropertyChanged}" />
 
                                 <TextBlock
                                     Grid.Row="4"

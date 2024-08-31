@@ -79,15 +79,17 @@ public class SuperManagerSelectionService
     {
         foreach (var sm in collection)
         {
-            SuperManagerCollection.Add(new SuperManagerCardViewModel(sm));
+            SuperManagerCollection.Add(new SuperManagerCardViewModel(sm,this));
         }
     }
     // This event will be invoked whenever CurrentSuperManager is modified
     // Define event
     public event Action<string> SuperManagerChanged;
+    public event Action SuperManagerCardUpdated;
     // Define delegate
     public delegate void SuperManagerChangedHandler(object sender, EventArgs e);
     private void NotifySuperManagerChanged(string name) => SuperManagerChanged?.Invoke(name);
+    private void NotifySuperManagerCardUpdate() => SuperManagerCardUpdated?.Invoke();
 
     // Add methods to manipulate the model here. 
     // For example, suppose SuperManager has a method to update its status
@@ -95,6 +97,21 @@ public class SuperManagerSelectionService
     {
         CurrentSuperManager.Name = newName;
     }
+    
+    public void UpdateCard(SuperManager superManager)
+    {
+        var targetVM = _superManagerCollection.SingleOrDefault(vm => vm.SuperManager == superManager);
+
+        if (targetVM != null)
+        {
+            // Modify the VM properties based on provided SuperManager properties.
+            // Here just as an example, `Area` property is updated.
+               NotifySuperManagerCardUpdate();
+        }
+        else
+        {
+            // Handle the scenario when no such SuperManagerCardViewModel can be found.
+        }   }
 
 
     private void PrepSuperManager()
@@ -155,7 +172,7 @@ public class SuperManagerSelectionService
             IEnumerable<SuperManager> csvContent = ReadAndParseCsv(filePath);
             foreach (var sm in csvContent)
             {
-                SuperManagerCollection.Add(new SuperManagerCardViewModel(sm));
+                SuperManagerCollection.Add(new SuperManagerCardViewModel(sm,this));
             }
         } 
         catch (Exception ex)
