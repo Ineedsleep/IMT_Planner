@@ -77,16 +77,16 @@ public class SuperManagerCardViewModel : ObservableObject
             }
         }
     }
-
-    public Rank? Rank
+    
+    public int CurrentRank
     {
-        get => SuperManager.Rank;
+        get => SuperManager.Rank.CurrentRank;
         set
         {
-            if (SuperManager.Rank != value)
+            if (SuperManager.Rank.CurrentRank != value)
             {
-                SuperManager.Rank = value;
-                OnPropertyChanged(nameof(Rank));
+                SuperManager.Rank.CurrentRank = value;
+                OnPropertyChanged(nameof(CurrentRank));
             }
         }
     }
@@ -139,7 +139,7 @@ public class SuperManagerCardViewModel : ObservableObject
        OnPropertyChanged(nameof(Elements));
        OnPropertyChanged(nameof(Promoted));
        OnPropertyChanged(nameof(Level));
-       OnPropertyChanged(nameof(Rank));
+       OnPropertyChanged(nameof(CurrentRank));
        OnPropertyChanged(nameof(Area));
        OnPropertyChanged(nameof(Rarity));
        OnPropertyChanged(nameof(Name));

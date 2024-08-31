@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IMT_Planner.Views.WPF.UserControls;
 
-public partial class SuperManagerOverview : UserControl
+public partial class SuperManagerCard : UserControl
 {
-    public SuperManagerOverview()
+    public SuperManagerCard()
     {
         InitializeComponent();
         DataContext = ((App)Application.Current).ServiceProvider.GetService<SuperManagerListViewModel>();
