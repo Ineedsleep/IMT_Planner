@@ -7,10 +7,16 @@
              xmlns:local="clr-namespace:IMT_Planner.Views"
              xmlns:rules="clr-namespace:IMT_Planner.Views.WPF.Rules"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:userControls="clr-namespace:IMT_Planner.Views.WPF.UserControls"
+
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <StackPanel x:Name="EditManagerPanel"  Margin="10" MaxWidth="400">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="EditManagerPanel"  Margin="10" MaxWidth="600">
   
             <!-- Editor for Name property -->
             <GroupBox Header="Name">
@@ -28,7 +34,7 @@
                 </TextBox>
             </GroupBox>
             
-            <GroupBox Header="Rank" MaxWidth="400">
+            <GroupBox Header="Rank">
                 <TextBox>
                     <TextBox.Text>
                         <Binding Path="Rank.CurrentRank" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -51,10 +57,13 @@
             </GroupBox>
 
             <!-- Other properties editors go here -->
-
+    
+            <GroupBox Header="Element">
+                <userControls:ElementSelection Grid.Row="1"></userControls:ElementSelection></GroupBox>
             <!-- Command button for UpdateName -->
             <Button Command="{Binding UpdateCommand}">Update</Button>
 
         </StackPanel>
+
     </Grid>
 </UserControl>

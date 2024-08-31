@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.IO;
 using System.Windows.Media.TextFormatting;
@@ -18,12 +19,14 @@ public class SuperManagerSelectionService
 
     //ToDo Probably just temporary
 
-    public ObservableCollection<SuperManagerElementViewModel> SEElements { get; private set; }= new();
-    public ObservableCollection<SuperManagerElementViewModel> NVEElements { get; private set; }= [];
-    public ObservableCollection<SuperManagerElementViewModel> PEElements { get; private set; }= new();
+    public ObservableCollection<SuperManagerElementViewModel> SEElements { get; set; } =
+        new ObservableCollection<SuperManagerElementViewModel>();
+    public ObservableCollection<SuperManagerElementViewModel> NVEElements { get;  set; }=
+        new ObservableCollection<SuperManagerElementViewModel>();    
+    public ObservableCollection<SuperManagerElementViewModel> PEElements { get;  set; }=
+        new ObservableCollection<SuperManagerElementViewModel>();
     
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection = new();
-    private SuperManagerDetailsViewModel _selectedSuperManagerDetails;
 
 
     public SuperManagerSelectionService()
@@ -57,18 +60,7 @@ public class SuperManagerSelectionService
             NotifySuperManagerChanged(nameof(SuperManagerCollection));
         }
     }
-
-    public SuperManagerDetailsViewModel SelectedSuperManagerDetails { 
-        get
-        {
-            
-            return _selectedSuperManagerDetails;
-        }
-        set
-        {
-            _selectedSuperManagerDetails = value;
-            NotifySuperManagerChanged(nameof(SelectedSuperManagerDetails));
-        } }
+    
 
     private ObservableCollection<SuperManagerCardViewModel> AdjustFilter(ObservableCollection<SuperManagerCardViewModel> superManagerCollection)
     {
@@ -79,9 +71,85 @@ public class SuperManagerSelectionService
     {
         foreach (var sm in collection)
         {
+            CheckInvalidElements(sm);
             SuperManagerCollection.Add(new SuperManagerCardViewModel(sm,this));
         }
     }
+
+    private void CheckInvalidElements(SuperManager sm)
+    {
+        if(sm.SuperManagerElements == null)
+        {
+            var elementCount = GetElementCount(sm.Rarity);
+
+            sm.SuperManagerElements = new List<SuperManagerElement>();
+            int counter = 0;
+            foreach(var item in CreateElements("SE", elementCount.Item1, sm.SuperManagerElements.Count))
+                sm.SuperManagerElements.Add(item);
+            foreach(var item in CreateElements("PE", elementCount.Item2,sm.SuperManagerElements.Count))
+                sm.SuperManagerElements.Add(item);
+            foreach(var item in CreateElements("NVE", elementCount.Item3,sm.SuperManagerElements.Count))
+                sm.SuperManagerElements.Add(item);
+        }
+    }
+    public static IEnumerable<SuperManagerElement> CreateElements(string effectivenessType, int count, int  counter)
+    {
+        for (var i = 0; i < count; i++)
+        {
+            yield return new SuperManagerElement { EffectivenessType = effectivenessType, Element = new Element(elements[counter]) };
+            counter++;
+        }
+    }
+    
+    static string[] elements = new string[] 
+    {
+        "Nature",
+        "Frost",
+        "Flame",
+        "Light",
+        "Dark",
+        "Wind",
+        "Sand",
+        "Water"
+    };
+    
+    private Tuple<int,int,int> GetElementCount(Rarity rarity)
+    {
+       int counter = 0;
+        Tuple<int, int, int> elementCount;
+        switch ( rarity )
+        {
+            case Rarity.Legendary:
+                return  new Tuple<int, int, int>(4,2,2);
+            case Rarity.Epic:
+                return  new Tuple<int, int, int>(3,3,2);
+            case Rarity.Rare:
+                return  new Tuple<int, int, int>(2,4,2);
+            case Rarity.Common:
+            default:
+                return  new Tuple<int, int, int>(1,5,2);
+        }
+    }
+    private void SplitElements()
+    {
+        SEElements.Clear();
+        PEElements.Clear();
+        NVEElements.Clear();
+        foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "SE"))
+        {
+            SEElements.Add(new SuperManagerElementViewModel(ele));
+        }
+        foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "PE"))
+        {
+            PEElements.Add(new SuperManagerElementViewModel(ele));
+        }
+        foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "NVE"))
+        {
+            NVEElements.Add(new SuperManagerElementViewModel(ele));
+        }
+        
+    }
+
     // This event will be invoked whenever CurrentSuperManager is modified
     // Define event
     public event Action<string> SuperManagerChanged;
@@ -112,58 +180,6 @@ public class SuperManagerSelectionService
         {
             // Handle the scenario when no such SuperManagerCardViewModel can be found.
         }   }
-
-
-    private void PrepSuperManager()
-    {
-        // var testi = new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Nature"),
-        //     "SE"));
-        // var testi1 =
-        //     new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Frost"), "SE"));
-        // var testi2 =
-        //     new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Flame"), "SE"));
-        // var testi3 =
-        //     new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Light"), "SE"));
-        // var testi4 = new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Dark"), "PE"));
-        // var testi5 = new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Wind"), "PE"));
-        // var testi6 =
-        //     new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Sand"), "NVE"));
-        // var testi7 =
-        //     new SuperManagerElementViewModel(new SuperManagerElement(CurrentSuperManager, new Element("Water"), "NVE"));
-        //
-        // ICollection<SuperManagerElementViewModel> elements = new List<SuperManagerElementViewModel>();
-        // elements.Add(testi);
-        // elements.Add(testi1);
-        // elements.Add(testi2);
-        // elements.Add(testi3);
-        // elements.Add(testi4);
-        // elements.Add(testi5);
-        // elements.Add(testi6);
-        // elements.Add(testi7);
-        // DistributeElements(elements);
-    }
-
-    private void DistributeElements(ICollection<SuperManagerElementViewModel> elements)
-    {
-        // Clear current collections
-
-        // Distribute elements based on their effectiveness
-        foreach (var element in elements)
-        {
-            switch (element.EffectivenessType)
-            {
-                case "SE":
-                    SEElements.Add(element);
-                    break;
-                case "PE":
-                    PEElements.Add(element);
-                    break;
-                case "NVE":
-                    NVEElements.Add(element);
-                    break;
-            }
-        }
-    }
 
     public void LoadSuperManagersFromFileAsync(string filePath)
     {
@@ -209,6 +225,7 @@ public class SuperManagerSelectionService
     public void UpdateSelectedSuperManager(SuperManagerCardViewModel superManagerCardViewModel)
     {
         CurrentSuperManager = superManagerCardViewModel.SuperManager;
+        SplitElements();
     }
 }
 
@@ -235,4 +252,6 @@ public class RankConverter : CsvHelper.TypeConversion.ITypeConverter
             rank.CurrentRank
                 .ToString(); // Assuming Rank class has a suitable ToString() method to represent it as a string
     }
+    
+
 }

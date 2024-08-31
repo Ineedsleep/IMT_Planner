@@ -7,11 +7,15 @@ namespace IMT_Planner_ViewModels;
 
 public class SuperManagerElementViewModel : ObservableObject
 {
-    private SuperManagerElement _model;
+    public SuperManagerElement Element { get; }
 
+
+    public SuperManagerElementViewModel()
+    {
+    } 
     public SuperManagerElementViewModel(SuperManagerElement model)
     {
-        _model = model;
+        Element = model;
     } 
 
     // Exposing the ElementId property
@@ -19,7 +23,7 @@ public class SuperManagerElementViewModel : ObservableObject
     {
         get
         {
-            return _model.ElementId;
+            return Element.ElementId;
         }
     }
 
@@ -28,14 +32,14 @@ public class SuperManagerElementViewModel : ObservableObject
     {
         get
         {
-            return _model.EffectivenessType;
+            return Element.EffectivenessType;
         }
     }
     public string Name
     {
         get
         {
-            return _model.Element.Name;
+            return Element.Element.Name;
         }
     }
     // Exposing a string property for the image, if Element has one
@@ -43,11 +47,11 @@ public class SuperManagerElementViewModel : ObservableObject
     {
         get
         {
-            var imageName = _model.Element?.Name;
+            var imageName = Element.Element?.Name;
             if (imageName == null) return null;
 
             // Define the URI for the resource image
-            var resourceUri = new Uri($"pack://application:,,,/Resources/Elements/{_model.Element.Name}.png");
+            var resourceUri = new Uri($"pack://application:,,,/Resources/Elements/{Element.Element.Name}.png");
 
             // Try to load the image from the URI
             try

@@ -26,15 +26,6 @@ public class SuperManagerDetailsViewModel : ObservableObject
         _superManagerSelectionService.SuperManagerChanged -= HandleSuperManagerSelectionChanged;
         _superManagerSelectionService.SuperManagerChanged += HandleSuperManagerSelectionChanged;
         UpdateCommand = new RelayCommand(Update);
-
-        try
-        {
-            _superManagerSelectionService.CreateSuperManagerCollection(_repositoryService.GetAllSuperManagers());
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
     }  
 
 
@@ -181,6 +172,19 @@ public class SuperManagerDetailsViewModel : ObservableObject
     //Command Methods
     private void Update()
     {
+        CurrentSuperManager.SuperManagerElements.Clear();
+        foreach (var element in _superManagerSelectionService.SEElements)
+        {
+            CurrentSuperManager.SuperManagerElements.Add(element.Element);
+        }
+        foreach (var element in _superManagerSelectionService.PEElements)
+        {
+            CurrentSuperManager.SuperManagerElements.Add(element.Element);
+        }
+        foreach (var element in _superManagerSelectionService.NVEElements)
+        {
+            CurrentSuperManager.SuperManagerElements.Add(element.Element);
+        }
         _repositoryService.UpdateSuperManager(CurrentSuperManager);
         _superManagerSelectionService.UpdateCard(CurrentSuperManager);
     }

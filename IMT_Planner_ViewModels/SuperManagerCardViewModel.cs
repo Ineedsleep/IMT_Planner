@@ -14,9 +14,14 @@ public class SuperManagerCardViewModel : ObservableObject
     private IMT_Planner_Model.SuperManager _superManager;
     private string _group;
     private ObservableCollection<SuperManagerElementViewModel> _elements = new ObservableCollection<SuperManagerElementViewModel>();
+    private ObservableCollection<SuperManagerElementViewModel> _seElements = new ObservableCollection<SuperManagerElementViewModel>();
 
-    public ObservableCollection<SuperManagerElementViewModel> SEElements { get; set; } =
-        new ObservableCollection<SuperManagerElementViewModel>();
+    public ObservableCollection<SuperManagerElementViewModel> SEElements
+    {
+        get { return _seElements; }
+        set { _seElements = value; }
+    }
+
     public ObservableCollection<SuperManagerElementViewModel> NVEElements { get; set; }  = new ObservableCollection<SuperManagerElementViewModel>();
     public ObservableCollection<SuperManagerElementViewModel> PEElements { get; set; } = new ObservableCollection<SuperManagerElementViewModel>();
     public SuperManager SuperManager
@@ -125,11 +130,30 @@ public class SuperManagerCardViewModel : ObservableObject
     public SuperManagerCardViewModel()
     {
         SuperManager = new SuperManager();
+        SplitElements();
+    }
+
+    private void SplitElements()
+    {
+        foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "SE"))
+        {
+            SEElements.Add(new SuperManagerElementViewModel(ele));
+        }
+        foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "PE"))
+        {
+            PEElements.Add(new SuperManagerElementViewModel(ele));
+        }
+        foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "NVE"))
+        {
+            NVEElements.Add(new SuperManagerElementViewModel(ele));
+        }
+        
     }
 
     public SuperManagerCardViewModel(SuperManager superManager,SuperManagerSelectionService _superManagerSelectionService)
     {
         SuperManager = superManager;
+        SplitElements();
         _superManagerSelectionService.SuperManagerCardUpdated -= CardUpdate;
         _superManagerSelectionService.SuperManagerCardUpdated += CardUpdate;
     }

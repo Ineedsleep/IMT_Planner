@@ -38,6 +38,15 @@ public class SuperManagerListViewModel: ObservableObject
         ImportCommand = new RelayCommand<string>(async path => ImportSuperManagers());
         SaveCommand = new RelayCommand(SaveSuperManager);
         SelectSuperManagerCommand = new RelayCommand<SuperManagerCardViewModel>(SelectSuperManagerViewModel);
+        try
+        {
+            _superManagerSelectionService.CreateSuperManagerCollection(_repositoryService.GetAllSuperManagers());
+            _superManagerSelectionService.CurrentSuperManager = _superManagerCollection.First().SuperManager;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 
     private void ImportSuperManagers()
@@ -60,8 +69,7 @@ public class SuperManagerListViewModel: ObservableObject
     
     private void SaveSuperManager()
     {
-        Console.WriteLine("Hello World");
-        // Implement saving a SuperManager here
+//Todo add functionality to export to csv / change name as well
     }
 
     private void LoadSuperManagersAsync(string filePath)

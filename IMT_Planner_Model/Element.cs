@@ -26,4 +26,9 @@ public class SuperManagerElement
     public Element Element { get; set; }
 
     public string EffectivenessType { get; set; }
+
+    public SuperManagerElement()
+    {
+        
+    }
 }

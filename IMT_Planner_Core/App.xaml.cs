@@ -50,6 +50,7 @@ public partial class App : Application
         services.AddTransient<IMT_Planner_ViewModels.SuperManagerDetailsViewModel>();
         services.AddSingleton<IMT_Planner_ViewModels.SuperManagerListViewModel>();
         services.AddSingleton<IMT_Planner_ViewModels.SuperManagerElementViewModel>();
+        services.AddSingleton<IMT_Planner_ViewModels.SMElementalListViewModel>();
         // Add other services or view models as needed.
         
         
