@@ -10,6 +10,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<IMTPlanner
     {
         var optionsBuilder = new DbContextOptionsBuilder<IMTPlannerDbContext>();
         optionsBuilder.UseSqlite("Data Source=IMT_Planner.db");
+        optionsBuilder.EnableSensitiveDataLogging();
         return new IMTPlannerDbContext(optionsBuilder.Options);
     }
 }

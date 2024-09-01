@@ -19,8 +19,6 @@ public class SuperManagerSelectionService
     // Holds the instance of SuperManager
     private SuperManager _superManager;
 
-    //ToDo Probably just temporary
-
     public ObservableCollection<SuperManagerElementViewModel> SEElements { get; set; } =
         new ObservableCollection<SuperManagerElementViewModel>();
 
@@ -31,7 +29,7 @@ public class SuperManagerSelectionService
         new ObservableCollection<SuperManagerElementViewModel>();
 
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection = new();
-
+    private List<Element> ElementCollection = new List<Element>();
 
     public SuperManagerSelectionService(CSVHandler csvHandler)
     {
@@ -78,7 +76,13 @@ public class SuperManagerSelectionService
             SuperManagerCollection.Add(new SuperManagerCardViewModel(sm, this));
         }
     }
-
+    public void CreateElementCollection(IEnumerable<Element> allElements)
+    {
+        foreach (var element in allElements)
+        {
+            ElementCollection.Add(element);
+        }
+    }
     private void CheckInvalidElements(SuperManager sm)
     {
         if (sm.SuperManagerElements == null)
@@ -96,7 +100,7 @@ public class SuperManagerSelectionService
         }
     }
 
-    public static IEnumerable<SuperManagerElement> CreateElements(SuperManager sm, string effectivenessType, int count,
+    public IEnumerable<SuperManagerElement> CreateElements(SuperManager sm, string effectivenessType, int count,
         int counter)
     {
         if (effectivenessType == "SE")
@@ -108,7 +112,8 @@ public class SuperManagerSelectionService
             {
                 yield return new SuperManagerElement
                 {
-                    EffectivenessType = effectivenessType, Element = new Element(elements[counter]),
+                    EffectivenessType = effectivenessType,
+                    Element = ElementCollection[counter],
                     RankRequirement = rankRequirement[i]
                 };
                 counter++;
@@ -121,7 +126,7 @@ public class SuperManagerSelectionService
             {
                 yield return new SuperManagerElement
                 {
-                    EffectivenessType = effectivenessType, Element = new Element(elements[counter]),
+                    EffectivenessType = effectivenessType, Element = ElementCollection[counter],
                 };
                 counter++;
             }
@@ -246,7 +251,8 @@ public class SuperManagerSelectionService
     {
         try
         {
-            IEnumerable<SuperManager> csvContent = _csvHandler.ReadAndParseCsv(filePath);
+            IEnumerable<SuperManager> csvContent = _csvHandler.ReadAndParseCsv(filePath,ElementCollection);
+            SuperManagerCollection.Clear();
             foreach (var sm in csvContent)
             {
                 SuperManagerCollection.Add(new SuperManagerCardViewModel(sm, this));
@@ -271,6 +277,8 @@ public class SuperManagerSelectionService
         IEnumerable <SuperManager> superManagers= _superManagerCollection.Select(sm => sm.SuperManager);
         _csvHandler.ExportToCSV(filePath, superManagers);
     }
+
+
 }
     
 

@@ -77,33 +77,5 @@ public class SMElementalListViewModel : ObservableObject
         ElementCollection = new ObservableCollection<SuperManagerElementViewModel>(SEElements.Concat(PEElements).Concat(NVEElements));
         
     }
-
-    private void InitElementalList()
-    {
-        // var currentSm = _superManagerSelectionService.CurrentSuperManager;
-        //
-        // List<(string ElementName, string ElementType)> elementData = new List<(string, string)>
-        // {
-        //     ("Nature", "SE"),
-        //     ("Frost", "SE"),
-        //     ("Flame", "SE"),
-        //     ("Light", "SE"),
-        //     ("Dark", "PE"),
-        //     ("Wind", "PE"),
-        //     ("Sand", "NVE"),
-        //     ("Water", "NVE"),
-        // };
-        //
-        // foreach (var data in elementData)
-        // {
-        //     SuperManagerElementViewModel elementViewModel = 
-        //         new SuperManagerElementViewModel(new SuperManagerElement
-        //         {
-        //            SuperManager = currentSm,
-        //             Element = new Element(data.ElementName),
-        //            EffectivenessType = data.ElementType,
-        //         },ElementCollection.Count);
-        //     ElementCollection.Add(elementViewModel);
-        // }
-    }
+    
 }

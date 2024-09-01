@@ -42,6 +42,7 @@ public class SuperManagerListViewModel: ObservableObject
         SelectSuperManagerCommand = new RelayCommand<SuperManagerCardViewModel>(SelectSuperManagerViewModel);
         try
         {
+            _superManagerSelectionService.CreateElementCollection(repositoryService.GetAllElements());
             _superManagerSelectionService.CreateSuperManagerCollection(_repositoryService.GetAllSuperManagersWithElements());
             _superManagerSelectionService.CurrentSuperManager = _superManagerCollection.First().SuperManager;
         }

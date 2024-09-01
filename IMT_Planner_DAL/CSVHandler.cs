@@ -10,18 +10,87 @@ namespace IMT_Planner_DAL;
 
 public class CSVHandler
 {
-    public IEnumerable<SuperManager> ReadAndParseCsv(string filePath)
+    public IEnumerable<SuperManager> ReadAndParseCsv(string filePath, IEnumerable<Element> elements)
     {
         using (var reader = new StreamReader(filePath))
         using (var csv = new CsvHelper.CsvReader(reader, CultureInfo.InvariantCulture))
         {
-            csv.Context.RegisterClassMap<SuperManagerMap>();
-            var records = csv.GetRecords<SuperManager>().ToList();
-            return records;
+            csv.Context.RegisterClassMap<SuperManagerImportModelMap>();
+            var records = csv.GetRecords<SuperManagerImportModel>().ToList();
+
+            var superManagers = new List<SuperManager>();
+            try
+            {
+                foreach (var record in records)
+                {
+                    var superManager = new SuperManager
+                    {
+                        Name = record.SuperManagerName,
+                        Area = record.SuperManagerArea,
+                        Rarity = record.Rarity,
+                        Rank = new Rank { CurrentRank = record.CurrentRank },
+                        Promoted = record.Promoted,
+                        Level = record.Level,
+                    };
+                
+                    superManager.SuperManagerElements = record.Elements.Split(';')
+                        .Select((e, i) =>
+                        {
+                            var element = elements.FirstOrDefault(element => element.Name == e) ?? elements.First();
+                            return new SuperManagerElement
+                            {
+                                Element = element,
+                                ElementId = element.ElementId,
+                                EffectivenessType = superManager.Rarity switch
+                                {
+                                    Rarity.Common => (i < 1) ? "SE" : (i < 6) ? "PE" : "NVE",
+                                    Rarity.Rare => (i < 2) ? "SE" : (i < 6) ? "PE" : "NVE",
+                                    Rarity.Epic => (i < 3) ? "SE" : (i < 6) ? "PE" : "NVE",
+                                    Rarity.Legendary => (i < 4) ? "SE" : (i < 6) ? "PE" : "NVE",
+                                    _ => "SE" // Default value
+                                }
+                            };
+                        }).ToList();
+
+                    if (superManager.SuperManagerElements.Count > 4)
+                    {
+                        var rankRequirement = GetRankRequirement(superManager.Rarity);
+                        for (int i = 0; i < rankRequirement.Length; i++)
+                        {
+                            superManager.SuperManagerElements.ElementAt(i).RankRequirement = rankRequirement[i];
+                        }    
+                    }
+                
+                
+                    superManagers.Add(superManager);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return superManagers;
+            }
+
+            return superManagers;
         }
     }
 
-
+    private static int[] GetRankRequirement(Rarity rarity)
+    {
+        switch (rarity)
+        {
+            case Rarity.Legendary:
+                return new[] { 0, 1, 3, 5 };
+            case Rarity.Epic:
+                return new[] { 0, 3, 5 };
+            case Rarity.Rare:
+                return new[] { 0, 5 };
+            case Rarity.Common:
+                return new[] { 0 };
+            default:
+                return new[] { 0 };
+        }
+    }
     public void ExportToCSV(string filePath, IEnumerable<SuperManager> superManagers)
     {
         List<SuperManagerCSVExportModel> records = new List<SuperManagerCSVExportModel>();
@@ -33,12 +102,16 @@ public class CSVHandler
             {
                 tmp = superManager.SuperManagerElements.OrderBy(e =>
                 {
-                    switch (e.EffectivenessType)
+                    switch (e.EffectivenessType + e.RankRequirement)
                     {
-                        case "SE": return 1;
-                        case "PE": return 2;
-                        case "NVE": return 3;
-                        default: return 4; // Handle unexpected values
+                        case "SE1": return 1;
+                        case "SE2": return 2;
+                        case "SE3": return 3;
+                        case "SE4": return 4;
+                        case "SE5": return 5;
+                        case "PE": return 6;
+                        case "NVE": return 7;
+                        default: return 8; // Handle unexpected values
                     }
 
                     ;
@@ -78,6 +151,19 @@ public class SuperManagerMap : ClassMap<SuperManager>
         Map(m => m.Rank).Name("Rank").TypeConverter<RankConverter>();
         Map(m => m.Level).Name("Level");
         Map(m => m.Promoted).Name("Promoted");
+    }
+}
+public class SuperManagerImportModelMap : ClassMap<SuperManagerImportModel>
+{
+    public SuperManagerImportModelMap() 
+    {
+        Map(m => m.SuperManagerName).Name("SuperManagerName");
+        Map(m => m.SuperManagerArea).Name("SuperManagerArea").TypeConverter<EnumConverter<Areas>>();
+        Map(m => m.CurrentRank).Name("CurrentRank");
+        Map(m => m.Level).Name("Level");
+        Map(m => m.Promoted).Name("Promoted");
+        Map(m => m.Elements).Name("Elements");
+        Map(m => m.Rarity).Name("Rarity").TypeConverter<EnumConverter<Rarity>>();
     }
 }
 

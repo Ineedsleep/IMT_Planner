@@ -10,7 +10,6 @@ namespace IMT_Planner_DAL.Context
         public IMTPlannerDbContext(DbContextOptions options)
             : base(options)
         {}
-
         public DbSet<SuperManager> SuperManagers { get; set; }
         public DbSet<Element> Elements { get; set; }
         public DbSet<SuperManagerElement> SuperManagerElements { get; set; }

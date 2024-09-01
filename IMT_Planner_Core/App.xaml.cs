@@ -41,6 +41,8 @@ public partial class App : Application
         services.AddDbContext<IMTPlannerDbContext>(options =>
         {
             options.UseSqlite("Data Source=IMT_Planner.db");
+            options.EnableSensitiveDataLogging();
+            
         });
         // Register your services and ViewModels here
         services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerSelectionService>();
