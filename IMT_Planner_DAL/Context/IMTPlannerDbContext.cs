@@ -43,6 +43,7 @@ namespace IMT_Planner_DAL.Context
             
             modelBuilder.Entity<SuperManager>(entity =>
             {
+                entity.Property(sm => sm.SuperManagerId).ValueGeneratedOnAdd();
                 entity.HasKey(sm => sm.SuperManagerId);
 
                 entity.Property(sm => sm.Name).IsRequired();

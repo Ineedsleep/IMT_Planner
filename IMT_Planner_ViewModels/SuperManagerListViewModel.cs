@@ -54,7 +54,7 @@ public class SuperManagerListViewModel: ObservableObject
 
     private void ImportSuperManagers()
     {
-        var tmp = SuperManagerCollection.Select(s => s.SuperManager);
+        IEnumerable<SuperManager> tmp = SuperManagerCollection.Select(s => s.SuperManager);
         _repositoryService.ImportSuperManagers(tmp);
     }
 

@@ -112,6 +112,8 @@ public class SuperManagerSelectionService
             {
                 yield return new SuperManagerElement
                 {
+                    SuperManager = sm,
+                    SuperManagerId = sm.SuperManagerId,
                     EffectivenessType = effectivenessType,
                     Element = ElementCollection[counter],
                     RankRequirement = rankRequirement[i]
@@ -126,6 +128,8 @@ public class SuperManagerSelectionService
             {
                 yield return new SuperManagerElement
                 {
+                    SuperManager = sm,
+                    SuperManagerId = sm.SuperManagerId,
                     EffectivenessType = effectivenessType, Element = ElementCollection[counter],
                 };
                 counter++;
@@ -205,7 +209,6 @@ public class SuperManagerSelectionService
         {
             NVEElements.Add(new SuperManagerElementViewModel(ele, NVEElements.Count));
         }
-
         SEElements = new ObservableCollection<SuperManagerElementViewModel>(tmp.OrderBy(e => e.RankRequirement).ToList());
         ElementsChanged();
     }

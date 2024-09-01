@@ -6,6 +6,7 @@ using IMT_Planner_DAL.Context;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using IMT_Planner_DAL.Repositories;
+using IMT_Planner_Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace IMT_Planner;
@@ -37,7 +38,7 @@ public partial class App : Application
     {
         //Repos
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
+        services.AddScoped<IRepository<SuperManager>, SuperManagerRepository>(); 
         services.AddDbContext<IMTPlannerDbContext>(options =>
         {
             options.UseSqlite("Data Source=IMT_Planner.db");

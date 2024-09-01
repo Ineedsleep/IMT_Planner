@@ -20,6 +20,7 @@ public class Element
 
 public class SuperManagerElement
 {
+   // public int SuperManagerId { get => SuperManager.SuperManagerId; set => SuperManager.SuperManagerId = value; }
     public int SuperManagerId { get; set; }
     public SuperManager SuperManager { get; set; }
     public int ElementId { get; set; }

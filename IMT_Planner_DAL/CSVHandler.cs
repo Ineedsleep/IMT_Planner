@@ -39,6 +39,8 @@ public class CSVHandler
                             var element = elements.FirstOrDefault(element => element.Name == e) ?? elements.First();
                             return new SuperManagerElement
                             {
+                                SuperManager = superManager,
+                                SuperManagerId = superManager.SuperManagerId,
                                 Element = element,
                                 ElementId = element.ElementId,
                                 EffectivenessType = superManager.Rarity switch
