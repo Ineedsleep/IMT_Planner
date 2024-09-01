@@ -19,9 +19,8 @@
         <StackPanel x:Name="EditManagerPanel"  Margin="10" MaxWidth="600">
   
             <!-- Editor for Name property -->
-            <GroupBox Header="Name">
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
-            </GroupBox>
+                <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/>
+                <!-- <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/> -->
             <GroupBox Header="Level">
                 <TextBox>
                     <TextBox.Text>
