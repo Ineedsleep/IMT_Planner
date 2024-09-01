@@ -1,15 +1,15 @@
 using System.Globalization;
 using System.IO;
+using System.Windows.Media.TextFormatting;
 using CsvHelper;
 using CsvHelper.Configuration;
+using IMT_Planner_DAL.Model;
 using IMT_Planner_Model;
 
 namespace IMT_Planner_DAL;
 
 public class CSVHandler
 {
-    
-    
     public IEnumerable<SuperManager> ReadAndParseCsv(string filePath)
     {
         using (var reader = new StreamReader(filePath))
@@ -24,10 +24,46 @@ public class CSVHandler
 
     public void ExportToCSV(string filePath, IEnumerable<SuperManager> superManagers)
     {
+        List<SuperManagerCSVExportModel> records = new List<SuperManagerCSVExportModel>();
+
+        foreach (var superManager in superManagers)
+        {
+            IOrderedEnumerable<SuperManagerElement> tmp = null;
+            if (superManager.SuperManagerElements != null)
+            {
+                tmp = superManager.SuperManagerElements.OrderBy(e =>
+                {
+                    switch (e.EffectivenessType)
+                    {
+                        case "SE": return 1;
+                        case "PE": return 2;
+                        case "NVE": return 3;
+                        default: return 4; // Handle unexpected values
+                    }
+
+                    ;
+                });
+            }
+
+            SuperManagerCSVExportModel model = new SuperManagerCSVExportModel
+            {
+                SuperManagerName = superManager.Name,
+                SuperManagerArea = superManager.Area,
+                Rarity = superManager.Rarity,
+                //   Group = superManager.Group,
+                CurrentRank = superManager.Rank.CurrentRank,
+                Promoted = superManager.Promoted,
+                Level = superManager.Level,
+            };
+            if (tmp != null)
+                model.Elements = String.Join(";", tmp.Select(e => e.Element.Name));
+            records.Add(model);
+        }
+
         using (var writer = new StreamWriter(filePath))
         using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
         {
-            csv.WriteRecords(superManagers);
+            csv.WriteRecords(records);
         }
     }
 }
@@ -44,8 +80,6 @@ public class SuperManagerMap : ClassMap<SuperManager>
         Map(m => m.Promoted).Name("Promoted");
     }
 }
-
-
 
 public class RankConverter : CsvHelper.TypeConversion.ITypeConverter
 {
@@ -71,8 +105,6 @@ public class RankConverter : CsvHelper.TypeConversion.ITypeConverter
                 .ToString(); // Assuming Rank class has a suitable ToString() method to represent it as a string
     }
 }
-
-
 
 public class EnumConverter<T> : CsvHelper.TypeConversion.ITypeConverter where T : struct
 {
