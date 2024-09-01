@@ -8,9 +8,21 @@ namespace IMT_Planner_ViewModels;
 
 public class SuperManagerElementViewModel : ObservableObject
 {
+    private string _rankRequirement;
     public SuperManagerElement Element { get; private set; }
 
     public int Index { get; }
+
+    public string RankRequirement
+    {
+        get => $"Rank: {Element.RankRequirement}";
+        set
+        {
+            if (value == _rankRequirement) return;
+            _rankRequirement = value;
+            OnPropertyChanged();
+        }
+    }
 
     public SuperManagerElementViewModel()
     {

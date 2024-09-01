@@ -24,6 +24,7 @@ public class SuperManagerElement
     public SuperManager SuperManager { get; set; }
     public int ElementId { get; set; }
     public Element Element { get; set; }
+    public int RankRequirement { get; set; }
 
     public string EffectivenessType { get; set; }
 

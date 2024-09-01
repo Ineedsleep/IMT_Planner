@@ -16,13 +16,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Label Width="100" VerticalAlignment="Center" Content="Rank: "></Label>
-            <Label Width="100" VerticalAlignment="Center" Content="Rank 0: "></Label>
-            <Label Width="100" VerticalAlignment="Center" Content="Rank 1: "></Label>
-            <Label Width="100" VerticalAlignment="Center" Content="Rank 3: "></Label>
-            <Label Width="100" VerticalAlignment="Center" Content="Rank 5: "></Label>
-        </StackPanel>
+        <!-- <StackPanel Grid.Row="0" Orientation="Horizontal"> -->
+        <!--     <Label Width="100" VerticalAlignment="Center" Content="Rank: "></Label> -->
+        <!--     <Label Width="100" VerticalAlignment="Center" Content="Rank 0: "></Label> -->
+        <!--     <Label Width="100" VerticalAlignment="Center" Content="Rank 1: "></Label> -->
+        <!--     <Label Width="100" VerticalAlignment="Center" Content="Rank 3: "></Label> -->
+        <!--     <Label Width="100" VerticalAlignment="Center" Content="Rank 5: "></Label> -->
+        <!-- </StackPanel> -->
         <StackPanel Grid.Row="1"  Orientation="Horizontal">
             <Label Width="60" VerticalAlignment="Center" Content="SE: "></Label>
             <ItemsControl ItemsSource="{Binding SEElements}" Width="400">
@@ -34,20 +34,24 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <ComboBox  SelectedIndex="{Binding DataContext. SelectedIndex, Mode=TwoWay,  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                       SelectedItem="{Binding DataContext.SelectedElement, 
-                                       RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                       ItemsSource="{Binding DataContext.ElementCollection, 
-                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                       Margin="8,8,8,8" Width="54" Height="32">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <Image Source="{Binding ImagePath}" Width="24" Height="24" ToolTip="{Binding Name}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                            <StackPanel>
+                                <Label Content="{Binding RankRequirement}"></Label>
+                                <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24" ToolTip="{Binding Name}"/>
+                            </StackPanel>
+                            <!-- <ComboBox  SelectedIndex="{Binding DataContext. SelectedIndex, Mode=TwoWay,  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" -->
+                            <!--            SelectedItem="{Binding DataContext.SelectedElement,  -->
+                            <!--            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" -->
+                            <!--            ItemsSource="{Binding DataContext.ElementCollection,  -->
+                            <!--     RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" -->
+                            <!--            Margin="8,8,8,8" Width="54" Height="32"> -->
+                            <!--     <ComboBox.ItemTemplate> -->
+                            <!--         <DataTemplate> -->
+                            <!--             <StackPanel> -->
+                            <!--                 <Image Source="{Binding ImagePath}" Width="24" Height="24" ToolTip="{Binding Name}"/> -->
+                            <!--             </StackPanel> -->
+                            <!--         </DataTemplate> -->
+                            <!--     </ComboBox.ItemTemplate> -->
+                            <!-- </ComboBox> -->
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -64,16 +68,19 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <ComboBox ItemsSource="{Binding DataContext.ElementCollection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Margin="8,8,8,8" Width="54" Height="32">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <Image Source="{Binding ImagePath}" Width="24" Height="24" ToolTip="{Binding Name}"/>
-                                            <!-- Here place any other objects you want in the template -->
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                            <StackPanel>
+                                <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24" ToolTip="{Binding Name}"/>
+                            </StackPanel>
+                            <!-- <ComboBox ItemsSource="{Binding DataContext.ElementCollection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Margin="8,8,8,8" Width="54" Height="32"> -->
+                            <!--     <ComboBox.ItemTemplate> -->
+                            <!--         <DataTemplate> -->
+                            <!--             <StackPanel> -->
+                            <!--                 <Image Source="{Binding ImagePath}" Width="24" Height="24" ToolTip="{Binding Name}"/> -->
+                            <!--                 ~1~ Here place any other objects you want in the template @1@ -->
+                            <!--             </StackPanel> -->
+                            <!--         </DataTemplate> -->
+                            <!--     </ComboBox.ItemTemplate> -->
+                            <!-- </ComboBox> -->
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -90,16 +97,19 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <ComboBox ItemsSource="{Binding DataContext.ElementCollection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Margin="8,8,8,8" Width="54" Height="32">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <Image Source="{Binding ImagePath}" Width="24" Height="24" ToolTip="{Binding Name}"/>
-                                            <!-- Here place any other objects you want in the template -->
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                            <StackPanel>
+                                <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24" ToolTip="{Binding Name}"/>
+                            </StackPanel>
+                            <!-- <ComboBox ItemsSource="{Binding DataContext.ElementCollection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Margin="8,8,8,8" Width="54" Height="32"> -->
+                            <!--     <ComboBox.ItemTemplate> -->
+                            <!--         <DataTemplate> -->
+                            <!--             <StackPanel> -->
+                            <!--                 <Image Source="{Binding ImagePath}" Width="24" Height="24" ToolTip="{Binding Name}"/> -->
+                            <!--                 ~1~ Here place any other objects you want in the template @1@ -->
+                            <!--             </StackPanel> -->
+                            <!--         </DataTemplate> -->
+                            <!--     </ComboBox.ItemTemplate> -->
+                            <!-- </ComboBox> -->
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
