@@ -45,6 +45,7 @@ public partial class App : Application
         // Register your services and ViewModels here
         services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerSelectionService>();
         services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerRepositoryService>();
+        services.AddSingleton<IMT_Planner_DAL.CSVHandler>();
         
         
         services.AddTransient<IMT_Planner_ViewModels.SuperManagerDetailsViewModel>();

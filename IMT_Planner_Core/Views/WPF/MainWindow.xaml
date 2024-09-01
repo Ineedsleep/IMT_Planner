@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         <Menu Grid.Column="0" DockPanel.Dock="Top" Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="_File">
-                <MenuItem Command="{Binding SaveCommand}" Header="_Save"/>
+                <MenuItem Command="{Binding ExportToCSVCommand}" Header="_ExportToCSV"/>
                 <MenuItem Command="{Binding LoadCommand}" Header="_Load"/>
                 <MenuItem Command="{Binding ImportCommand}" Header="_Import"/>
             </MenuItem>

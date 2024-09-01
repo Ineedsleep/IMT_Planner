@@ -52,4 +52,7 @@ public class SuperManagerRepositoryService
             _repository.Delete(superManager);
         }
     }
+    
+    
+    
 }

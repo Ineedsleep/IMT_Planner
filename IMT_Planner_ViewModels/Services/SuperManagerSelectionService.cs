@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Media.TextFormatting;
 using CsvHelper;
 using CsvHelper.Configuration;
+using IMT_Planner_DAL;
 using IMT_Planner_Model;
 using IMT_Planner_ViewModels.Helper;
 
@@ -13,6 +14,8 @@ namespace IMT_Planner_ViewModels.Services;
 
 public class SuperManagerSelectionService
 {
+    private readonly CSVHandler _csvHandler;
+
     // Holds the instance of SuperManager
     private SuperManager _superManager;
 
@@ -30,8 +33,9 @@ public class SuperManagerSelectionService
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection = new();
 
 
-    public SuperManagerSelectionService()
+    public SuperManagerSelectionService(CSVHandler csvHandler)
     {
+        _csvHandler = csvHandler;
     }
 
     public SuperManager CurrentSuperManager
@@ -242,7 +246,7 @@ public class SuperManagerSelectionService
     {
         try
         {
-            IEnumerable<SuperManager> csvContent = ReadAndParseCsv(filePath);
+            IEnumerable<SuperManager> csvContent = _csvHandler.ReadAndParseCsv(filePath);
             foreach (var sm in csvContent)
             {
                 SuperManagerCollection.Add(new SuperManagerCardViewModel(sm, this));
@@ -254,59 +258,19 @@ public class SuperManagerSelectionService
             // throw; // If you want to rethrow the exception to be handled in the calling code.
         }
     }
-
-    private IEnumerable<SuperManager> ReadAndParseCsv(string filePath)
-    {
-        using (var reader = new StreamReader(filePath))
-        using (var csv = new CsvHelper.CsvReader(reader, CultureInfo.InvariantCulture))
-        {
-            csv.Context.RegisterClassMap<SuperManagerMap>();
-            var records = csv.GetRecords<SuperManager>().ToList();
-            return records;
-        }
-    }
-
-    public class SuperManagerMap : ClassMap<SuperManager>
-    {
-        public SuperManagerMap()
-        {
-            Map(m => m.Rarity).Name("Rarity").TypeConverter<EnumConverter<Rarity>>();
-            Map(m => m.Name).Name("Name");
-            Map(m => m.Area).Name("Area").TypeConverter<EnumConverter<Areas>>();
-            Map(m => m.Rank).Name("Rank").TypeConverter<RankConverter>();
-            Map(m => m.Level).Name("Level");
-            Map(m => m.Promoted).Name("Promoted");
-        }
-    }
+    
 
     public void UpdateSelectedSuperManager(SuperManagerCardViewModel superManagerCardViewModel)
     {
         CurrentSuperManager = superManagerCardViewModel.SuperManager;
         SplitElements();
     }
-}
 
-public class RankConverter : CsvHelper.TypeConversion.ITypeConverter
-{
-    public object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
+    public void ExportToCSV(string filePath)
     {
-        if (string.IsNullOrEmpty(text))
-        {
-            Rank defaultRank = new Rank(99);
-            return defaultRank;
-        }
-
-        // The logic to create a Rank instance from a string
-        int rankValue = int.Parse(text);
-        Rank rank = new Rank(rankValue); // Assuming Rank class has a constructor that accepts an integer
-        return rank;
-    }
-
-    public string ConvertToString(object value, IWriterRow row, MemberMapData memberMapData)
-    {
-        Rank rank = (Rank)value;
-        return
-            rank.CurrentRank
-                .ToString(); // Assuming Rank class has a suitable ToString() method to represent it as a string
+        IEnumerable <SuperManager> superManagers= _superManagerCollection.Select(sm => sm.SuperManager);
+        _csvHandler.ExportToCSV(filePath, superManagers);
     }
 }
+    
+

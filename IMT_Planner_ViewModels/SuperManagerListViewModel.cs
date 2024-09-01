@@ -1,5 +1,7 @@
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows.Input;
+using CsvHelper;
 using IMT_Planner_Model;
 using IMT_Planner_ViewModels.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
@@ -12,7 +14,7 @@ public class SuperManagerListViewModel: ObservableObject
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection;   
     private readonly SuperManagerSelectionService _superManagerSelectionService;
     private readonly SuperManagerRepositoryService _repositoryService;
-    public ICommand SaveCommand { get; private set; }
+    public ICommand ExportToCSVCommand { get; private set; }
     public ICommand LoadCommand { get; private set; }
     public ICommand ImportCommand { get; private set; }
 
@@ -36,7 +38,7 @@ public class SuperManagerListViewModel: ObservableObject
         _superManagerCollection = new ObservableCollection<SuperManagerCardViewModel> ();
         LoadCommand = new RelayCommand<string>(async path => LoadSuperManagersAsync(path));
         ImportCommand = new RelayCommand<string>(async path => ImportSuperManagers());
-        SaveCommand = new RelayCommand(SaveSuperManager);
+        ExportToCSVCommand = new RelayCommand(ExportSuperManagerToCSV);
         SelectSuperManagerCommand = new RelayCommand<SuperManagerCardViewModel>(SelectSuperManagerViewModel);
         try
         {
@@ -67,9 +69,11 @@ public class SuperManagerListViewModel: ObservableObject
        OnPropertyChanged(name);
     }
     
-    private void SaveSuperManager()
-    {
-//Todo add functionality to export to csv / change name as well
+    private void ExportSuperManagerToCSV()
+    { 
+        
+        var filePath = "C:\\Users\\Tower\\Downloads\\SM_Sheet_new.csv";
+        _superManagerSelectionService.ExportToCSV(filePath);
     }
 
     private void LoadSuperManagersAsync(string filePath)
