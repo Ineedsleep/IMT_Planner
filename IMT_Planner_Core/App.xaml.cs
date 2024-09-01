@@ -1,9 +1,5 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
-using IMT_Planner_DAL;
+﻿using System.Windows;
 using IMT_Planner_DAL.Context;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using IMT_Planner_DAL.Repositories;
 using IMT_Planner_Model;
