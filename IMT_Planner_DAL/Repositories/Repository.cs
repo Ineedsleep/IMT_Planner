@@ -19,7 +19,14 @@ public class Repository<T> : IRepository<T> where T : class
     {
         return _dbSet.AsNoTracking();
     }
-
+    
+    public IEnumerable<T> GetAllWithElements()
+    {
+        var sms = _context.SuperManagers                
+            .Include(sm => sm.SuperManagerElements)
+            .ThenInclude(sme => sme.Element)
+            .ToList(); return (IEnumerable<T>)sms;
+    }
     public T GetById(int id)
     {
         return _dbSet.Find(id);

@@ -130,6 +130,9 @@ namespace IMT_Planner_DAL.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("RankRequirement")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("SuperManagerId", "ElementId");
 
                     b.HasIndex("ElementId");

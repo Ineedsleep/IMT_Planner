@@ -17,6 +17,10 @@ public class SuperManagerRepositoryService
     {
         return _repository.GetAll();
     }
+    public IEnumerable<SuperManager> GetAllSuperManagersWithElements()
+    {
+        return _repository.GetAllWithElements();
+    }
 
     // Finds SuperManager by Id
     public SuperManager GetSuperManagerById(int id)

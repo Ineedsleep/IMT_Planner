@@ -12,4 +12,5 @@ public interface IRepository<T> where T : class
 
     // other needed methods...
     void InsertMany(IEnumerable<T> superManagers);
+    IEnumerable<T> GetAllWithElements();
 }

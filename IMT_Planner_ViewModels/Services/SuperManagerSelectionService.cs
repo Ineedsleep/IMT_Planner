@@ -172,15 +172,17 @@ public class SuperManagerSelectionService
         }
     }
 
+    
     private void SplitElements()
     {
         SEElements.Clear();
         PEElements.Clear();
         NVEElements.Clear();
+        IList<SuperManagerElementViewModel> tmp = new List<SuperManagerElementViewModel>();
         foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(element =>
                      element.EffectivenessType == "SE"))
         {
-            SEElements.Add(new SuperManagerElementViewModel(ele, SEElements.Count));
+            tmp.Add(new SuperManagerElementViewModel(ele, SEElements.Count));
         }
 
         foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(element =>
@@ -195,6 +197,7 @@ public class SuperManagerSelectionService
             NVEElements.Add(new SuperManagerElementViewModel(ele, NVEElements.Count));
         }
 
+        SEElements = new ObservableCollection<SuperManagerElementViewModel>(tmp.OrderBy(e => e.RankRequirement).ToList());
         ElementsChanged();
     }
 

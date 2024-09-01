@@ -135,9 +135,10 @@ public class SuperManagerCardViewModel : ObservableObject
 
     private void SplitElements()
     {
+        IList<SuperManagerElementViewModel> tmp = new List<SuperManagerElementViewModel>();
         foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "SE"))
         {
-            SEElements.Add(new SuperManagerElementViewModel(ele,SEElements.Count));
+            tmp.Add(new SuperManagerElementViewModel(ele,SEElements.Count));
         }
         foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "PE"))
         {
@@ -147,12 +148,14 @@ public class SuperManagerCardViewModel : ObservableObject
         {
             NVEElements.Add(new SuperManagerElementViewModel(ele,NVEElements.Count));
         }
-        
+
+        SEElements = new ObservableCollection<SuperManagerElementViewModel>(tmp.OrderBy(e => e.RankRequirement).ToList());
     }
 
     public SuperManagerCardViewModel(SuperManager superManager,SuperManagerSelectionService _superManagerSelectionService)
     {
         SuperManager = superManager;
+        if(superManager.SuperManagerElements != null)
         SplitElements();
         _superManagerSelectionService.SuperManagerCardUpdated -= CardUpdate;
         _superManagerSelectionService.SuperManagerCardUpdated += CardUpdate;

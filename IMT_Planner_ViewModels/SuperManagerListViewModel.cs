@@ -40,7 +40,7 @@ public class SuperManagerListViewModel: ObservableObject
         SelectSuperManagerCommand = new RelayCommand<SuperManagerCardViewModel>(SelectSuperManagerViewModel);
         try
         {
-            _superManagerSelectionService.CreateSuperManagerCollection(_repositoryService.GetAllSuperManagers());
+            _superManagerSelectionService.CreateSuperManagerCollection(_repositoryService.GetAllSuperManagersWithElements());
             _superManagerSelectionService.CurrentSuperManager = _superManagerCollection.First().SuperManager;
         }
         catch (Exception e)
