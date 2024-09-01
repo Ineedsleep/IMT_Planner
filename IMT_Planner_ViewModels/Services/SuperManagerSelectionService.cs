@@ -137,27 +137,31 @@ public class SuperManagerSelectionService
         NVEElements.Clear();
         foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "SE"))
         {
-            SEElements.Add(new SuperManagerElementViewModel(ele));
+            SEElements.Add(new SuperManagerElementViewModel(ele, SEElements.Count));
         }
         foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "PE"))
         {
-            PEElements.Add(new SuperManagerElementViewModel(ele));
+            PEElements.Add(new SuperManagerElementViewModel(ele,PEElements.Count));
         }
         foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "NVE"))
         {
-            NVEElements.Add(new SuperManagerElementViewModel(ele));
+            NVEElements.Add(new SuperManagerElementViewModel(ele,NVEElements.Count));
         }
-        
+
+        ElementsChanged();
+
     }
 
     // This event will be invoked whenever CurrentSuperManager is modified
     // Define event
     public event Action<string> SuperManagerChanged;
     public event Action SuperManagerCardUpdated;
+    public event Action ElementsChanged;
     // Define delegate
     public delegate void SuperManagerChangedHandler(object sender, EventArgs e);
     private void NotifySuperManagerChanged(string name) => SuperManagerChanged?.Invoke(name);
     private void NotifySuperManagerCardUpdate() => SuperManagerCardUpdated?.Invoke();
+    private void NotifyElementsUpdate() => ElementsChanged?.Invoke();
 
     // Add methods to manipulate the model here. 
     // For example, suppose SuperManager has a method to update its status

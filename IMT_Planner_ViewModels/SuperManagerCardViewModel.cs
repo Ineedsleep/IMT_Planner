@@ -137,15 +137,15 @@ public class SuperManagerCardViewModel : ObservableObject
     {
         foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "SE"))
         {
-            SEElements.Add(new SuperManagerElementViewModel(ele));
+            SEElements.Add(new SuperManagerElementViewModel(ele,SEElements.Count));
         }
         foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "PE"))
         {
-            PEElements.Add(new SuperManagerElementViewModel(ele));
+            PEElements.Add(new SuperManagerElementViewModel(ele,PEElements.Count));
         }
         foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "NVE"))
         {
-            NVEElements.Add(new SuperManagerElementViewModel(ele));
+            NVEElements.Add(new SuperManagerElementViewModel(ele,NVEElements.Count));
         }
         
     }

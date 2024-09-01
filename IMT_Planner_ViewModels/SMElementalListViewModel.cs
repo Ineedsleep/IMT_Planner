@@ -9,6 +9,8 @@ public class SMElementalListViewModel : ObservableObject
 {
     private readonly SuperManagerSelectionService _superManagerSelectionService;
     private ObservableCollection<SuperManagerElementViewModel> _elementCollection;
+    private SuperManagerElementViewModel _selectedElement;
+    private int _index;
 
     public ObservableCollection<SuperManagerElementViewModel> ElementCollection
     {
@@ -21,10 +23,27 @@ public class SMElementalListViewModel : ObservableObject
         get => _superManagerSelectionService.SEElements;
         private set
         {
-            _superManagerSelectionService.SEElements = value; 
+            _superManagerSelectionService.SEElements = value;
             OnPropertyChanged();
         }
     }
+
+    public int SelectedIndex { get; set; }
+    public SuperManagerElementViewModel SelectedElement
+    {
+        get
+        {
+            return _selectedElement;
+        }
+        set
+        {
+            if(_selectedElement != null)
+            SEElements[_selectedElement.Index].ChangeElement(value);
+                _selectedElement = value;
+            OnPropertyChanged(nameof(SEElements));
+        }
+    }
+
 
     public ObservableCollection<SuperManagerElementViewModel> SECollection  
     {
@@ -43,39 +62,48 @@ public class SMElementalListViewModel : ObservableObject
     public SMElementalListViewModel(SuperManagerSelectionService superManagerSelectionService)
     {
         _superManagerSelectionService = superManagerSelectionService;
-        InitElementalList();
         OnPropertyChanged(nameof(ElementCollection));
         var tmp = new ObservableCollection<SuperManagerElementViewModel>();
         OnPropertyChanged(nameof(SEElements));
+        _superManagerSelectionService.ElementsChanged -= ElementUpdate;
+        _superManagerSelectionService.ElementsChanged += ElementUpdate;
+    }
+
+    private void ElementUpdate()
+    {
+        OnPropertyChanged(nameof(SEElements));
+        OnPropertyChanged(nameof(NVEElements));
+        OnPropertyChanged(nameof(PEElements));
+        ElementCollection = new ObservableCollection<SuperManagerElementViewModel>(SEElements.Concat(PEElements).Concat(NVEElements));
+        
     }
 
     private void InitElementalList()
     {
-        ElementCollection = new ObservableCollection<SuperManagerElementViewModel>();
-        var currentSm = _superManagerSelectionService.CurrentSuperManager;
-
-        List<(string ElementName, string ElementType)> elementData = new List<(string, string)>
-        {
-            ("Nature", "SE"),
-            ("Frost", "SE"),
-            ("Flame", "SE"),
-            ("Light", "SE"),
-            ("Dark", "PE"),
-            ("Wind", "PE"),
-            ("Sand", "NVE"),
-            ("Water", "NVE"),
-        };
-
-        foreach (var data in elementData)
-        {
-            SuperManagerElementViewModel elementViewModel = 
-                new SuperManagerElementViewModel(new SuperManagerElement
-                {
-                   SuperManager = currentSm,
-                    Element = new Element(data.ElementName),
-                   EffectivenessType = data.ElementType    
-                });
-            ElementCollection.Add(elementViewModel);
-        }
+        // var currentSm = _superManagerSelectionService.CurrentSuperManager;
+        //
+        // List<(string ElementName, string ElementType)> elementData = new List<(string, string)>
+        // {
+        //     ("Nature", "SE"),
+        //     ("Frost", "SE"),
+        //     ("Flame", "SE"),
+        //     ("Light", "SE"),
+        //     ("Dark", "PE"),
+        //     ("Wind", "PE"),
+        //     ("Sand", "NVE"),
+        //     ("Water", "NVE"),
+        // };
+        //
+        // foreach (var data in elementData)
+        // {
+        //     SuperManagerElementViewModel elementViewModel = 
+        //         new SuperManagerElementViewModel(new SuperManagerElement
+        //         {
+        //            SuperManager = currentSm,
+        //             Element = new Element(data.ElementName),
+        //            EffectivenessType = data.ElementType,
+        //         },ElementCollection.Count);
+        //     ElementCollection.Add(elementViewModel);
+        // }
     }
 }

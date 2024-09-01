@@ -2,19 +2,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using IMT_Planner_Model;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace IMT_Planner_ViewModels;
 
 public class SuperManagerElementViewModel : ObservableObject
 {
-    public SuperManagerElement Element { get; }
+    public SuperManagerElement Element { get; private set; }
 
+    public int Index { get; }
 
     public SuperManagerElementViewModel()
     {
     } 
-    public SuperManagerElementViewModel(SuperManagerElement model)
+    public SuperManagerElementViewModel(SuperManagerElement model, int index)
     {
+        Index = index;
         Element = model;
     } 
 
@@ -25,6 +28,10 @@ public class SuperManagerElementViewModel : ObservableObject
         {
             return Element.ElementId;
         }
+        private set
+        {
+            Element.ElementId = value;
+        }
     }
 
     // Exposing the EffectivenessType property
@@ -34,12 +41,20 @@ public class SuperManagerElementViewModel : ObservableObject
         {
             return Element.EffectivenessType;
         }
+        private set
+        {
+            Element.EffectivenessType = value;
+        }
     }
     public string Name
     {
         get
         {
             return Element.Element.Name;
+        }
+        private set
+        {
+            Element.Element.Name = value;
         }
     }
     // Exposing a string property for the image, if Element has one
@@ -68,8 +83,13 @@ public class SuperManagerElementViewModel : ObservableObject
     }
     
     
+    
 
     // Add other properties of Element and SuperManagerElement as needed
 
     // Add other properties of the SuperManagerElement as needed 
+    public void ChangeElement(SuperManagerElementViewModel value)
+    {
+        this.Element = value.Element;
+    }
 }

@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:rules="clr-namespace:IMT_Planner.Views.WPF.Rules"
              xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -32,12 +34,16 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <ComboBox ItemsSource="{Binding DataContext.ElementCollection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Margin="8,8,8,8" Width="54" Height="32">
+                            <ComboBox  SelectedIndex="{Binding DataContext. SelectedIndex, Mode=TwoWay,  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                       SelectedItem="{Binding DataContext.SelectedElement, 
+                                       RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                       ItemsSource="{Binding DataContext.ElementCollection, 
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                       Margin="8,8,8,8" Width="54" Height="32">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
                                             <Image Source="{Binding ImagePath}" Width="24" Height="24" ToolTip="{Binding Name}"/>
-                                            <!-- Here place any other objects you want in the template -->
                                         </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
