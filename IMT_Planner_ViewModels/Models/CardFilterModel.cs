@@ -9,14 +9,12 @@ public class CardFilterModel
     public (int? Min, int? Max) Level { get; set; }
     public (int? Min, int? Max) RankRange { get; set; }
     public int? Rank { get; set; }
-   
-    // Possible use Enum here
+    
     public ICollection<Areas> Area { get; set; } 
     public ICollection<Rarity> Rarity { get; set; } 
     public ICollection<SuperManagerElement>? Elements { get; set; } 
    public bool Promoted { get; set; }
    public bool? HasPassiveMultiplier { get; set; }
-    // More properties...
     
     public Expression<Func<SuperManager, bool>> GetExpression()
     {
