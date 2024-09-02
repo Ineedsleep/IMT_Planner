@@ -79,8 +79,9 @@ namespace IMT_Planner_DAL.Context
                     v => v.ToString(),
                     v => (Equipment) Enum.Parse(typeof(Equipment), v));
                 entity.Property(sm => sm.Equipment).HasConversion(equipmentConverter);
-
+                
                 entity.Property(sm => sm.PassiveMultiplier);
+                entity.Property(sm => sm.HasMultiplier);
 
                 entity.Property(sm => sm.Priority);
                 

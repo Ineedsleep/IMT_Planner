@@ -15,7 +15,7 @@ public class CardFilterModel
     public ICollection<SuperManagerElement>? Elements { get; set; } 
    public bool Promoted { get; set; }
    public bool? HasPassiveMultiplier { get; set; }
-    
+   public double? PassiveMultiplier { get; set; }
     public Expression<Func<SuperManager, bool>> GetExpression()
     {
         var elementNames = Elements?.Select(e => e.Element.Name).ToList();
@@ -27,11 +27,11 @@ public class CardFilterModel
         if (Level.Max.HasValue)
             predicate = predicate.And(sm => sm.Level <= Level.Max);
         if (Rank.HasValue)
-            predicate = predicate.And(sm => sm.Rank.CurrentRank == Rank.Value);
+            predicate = predicate.And(sm => sm.Rank != null && sm.Rank.CurrentRank == Rank.Value);
         if (RankRange.Min.HasValue)
-            predicate = predicate.And(sm => sm.Rank.CurrentRank >= RankRange.Min);
+            predicate = predicate.And(sm => sm.Rank != null && sm.Rank.CurrentRank >= RankRange.Min);
         if (RankRange.Max.HasValue)
-            predicate = predicate.And(sm => sm.Rank.CurrentRank <= RankRange.Max);
+            predicate = predicate.And(sm => sm.Rank != null && sm.Rank.CurrentRank <= RankRange.Max);
         if (Elements != null)
         {
             predicate = predicate.And(sm => sm.SuperManagerElements != null 
@@ -43,14 +43,20 @@ public class CardFilterModel
                                                 effectiveness != null 
                                                 && effectiveness.Contains(e.EffectivenessType)
                                                 && e.RankRequirement <= sm.Rank.CurrentRank));
-            
         }
 
-        if (HasPassiveMultiplier.HasValue)
+        if (HasPassiveMultiplier ?? false)
         {
-            predicate = predicate.And(sm => sm.PassiveMultiplier > 1.00);
+            predicate = predicate.And(sm => sm.HasMultiplier);
+        }
+        
+        if(PassiveMultiplier.HasValue)
+        {
+            predicate = predicate.And(sm => sm.PassiveMultiplier >= PassiveMultiplier);
         }
 
         return predicate;
     }
+
+    
 }

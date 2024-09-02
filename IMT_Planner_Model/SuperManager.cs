@@ -66,7 +66,11 @@ public class SuperManager
     public byte Level { get; set; }
     public int CurrentFragments { get; set; }
     public Equipment Equipment { get; set; }
+    
+    //ToDo: needs to be changed into a Class and extra table with: HasIt, Value, RankRequirement, SmId
     public double PassiveMultiplier { get; set; }
+    public bool HasMultiplier { get; set; }
+    //ToDoEnd;
     public Rarity Rarity { get; set; }
     public Areas Area { get; set; }
     
