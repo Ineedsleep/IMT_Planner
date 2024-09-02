@@ -90,6 +90,9 @@ namespace IMT_Planner_DAL.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("HasMultiplier")
+                        .HasColumnType("INTEGER");
+
                     b.Property<byte>("Level")
                         .HasColumnType("INTEGER");
 

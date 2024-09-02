@@ -10,6 +10,7 @@ using CsvHelper.Configuration;
 using IMT_Planner_DAL;
 using IMT_Planner_Model;
 using IMT_Planner_ViewModels.Helper;
+using LinqKit;
 
 namespace IMT_Planner_ViewModels.Services;
 
@@ -30,6 +31,7 @@ public class SuperManagerSelectionService
         new ObservableCollection<SuperManagerElementViewModel>();
 
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection = new();
+    private ICollection<SuperManager> _backupManagerCollection;
     private List<Element> ElementCollection = new List<Element>();
 
     public SuperManagerSelectionService(CSVHandler csvHandler)
@@ -61,8 +63,7 @@ public class SuperManagerSelectionService
             NotifySuperManagerChanged(nameof(SuperManagerCollection));
         }
     }
-
-
+    
     private ObservableCollection<SuperManagerCardViewModel> AdjustFilter(
         ObservableCollection<SuperManagerCardViewModel> superManagerCollection)
     {
@@ -75,6 +76,7 @@ public class SuperManagerSelectionService
         {
             CheckInvalidElements(sm);
             SuperManagerCollection.Add(new SuperManagerCardViewModel(sm, this));
+            _backupManagerCollection = SuperManagerCollection.Select(sm => sm.SuperManager).ToList();
         }
     }
     public void CreateElementCollection(IEnumerable<Element> allElements)
@@ -261,6 +263,8 @@ public class SuperManagerSelectionService
             {
                 SuperManagerCollection.Add(new SuperManagerCardViewModel(sm, this));
             }
+
+            _backupManagerCollection = SuperManagerCollection.Select(sm => sm.SuperManager).ToList();
         }
         catch (Exception ex)
         {
@@ -280,6 +284,20 @@ public class SuperManagerSelectionService
     {
         IEnumerable <SuperManager> superManagers= _superManagerCollection.Select(sm => sm.SuperManager);
         _csvHandler.ExportToCSV(filePath, superManagers);
+    }
+
+    public void ApplyFilters(Expression<Func<SuperManager,bool>> filterExpression)
+    {
+            var filteredSuperManagers = _backupManagerCollection.AsQueryable()
+                                                    .Where(filterExpression)
+                                                    .Select(sm => new SuperManagerCardViewModel(sm,this))
+                                                    .ToList();
+        SuperManagerCollection.Clear();
+        foreach(var smv in filteredSuperManagers)
+        {
+            SuperManagerCollection.Add(smv);
+        }  
+
     }
 }
     
