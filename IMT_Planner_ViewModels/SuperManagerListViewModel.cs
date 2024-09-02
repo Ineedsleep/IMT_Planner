@@ -73,13 +73,13 @@ public class SuperManagerListViewModel: ObservableObject
     private void ExportSuperManagerToCSV()
     { 
         
-        var filePath = "C:\\Users\\Tower\\Downloads\\SM_Sheet_new.csv";
+        var filePath = $@".\Resources\SM_Sheet_{DateTime.Now:yy-MM-dd}.csv";
         _superManagerSelectionService.ExportToCSV(filePath);
     }
 
     private void LoadSuperManagersAsync(string filePath)
     {    
-        filePath = "C:\\Users\\Tower\\Downloads\\SM_Sheet.csv";
+        filePath = @".\Resources\SM_Sheet_Default.csv";
          _superManagerSelectionService.LoadSuperManagersFromFileAsync(filePath);
     }
 }

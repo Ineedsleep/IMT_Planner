@@ -72,4 +72,11 @@
       <Resource Include="Resources\Elements\Wind.png" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\SM_Sheet_Default.csv" />
+      <Content Include="Resources\SM_Sheet_Default.csv">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
