@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.IO;
+using System.Linq.Expressions;
 using System.Windows.Media.TextFormatting;
 using CsvHelper;
 using CsvHelper.Configuration;
@@ -280,8 +281,6 @@ public class SuperManagerSelectionService
         IEnumerable <SuperManager> superManagers= _superManagerCollection.Select(sm => sm.SuperManager);
         _csvHandler.ExportToCSV(filePath, superManagers);
     }
-
-
 }
     
 
