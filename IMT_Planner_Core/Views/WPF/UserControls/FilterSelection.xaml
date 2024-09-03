@@ -7,52 +7,54 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        
-<Grid>
+           <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Command Buttons -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
             <Button Content="Apply Filter" Command="{Binding ApplyFilterCommand}" Margin="5"/>
             <Button Content="Reset Filter" Command="{Binding ResetFilterCommand}" Margin="5"/>
         </StackPanel>
-        
+
         <!-- Level and Rank Filters -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <!-- Level -->
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Level"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock Text="Min"/>
+                        <TextBox Text="{Binding LevelMin, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock Text="Max"/>
+                        <TextBox Text="{Binding LevelMax, Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
 
-            <!-- Level Min -->
-            <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Level Min"/>
-                <TextBox Text="{Binding Level.Min, Mode=TwoWay}"/>
-            </StackPanel>
-            
-            <!-- Level Max -->
-            <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Level Max"/>
-                <TextBox Text="{Binding Level.Max, Mode=TwoWay}"/>
-            </StackPanel>
-            
             <!-- Rank -->
             <StackPanel Orientation="Vertical" Margin="5">
                 <TextBlock Text="Rank"/>
-                <TextBox Text="{Binding Rank, Mode=TwoWay}"/>
-            </StackPanel>
-            
-            <!-- Rank Range Min -->
-            <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Rank Range Min"/>
-                <TextBox Text="{Binding RankRange.Min, Mode=TwoWay}"/>
-            </StackPanel>
-            
-            <!-- Rank Range Max -->
-            <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Rank Range Max"/>
-                <TextBox Text="{Binding RankRange.Max, Mode=TwoWay}"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock Text="Min"/>
+                        <TextBox Text="{Binding RankRangeMin, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock Text="Max"/>
+                        <TextBox Text="{Binding RankRangeMax, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <TextBlock Text="Exact"/>
+                        <TextBox Text="{Binding Rank, Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
 
@@ -62,7 +64,6 @@
                 <DataTemplate>
                     <Border BorderThickness="1" BorderBrush="Gray" Margin="5" Padding="10">
                         <StackPanel Orientation="Vertical">
-                            <!-- Example fields, adjust according to properties of CardFilterModel -->
                             <TextBlock Text="Element Name" FontWeight="Bold" />
                             <TextBox Text="{Binding Element.Name, Mode=TwoWay}"/>
                             <TextBlock Text="Effectiveness Type" FontWeight="Bold" />
@@ -73,19 +74,15 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <!-- Passive Multiplier Filters -->
+        <!-- CIF / MIF Group -->
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <!-- Has Passive Multiplier -->
-            <CheckBox Content="Has Passive Multiplier" 
-                      IsChecked="{Binding HasPassiveMultiplier, Mode=TwoWay}" Margin="5"/>
-            
-            <!-- Passive Multiplier -->
-            <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Passive Multiplier"/>
-                <TextBox Text="{Binding PassiveMultiplier, Mode=TwoWay}"/>
-            </StackPanel>
+            <!-- CIF -->
+            <CheckBox Content="CIF" 
+                      IsChecked="{Binding HasCIF, Mode=TwoWay}" Margin="5"/>
+            <!-- MIF -->
+            <CheckBox Content="MIF" 
+                      IsChecked="{Binding HasMIF, Mode=TwoWay}" Margin="5"/>
         </StackPanel>
-
     </Grid>
         
         

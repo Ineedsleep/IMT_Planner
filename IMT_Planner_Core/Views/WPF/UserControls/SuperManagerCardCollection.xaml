@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls"
-             xmlns:uc="clr-namespace:IMT_Planner.Views.WPF.UserControls"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:converter="clr-namespace:IMT_Planner.Views.Converter"
              mc:Ignorable="d"
@@ -15,7 +14,12 @@
         <converter:RarityToBackgroundConverter x:Key="RarityToBackgroundConverter" />
     </UserControl.Resources>
     <Grid>
-        <Border
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <local:FilterSelection Grid.Row="0"/>
+        <Border Grid.Row="1"
             Grid.Column="0"
             Margin="10,10,10,10"
             BorderBrush="{DynamicResource MahApps.Brushes.Red}"
@@ -41,7 +45,7 @@
                             <!--         <Binding Path="Promoted"/> -->
                             <!--     </MultiBinding> -->
                             <!-- </Border.Background> -->
-                     <uc:SuperManagerCard/>
+                     <local:SuperManagerCard/>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

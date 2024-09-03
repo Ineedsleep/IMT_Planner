@@ -12,7 +12,9 @@ public class FilterViewModel : ObservableObject
     private readonly SuperManagerSelectionService _superManagerSelectionService;
     public ICommand ApplyFilterCommand { get; private set; }
     public ICommand ResetFilterCommand { get; private set; }
-    public ObservableCollection<CardFilterModel> CardFilters { get; set; }
+
+    public ObservableCollection<CardFilterModel> CardFilters { get; set; } = new ObservableCollection<CardFilterModel>()
+        { new CardFilterModel() };
     public FilterViewModel(SuperManagerSelectionService superManagerSelectionService)
     {
         _superManagerSelectionService = superManagerSelectionService;
