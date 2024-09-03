@@ -2,9 +2,9 @@ using System.Windows.Controls;
 
 namespace IMT_Planner.Views.WPF.UserControls;
 
-public partial class SuperManagerCard : UserControl
+public partial class FilterSelection : UserControl
 {
-    public SuperManagerCard()
+    public FilterSelection()
     {
         InitializeComponent();
     }

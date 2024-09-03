@@ -51,6 +51,7 @@ public partial class App : Application
         services.AddSingleton<IMT_Planner_ViewModels.SuperManagerListViewModel>();
         services.AddSingleton<IMT_Planner_ViewModels.SuperManagerElementViewModel>();
         services.AddSingleton<IMT_Planner_ViewModels.SMElementalListViewModel>();
+        services.AddSingleton<IMT_Planner_ViewModels.FilterViewModel>();
         // Add other services or view models as needed.
         
         

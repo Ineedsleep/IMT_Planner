@@ -4,43 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:converter="clr-namespace:IMT_Planner.Views.Converter"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1600">
-    <UserControl.Resources>
-        <converter:RankToBrushConverter x:Key="RankToBrushConverter" />
-        <converter:MaxToBrushConverter x:Key="MaxToBrushConverter" />
-        <converter:RarityToBackgroundConverter x:Key="RarityToBackgroundConverter" />
-    </UserControl.Resources>
-    <Grid>
-        <Border
-            Grid.Column="0"
-            Margin="10,10,10,10"
-            BorderBrush="{DynamicResource MahApps.Brushes.Red}"
-            BorderThickness="1">
-            <ItemsControl x:Name="ItemsControlSuperManager" ItemsSource="{Binding SuperManagerCollection}" >
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border
-                            Margin="12"
-                            Padding="8"
-                            BorderBrush="{Binding CurrentRank, Converter={StaticResource RankToBrushConverter}}"
-                            Background="{Binding Path=Rarity, Converter={StaticResource RarityToBackgroundConverter}}"
-                            BorderThickness="3"  
-                            CornerRadius="10">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseLeftButtonUp">
-                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectSuperManagerCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <!-- <Border.Background> -->
-                            <!--     <MultiBinding Converter="{StaticResource MaxToBrushConverter}"> -->
-                            <!--         <Binding Path="Level"/> -->
-                            <!--         <Binding Path="Promoted"/> -->
-                            <!--     </MultiBinding> -->
-                            <!-- </Border.Background> -->
-                            <Grid>
+             d:DesignHeight="300" d:DesignWidth="300">
+       <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1.5*" />
                                     <RowDefinition Height="Auto" />
@@ -193,15 +159,4 @@
                                     </ItemsControl>
                                 </Grid>
                             </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </Border>
-    </Grid>
 </UserControl>
