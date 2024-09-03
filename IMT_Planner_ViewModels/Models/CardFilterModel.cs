@@ -34,15 +34,11 @@ public class CardFilterModel
             predicate = predicate.And(sm => sm.Rank != null && sm.Rank.CurrentRank <= RankRange.Max);
         if (Elements != null)
         {
-            predicate = predicate.And(sm => sm.SuperManagerElements != null 
-                                            && sm.SuperManagerElements.Any(e => 
-                                                elementNames != null 
-                                                && elementNames.Contains(e.Element.Name)
-                                                && e.RankRequirement <= sm.Rank.CurrentRank)
-                                            && sm.SuperManagerElements.Any(e => 
-                                                effectiveness != null 
-                                                && effectiveness.Contains(e.EffectivenessType)
-                                                && e.RankRequirement <= sm.Rank.CurrentRank));
+            predicate = predicate.And(manager => manager.SuperManagerElements != null 
+                                                 && manager.SuperManagerElements
+                                                     .Any(x => elementNames.Contains(x.Element.Name) 
+                                                               && effectiveness.Contains(x.EffectivenessType) 
+                                                               && x.RankRequirement <= manager.Rank.CurrentRank));
         }
 
         if (HasPassiveMultiplier ?? false)

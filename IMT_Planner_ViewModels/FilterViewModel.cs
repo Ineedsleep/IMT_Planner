@@ -1,7 +1,10 @@
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 using System.Windows.Input;
+using IMT_Planner_Model;
 using IMT_Planner_ViewModels.Models;
 using IMT_Planner_ViewModels.Services;
+using LinqKit;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 
@@ -24,11 +27,44 @@ public class FilterViewModel : ObservableObject
 
     private void ResetFilters()
     {
-        throw new NotImplementedException();
+        var masterPredicate = PredicateBuilder.New<SuperManager>(true);
+        _superManagerSelectionService.ApplyFilters(masterPredicate);
     }
 
     private void ApplyFilters()
     {
-        throw new NotImplementedException();
+        var masterPredicate = PredicateBuilder.New<SuperManager>(true); // Start with a true predicate
+
+        foreach (CardFilterModel filter in CardFilters)
+        {
+            var filterExpression = filter.GetExpression();
+            masterPredicate = masterPredicate.And(filterExpression);
+        }
+
+        // SuperManagerElement testi = new SuperManagerElement
+        // {
+        //     SuperManagerId = 0,
+        //     SuperManager = null,
+        //     ElementId = 1,
+        //     Element = new Element("Nature"),
+        //     RankRequirement = 0,
+        //     EffectivenessType = "SE"
+        // };
+        // CardFilterModel cardFilterModel = new CardFilterModel
+        // {
+        //     Level = (50, null),
+        //     RankRange = (null, null),
+        //     Rank = null,
+        //     Area = null,
+        //     Rarity = null,
+        //     Elements = new List<SuperManagerElement>(){ testi },
+        //     Promoted = false,
+        //     HasPassiveMultiplier = null,
+        //     PassiveMultiplier = null
+        // };
+        
+
+        //_superManagerSelectionService.ApplyFilters(cardFilterModel.GetExpression());
+        _superManagerSelectionService.ApplyFilters(masterPredicate);
     }
 }
