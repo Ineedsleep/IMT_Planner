@@ -5,9 +5,52 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-           <Grid>
+             d:DesignHeight="300" d:DesignWidth="400">
+    <UserControl.Resources>
+        <!-- Reused Base Styles -->
+        <Style x:Key="BaseCardStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <Style x:Key="BaseButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="4,0,4,0"/>
+            <!-- <Setter Property="Padding" Value="5"/> -->
+            <Setter Property="MinWidth" Value="48"/>
+            <Setter Property="MaxHeight" Value="24"/>
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="MaxWidth" Value="224"/>
+        </Style>
+    </UserControl.Resources>
+
+       <Grid Background="#f0f0f0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -15,105 +58,98 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
         <!-- Command Buttons -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Content="Apply Filter" Command="{Binding ApplyFilterCommand}" Margin="5"/>
-            <Button Content="Reset Filter" Command="{Binding ResetFilterCommand}" Margin="5"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal"   Margin="10">
+            <Button Content="Apply Filter" Command="{Binding ApplyFilterCommand}" Style="{StaticResource BaseButtonStyle}"/>
+            <Button Content="Reset Filter" Command="{Binding ResetFilterCommand}" Style="{StaticResource BaseButtonStyle}"/>
         </StackPanel>
 
-        <!-- Level and Rank Filters -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <!-- Level -->
-            <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Level"/>
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical" Margin="5">
+        <!-- Combined Level / Rank Filters -->
+        <GroupBox Grid.Row="1" Header="Sm Properties" Style="{StaticResource {x:Type GroupBox}}">
+           <StackPanel >
+            <StackPanel Orientation="Vertical">
+                <!-- Level Filters -->
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <TextBlock Text="Level" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal" Margin="10">
                         <TextBlock Text="Min"/>
                         <TextBox Text="{Binding LevelMin, Mode=TwoWay}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" Margin="5">
                         <TextBlock Text="Max"/>
                         <TextBox Text="{Binding LevelMax, Mode=TwoWay}"/>
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
-
-            <!-- Rank -->
-            <StackPanel Orientation="Vertical" Margin="5">
-                <TextBlock Text="Rank"/>
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical" Margin="5">
+                <!-- Rank Filters -->
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <TextBlock Text="Rank" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal" Margin="10">
                         <TextBlock Text="Min"/>
                         <TextBox Text="{Binding RankRangeMin, Mode=TwoWay}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" Margin="5">
                         <TextBlock Text="Max"/>
                         <TextBox Text="{Binding RankRangeMax, Mode=TwoWay}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" Margin="5">
-                        <TextBlock Text="Exact"/>
-                        <TextBox Text="{Binding Rank, Mode=TwoWay}"/>
+                        <!-- <TextBlock Text="Exact"/> -->
+                        <!-- <TextBox Text="{Binding Rank, Mode=TwoWay}"/> -->
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Header row -->
+            <RowDefinition Height="Auto"/> <!-- Income factor filter -->
+            <RowDefinition Height="Auto"/> <!-- CR filter -->
+            <RowDefinition Height="Auto"/> <!-- Unlock filter -->
+        </Grid.RowDefinitions>
 
-        <!-- ItemControl for Element Filters -->
-        <ItemsControl Grid.Row="2" ItemsSource="{Binding CardFilters}" Margin="10">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="1" BorderBrush="Gray" Margin="5" Padding="10">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Element Name" FontWeight="Bold" />
-                            <TextBox Text="{Binding Element.Name, Mode=TwoWay}"/>
-                            <TextBlock Text="Effectiveness Type" FontWeight="Bold" />
-                            <TextBox Text="{Binding EffectivenessType, Mode=TwoWay}"/>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/> <!-- Checkboxes column -->
+            <ColumnDefinition Width="Auto"/> <!-- Labels column -->
+            <ColumnDefinition Width="*" />   <!-- TextBoxes column -->
+        </Grid.ColumnDefinitions>
 
-        <!-- CIF / MIF Group -->
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <!-- CIF -->
-            <CheckBox Content="CIF" 
-                      IsChecked="{Binding HasCIF, Mode=TwoWay}" Margin="5"/>
-            <!-- MIF -->
-            <CheckBox Content="MIF" 
-                      IsChecked="{Binding HasMIF, Mode=TwoWay}" Margin="5"/>
-        </StackPanel>
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Passives" FontWeight="Bold" Margin="0,0,0,5"/>
+
+        <!-- Has Income Filter -->
+        <CheckBox Grid.Row="1" Grid.Column="0" Content="IF" FlowDirection="RightToLeft" IsChecked="{Binding HasIncomeFactor, Mode=TwoWay}" ToolTip="Has MIF / CIF as passive" Margin="5"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Value:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding IncomeFactorValue, Mode=TwoWay}" IsEnabled="{Binding HasIncomeFactor, Mode=TwoWay}" Margin="5"/>
+
+        <!-- CR Filter -->
+        <CheckBox Grid.Row="2" Grid.Column="0" Content="CR" FlowDirection="RightToLeft" IsChecked="{Binding HasCR, Mode=TwoWay}" Margin="5"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Value:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding CRValue, Mode=TwoWay}" IsEnabled="{Binding HasCR, Mode=TwoWay}" Margin="5"/>
+
+        <!-- Unlock Filter -->
+        <CheckBox Grid.Row="3" Grid.Column="0" Content="Unlock" FlowDirection="RightToLeft" IsChecked="{Binding HasUnlock, Mode=TwoWay}" Margin="5"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Value:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding UnlockValue, Mode=TwoWay}" IsEnabled="{Binding HasUnlock, Mode=TwoWay}" Margin="5"/>
     </Grid>
-        
-        
-        
-        
-        
-        
-        
-        
-        <!-- <ItemsControl x:Name="ItemsControlSuperManager" ItemsSource="{Binding CardFilters}" > -->
-          <!--       <ItemsControl.ItemTemplate> -->
-          <!--           <DataTemplate> -->
-          <!--               <Border -->
-          <!--                   Margin="12" -->
-          <!--                   Padding="8" -->
-          <!--                   BorderBrush="{Binding CurrentRank, Converter={StaticResource RankToBrushConverter}}" -->
-          <!--                   Background="{Binding Path=Rarity, Converter={StaticResource RarityToBackgroundConverter}}" -->
-          <!--                   BorderThickness="3"   -->
-          <!--                   CornerRadius="10"> -->
-          <!--                   <Grid> -->
-          <!--                        -->
-          <!--                        -->
-          <!--                   </Grid> -->
-          <!--               </Border> -->
-          <!--           </DataTemplate> -->
-          <!--       </ItemsControl.ItemTemplate> -->
-          <!--       <ItemsControl.ItemsPanel> -->
-          <!--           <ItemsPanelTemplate> -->
-          <!--               <WrapPanel Orientation="Horizontal" /> -->
-          <!--           </ItemsPanelTemplate> -->
-          <!--       </ItemsControl.ItemsPanel> -->
-          <!--   </ItemsControl> -->
+</StackPanel>
+
+           </StackPanel>
+        </GroupBox>
+        <!-- Elements Filters -->
+        <GroupBox Grid.Column="1" Grid.Row="1" Header="Elements" Style="{StaticResource {x:Type GroupBox}}">
+            <ItemsControl ItemsSource="{Binding CardFilters}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource BaseCardStyle}">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Element Name" FontWeight="Bold"/>
+                                <ComboBox ItemsSource="{Binding ElementOptions}" SelectedItem="{Binding Element.Name, Mode=TwoWay}"/>
+                                <TextBlock Text="Effectiveness Type" FontWeight="Bold"/>
+                                <TextBox Text="{Binding EffectivenessType, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </GroupBox>
     </Grid>
 </UserControl>

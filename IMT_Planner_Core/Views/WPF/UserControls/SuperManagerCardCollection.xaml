@@ -14,12 +14,7 @@
         <converter:RarityToBackgroundConverter x:Key="RarityToBackgroundConverter" />
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
-        <local:FilterSelection Grid.Row="0"/>
-        <Border Grid.Row="1"
+        <Border Grid.Row="0"
             Grid.Column="0"
             Margin="10,10,10,10"
             BorderBrush="{DynamicResource MahApps.Brushes.Red}"
