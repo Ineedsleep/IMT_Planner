@@ -44,7 +44,7 @@ public class SuperManagerListViewModel: ObservableObject
         {
             _superManagerSelectionService.CreateElementCollection(repositoryService.GetAllElements());
             _superManagerSelectionService.CreateSuperManagerCollection(_repositoryService.GetAllSuperManagersWithElements());
-            _superManagerSelectionService.CurrentSuperManager = _superManagerCollection.First().SuperManager;
+            _superManagerSelectionService.CurrentSuperManager = SuperManagerCollection.First().SuperManager;
         }
         catch (Exception e)
         {
