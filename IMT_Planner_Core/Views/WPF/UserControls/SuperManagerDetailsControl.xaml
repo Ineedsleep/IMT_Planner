@@ -11,12 +11,26 @@
 
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="BaseButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="MinWidth" Value="100" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <StackPanel x:Name="EditManagerPanel"  Margin="10" MaxWidth="600">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" x:Name="EditManagerPanel"  Margin="10" MaxWidth="600">
   
             <!-- Editor for Name property -->
                 <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/>
@@ -54,15 +68,15 @@
             <GroupBox Header="Promoted">
                 <CheckBox IsChecked="{Binding Promoted}" />
             </GroupBox>
-
             <!-- Other properties editors go here -->
-    
             <GroupBox Header="Element">
                 <userControls:ElementSelection Grid.Row="1"></userControls:ElementSelection></GroupBox>
             <!-- Command button for UpdateName -->
-            <Button Command="{Binding UpdateCommand}">Update</Button>
-
+   
         </StackPanel>
-
+<StackPanel Grid.Column="1" Grid.Row="0">
+    <!-- <local:CostDetailControl/> -->
+</StackPanel>
+        <Button Grid.Row="2" Grid.Column="1" Command="{Binding UpdateCommand}"  HorizontalAlignment="Right" Style="{StaticResource BaseButtonStyle}" Margin="16">Update</Button>
     </Grid>
 </UserControl>

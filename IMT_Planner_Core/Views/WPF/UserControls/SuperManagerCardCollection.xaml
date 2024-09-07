@@ -15,10 +15,10 @@
     </UserControl.Resources>
     <Grid>
         <Border Grid.Row="0"
-            Grid.Column="0"
-            Margin="10,10,10,10"
-            BorderBrush="{DynamicResource MahApps.Brushes.Red}"
-            BorderThickness="1">
+                Grid.Column="0"
+                Margin="10,10,10,10"
+                BorderBrush="{DynamicResource MahApps.Brushes.Red}"
+                BorderThickness="1">
             <ItemsControl x:Name="ItemsControlSuperManager" ItemsSource="{Binding SuperManagerCollection}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -34,13 +34,7 @@
                                     <i:InvokeCommandAction Command="{Binding DataContext.SelectSuperManagerCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                            <!-- <Border.Background> -->
-                            <!--     <MultiBinding Converter="{StaticResource MaxToBrushConverter}"> -->
-                            <!--         <Binding Path="Level"/> -->
-                            <!--         <Binding Path="Promoted"/> -->
-                            <!--     </MultiBinding> -->
-                            <!-- </Border.Background> -->
-                     <local:SuperManagerCard/>
+                            <local:SuperManagerCard/>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

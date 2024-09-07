@@ -30,9 +30,25 @@
                 <MenuItem Command="{Binding ImportCommand}" Header="_Import" />
             </MenuItem>
         </Menu>
-        <ScrollViewer Grid.Column="0" Grid.Row="1">
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="0">
             <userControls:SuperManagerCardCollection />
         </ScrollViewer>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Text="Sum of blue gem costs: " VerticalAlignment="Center"></TextBlock>
+                <Label Content="xxx" VerticalAlignment="Center"/> 
+                <TextBlock Text="Sum of red gem costs: " VerticalAlignment="Center"></TextBlock>
+                <Label Content="xxx" VerticalAlignment="Center"/>
+                <TextBlock Text="Sum of blue crystal costs: " VerticalAlignment="Center"></TextBlock>
+                <Label Content="xxx" VerticalAlignment="Center"/>
+                <TextBlock Text="Sum of red crystal costs: " VerticalAlignment="Center"></TextBlock>
+                <Label Content="xxx" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
         <Grid Grid.Row="1" Grid.Column="2">
             <Grid.RowDefinitions>
