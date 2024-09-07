@@ -220,30 +220,31 @@ public class CardFilterModel
 
         if (HasPassiveMultiplier ?? false)
         {
-            predicate = predicate.And(sm => sm.HasMultiplier);
+            predicate = predicate.And(sm => sm.Passives.HasCif || sm.Passives.HasMif);
         }
 
         if (PassiveMultiplier.HasValue)
         {
-            predicate = predicate.And(sm => sm.PassiveMultiplier >= PassiveMultiplier);
+            predicate = predicate.And(sm => sm.Passives.ContinentIncomeFactor >= PassiveMultiplier || sm.Passives.MineIncomeFactor <= PassiveMultiplier);
         }
+        
         if (HasCR ?? false)
         {
-            predicate = predicate.And(sm => sm.HasCR);
+            predicate = predicate.And(sm => sm.Passives.HasCostReduction);
         }
 
         if (CRValue.HasValue)
         {
-            predicate = predicate.And(sm => sm.CRValue >= CRValue);
+            predicate = predicate.And(sm => sm.Passives.CostReduction >= CRValue);
         }
         if (HasShaftUnlockReduction ?? false)
         {
-            predicate = predicate.And(sm => sm.HasShaftUnlockReduction);
+            predicate = predicate.And(sm => sm.Passives.HasShaftUnlockReduction);
         }
 
         if (ShaftUnlockReduction.HasValue)
         {
-            predicate = predicate.And(sm => sm.ShaftUnlockReduction >= ShaftUnlockReduction);
+            predicate = predicate.And(sm => sm.Passives.ShaftUnlockReduction >= ShaftUnlockReduction);
         }
         
 

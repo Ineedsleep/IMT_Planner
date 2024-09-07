@@ -13,6 +13,7 @@ namespace IMT_Planner_DAL.Context
         public DbSet<SuperManager> SuperManagers { get; set; }
         public DbSet<Element> Elements { get; set; }
         public DbSet<SuperManagerElement> SuperManagerElements { get; set; }
+        public DbSet<Passives> Passives { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {   
             // Configuration for many-many relation between SuperManager and Element
@@ -45,8 +46,13 @@ namespace IMT_Planner_DAL.Context
             {
                 entity.Property(sm => sm.SuperManagerId).ValueGeneratedOnAdd();
                 entity.HasKey(sm => sm.SuperManagerId);
-
                 entity.Property(sm => sm.Name).IsRequired();
+                
+                    entity.HasOne(sm => sm.Passives)
+                    .WithOne(p => p.SuperManager)
+                    .HasForeignKey<Passives>(p => p.SuperManagerId);
+                
+                
                 var rankConverter = new ValueConverter<Rank?, int>(
                     v => v.CurrentRank, // Convert from Rank to int
                     v => new Rank(v) // Convert from int to Rank
@@ -80,13 +86,24 @@ namespace IMT_Planner_DAL.Context
                     v => (Equipment) Enum.Parse(typeof(Equipment), v));
                 entity.Property(sm => sm.Equipment).HasConversion(equipmentConverter);
                 
-                entity.Property(sm => sm.PassiveMultiplier);
-                entity.Property(sm => sm.HasMultiplier);
 
                 entity.Property(sm => sm.Priority);
                 
             });
-            
+            modelBuilder.Entity<Passives>(entity =>
+            {
+                entity.HasKey(p => p.Id); // Define primary key
+                entity.Property(p => p.MineIncomeFactor);
+                entity.Property(p => p.ContinentIncomeFactor);
+                entity.Property(p => p.HasMif);
+                entity.Property(p => p.MineIncomeFactor);
+                entity.Property(p => p.HasCif);
+                entity.Property(p => p.ContinentIncomeFactor);
+                entity.Property(p => p.HasCostReduction);
+                entity.Property(p => p.CostReduction);
+                entity.Property(p => p.HasShaftUnlockReduction);
+                entity.Property(p => p.ShaftUnlockReduction);
+            });
             
         }
     }

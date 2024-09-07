@@ -6,20 +6,6 @@ namespace IMT_Planner_Model;
 public class SuperManager
 {
     public SuperManager(string? name, Rank? rank, bool promoted
-        , byte level, Rarity rarity, Areas area, Equipment equipment, double passiveMultiplier, ICollection<SuperManagerElement>? superManagerElements)
-    {
-        Name = name;
-        Rank = rank;
-        Promoted = promoted;
-        Level = level;
-        Rarity = rarity;
-        Area = area;
-        Equipment = equipment;
-        PassiveMultiplier = passiveMultiplier;
-        SuperManagerElements = superManagerElements;
-    }
-    
-    public SuperManager(string? name, Rank? rank, bool promoted
         ,Rarity rarity, Areas area)
     {
         Name = name;
@@ -38,22 +24,6 @@ public class SuperManager
         SuperManagerElements = superManagerElements;
     }
     
-    public SuperManager(string? name, Rank? rank, bool promoted, byte level, Rarity rarity, Areas area, 
-        Equipment equipment, double passiveMultiplier, byte priority
-        , ICollection<SuperManagerElement>? superManagerElements)
-    {
-        Name = name;
-        Rank = rank;
-        Promoted = promoted;
-        Level = level;
-        Rarity = rarity;
-        Area = area;
-        Equipment = equipment;
-        PassiveMultiplier = passiveMultiplier;
-        Priority = priority;
-        SuperManagerElements = superManagerElements;
-    }
-
     public SuperManager()
     {
     }
@@ -66,17 +36,7 @@ public class SuperManager
     public byte Level { get; set; }
     public int CurrentFragments { get; set; }
     public Equipment Equipment { get; set; }
-    
-    //ToDo: needs to be changed into a Class and extra table with: HasIt, Value, RankRequirement, SmId
-    public double PassiveMultiplier { get; set; }
-    public bool HasMultiplier { get; set; }
-    public bool HasCR { get; set; }
-    public double CRValue { get; set; }
-    
-    public bool HasShaftUnlockReduction { get; set; }
-    public double ShaftUnlockReduction { get; set; }
-    
-    //ToDoEnd;
+    public Passives Passives { get; set; }
     public Rarity Rarity { get; set; }
     public Areas Area { get; set; }
  
