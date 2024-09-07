@@ -22,7 +22,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="10*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -74,8 +74,8 @@
             <!-- Command button for UpdateName -->
    
         </StackPanel>
-<StackPanel Grid.Column="1" Grid.Row="0">
-    <!-- <local:CostDetailControl/> -->
+<StackPanel Grid.Column="1" Grid.Row="0"  Margin="10,64,10,10" >
+    <userControls:CostDetailControl/>
 </StackPanel>
         <Button Grid.Row="2" Grid.Column="1" Command="{Binding UpdateCommand}"  HorizontalAlignment="Right" Style="{StaticResource BaseButtonStyle}" Margin="16">Update</Button>
     </Grid>

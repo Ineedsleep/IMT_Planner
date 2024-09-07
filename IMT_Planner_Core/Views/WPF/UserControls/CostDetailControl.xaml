@@ -7,6 +7,47 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Sum of blue gem costs: " VerticalAlignment="Center" FontSize="14"></TextBlock>
+            <Label Content="xxx" VerticalAlignment="Center" FontSize="14"/> 
+            <TextBlock Text="Sum of red gem costs: " VerticalAlignment="Center" FontSize="14"></TextBlock>
+            <Label Content="xxx" VerticalAlignment="Center" FontSize="14"/>
+            <TextBlock Text="Sum of blue crystal costs: " VerticalAlignment="Center" FontSize="14"></TextBlock>
+            <Label Content="xxx" VerticalAlignment="Center" FontSize="14"/>
+            <TextBlock Text="Sum of red crystal costs: " VerticalAlignment="Center" FontSize="14"></TextBlock>
+            <Label Content="xxx" VerticalAlignment="Center" FontSize="14"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,8">
+            <StackPanel>
+            <Label Width="100" VerticalAlignment="Center" Content="Cost To Craft: " FontSize="14"></Label>
+            <!--For now hardcoded but needs to be adjusted via Itemscontrol depending on the rank of the manager-->
+         
+            <Label Width="100" VerticalAlignment="Center" Content="To Rank 3: " FontSize="14"></Label>
+            <Label Width="100" VerticalAlignment="Center" Content="To Rank 4: " FontSize="14"></Label>
+            <Label Width="100" VerticalAlignment="Center" Content="To Rank 5: " FontSize="14"></Label>
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding SEElements}" Width="400">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel>
+                                <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24"
+                                       ToolTip="{Binding Name}" />
+                                <Label Content="Amount To Craft: "></Label>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
     </Grid>
 </UserControl>
