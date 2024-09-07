@@ -73,14 +73,14 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <!-- You may need to adapt this line to present your 'Element' object's properties correctly -->
-                                <TextBlock Text="{Binding Element.Name}"/>
+                                <TextBlock Text="{Binding Element.Abbreviation}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Assigned SM">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding AssignedSM.Name}"/>
+                                <TextBlock Text="{Binding AssignedSM.Abbreviation}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

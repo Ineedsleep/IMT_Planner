@@ -15,7 +15,7 @@ public class CardFilterModel
     private ICollection<Rarity> _rarity;
     private ICollection<SuperManagerElement>? _elements;
     private bool _promoted;
-    private bool? _hasPassiveMultiplier;
+    private bool? _hasIncomeFactor;
     private double? _passiveMultiplier;
     private bool? _hasCostReduction;
     private double? _costReductionValue;
@@ -25,63 +25,33 @@ public class CardFilterModel
     public int? LevelMin
     {
         get => _levelMin;
-        set
-        {
-            if (_levelMin != value)
-            {
-                _levelMin = value;
-            }
-        }
+        set => _levelMin = value;
     }
 
     public int? LevelMax
     {
         get => _levelMax;
-        set
-        {
-            if (_levelMax != value)
-            {
-                _levelMax = value;
-            }
-        }
+        set => _levelMax = value;
     }
 
     public int? RankRangeMin
     {
         get => _rankRangeMin;
-        set
-        {
-                _rankRangeMin = value;
-        }
+        set => _rankRangeMin = value;
     }
 
     public int? RankRangeMax
     {
         get => _rankRangeMax;
-        set
-        {
-                _rankRangeMax = value;
-        }
+        set => _rankRangeMax = value;
     }
-
-    public int? Rank
-    {
-        get => _rank;
-        set
-        {
-            if (_rank != value)
-            {
-                _rank = value;
-            }
-        }
-    }
-
+    
     public ICollection<Areas> Area
     {
         get => _area;
         set
         {
-            if (_area != value)
+            if (!Equals(_area, value))
             {
                 _area = value;
             }
@@ -93,7 +63,7 @@ public class CardFilterModel
         get => _rarity;
         set
         {
-            if (_rarity != value)
+            if (!Equals(_rarity, value))
             {
                 _rarity = value;
             }
@@ -105,7 +75,7 @@ public class CardFilterModel
         get => _elements;
         set
         {
-            if (_elements != value)
+            if (!Equals(_elements, value))
             {
                 _elements = value;
             }
@@ -115,85 +85,43 @@ public class CardFilterModel
     public bool Promoted
     {
         get => _promoted;
-        set
-        {
-            if (_promoted != value)
-            {
-                _promoted = value;
-            }
-        }
+        set => _promoted = value;
     }
 
-    public bool? HasPassiveMultiplier
+    public bool? HasIncomeFactor
     {
-        get => _hasPassiveMultiplier;
-        set
-        {
-            if (_hasPassiveMultiplier != value)
-            {
-                _hasPassiveMultiplier = value;
-            }
-        }
+        get => _hasIncomeFactor;
+        set => _hasIncomeFactor = value;
     }
 
     public double? PassiveMultiplier
     {
         get => _passiveMultiplier;
-        set
-        {
-            if (_passiveMultiplier != value)
-            {
-                _passiveMultiplier = value;
-            }
-        }
+        set => _passiveMultiplier = value;
     }
-    public bool? HasCR
+    public bool? HasCostReduction
     {
         get => _hasCostReduction;
-        set
-        {
-            if (_hasCostReduction != value)
-            {
-                _hasCostReduction = value;
-            }
-        }
+        set => _hasCostReduction = value;
     }
 
     public double? CRValue
     {
         get => _costReductionValue;
-        set
-        {
-            if (_costReductionValue != value)
-            {
-                _costReductionValue= value;
-            }
-        }
+        set => _costReductionValue= value;
     }
     
     
     public bool? HasShaftUnlockReduction
     {
         get => _hasShaftUnlockReduction;
-        set
-        {
-            if (_hasShaftUnlockReduction != value)
-            {
-                _hasShaftUnlockReduction = value;
-            }
-        }
+        set => _hasShaftUnlockReduction = value;
     }
 
     public double? ShaftUnlockReduction
     {
         get => _shaftUnlockReduction;
-        set
-        {
-            if (_shaftUnlockReduction != value)
-            {
-                _shaftUnlockReduction= value;
-            }
-        }
+        set => _shaftUnlockReduction= value;
     }
     public Expression<Func<SuperManager, bool>> GetExpression()
     {
@@ -218,33 +146,33 @@ public class CardFilterModel
                                                                && x.RankRequirement <= manager.Rank.CurrentRank));
         }
 
-        if (HasPassiveMultiplier ?? false)
+        if (HasIncomeFactor ?? false)
         {
-            predicate = predicate.And(sm => sm.Passives.HasCif || sm.Passives.HasMif);
+            predicate = predicate.And(sm => sm.Passives.Any(p => p.Name.Abbreviation == "MIF" || p.Name.Abbreviation == "CIF"));
         }
 
-        if (PassiveMultiplier.HasValue)
+        if (PassiveMultiplier.HasValue && HasIncomeFactor != null && HasIncomeFactor.Value)
         {
-            predicate = predicate.And(sm => sm.Passives.ContinentIncomeFactor >= PassiveMultiplier || sm.Passives.MineIncomeFactor <= PassiveMultiplier);
+            predicate = predicate.And(sm => sm.Passives.Any(p => p.AttributeValue >= PassiveMultiplier));
         }
         
-        if (HasCR ?? false)
+        if (HasCostReduction ?? false)
         {
-            predicate = predicate.And(sm => sm.Passives.HasCostReduction);
+            predicate = predicate.And(sm => sm.Passives.Any(p => p.Name.Abbreviation == "CR"));
         }
 
-        if (CRValue.HasValue)
+        if (CRValue.HasValue && HasCostReduction != null && HasCostReduction.Value)
         {
-            predicate = predicate.And(sm => sm.Passives.CostReduction >= CRValue);
+            predicate = predicate.And(sm => sm.Passives.Any(p => p.AttributeValue>= CRValue));
         }
         if (HasShaftUnlockReduction ?? false)
         {
-            predicate = predicate.And(sm => sm.Passives.HasShaftUnlockReduction);
+            predicate = predicate.And(sm => sm.Passives.Any(p => p.Name.Abbreviation == "SUCR"));
         }
 
-        if (ShaftUnlockReduction.HasValue)
+        if (ShaftUnlockReduction.HasValue && HasShaftUnlockReduction != null && HasShaftUnlockReduction.Value)
         {
-            predicate = predicate.And(sm => sm.Passives.ShaftUnlockReduction >= ShaftUnlockReduction);
+            predicate = predicate.And(sm => sm.Passives.Any(p => p.AttributeValue >= ShaftUnlockReduction));
         }
         
 

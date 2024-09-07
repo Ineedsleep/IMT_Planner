@@ -47,31 +47,6 @@ public class FilterViewModel : ObservableObject
             var filterExpression = filter.GetExpression();
             masterPredicate = masterPredicate.And(filterExpression);
         }
-
-        // SuperManagerElement testi = new SuperManagerElement
-        // {
-        //     SuperManagerId = 0,
-        //     SuperManager = null,
-        //     ElementId = 1,
-        //     Element = new Element("Nature"),
-        //     RankRequirement = 0,
-        //     EffectivenessType = "SE"
-        // };
-        // CardFilterModel cardFilterModel = new CardFilterModel
-        // {
-        //     Level = (50, null),
-        //     RankRange = (null, null),
-        //     Rank = null,
-        //     Area = null,
-        //     Rarity = null,
-        //     Elements = new List<SuperManagerElement>(){ testi },
-        //     Promoted = false,
-        //     HasPassiveMultiplier = null,
-        //     PassiveMultiplier = null
-        // };
-        
-
-        //_superManagerSelectionService.ApplyFilters(cardFilterModel.GetExpression());
         _superManagerSelectionService.ApplyFilters(masterPredicate);
     }
 }

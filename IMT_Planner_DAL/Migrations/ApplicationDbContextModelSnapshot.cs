@@ -74,45 +74,76 @@ namespace IMT_Planner_DAL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("IMT_Planner_Model.Passives", b =>
+            modelBuilder.Entity("IMT_Planner_Model.Passive", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double?>("ContinentIncomeFactor")
+                    b.Property<double?>("AttributeValue")
                         .HasColumnType("REAL");
 
-                    b.Property<double?>("CostReduction")
-                        .HasColumnType("REAL");
-
-                    b.Property<bool>("HasCif")
+                    b.Property<int>("PassiveAttributeNameId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("HasCostReduction")
+                    b.Property<int>("RankRequirement")
                         .HasColumnType("INTEGER");
-
-                    b.Property<bool>("HasMif")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("HasShaftUnlockReduction")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("MineIncomeFactor")
-                        .HasColumnType("REAL");
-
-                    b.Property<double?>("ShaftUnlockReduction")
-                        .HasColumnType("REAL");
 
                     b.Property<int>("SuperManagerId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SuperManagerId")
-                        .IsUnique();
+                    b.HasIndex("PassiveAttributeNameId");
+
+                    b.HasIndex("SuperManagerId");
 
                     b.ToTable("Passives");
+                });
+
+            modelBuilder.Entity("IMT_Planner_Model.PassiveAttributeName", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PassiveAttributeNames");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Abbreviation = "MIF",
+                            Description = "Mine Income Factor"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Abbreviation = "CIF",
+                            Description = "Continental Income Factor"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Abbreviation = "CR",
+                            Description = "Cost reduction for current shaft lvl"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Abbreviation = "SUCR",
+                            Description = "Shaft unlock cost reduction"
+                        });
                 });
 
             modelBuilder.Entity("IMT_Planner_Model.SuperManager", b =>
@@ -179,13 +210,21 @@ namespace IMT_Planner_DAL.Migrations
                     b.ToTable("SuperManagerElements");
                 });
 
-            modelBuilder.Entity("IMT_Planner_Model.Passives", b =>
+            modelBuilder.Entity("IMT_Planner_Model.Passive", b =>
                 {
-                    b.HasOne("IMT_Planner_Model.SuperManager", "SuperManager")
-                        .WithOne("Passives")
-                        .HasForeignKey("IMT_Planner_Model.Passives", "SuperManagerId")
+                    b.HasOne("IMT_Planner_Model.PassiveAttributeName", "Name")
+                        .WithMany("PassiveAttributes")
+                        .HasForeignKey("PassiveAttributeNameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("IMT_Planner_Model.SuperManager", "SuperManager")
+                        .WithMany("Passives")
+                        .HasForeignKey("SuperManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Name");
 
                     b.Navigation("SuperManager");
                 });
@@ -214,10 +253,14 @@ namespace IMT_Planner_DAL.Migrations
                     b.Navigation("SuperManagerElements");
                 });
 
+            modelBuilder.Entity("IMT_Planner_Model.PassiveAttributeName", b =>
+                {
+                    b.Navigation("PassiveAttributes");
+                });
+
             modelBuilder.Entity("IMT_Planner_Model.SuperManager", b =>
                 {
-                    b.Navigation("Passives")
-                        .IsRequired();
+                    b.Navigation("Passives");
 
                     b.Navigation("SuperManagerElements");
                 });

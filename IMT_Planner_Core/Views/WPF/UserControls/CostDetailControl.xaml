@@ -41,7 +41,7 @@
                         <Grid>
                             <StackPanel>
                                 <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24"
-                                       ToolTip="{Binding Name}" />
+                                       ToolTip="{Binding Abbreviation}" />
                                 <Label Content="Amount To Craft: "></Label>
                             </StackPanel>
                         </Grid>

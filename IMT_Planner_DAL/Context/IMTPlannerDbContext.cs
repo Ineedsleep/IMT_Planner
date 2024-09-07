@@ -13,7 +13,8 @@ namespace IMT_Planner_DAL.Context
         public DbSet<SuperManager> SuperManagers { get; set; }
         public DbSet<Element> Elements { get; set; }
         public DbSet<SuperManagerElement> SuperManagerElements { get; set; }
-        public DbSet<Passives> Passives { get; set; }
+        public DbSet<Passive> Passives { get; set; }
+        public DbSet<PassiveAttributeName> PassiveAttributeNames { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {   
             // Configuration for many-many relation between SuperManager and Element
@@ -42,15 +43,23 @@ namespace IMT_Planner_DAL.Context
                 new Element { ElementId = 8, Name = "Water" }
             );
             
+            modelBuilder.Entity<PassiveAttributeName>().HasData(
+                new PassiveAttributeName { Id = 1, Abbreviation = "MIF", Description = "Mine Income Factor"},
+                new PassiveAttributeName { Id = 2, Abbreviation = "CIF", Description = "Continental Income Factor"},
+                new PassiveAttributeName { Id = 3, Abbreviation = "CR", Description = "Cost reduction for current shaft lvl"},
+                new PassiveAttributeName { Id = 4, Abbreviation = "SUCR", Description = "Shaft unlock cost reduction"}
+                // Add more default attribute names as needed
+            );
             modelBuilder.Entity<SuperManager>(entity =>
             {
                 entity.Property(sm => sm.SuperManagerId).ValueGeneratedOnAdd();
                 entity.HasKey(sm => sm.SuperManagerId);
                 entity.Property(sm => sm.Name).IsRequired();
                 
-                    entity.HasOne(sm => sm.Passives)
-                    .WithOne(p => p.SuperManager)
-                    .HasForeignKey<Passives>(p => p.SuperManagerId);
+                // Define the one-to-many relationship
+                entity.HasMany(sm => sm.Passives)
+                    .WithOne(pa => pa.SuperManager)
+                    .HasForeignKey(pa => pa.SuperManagerId);
                 
                 
                 var rankConverter = new ValueConverter<Rank?, int>(
@@ -90,19 +99,27 @@ namespace IMT_Planner_DAL.Context
                 entity.Property(sm => sm.Priority);
                 
             });
-            modelBuilder.Entity<Passives>(entity =>
+            modelBuilder.Entity<Passive>(entity =>
             {
-                entity.HasKey(p => p.Id); // Define primary key
-                entity.Property(p => p.MineIncomeFactor);
-                entity.Property(p => p.ContinentIncomeFactor);
-                entity.Property(p => p.HasMif);
-                entity.Property(p => p.MineIncomeFactor);
-                entity.Property(p => p.HasCif);
-                entity.Property(p => p.ContinentIncomeFactor);
-                entity.Property(p => p.HasCostReduction);
-                entity.Property(p => p.CostReduction);
-                entity.Property(p => p.HasShaftUnlockReduction);
-                entity.Property(p => p.ShaftUnlockReduction);
+                entity.HasKey(pa => pa.Id); // Define primary key
+                entity.Property(pa => pa.AttributeValue);
+                entity.Property(pa => pa.RankRequirement).IsRequired();
+
+                // Define relationship with SuperManager
+                entity.HasOne(pa => pa.SuperManager)
+                    .WithMany(sm => sm.Passives)
+                    .HasForeignKey(pa => pa.SuperManagerId);
+
+                // Define relationship with PassiveAttributeName
+                entity.HasOne(pa => pa.Name)
+                    .WithMany(paName => paName.PassiveAttributes)
+                    .HasForeignKey(pa => pa.PassiveAttributeNameId);
+            });
+            modelBuilder.Entity<PassiveAttributeName>(entity =>
+            {
+                entity.HasKey(pan => pan.Id); // Define primary key
+                entity.Property(pan => pan.Abbreviation).IsRequired();
+                entity.Property(pan => pan.Description);
             });
             
         }

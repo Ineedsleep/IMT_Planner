@@ -33,7 +33,7 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" x:Name="EditManagerPanel"  Margin="10" MaxWidth="600">
   
             <!-- Editor for Name property -->
-                <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/>
+                <Label Content="{Binding Abbreviation, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/>
                 <!-- <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/> -->
             <GroupBox Header="Level">
                 <TextBox>

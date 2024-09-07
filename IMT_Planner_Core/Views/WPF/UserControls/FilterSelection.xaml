@@ -10,6 +10,7 @@
     <UserControl.Resources>
         <!-- Reused Base Styles -->
         <converter:NullableIntConverter x:Key="NullableIntConverter" />
+        <converter:NullToFalseConverter x:Key="NullToFalseConverter" />
         <Style x:Key="BaseCardStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Background" Value="White" />
@@ -37,18 +38,18 @@
             <Setter Property="MaxLength" Value="5"></Setter>
         </Style>
 
-        <Style TargetType="CheckBox">
-            <Setter Property="Margin" Value="5" />
-        </Style>
+        <!-- <Style TargetType="CheckBox"> -->
+        <!--     <Setter Property="Margin" Value="5" /> -->
+        <!-- </Style> -->
 
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Padding" Value="5" />
         </Style>
         <DataTemplate x:Key="ElementComboBoxItemTemplate">
-            <StackPanel Orientation="Horizontal" ToolTip="{Binding Name}">
-                <Image Source="{Binding ImagePath}" Width="24" Height="24" Margin="4"/>
-                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0"/>
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Abbreviation}">
+                <Image Source="{Binding ImagePath}" Width="24" Height="24" Margin="4" />
+                <TextBlock Text="{Binding Abbreviation}" VerticalAlignment="Center" Margin="4,0" />
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
@@ -72,112 +73,138 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Style="{StaticResource BaseCardStyle}">
-                    <StackPanel>
-                        <!-- Level Filters -->
-                        <StackPanel Orientation="Vertical" Margin="5">
-                            <TextBlock Text="Level" FontWeight="Bold" />
-                            <StackPanel Orientation="Horizontal" Margin="10">
-                                <TextBlock Text="Min" />
-                                <TextBox Text="{Binding LevelMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
-                                <TextBlock Text="Max" />
-                                <TextBox Text="{Binding LevelMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
-                            </StackPanel>
-                        </StackPanel>
-                        <!-- Rank Filters -->
-                        <StackPanel Orientation="Vertical" Margin="5">
-                            <TextBlock Text="Rank" FontWeight="Bold" />
-                            <StackPanel Orientation="Horizontal" Margin="10">
-                                <TextBlock Text="Min" />
-                                <TextBox Text="{Binding RankRangeMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
-                                <TextBlock Text="Max" />
-                                <TextBox Text="{Binding RankRangeMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
-                            </StackPanel>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Grid Margin="5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" /> <!-- Header row -->
-                                    <RowDefinition Height="Auto" /> <!-- Income factor filter -->
-                                    <RowDefinition Height="Auto" /> <!-- CR filter -->
-                                    <RowDefinition Height="Auto" /> <!-- Unlock filter -->
-                                </Grid.RowDefinitions>
+                            <StackPanel>
+                                <!-- Level Filters -->
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <TextBlock Text="Level" FontWeight="Bold" />
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <TextBlock Text="Min" />
+                                        <TextBox
+                                            Text="{Binding LevelMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
+                                        <TextBlock Text="Max" />
+                                        <TextBox
+                                            Text="{Binding LevelMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <!-- Rank Filters -->
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <TextBlock Text="Rank" FontWeight="Bold" />
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <TextBlock Text="Min" />
+                                        <TextBox
+                                            Text="{Binding RankRangeMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
+                                        <TextBlock Text="Max" />
+                                        <TextBox
+                                            Text="{Binding RankRangeMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Grid Margin="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" /> <!-- Header row -->
+                                            <RowDefinition Height="Auto" /> <!-- Income factor filter -->
+                                            <RowDefinition Height="Auto" /> <!-- CR filter -->
+                                            <RowDefinition Height="Auto" /> <!-- Unlock filter -->
+                                        </Grid.RowDefinitions>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" /> <!-- Checkboxes column -->
-                                    <ColumnDefinition Width="Auto" /> <!-- Labels column -->
-                                    <ColumnDefinition Width="*" />   <!-- TextBoxes column -->
-                                </Grid.ColumnDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" /> <!-- Checkboxes column -->
+                                            <ColumnDefinition Width="Auto" /> <!-- Labels column -->
+                                            <ColumnDefinition Width="*" />   <!-- TextBoxes column -->
+                                        </Grid.ColumnDefinitions>
 
-                                <!-- Header -->
-                                <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Passives" FontWeight="Bold"
-                                           Margin="0,0,0,5" />
+                                        <!-- Header -->
+                                        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Passives" FontWeight="Bold"
+                                                   Margin="0,0,0,5" />
 
-                                <!-- Has Income Filter -->
-                                <CheckBox Grid.Row="1" Grid.Column="0" Content="IF"
-                                          FlowDirection="RightToLeft"
-                                          IsChecked="{Binding HasIncomeFactor, Mode=TwoWay}"
-                                          ToolTip="Has MIF / CIF as passive" Margin="5" />
+                                        <!-- Has Income Filter -->
+                                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="5">
+                                            <!-- Content on the left side -->
+                                            <TextBlock Text="IF" VerticalAlignment="Center" Margin="0,0,5,0"
+                                                       HorizontalAlignment="Left"    ToolTip="Has MIF / CIF as passive" />
+                                            <CheckBox HorizontalAlignment="Right"
+                                                      IsChecked="{Binding HasIncomeFactor, Mode=TwoWay, Converter={StaticResource NullToFalseConverter}}"
+                                                      VerticalAlignment="Center" />
+                                        </StackPanel>
 
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="Value:" VerticalAlignment="Center"
-                                           Margin="5" />
-                                <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding IncomeFactorValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"
-                                         IsEnabled="{Binding HasIncomeFactor, Mode=TwoWay}" Margin="5" />
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Value:"
+                                                   VerticalAlignment="Center"
+                                                   Margin="5" />
+                                        <TextBox Grid.Row="1" Grid.Column="2"
+                                                 Text="{Binding IncomeFactorValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"
+                                                 IsEnabled="{Binding HasIncomeFactor, Mode=TwoWay}" Margin="5" />
 
-                                <!-- CR Filter -->
-                                <CheckBox Grid.Row="2" Grid.Column="0" Content="CR" FlowDirection="RightToLeft"
-                                          IsChecked="{Binding HasCR, Mode=TwoWay}" Margin="5" />
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="Value:" VerticalAlignment="Center"
-                                           Margin="5" />
-                                <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding CRValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"
-                                         IsEnabled="{Binding HasCR, Mode=TwoWay}" Margin="5" />
+                                        <!-- CR Filter -->
+                                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="5">
+                                            <TextBlock Text="CR" VerticalAlignment="Center" Margin="0,0,5,0"
+                                                       HorizontalAlignment="Left" />
+                                            <CheckBox HorizontalAlignment="Right"
+                                                IsChecked="{Binding HasCostReduction, Mode=TwoWay, Converter={StaticResource NullToFalseConverter}}"
+                                                VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" Text="Value:"
+                                                   VerticalAlignment="Center"
+                                                   Margin="5" />
+                                        <TextBox Grid.Row="2" Grid.Column="2"
+                                                 Text="{Binding CRValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"
+                                                 IsEnabled="{Binding HasCostReduction, Mode=TwoWay}" Margin="5" />
 
-                                <!-- Unlock Filter -->
-                                <CheckBox Grid.Row="3" Grid.Column="0" Content="Unlock" FlowDirection="RightToLeft"
-                                          IsChecked="{Binding HasUnlock, Mode=TwoWay}" Margin="5" />
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="Value:" VerticalAlignment="Center"
-                                           Margin="5" />
-                                <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding UnlockValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"
-                                         IsEnabled="{Binding HasUnlock, Mode=TwoWay}" Margin="5" />
-                            </Grid>
-                        </StackPanel>
-                        <StackPanel  Orientation="Vertical" HorizontalAlignment="Left">
-                            <ItemsControl ItemsSource="{Binding DataContext.CardFilters, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <StackPanel Orientation="Vertical" Margin="0,0,16,0">
-                                                <TextBlock Text="Element" FontWeight="Bold" />
-                                                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                                          ItemsSource="{Binding ElementOptions}"
-                                                          SelectedItem="{Binding Element, Mode=TwoWay}" 
-                                                          ItemTemplate="{StaticResource ElementComboBoxItemTemplate}">
-                                                </ComboBox>
+                                        <!-- Unlock Filter -->
+                                        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="5">
+                                            <TextBlock Text="Unlock" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="0,0,5,0" />
+                                            <CheckBox HorizontalAlignment="Right"
+                                                      IsChecked="{Binding HasShaftUnlockReduction, Mode=TwoWay, Converter={StaticResource NullToFalseConverter}}"
+                                                      VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" Text="Value:"
+                                                   VerticalAlignment="Center"
+                                                   Margin="5" />
+                                        <TextBox Grid.Row="3" Grid.Column="2"
+                                                 Text="{Binding UnlockValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"
+                                                 IsEnabled="{Binding HasShaftUnlockReduction, Mode=TwoWay}" Margin="5" />
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                    <ItemsControl
+                                        ItemsSource="{Binding DataContext.CardFilters, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <StackPanel Orientation="Vertical" Margin="0,0,16,0">
+                                                        <TextBlock Text="Element" FontWeight="Bold" />
+                                                        <ComboBox VerticalAlignment="Center"
+                                                                  HorizontalAlignment="Center"
+                                                                  ItemsSource="{Binding ElementOptions}"
+                                                                  SelectedItem="{Binding Element, Mode=TwoWay}"
+                                                                  ItemTemplate="{StaticResource ElementComboBoxItemTemplate}">
+                                                        </ComboBox>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical" Margin="16,0,0,0">
+                                                        <TextBlock Text="Effectiveness Type" FontWeight="Bold" />
+                                                        <ComboBox VerticalAlignment="Center"
+                                                                  HorizontalAlignment="Center"
+                                                                  ItemsSource="{Binding ElementEffectiveOptions}"
+                                                                  SelectedItem="{Binding Element, Mode=TwoWay}"
+                                                                  ItemTemplate="{StaticResource ElementComboBoxItemTemplate}">
+                                                        </ComboBox>
+                                                    </StackPanel>
                                                 </StackPanel>
-                                                <StackPanel Orientation="Vertical" Margin="16,0,0,0">
-                                                <TextBlock Text="Effectiveness Type" FontWeight="Bold" />
-                                                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                                          ItemsSource="{Binding ElementEffectiveOptions}"
-                                                          SelectedItem="{Binding Element, Mode=TwoWay}" 
-                                                          ItemTemplate="{StaticResource ElementComboBoxItemTemplate}">
-                                                </ComboBox>
-                                                </StackPanel>
-                                            </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-        
+
         <!-- Command Buttons -->
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Apply Filter" Command="{Binding ApplyFilterCommand}" 
+            <Button Content="Apply Filter" Command="{Binding ApplyFilterCommand}"
                     Style="{StaticResource BaseButtonStyle}" Margin="5" />
-            <Button Content="Reset Filter" Command="{Binding ResetFiltersCommand}" 
+            <Button Content="Reset Filter" Command="{Binding ResetFiltersCommand}"
                     Style="{StaticResource BaseButtonStyle}" Margin="5" />
         </StackPanel>
     </Grid>
