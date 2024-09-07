@@ -39,24 +39,43 @@ public class SuperManagerRepository : IRepository<SuperManager>
 
     public void InsertMany(IEnumerable<SuperManager> superManagers)
     {
-        foreach (var sm in superManagers)
+        try
         {
-            try
+            foreach (var sm in superManagers)
             {
-
-                _dbSet.Add(sm);
+                // Attach Elements to the context
                 foreach (var sme in sm.SuperManagerElements)
                 {
-                    _context.Elements.Attach(sme.Element);
+                    if (_context.Elements.Local.All(e => e.ElementId != sme.Element.ElementId)) // Check if not already tracked
+                    {
+                        _context.Elements.Attach(sme.Element);
+                    }
                 }
+
+                // Attach Passives and their PassiveAttributeName to the context
+                foreach (var passive in sm.Passives)
+                {
+                    if (_context.Passives.Local.All(p => p.Id != passive.Id)) // Check if not already tracked
+                    {
+                        if (_context.PassiveAttributeNames.Local.All(pan => pan.Id != passive.PassiveAttributeNameId))
+                        {
+                            _context.PassiveAttributeNames.Attach(passive.Name); // Attach PassiveAttributeName
+                        }
+                        _context.Passives.Attach(passive); // Attach Passive
+                    }
+                }
+
+                // Add SuperManager and its relationships to the context
                 _context.SuperManagers.Add(sm);
-                _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+
+            // Save all changes once at the end, ensuring transactions work efficiently
+            _context.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw;
         }
         
         // _dbSet.AddRange(superManagers);
@@ -65,9 +84,13 @@ public class SuperManagerRepository : IRepository<SuperManager>
 
     public IEnumerable<SuperManager> GetAllWithElements()
     {
-        var sms = _context.SuperManagers                
+        var sms = _context.SuperManagers
             .Include(sm => sm.SuperManagerElements)
             .ThenInclude(sme => sme.Element)
-            .ToList(); return (IEnumerable<SuperManager>)sms;
+            .Include(sm => sm.Passives)
+            .ThenInclude(p => p.Name) // Include 'Name' from PassiveAttributeName
+            .ToList();
+
+        return sms;
     }
 }

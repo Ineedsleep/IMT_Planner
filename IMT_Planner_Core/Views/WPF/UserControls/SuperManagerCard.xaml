@@ -34,7 +34,7 @@
                                     HorizontalAlignment="Center"
                                     FontSize="16"
                                     FontWeight="Bold" MaxWidth="100"
-                                    Text="{Binding Abbreviation}" />
+                                    Text="{Binding Name}" />
 
                                 <TextBlock
                                     Grid.Row="1"
