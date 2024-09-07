@@ -83,6 +83,9 @@ namespace IMT_Planner_DAL.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<double>("CRValue")
+                        .HasColumnType("REAL");
+
                     b.Property<int>("CurrentFragments")
                         .HasColumnType("INTEGER");
 
@@ -90,7 +93,13 @@ namespace IMT_Planner_DAL.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("HasCR")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("HasMultiplier")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("HasShaftUnlockReduction")
                         .HasColumnType("INTEGER");
 
                     b.Property<byte>("Level")
@@ -115,6 +124,9 @@ namespace IMT_Planner_DAL.Migrations
                     b.Property<string>("Rarity")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<double>("ShaftUnlockReduction")
+                        .HasColumnType("REAL");
 
                     b.HasKey("SuperManagerId");
 

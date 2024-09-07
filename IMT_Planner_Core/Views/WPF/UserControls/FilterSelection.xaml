@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls"
+             xmlns:converter="clr-namespace:IMT_Planner.Views.Converter"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="400">
     <UserControl.Resources>
         <!-- Reused Base Styles -->
+        <converter:NullableIntConverter x:Key="NullableIntConverter" />
         <Style x:Key="BaseCardStyle" TargetType="Border">
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Background" Value="White" />
@@ -32,6 +34,7 @@
             <!-- <Setter Property="Padding" Value="5"/> -->
             <Setter Property="MinWidth" Value="48" />
             <Setter Property="MaxHeight" Value="24" />
+            <Setter Property="MaxLength" Value="5"></Setter>
         </Style>
 
         <Style TargetType="CheckBox">
@@ -42,6 +45,12 @@
             <Setter Property="Margin" Value="5" />
             <Setter Property="Padding" Value="5" />
         </Style>
+        <DataTemplate x:Key="ElementComboBoxItemTemplate">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding Name}">
+                <Image Source="{Binding ImagePath}" Width="24" Height="24" Margin="4"/>
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="4,0"/>
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid Background="#f0f0f0">
@@ -49,7 +58,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" /> <!-- This row definition reserved for the buttons -->
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -57,21 +66,21 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Other UI elements remain unchanged -->
-
-        <!-- Combined Level / Rank Filters -->
-        <StackPanel Grid.Row="1" Grid.Column="0">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Border Style="{StaticResource BaseCardStyle}">
+        <!-- Filters Panel -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+            <ItemsControl ItemsSource="{Binding CardFilters}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource BaseCardStyle}">
                     <StackPanel>
                         <!-- Level Filters -->
                         <StackPanel Orientation="Vertical" Margin="5">
                             <TextBlock Text="Level" FontWeight="Bold" />
                             <StackPanel Orientation="Horizontal" Margin="10">
                                 <TextBlock Text="Min" />
-                                <TextBox Text="{Binding LevelMin, Mode=TwoWay}" />
+                                <TextBox Text="{Binding LevelMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
                                 <TextBlock Text="Max" />
-                                <TextBox Text="{Binding LevelMax, Mode=TwoWay}" />
+                                <TextBox Text="{Binding LevelMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
                             </StackPanel>
                         </StackPanel>
                         <!-- Rank Filters -->
@@ -79,9 +88,9 @@
                             <TextBlock Text="Rank" FontWeight="Bold" />
                             <StackPanel Orientation="Horizontal" Margin="10">
                                 <TextBlock Text="Min" />
-                                <TextBox Text="{Binding RankRangeMin, Mode=TwoWay}" />
+                                <TextBox Text="{Binding RankRangeMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
                                 <TextBlock Text="Max" />
-                                <TextBox Text="{Binding RankRangeMax, Mode=TwoWay}" />
+                                <TextBox Text="{Binding RankRangeMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
@@ -111,7 +120,7 @@
 
                                 <TextBlock Grid.Row="1" Grid.Column="1" Text="Value:" VerticalAlignment="Center"
                                            Margin="5" />
-                                <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding IncomeFactorValue, Mode=TwoWay}"
+                                <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding IncomeFactorValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"
                                          IsEnabled="{Binding HasIncomeFactor, Mode=TwoWay}" Margin="5" />
 
                                 <!-- CR Filter -->
@@ -119,7 +128,7 @@
                                           IsChecked="{Binding HasCR, Mode=TwoWay}" Margin="5" />
                                 <TextBlock Grid.Row="2" Grid.Column="1" Text="Value:" VerticalAlignment="Center"
                                            Margin="5" />
-                                <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding CRValue, Mode=TwoWay}"
+                                <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding CRValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"
                                          IsEnabled="{Binding HasCR, Mode=TwoWay}" Margin="5" />
 
                                 <!-- Unlock Filter -->
@@ -127,38 +136,48 @@
                                           IsChecked="{Binding HasUnlock, Mode=TwoWay}" Margin="5" />
                                 <TextBlock Grid.Row="3" Grid.Column="1" Text="Value:" VerticalAlignment="Center"
                                            Margin="5" />
-                                <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding UnlockValue, Mode=TwoWay}"
+                                <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding UnlockValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NullableIntConverter}}"
                                          IsEnabled="{Binding HasUnlock, Mode=TwoWay}" Margin="5" />
                             </Grid>
                         </StackPanel>
+                        <StackPanel  Orientation="Vertical" HorizontalAlignment="Left">
+                            <ItemsControl ItemsSource="{Binding DataContext.CardFilters, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <StackPanel Orientation="Vertical" Margin="0,0,16,0">
+                                                <TextBlock Text="Element" FontWeight="Bold" />
+                                                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                                          ItemsSource="{Binding ElementOptions}"
+                                                          SelectedItem="{Binding Element, Mode=TwoWay}" 
+                                                          ItemTemplate="{StaticResource ElementComboBoxItemTemplate}">
+                                                </ComboBox>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Vertical" Margin="16,0,0,0">
+                                                <TextBlock Text="Effectiveness Type" FontWeight="Bold" />
+                                                <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                                          ItemsSource="{Binding ElementEffectiveOptions}"
+                                                          SelectedItem="{Binding Element, Mode=TwoWay}" 
+                                                          ItemTemplate="{StaticResource ElementComboBoxItemTemplate}">
+                                                </ComboBox>
+                                                </StackPanel>
+                                            </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
-            </StackPanel>
-
-            <!-- Elements Filters -->
-            <StackPanel  Orientation="Vertical" HorizontalAlignment="Left">
-                <ItemsControl ItemsSource="{Binding CardFilters}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border Style="{StaticResource BaseCardStyle}">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="Element Name" FontWeight="Bold" />
-                                    <ComboBox ItemsSource="{Binding ElementOptions}"
-                                              SelectedItem="{Binding Element.Name, Mode=TwoWay}" />
-                                    <TextBlock Text="Effectiveness Type" FontWeight="Bold" />
-                                    <TextBox Text="{Binding EffectivenessType, Mode=TwoWay}" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
-        <!-- Command Buttons at the bottom right -->
+        
+        <!-- Command Buttons -->
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Apply Filter" Command="{Binding ApplyFilterCommand}"
+            <Button Content="Apply Filter" Command="{Binding ApplyFilterCommand}" 
                     Style="{StaticResource BaseButtonStyle}" Margin="5" />
-            <Button Content="Reset Filter" Command="{Binding ResetFilterCommand}"
+            <Button Content="Reset Filter" Command="{Binding ResetFiltersCommand}" 
                     Style="{StaticResource BaseButtonStyle}" Margin="5" />
         </StackPanel>
     </Grid>

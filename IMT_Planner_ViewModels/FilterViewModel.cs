@@ -14,7 +14,7 @@ public class FilterViewModel : ObservableObject
 {
     private readonly SuperManagerSelectionService _superManagerSelectionService;
     public ICommand ApplyFilterCommand { get; private set; }
-    public ICommand ResetFilterCommand { get; private set; }
+    public ICommand ResetFiltersCommand { get; private set; }
 
     public ObservableCollection<CardFilterModel> CardFilters { get; set; } = new ObservableCollection<CardFilterModel>()
         { new CardFilterModel() };
@@ -22,13 +22,20 @@ public class FilterViewModel : ObservableObject
     {
         _superManagerSelectionService = superManagerSelectionService;
         ApplyFilterCommand = new RelayCommand(ApplyFilters);
-        ResetFilterCommand = new RelayCommand(ResetFilters);
+        ResetFiltersCommand = new RelayCommand(ResetFilters);
     }
 
     private void ResetFilters()
     {
-        var masterPredicate = PredicateBuilder.New<SuperManager>(true);
-        _superManagerSelectionService.ApplyFilters(masterPredicate);
+        int count = CardFilters.Count;
+        
+        CardFilters.Clear();
+        for (int i = 0; i < count; i++)
+        {
+            CardFilters.Add(new CardFilterModel());
+        }
+        OnPropertyChanged(nameof(CardFilters));
+        _superManagerSelectionService.ApplyFilters(CardFilters.First().GetExpression());
     }
 
     private void ApplyFilters()

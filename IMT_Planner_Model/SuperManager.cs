@@ -70,10 +70,16 @@ public class SuperManager
     //ToDo: needs to be changed into a Class and extra table with: HasIt, Value, RankRequirement, SmId
     public double PassiveMultiplier { get; set; }
     public bool HasMultiplier { get; set; }
+    public bool HasCR { get; set; }
+    public double CRValue { get; set; }
+    
+    public bool HasShaftUnlockReduction { get; set; }
+    public double ShaftUnlockReduction { get; set; }
+    
     //ToDoEnd;
     public Rarity Rarity { get; set; }
     public Areas Area { get; set; }
-    
+ 
     public byte Priority { get; set; }
     
 }
