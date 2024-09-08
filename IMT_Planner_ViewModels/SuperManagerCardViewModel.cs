@@ -141,15 +141,15 @@ public class SuperManagerCardViewModel : ObservableObject
         IList<SuperManagerElementViewModel> tmp = new List<SuperManagerElementViewModel>();
         foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "SE" && element.RankRequirement <= element.SuperManager.Rank.CurrentRank))
         {
-            tmp.Add(new SuperManagerElementViewModel(ele,SEElements.Count));
+            tmp.Add(new SuperManagerElementViewModel(ele));
         }
         foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "PE" || element.RankRequirement > element.SuperManager.Rank.CurrentRank ))
         {
-            PEElements.Add(new SuperManagerElementViewModel(ele,PEElements.Count));
+            PEElements.Add(new SuperManagerElementViewModel(ele));
         }
         foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "NVE"))
         {
-            NVEElements.Add(new SuperManagerElementViewModel(ele,NVEElements.Count));
+            NVEElements.Add(new SuperManagerElementViewModel(ele));
         }
 
         SEElements = new ObservableCollection<SuperManagerElementViewModel>(tmp.OrderBy(e => e.RankRequirement).ToList());

@@ -10,7 +10,6 @@ public class SMElementalListViewModel : ObservableObject
     private readonly SuperManagerSelectionService _superManagerSelectionService;
     private ObservableCollection<SuperManagerElementViewModel> _elementCollection;
     private SuperManagerElementViewModel _selectedElement;
-    private int _index;
 
     public ObservableCollection<SuperManagerElementViewModel> ElementCollection
     {
@@ -27,8 +26,6 @@ public class SMElementalListViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
-
-    public int SelectedIndex { get; set; }
     public SuperManagerElementViewModel SelectedElement
     {
         get
@@ -37,10 +34,7 @@ public class SMElementalListViewModel : ObservableObject
         }
         set
         {
-            if(_selectedElement != null)
-            SEElements[_selectedElement.Index].ChangeElement(value);
                 _selectedElement = value;
-            OnPropertyChanged(nameof(SEElements));
         }
     }
 

@@ -11,8 +11,6 @@ public class SuperManagerElementViewModel : ObservableObject
     private string _rankRequirement;
     public SuperManagerElement Element { get; private set; }
 
-    public int Index { get; }
-
     public string RankRequirement
     {
         get => $"Rank: {Element.RankRequirement}";
@@ -27,9 +25,8 @@ public class SuperManagerElementViewModel : ObservableObject
     public SuperManagerElementViewModel()
     {
     } 
-    public SuperManagerElementViewModel(SuperManagerElement model, int index)
+    public SuperManagerElementViewModel(SuperManagerElement model)
     {
-        Index = index;
         Element = model;
     } 
 

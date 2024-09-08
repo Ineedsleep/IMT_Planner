@@ -47,10 +47,9 @@
                                                         <Setter Property="Padding" Value="5" />
                                                     </Style>
                                                     <DataTemplate x:Key="ElementComboBoxItemTemplate">
-                                                        <StackPanel Orientation="Horizontal" ToolTip="{Binding Abbreviation}">
-                                                            <Image Source="{Binding ImagePath}" Width="24" Height="24" Margin="4" />
-                                                            <TextBlock Text="{Binding Abbreviation}" VerticalAlignment="Center" Margin="4,0" />
-                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal" ToolTip="{Binding ElementName}">
+                                                            <Image Source="{Binding ImagePath}" Width="24" Height="24"/>
+                                                            </StackPanel>
                                                     </DataTemplate>
                                                 </UserControl.Resources>
                                             
@@ -180,19 +179,28 @@
                                                     <StackPanel Orientation="Vertical" Margin="0,0,16,0">
                                                         <TextBlock Text="Element" FontWeight="Bold" />
                                                         <ComboBox VerticalAlignment="Center"
-                                                                  HorizontalAlignment="Center"
-                                                                  ItemsSource="{Binding ElementOptions}"
-                                                                  SelectedItem="{Binding Element, Mode=TwoWay}"
+                                                                  HorizontalAlignment="Center"  Height="36" Width="64"
+                                                                  ItemsSource="{Binding ElementBase}"
+                                                                  SelectedItem="{Binding SelectedElement, Mode=TwoWay}"
                                                                   ItemTemplate="{StaticResource ElementComboBoxItemTemplate}">
                                                         </ComboBox>
                                                     </StackPanel>
                                                     <StackPanel Orientation="Vertical" Margin="16,0,0,0">
-                                                        <TextBlock Text="Effectiveness Type" FontWeight="Bold" />
-                                                        <ComboBox VerticalAlignment="Center"
+                                                        <TextBlock Text="Effectiveness" FontWeight="Bold" />
+                                                        <ComboBox VerticalAlignment="Center" FontSize="16" Height="36" Width="64"
                                                                   HorizontalAlignment="Center"
-                                                                  ItemsSource="{Binding ElementEffectiveOptions}"
-                                                                  SelectedItem="{Binding Element, Mode=TwoWay}"
-                                                                  ItemTemplate="{StaticResource ElementComboBoxItemTemplate}">
+                                                                  SelectedItem="{Binding Effectiveness, Mode=TwoWay}">
+                                                            <ComboBox.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock Text="{Binding}" />
+                                                                </DataTemplate>
+                                                            </ComboBox.ItemTemplate>
+                                                            <ComboBox.Items>
+                                                                <ComboBoxItem Content="" />
+                                                                <ComboBoxItem Content="SE" />
+                                                                <ComboBoxItem Content="PE" />
+                                                                <ComboBoxItem Content="NVE"/>
+                                                            </ComboBox.Items>
                                                         </ComboBox>
                                                     </StackPanel>
                                                 </StackPanel>
