@@ -35,7 +35,9 @@ public class CSVHandler
                     Rank = new Rank { CurrentRank = im.CurrentRank },
                     Level = im.Level,
                     Promoted = im.Promoted,
-                    Passives = ParsePassives(im.Passives),
+                    Unlocked = im.Unlocked,
+                    Passives = ParsePassives(im.Passives)
+                  
                     //   Priority = im.Priority
                 };
                 superManager.SuperManagerElements = im.Elements.Split(';')
@@ -152,6 +154,7 @@ public class CSVHandler
                     CurrentRank = superManager.Rank.CurrentRank,
                     Level = superManager.Level,
                     Promoted = superManager.Promoted,
+                    Unlocked = superManager.Unlocked,
                     Elements = StringifyElements(superManager.SuperManagerElements),
                     Passives = StringifyPassives(superManager.Passives), // Using the StringifyPassives method
                     //  Priority = superManager.Priority
@@ -208,6 +211,7 @@ public class CSVHandler
             Map(m => m.Rank).Name("Rank").TypeConverter<RankConverter>();
             Map(m => m.Level).Name("Level");
             Map(m => m.Promoted).Name("Promoted");
+            Map(m => m.Unlocked).Name("Unlocked");
         }
     }
 
@@ -220,6 +224,7 @@ public class CSVHandler
             Map(m => m.CurrentRank).Name("CurrentRank");
             Map(m => m.Level).Name("Level");
             Map(m => m.Promoted).Name("Promoted");
+            Map(m => m.Unlocked).Name("Unlocked");
             Map(m => m.Elements).Name("Elements");
             Map(m => m.Rarity).Name("Rarity").TypeConverter<EnumConverter<Rarity>>();
             Map(m => m.Passives).Name("Passives"); // Add this mapping

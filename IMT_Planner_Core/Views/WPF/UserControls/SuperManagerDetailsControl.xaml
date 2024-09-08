@@ -34,8 +34,17 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" x:Name="EditManagerPanel"  Margin="10" MaxWidth="600">
   
             <!-- Editor for Name property -->
-                <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/>
-                <!-- <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/> -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label
+                    Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                    FontSize="20"
+                    VerticalAlignment="Center" />
+                <CheckBox
+                    Content="Unlocked"
+                    IsChecked="{Binding Unlocked}"
+                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                    Margin="10,0,0,0" />
+            </StackPanel>      <!-- <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/> -->
             <GroupBox Header="Level">
                 <TextBox>
                     <TextBox.Text>

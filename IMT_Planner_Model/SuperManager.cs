@@ -41,6 +41,10 @@ public class SuperManager
     public Areas Area { get; set; }
  
     public byte Priority { get; set; }
+    /// <summary>
+    /// If this is true the first initial 30 frags are collected and the sm can be crafted
+    /// </summary>
+    public bool Unlocked { get; set; }
     
 }
 

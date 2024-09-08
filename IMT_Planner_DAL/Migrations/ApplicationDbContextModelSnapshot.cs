@@ -179,6 +179,9 @@ namespace IMT_Planner_DAL.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Unlocked")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("SuperManagerId");
 
                     b.ToTable("SuperManagers");

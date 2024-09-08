@@ -13,4 +13,5 @@ public class SuperManagerImportModel
     public string Group { get; set; }
     public string Elements { get; set; }
     public string Passives { get; set; }
+    public bool Unlocked { get; set; }
 }//Abbreviation1,10.5,2;Abbreviation2,null,3

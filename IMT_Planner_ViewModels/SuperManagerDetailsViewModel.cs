@@ -44,6 +44,7 @@ public class SuperManagerDetailsViewModel : ObservableObject
         OnPropertyChanged(nameof(Rank));
         OnPropertyChanged(nameof(Level));
         OnPropertyChanged(nameof(Promoted));
+        OnPropertyChanged(nameof(Unlocked));
     }
 
 
@@ -160,6 +161,18 @@ public class SuperManagerDetailsViewModel : ObservableObject
         }
     }
     
+    public bool Unlocked
+    {
+        get => CurrentSuperManager.Unlocked;
+        set
+        {
+            if (CurrentSuperManager.Unlocked != value)
+            {
+                CurrentSuperManager.Unlocked = value;
+                OnPropertyChanged(nameof(Unlocked));
+            }
+        }
+    }
     public IEnumerable<Rarity> Rarities
     {
         get { return Enum.GetValues(typeof(Rarity)).Cast<Rarity>(); }

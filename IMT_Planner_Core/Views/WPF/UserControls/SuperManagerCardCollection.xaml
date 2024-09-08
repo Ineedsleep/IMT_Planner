@@ -12,6 +12,8 @@
         <converter:RankToBrushConverter x:Key="RankToBrushConverter" />
         <converter:MaxToBrushConverter x:Key="MaxToBrushConverter" />
         <converter:RarityToBackgroundConverter x:Key="RarityToBackgroundConverter" />
+        <converter:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
         <Border Grid.Row="0"
@@ -22,6 +24,7 @@
             <ItemsControl x:Name="ItemsControlSuperManager" ItemsSource="{Binding SuperManagerCollection}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
+                        <Grid>
                         <Border
                             Margin="12"
                             Padding="8"
@@ -29,6 +32,20 @@
                             Background="{Binding Path=Rarity, Converter={StaticResource RarityToBackgroundConverter}}"
                             BorderThickness="3"  
                             CornerRadius="10">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Unlocked}" Value="False">
+                                            <Setter Property="Opacity" Value="0.5"/>
+                                            <Setter Property="Background" Value="DarkGray"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Unlocked}" Value="True">
+                                            <Setter Property="Opacity" Value="1"/>
+                                            <Setter Property="Background" Value="{Binding Path=Rarity, Converter={StaticResource RarityToBackgroundConverter}}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseLeftButtonUp">
                                     <i:InvokeCommandAction Command="{Binding DataContext.SelectSuperManagerCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
@@ -36,6 +53,32 @@
                             </i:Interaction.Triggers>
                             <local:SuperManagerCard/>
                         </Border>
+                            <!-- Lock Overlay -->
+                            <!-- Lock Overlay -->
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Canvas Width="64" Height="64">
+                                    <Canvas.LayoutTransform>
+                                        <MatrixTransform Matrix="1,0,0,-1,0,0" />
+                                    </Canvas.LayoutTransform>
+                                    <Path Data="M100 207.2798C100 224.7938 104.8438 237.892 112.8646 246.5286C120.7868 255.059 132.9164 260.434 150.028 260.434C167.149 260.434 179.2612 255.0696 187.1646 246.5584C195.1676 237.9402 200 224.8584 200 207.335V180.0002H100V207.2798zM80 180.0002V207.2798C80 228.3704 85.8678 246.8492 98.2098 260.1386C110.6504 273.5342 128.535 280.43396 150.028 280.43396C171.5166 280.43396 189.3904 273.5534 201.82 260.1676C214.152 246.8886 220 228.4208 220 207.335V180.0002H240C251.046 180.0002 260 171.0458 260 160.0002V40C260 28.954 251.046 20 240 20H60C48.9544 20 40 28.954 40 40V160.0002C40 171.0458 48.9544 180.0002 60 180.0002H80zM60 160.0002H240V40H60V160.0002z"
+                                          Stroke="{x:Null}"
+                                          Fill="#FF000000"
+                                          Stretch="Fill"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Width="64"
+                                          Height="64"
+                                          SnapsToDevicePixels="False"
+                                          UseLayoutRounding="True"
+                                          StrokeThickness="0"
+                                          StrokeStartLineCap="flat"
+                                          StrokeEndLineCap="flat"
+                                          StrokeLineJoin="miter"
+                                          Visibility="{Binding Unlocked, Converter={StaticResource InvertedBooleanToVisibilityConverter}, ConverterParameter=False}"/>
+                                </Canvas>
+                            </Grid>
+                           
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemsPanel>

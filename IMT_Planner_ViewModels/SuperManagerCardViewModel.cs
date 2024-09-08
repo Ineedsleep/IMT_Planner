@@ -115,7 +115,15 @@ public class SuperManagerCardViewModel : ObservableObject
                 OnPropertyChanged(nameof(Promoted));
         }
     }
-
+    public bool Unlocked
+    {
+        get => SuperManager.Unlocked;
+        set
+        {
+            SuperManager.Unlocked = value;
+            OnPropertyChanged(nameof(Unlocked));
+        }
+    }
     public ObservableCollection<SuperManagerElementViewModel> Elements
     {
         get => _elements;

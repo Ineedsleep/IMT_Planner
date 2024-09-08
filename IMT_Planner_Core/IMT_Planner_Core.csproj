@@ -66,6 +66,7 @@
       <Resource Include="Resources\Elements\Water.png" />
       <None Remove="Resources\Elements\Wind.png" />
       <Resource Include="Resources\Elements\Wind.png" />
+      <None Remove="Resources\Lock.png" />
     </ItemGroup>
 
     <ItemGroup>
