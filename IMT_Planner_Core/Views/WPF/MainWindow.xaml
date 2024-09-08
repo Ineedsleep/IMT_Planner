@@ -52,7 +52,7 @@
         <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
         <Grid Grid.Row="1" Grid.Column="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="0.8*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <userControls:SuperManagerDetailsControl Grid.Row="0" />

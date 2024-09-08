@@ -22,14 +22,14 @@
             <Label Content="xxx" VerticalAlignment="Center" FontSize="14"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,8,0,8">
-            <StackPanel>
-            <Label Width="100" VerticalAlignment="Center" Content="Cost To Craft: " FontSize="14"></Label>
-            <!--For now hardcoded but needs to be adjusted via Itemscontrol depending on the rank of the manager-->
-         
-            <Label Width="100" VerticalAlignment="Center" Content="To Rank 3: " FontSize="14"></Label>
-            <Label Width="100" VerticalAlignment="Center" Content="To Rank 4: " FontSize="14"></Label>
-            <Label Width="100" VerticalAlignment="Center" Content="To Rank 5: " FontSize="14"></Label>
-            </StackPanel>
+            <!-- <StackPanel> -->
+            <!-- <Label Width="100" VerticalAlignment="Center" Content="Cost To Craft: " FontSize="14"></Label> -->
+            <!-- ~1~Todo: needs to be displayed correctly as wellFor now hardcoded but needs to be adjusted via Itemscontrol depending on the rank of the manager@1@ -->
+            <!-- -->
+            <!-- <Label Width="100" VerticalAlignment="Center" Content="To Rank 3: " FontSize="14"></Label> -->
+            <!-- <Label Width="100" VerticalAlignment="Center" Content="To Rank 4: " FontSize="14"></Label> -->
+            <!-- <Label Width="100" VerticalAlignment="Center" Content="To Rank 5: " FontSize="14"></Label> -->
+            <!-- </StackPanel> -->
             <ItemsControl ItemsSource="{Binding SEElements}" Width="400">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

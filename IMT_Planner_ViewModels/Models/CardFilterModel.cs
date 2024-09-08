@@ -10,9 +10,8 @@ public class CardFilterModel
     private int? _levelMax;
     private int? _rankRangeMin;
     private int? _rankRangeMax;
-    private int? _rank;
-    private ICollection<Areas> _area;
-    private ICollection<Rarity> _rarity;
+    private Areas? _area;
+    private Rarity? _rarity;
     private ICollection<SuperManagerElement>? _elements;
     private bool _promoted;
     private bool? _hasIncomeFactor;
@@ -46,7 +45,7 @@ public class CardFilterModel
         set => _rankRangeMax = value;
     }
     
-    public ICollection<Areas> Area
+    public Areas? Area
     {
         get => _area;
         set
@@ -58,7 +57,7 @@ public class CardFilterModel
         }
     }
 
-    public ICollection<Rarity> Rarity
+    public Rarity? Rarity
     {
         get => _rarity;
         set
@@ -137,6 +136,10 @@ public class CardFilterModel
             predicate = predicate.And(sm => sm.Rank != null && sm.Rank.CurrentRank >= RankRangeMin);
         if (RankRangeMax.HasValue)
             predicate = predicate.And(sm => sm.Rank != null && sm.Rank.CurrentRank <= RankRangeMax);
+        if (Area.HasValue)
+            predicate = predicate.And(sm =>  sm.Area == Area.Value);
+        if (Rarity.HasValue)
+            predicate = predicate.And(sm =>  sm.Rarity == Rarity.Value);
         if (Elements != null)
         {
             predicate = predicate.And(manager => manager.SuperManagerElements != null
@@ -177,5 +180,15 @@ public class CardFilterModel
         
 
         return predicate;
+    }
+    
+    
+    public IEnumerable<Rarity> Rarities
+    {
+        get { return Enum.GetValues(typeof(Rarity)).Cast<Rarity>(); }
+    }
+    public IEnumerable<Areas> Areas
+    {
+        get { return Enum.GetValues(typeof(Areas)).Cast<Areas>(); }
     }
 }
