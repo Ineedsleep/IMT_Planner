@@ -5,21 +5,7 @@ namespace IMT_Planner_Model;
 
 public class SuperManager
 {
-    public SuperManager(string? name, Rank? rank, bool promoted
-        , byte level, Rarity rarity, Areas area, Equipment equipment, double passiveMultiplier, ICollection<SuperManagerElement>? superManagerElements)
-    {
-        Name = name;
-        Rank = rank;
-        Promoted = promoted;
-        Level = level;
-        Rarity = rarity;
-        Area = area;
-        Equipment = equipment;
-        PassiveMultiplier = passiveMultiplier;
-        SuperManagerElements = superManagerElements;
-    }
-    
-    public SuperManager(string? name, Rank? rank, bool promoted
+    public SuperManager(string? name, Rank? rank, int promoted
         ,Rarity rarity, Areas area)
     {
         Name = name;
@@ -38,22 +24,6 @@ public class SuperManager
         SuperManagerElements = superManagerElements;
     }
     
-    public SuperManager(string? name, Rank? rank, bool promoted, byte level, Rarity rarity, Areas area, 
-        Equipment equipment, double passiveMultiplier, byte priority
-        , ICollection<SuperManagerElement>? superManagerElements)
-    {
-        Name = name;
-        Rank = rank;
-        Promoted = promoted;
-        Level = level;
-        Rarity = rarity;
-        Area = area;
-        Equipment = equipment;
-        PassiveMultiplier = passiveMultiplier;
-        Priority = priority;
-        SuperManagerElements = superManagerElements;
-    }
-
     public SuperManager()
     {
     }
@@ -62,18 +32,14 @@ public class SuperManager
     public ICollection<SuperManagerElement>? SuperManagerElements { get; set; }
     public string? Name { get; set; }
     public Rank? Rank { get; set; }
-    public bool Promoted { get; set; }
+    public int Promoted { get; set; }
     public byte Level { get; set; }
     public int CurrentFragments { get; set; }
-    public Equipment Equipment { get; set; }
-    
-    //ToDo: needs to be changed into a Class and extra table with: HasIt, Value, RankRequirement, SmId
-    public double PassiveMultiplier { get; set; }
-    public bool HasMultiplier { get; set; }
-    //ToDoEnd;
+  //  public Equipment Equipment { get; set; }
+    public ICollection<Passive> Passives { get; set; } = new List<Passive>();
     public Rarity Rarity { get; set; }
     public Areas Area { get; set; }
-    
+ 
     public byte Priority { get; set; }
     
 }

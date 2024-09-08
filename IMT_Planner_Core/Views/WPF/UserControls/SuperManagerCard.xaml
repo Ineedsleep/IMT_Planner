@@ -4,9 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls"
+             xmlns:converter="clr-namespace:IMT_Planner.Views.Converter"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-       <Grid>
+    <UserControl.Resources>
+        <converter:RankToBrushConverter x:Key="RankToBrushConverter" />
+        <converter:MaxToBrushConverter x:Key="MaxToBrushConverter" />
+        <converter:RarityToBackgroundConverter x:Key="RarityToBackgroundConverter" />
+    </UserControl.Resources>
+    <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1.5*" />
                                     <RowDefinition Height="Auto" />

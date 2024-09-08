@@ -36,7 +36,7 @@
                         <Grid>
                             <StackPanel>
                                 <Label Content="{Binding RankRequirement}"></Label>
-                                <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24" ToolTip="{Binding Name}"/>
+                                <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24" ToolTip="{Binding Abbreviation}"/>
                             </StackPanel>
                             <!-- <ComboBox  SelectedIndex="{Binding DataContext. SelectedIndex, Mode=TwoWay,  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" -->
                             <!--            SelectedItem="{Binding DataContext.SelectedElement,  -->
@@ -69,7 +69,7 @@
                     <DataTemplate>
                         <Grid>
                             <StackPanel>
-                                <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24" ToolTip="{Binding Name}"/>
+                                <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24" ToolTip="{Binding Abbreviation}"/>
                             </StackPanel>
                             <!-- <ComboBox ItemsSource="{Binding DataContext.ElementCollection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Margin="8,8,8,8" Width="54" Height="32"> -->
                             <!--     <ComboBox.ItemTemplate> -->
@@ -98,7 +98,7 @@
                     <DataTemplate>
                         <Grid>
                             <StackPanel>
-                                <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24" ToolTip="{Binding Name}"/>
+                                <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24" ToolTip="{Binding Abbreviation}"/>
                             </StackPanel>
                             <!-- <ComboBox ItemsSource="{Binding DataContext.ElementCollection, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" Margin="8,8,8,8" Width="54" Height="32"> -->
                             <!--     <ComboBox.ItemTemplate> -->

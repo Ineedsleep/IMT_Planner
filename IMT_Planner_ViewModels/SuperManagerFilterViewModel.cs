@@ -1,36 +1,40 @@
 using System.Collections.ObjectModel;
+using System.Windows.Automation.Provider;
 using IMT_Planner_Model;
 using IMT_Planner_ViewModels.Models;
 using IMT_Planner_ViewModels.Services;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
-public class SuperManagerFilterViewModel
+public class SuperManagerFilterViewModel : ObservableObject
 {
     private readonly SuperManagerSelectionService _selectionService;
+    private readonly SuperManagerRepositoryService _repositoryService;
+    private IEnumerable<Element> _elements;
     public CardFilterModel FilterModel { get; set; } = new CardFilterModel();
 
     private List<SuperManager> AllSuperManagers { get; set; } 
 
-    public SuperManagerFilterViewModel(SuperManagerSelectionService selectionService)
+    public SuperManagerFilterViewModel(SuperManagerSelectionService selectionService,SuperManagerRepositoryService repositoryService)
     {
         _selectionService = selectionService;
+        _repositoryService = repositoryService;
+        Elements = _repositoryService.GetAllElements();
     }
 
-    
+    public IEnumerable<Element> Elements
+    {
+        get => _elements;
+        set
+        {
+            _elements = value;
+            OnPropertyChanged(nameof(Elements));
+        }
+    }
+
+
     public void ApplyFilters()
     {
         var filterExpression = FilterModel.GetExpression();
         _selectionService.ApplyFilters(filterExpression);
-    //
-    //     // Filter SuperManagers and transform to SuperManagerViewModels.
-    //     var filteredSuperManagers = AllSuperManagers.AsQueryable()
-    //                                                 .Where(filterExpression)
-    //                                                 .Select(sm => new SuperManagerViewModel(sm))
-    //                                                 .ToList();
-    //
-    //     FilteredSuperManagers.Clear();
-    //     foreach(var smv in filteredSuperManagers)
-    //     {
-    //         FilteredSuperManagers.Add(smv);
-    //     }  
      }  
 }

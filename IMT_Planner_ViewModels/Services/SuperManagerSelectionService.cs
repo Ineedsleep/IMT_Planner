@@ -31,8 +31,9 @@ public class SuperManagerSelectionService
         new ObservableCollection<SuperManagerElementViewModel>();
 
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection = new();
-    private ICollection<SuperManager> _backupManagerCollection;
+    private ICollection<SuperManager>? _backupManagerCollection;
     private List<Element> ElementCollection = new List<Element>();
+    private List<PassiveAttributeName> PassiveNameCollection = new List<PassiveAttributeName>();
 
     public SuperManagerSelectionService(CSVHandler csvHandler)
     {
@@ -63,7 +64,7 @@ public class SuperManagerSelectionService
             NotifySuperManagerChanged(nameof(SuperManagerCollection));
         }
     }
-    
+
     private ObservableCollection<SuperManagerCardViewModel> AdjustFilter(
         ObservableCollection<SuperManagerCardViewModel> superManagerCollection)
     {
@@ -79,6 +80,7 @@ public class SuperManagerSelectionService
             _backupManagerCollection = SuperManagerCollection.Select(sm => sm.SuperManager).ToList();
         }
     }
+
     public void CreateElementCollection(IEnumerable<Element> allElements)
     {
         foreach (var element in allElements)
@@ -86,6 +88,15 @@ public class SuperManagerSelectionService
             ElementCollection.Add(element);
         }
     }
+
+    public void CreatePassiveNameCollection(IEnumerable<PassiveAttributeName> passiveNames)
+    {
+        foreach (var element in passiveNames)
+        {
+            PassiveNameCollection.Add(element);
+        }
+    }
+
     private void CheckInvalidElements(SuperManager sm)
     {
         if (sm.SuperManagerElements == null)
@@ -126,7 +137,6 @@ public class SuperManagerSelectionService
         }
         else
         {
-            
             for (var i = 0; i < count; i++)
             {
                 yield return new SuperManagerElement
@@ -139,18 +149,6 @@ public class SuperManagerSelectionService
             }
         }
     }
-
-    static string[] elements = new string[]
-    {
-        "Nature",
-        "Frost",
-        "Flame",
-        "Light",
-        "Dark",
-        "Wind",
-        "Sand",
-        "Water"
-    };
 
     private static int[] GetRankRequirement(Rarity rarity)
     {
@@ -188,7 +186,7 @@ public class SuperManagerSelectionService
         }
     }
 
-    
+
     private void SplitElements()
     {
         SEElements.Clear();
@@ -198,21 +196,23 @@ public class SuperManagerSelectionService
         foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(element =>
                      element.EffectivenessType == "SE"))
         {
-            tmp.Add(new SuperManagerElementViewModel(ele, SEElements.Count));
+            tmp.Add(new SuperManagerElementViewModel(ele));
         }
 
         foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(element =>
                      element.EffectivenessType == "PE"))
         {
-            PEElements.Add(new SuperManagerElementViewModel(ele, PEElements.Count));
+            PEElements.Add(new SuperManagerElementViewModel(ele));
         }
 
         foreach (var ele in CurrentSuperManager.SuperManagerElements.Where(
                      element => element.EffectivenessType == "NVE"))
         {
-            NVEElements.Add(new SuperManagerElementViewModel(ele, NVEElements.Count));
+            NVEElements.Add(new SuperManagerElementViewModel(ele));
         }
-        SEElements = new ObservableCollection<SuperManagerElementViewModel>(tmp.OrderBy(e => e.RankRequirement).ToList());
+
+        SEElements =
+            new ObservableCollection<SuperManagerElementViewModel>(tmp.OrderBy(e => e.RankRequirement).ToList());
         ElementsChanged();
     }
 
@@ -257,7 +257,8 @@ public class SuperManagerSelectionService
     {
         try
         {
-            IEnumerable<SuperManager> csvContent = _csvHandler.ReadAndParseCsv(filePath,ElementCollection);
+            IEnumerable<SuperManager> csvContent =
+                _csvHandler.ReadAndParseCsv(filePath, ElementCollection, PassiveNameCollection);
             SuperManagerCollection.Clear();
             foreach (var sm in csvContent)
             {
@@ -272,7 +273,7 @@ public class SuperManagerSelectionService
             // throw; // If you want to rethrow the exception to be handled in the calling code.
         }
     }
-    
+
 
     public void UpdateSelectedSuperManager(SuperManagerCardViewModel superManagerCardViewModel)
     {
@@ -282,23 +283,23 @@ public class SuperManagerSelectionService
 
     public void ExportToCSV(string filePath)
     {
-        IEnumerable <SuperManager> superManagers= _superManagerCollection.Select(sm => sm.SuperManager);
+        IEnumerable<SuperManager> superManagers = _superManagerCollection.Select(sm => sm.SuperManager);
         _csvHandler.ExportToCSV(filePath, superManagers);
     }
 
-    public void ApplyFilters(Expression<Func<SuperManager,bool>> filterExpression)
+    public void ApplyFilters(Expression<Func<SuperManager, bool>> filterExpression)
     {
-            var filteredSuperManagers = _backupManagerCollection.AsQueryable()
-                                                    .Where(filterExpression)
-                                                    .Select(sm => new SuperManagerCardViewModel(sm,this))
-                                                    .ToList();
-        SuperManagerCollection.Clear();
-        foreach(var smv in filteredSuperManagers)
+        if (_backupManagerCollection != null)
         {
-            SuperManagerCollection.Add(smv);
-        }  
-
+            var filteredSuperManagers = _backupManagerCollection.AsQueryable()
+                .Where(filterExpression)
+                .Select(sm => new SuperManagerCardViewModel(sm, this))
+                .ToList();
+            SuperManagerCollection.Clear();
+            foreach (var smv in filteredSuperManagers)
+            {
+                SuperManagerCollection.Add(smv);
+            }
+        }
     }
 }
-    
-

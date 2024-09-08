@@ -50,10 +50,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Views\Converter\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Remove="Resources\Elements\Nature.png" />
       <Resource Include="Resources\Elements\Nature.png" />
       <None Remove="Resources\Elements\Dark.png" />

@@ -1,72 +1,73 @@
-SuperManagerName,SuperManagerRarity,SuperManagerArea,CurrentRank,Level,Promoted,Group,Elements,Rarity
-Samantha Reiss,Common,Mineshaft,1,1,False,,Wind;Nature;Dark;Frost;Flame;Light;Sand;Water,Legendary
-Ember,Common,Mineshaft,1,1,False,,Dark;Wind;Nature;Frost;Flame;Light;Sand;Water,Legendary
-Ut'ux,Common,Mineshaft,1,1,False,,Dark;Flame;Light;Nature;Frost;Wind;Sand;Water,Legendary
-Sir Lorenzo,Common,Mineshaft,1,1,False,,Sand;Flame;Wind;Nature;Frost;Light;Dark;Water,Legendary
-Urca,Common,Elevator,1,1,False,,Water;Light;Wind;Nature;Frost;Flame;Dark;Sand,Legendary
-Lord Beiroth,Common,Mineshaft,1,1,False,,Flame;Water;Sand;Nature;Frost;Light;Dark;Wind,Legendary
-Professor Impossible,Common,Warehouse,1,1,False,,Sand;Light;Flame;Nature;Frost;Dark;Wind;Water,Legendary
-Luna and Stella,Common,Elevator,1,1,False,,Nature;Frost;Water;Flame;Light;Dark;Wind;Sand,Legendary
-Zoe_365,Common,Mineshaft,1,1,False,,Frost;Light;Wind;Nature;Dark;Water;Flame;Sand,Epic
-Cliff Walker,Common,Mineshaft,1,1,False,,Frost;Light;Water;Nature;Dark;Wind;Flame;Sand,Epic
-Floating Agatha,Common,Mineshaft,1,1,False,,Dark;Frost;Wind;Flame;Sand;Water;Nature;Light,Epic
-Octavia De Vere,Common,Warehouse,1,1,False,,Dark;Flame;Frost;Wind;Sand;Water;Nature;Light,Epic
-Rabbit Blingsley,Common,Mineshaft,1,1,False,,Light;Frost;Nature;Flame;Wind;Water;Dark;Sand,Epic
-Wolfgang Clawson,Common,Mineshaft,1,1,False,,Dark;Sand;Wind;Frost;Flame;Water;Nature;Light,Epic
-Dr Steiner,Common,Mineshaft,1,1,False,,Wind;Sand;Dark;Flame;Light;Water;Nature;Frost,Epic
-Ore-sama Daichi,Common,Mineshaft,1,1,False,,Sand;Flame;Frost;Light;Dark;Wind;Nature;Water,Epic
-Lavender Wick,Common,Mineshaft,1,1,False,,Flame;Dark;Light;Nature;Wind;Sand;Frost;Water,Epic
-Marrena,Common,Mineshaft,1,1,False,,Water;Wind;Dark;Nature;Frost;Flame;Light;Sand,Epic
-Sam Fisher,Common,Elevator,1,1,False,,Dark;Water;Sand;Frost;Flame;Wind;Nature;Light,Epic
-Luxario,Common,Warehouse,1,1,False,,Light;Flame;Nature;Frost;Wind;Water;Dark;Sand,Epic
-Green Idler,Common,Mineshaft,1,1,False,,Nature;Light;Water;Frost;Dark;Sand;Flame;Wind,Epic
-Professor Maple,Common,Warehouse,1,1,False,,Nature;Water;Sand;Frost;Light;Dark;Flame;Wind,Epic
-Dr. Nova,Common,Warehouse,1,1,False,,Sand;Wind;Frost;Flame;Light;Dark;Nature;Water,Epic
-Violet Evergreen,Common,Elevator,1,1,False,,Nature;Water;Sand;Frost;Light;Dark;Flame;Wind,Epic
-Jade Kim,Common,Warehouse,1,1,False,,Flame;Sand;Nature;Light;Dark;Wind;Frost;Water,Epic
-Ezio Auditore,Common,Elevator,1,1,False,,Light;Nature;Flame;Frost;Wind;Water;Dark;Sand,Epic
-Dr. Lilly,Common,Elevator,1,1,False,,Flame;Nature;Wind;Light;Dark;Sand;Frost;Water,Epic
-Jackal,Common,Mineshaft,1,1,False,,Sand;Dark;Flame;Frost;Light;Wind;Nature;Water,Epic
-Rayman,Common,Warehouse,1,1,False,,Wind;Flame;Light;Dark;Sand;Water;Nature;Frost,Epic
-Pebble,Common,Mineshaft,1,1,False,,Sand;Frost;Dark;Flame;Light;Wind;Nature;Water,Epic
-Queen Aurora,Common,Elevator,1,1,False,,Frost;Nature;Light;Dark;Wind;Water;Flame;Sand,Epic
-Melody Rivers,Common,Elevator,1,1,False,,Wind;Flame;Light;Dark;Sand;Water;Nature;Frost,Epic
-Zephyria,Common,Elevator,1,1,False,,Sand;Dark;Wind;Frost;Flame;Light;Nature;Water,Epic
-Maya Gelata,Common,Warehouse,1,1,False,,Frost;Water;Nature;Light;Dark;Wind;Flame;Sand,Epic
-Erica Quill,Common,Mineshaft,1,1,False,,Wind;Flame;Dark;Light;Sand;Water;Nature;Frost,Epic
-Afi,Common,Warehouse,1,1,False,,Flame;Nature;Dark;Light;Wind;Sand;Frost;Water,Epic
-Thalia,Common,Mineshaft,1,1,False,,Water;Dark;Flame;Nature;Frost;Wind;Light;Sand,Epic
-Mad Eye Drake,Common,Warehouse,1,1,False,,Water;Nature;Frost;Flame;Dark;Wind;Light;Sand,Epic
-Ula Galvani,Common,Mineshaft,1,1,False,,Water;Frost;Nature;Flame;Dark;Wind;Light;Sand,Epic
-Glimmer,Common,Mineshaft,1,1,False,,Nature;Light;Sand;Frost;Dark;Water;Flame;Wind,Epic
-Santa 2020,Common,Warehouse,1,1,False,,Water;Dark;Frost;Nature;Flame;Wind;Light;Sand,Epic
-Amora,Common,Elevator,1,1,False,,Wind;Light;Sand;Flame;Dark;Water;Nature;Frost,Epic
-Beiro,Common,Mineshaft,1,1,False,,Frost;Wind;Water;Nature;Light;Dark;Flame;Sand,Epic
-Ray Rift,Common,Elevator,1,1,False,,Nature;Water;Sand;Frost;Light;Dark;Flame;Wind,Epic
-Santa Claus,Common,Warehouse,1,1,False,,Frost;Light;Water;Nature;Dark;Wind;Flame;Sand,Epic
-Ranger Sue,Common,Mineshaft,1,1,False,,Sand;Dark;Frost;Flame;Light;Wind;Nature;Water,Rare
-Zi Galvani,Common,Mineshaft,1,1,False,,Flame;Wind;Nature;Light;Dark;Sand;Frost;Water,Rare
-Damian Jones,Common,Elevator,1,1,False,,Frost;Light;Nature;Dark;Wind;Water;Flame;Sand,Rare
-Mr. Turner,Common,Mineshaft,1,1,False,,Nature;Water;Frost;Light;Dark;Sand;Flame;Wind,Rare
-Blingsley,Common,Mineshaft,1,1,False,,Light;Frost;Nature;Flame;Wind;Water;Dark;Sand,Rare
-Sojo,Common,Elevator,1,1,False,,Flame;Wind;Nature;Light;Dark;Sand;Frost;Water,Rare
-Jeff,Common,Elevator,1,1,False,,Water;Frost;Nature;Flame;Dark;Wind;Light;Sand,Rare
-1DL3,Common,Mineshaft,1,1,False,,Light;Frost;Nature;Flame;Wind;Water;Dark;Sand,Rare
-Chris Capella,Common,Warehouse,1,1,False,,Wind;Water;Flame;Light;Dark;Sand;Nature;Frost,Rare
-Al Titude,Common,Warehouse,1,1,False,,Dark;Flame;Frost;Wind;Sand;Water;Nature;Light,Rare
-Goodman Jr.,Common,Mineshaft,1,1,False,,Frost;Nature;Light;Dark;Wind;Water;Flame;Sand,Common
-Mrs. Goodman,Common,Elevator,1,1,False,,Sand;Frost;Flame;Light;Dark;Wind;Nature;Water,Common
-Gordon,Common,Mineshaft,1,1,False,,Flame;Nature;Light;Dark;Wind;Sand;Frost;Water,Common
-Mr. Goodman,Common,Warehouse,1,1,False,,Nature;Frost;Light;Dark;Sand;Water;Flame;Wind,Common
-Chester,Common,Mineshaft,1,1,False,,Wind;Flame;Light;Dark;Sand;Water;Nature;Frost,Common
-Mark,Common,Warehouse,1,1,False,,Nature;Frost;Light;Dark;Sand;Water;Flame;Wind,Common
-Lee Vatori,Common,Elevator,1,1,False,,Water;Nature;Frost;Flame;Dark;Wind;Light;Sand,Common
-Eternity,Common,Mineshaft,1,1,False,,Wind;Sand;Water;Flame;Light;Dark;Nature;Frost,Legendary
-Poseidon,Common,Warehouse,1,1,False,,Water;Dark;Wind;Nature;Frost;Flame;Light;Sand,Legendary
-Asterion,Common,Mineshaft,1,1,False,,Nature;Sand;Dark;Frost;Light;Water;Flame;Wind,Legendary
-Dav Riptide,Common,Elevator,1,1,False,,Sand;Light;Dark;Frost;Flame;Wind;Nature;Water,Epic
-Krampus,Common,Elevator,1,1,False,,Dark;Wind;Sand;Frost;Flame;Water;Nature;Light,Epic
-R. bit,Common,Warehouse,1,1,False,,Light;Nature;Flame;Frost;Wind;Water;Dark;Sand,Epic
-Freesia,Common,Mineshaft,1,1,False,,Light;Wind;Frost;Nature;Flame;Water;Dark;Sand,Epic
-Henry,Common,Mineshaft,1,1,False,,Flame;Light;Nature;Dark;Wind;Sand;Frost;Water,Rare
-Om'nix,Common,Mineshaft,1,1,False,,Nature;Sand;Dark;Light;Frost;Water;Flame;Wind,Legendary
+SuperManagerName,SuperManagerArea,CurrentRank,Level,Promoted,Elements,Rarity,Passives
+Samantha Reiss,Mineshaft,1,1,FALSE,Water;Wind;Nature;Dark;Frost;Flame;Light;Sand,Legendary,"CR,84.8,1;CIF,1.6,5"
+Ember,Mineshaft,1,1,FALSE,Flame;Dark;Wind;Nature;Light;Sand;Frost;Water,Legendary,"CR,84.8,3;SUCR,52.2,5"
+Ut'ux,Mineshaft,1,1,FALSE,Sand;Dark;Flame;Light;Frost;Wind;Nature;Water,Legendary,"CR,84.8,3;CIF,1.6,5"
+Sir Lorenzo,Mineshaft,1,1,FALSE,Dark;Sand;Flame;Wind;Frost;Water;Nature;Light,Legendary,"CR,84.8,3;CIF,1.6,5"
+Urca,Elevator,1,1,FALSE,Frost;Water;Light;Wind;Nature;Dark;Flame;Sand,Legendary,"CR,66.5,3"
+Lord Beiroth,Mineshaft,1,1,FALSE,Dark;Flame;Water;Sand;Frost;Wind;Nature;Light,Legendary,"SUCR,36.1,3;CIF,1.6,5"
+Professor Impossible,Warehouse,1,1,FALSE,Wind;Sand;Light;Flame;Dark;Water;Nature;Frost,Legendary,"CR,66.5,3;CIF,1.6,5"
+Luna and Stella,Elevator,1,1,FALSE,Light;Nature;Frost;Water;Flame;Wind;Dark;Sand,Legendary,"CR,66.5,3"
+Zoe_365,Mineshaft,1,1,FALSE,Frost;Light;Wind;Nature;Dark;Water;Flame;Sand,Epic,"CR,59.2,1;MIF,1.98,5"
+Cliff Walker,Mineshaft,1,1,FALSE,Frost;Light;Water;Nature;Dark;Wind;Flame;Sand,Epic,"CR,59.2,3;CIF,1.5,5"
+Floating Agatha,Mineshaft,1,1,FALSE,Dark;Frost;Wind;Flame;Sand;Water;NAture;Light,Epic,"CR,59.2,1;CIF,1.5,5"
+Octavia De Vere,Warehouse,1,1,FALSE,Dark;Flame;Frost;Wind;Sand;Water;Nature;Light,Epic,"CR,59.2,1;CIF,1.2,3"
+Rabbit Blingsley,Mineshaft,1,1,FALSE,Light;Frost;Nature;Flame;Wind;Water;Dark;Sand,Epic,"CR,59.2,3;CIF,1.5,5"
+Wolfgang Clawson,Mineshaft,1,1,FALSE,Dark;Sand;Wind;Frost;Flame;Water;Nature;Light,Epic,"CR,59.2,3;CIF,1.5,5"
+Dr Steiner,Mineshaft,1,1,FALSE,Wind;Sand;Dark;Flame;Light;Water;Nature;Frost,Epic,"CIF,1.2,3"
+Ore-sama Daichi,Mineshaft,1,1,FALSE,Sand;Flame;Frost;Light;Dark;Wind;Nature;Water,Epic,"SUCR,31.4,5"
+Lavender Wick,Mineshaft,1,1,FALSE,Flame;Dark;Light;Nature;Wind;Sand;Frost;Water,Epic,"SUCR,26.4,3"
+Marrena,Mineshaft,1,1,FALSE,Water;Wind;Dark;Nature;Frost;Flame;Light;Sand,Epic,"CIF,1.2,3"
+Sam Fisher,Elevator,1,1,FALSE,Dark;Water;Sand;Frost;Flame;Wind;Nature;Light,Epic,"CIF,1.2,3;CR,59.2,5"
+Luxario,Warehouse,1,1,FALSE,Light;Flame;Nature;Frost;Wind;Water;Dark;Sand,Epic,"CR,52.6,3;CIF,1.5,5"
+Green Idler,Mineshaft,1,1,FALSE,Nature;Light;Water;Frost;Dark;Sand;Flame;Wind,Epic,"CIF,1.2,3,SUCR,31.4,5"
+Professor Maple,Warehouse,1,1,FALSE,Nature;Water;Sand;Frost;Light;Dark;Flame;Wind,Epic,"CR,52.6,3;CIF,1.5,5"
+Dr. Nova,Warehouse,1,1,FALSE,Sand;Wind;Frost;Flame;Light;Dark;Nature;Water,Epic,"CR,52.6,1;CIF,1.2,3"
+Violet Evergreen,Elevator,1,1,FALSE,Nature;Water;Sand;Frost;Light;Dark;Flame;Wind,Epic,"CR,52.6,3;CIF,1.5,5"
+Jade Kim,Warehouse,1,1,FALSE,Flame;Sand;Nature;Light;Dark;Wind;Frost;Water,Epic,"CR,52.6,1;CIF,1.2,3"
+Ezio Auditore,Elevator,1,1,FALSE,Light;Nature;Flame;Frost;Wind;Water;Dark;Sand,Epic,"CIF,1.2,3,CR,59.2,5"
+Dr. Lilly,Elevator,1,1,FALSE,Flame;Nature;Wind;Light;Dark;Sand;Frost;Water,Epic,"CIF,1.2,3"
+Jackal,Mineshaft,1,1,FALSE,Sand;Dark;Flame;Frost;Light;Wind;Nature;Water,Epic,"CR,52.6,3;SUCR,31.4,5"
+Rayman,Warehouse,1,1,FALSE,Wind;Flame;Light;Dark;Sand;Water;Nature;Frost,Epic,"CR,52.6,3;CIF,1.5,5"
+Pebble,Mineshaft,1,1,FALSE,Sand;Frost;Dark;Flame;Light;Wind;Nature;Water,Epic,"SUCR,31.4,5"
+Queen Aurora,Elevator,1,1,FALSE,Frost;Nature;Light;Dark;Wind;Water;Flame;Sand,Epic,"CR,52.6,3;CIF,1.5,5"
+Melody Rivers,Elevator,1,1,FALSE,Wind;Flame;Light;Dark;Sand;Water;Nature;Frost,Epic,"CR,52.6,3;CIF,1.5,5"
+Zephyria,Elevator,1,1,FALSE,Sand;Dark;Wind;Frost;Flame;Light;Nature;Water,Epic,"CR,52.6,3"
+Maya Gelata,Warehouse,1,1,FALSE,Frost;Water;Nature;Light;Dark;Wind;Flame;Sand,Epic,"SUCR,26.4,3;CIF,1.5,5"
+Erica Quill,Mineshaft,1,1,FALSE,Wind;Flame;Dark;Light;Sand;Water;Nature;Frost,Epic,"CR,52.6,1;CIF,1.5,5"
+Afi,Warehouse,1,1,FALSE,Flame;Nature;Dark;Light;Wind;Sand;Frost;Water,Epic,"CR,52.6,3"
+Thalia,Mineshaft,1,1,FALSE,Water;Dark;Flame;Nature;Frost;Wind;Light;Sand,Epic,"CR,52.6,1;SUCR,26.4,3"
+Mad Eye Drake,Warehouse,1,1,FALSE,Water;Nature;Frost;Flame;Dark;Wind;Light;Sand,Epic,"CR,52.6,3;CIF,1.5,5"
+Ula Galvani,Mineshaft,1,1,FALSE,Water;Frost;Nature;Flame;Dark;Wind;Light;Sand,Epic,"SUCR,31.4,5"
+Glimmer,Mineshaft,1,1,FALSE,Nature;Light;Sand;Frost;Dark;Water;Flame;Wind,Epic,"CR,52.6,3;SUCR,31.4,5"
+Santa 2020,Warehouse,1,1,FALSE,Water;Dark;Frost;Nature;Flame;Wind;Light;Sand,Epic,"CIF,1.2,3"
+Amora,Elevator,1,1,FALSE,Wind;Light;Sand;Flame;Dark;Water;Nature;Frost,Epic,"CR,43.7,3;CIF,1.5,5"
+Beiro,Mineshaft,1,1,FALSE,Frost;Wind;Water;Nature;Light;Dark;Flame;Sand,Epic,"SUCR,22,3;CIF,1.5,5"
+Ray Rift,Elevator,1,1,FALSE,Nature;Water;Sand;Frost;Light;Dark;Flame;Wind,Epic,"CIF,1.5,5"
+Santa Claus,Warehouse,1,1,FALSE,Frost;Light;Water;Nature;Dark;Wind;Flame;Sand,Epic,"CIF,1.2,3"
+Ranger Sue,Mineshaft,1,1,FALSE,Sand;Dark;Frost;Flame;Light;Wind;Nature;Water,Rare,"MIF,1.44,3"
+Zi Galvani,Mineshaft,1,1,FALSE,Flame;Wind;Nature;Light;Dark;Sand;Frost;Water,Rare,"MIF,1.44,3"
+Damian Jones,Elevator,1,1,FALSE,Frost;Light;Nature;Dark;Wind;Water;Flame;Sand,Rare,"CR,35.7,1;MIF,1.44,3"
+Mr. Turner,Mineshaft,1,1,FALSE,Nature;Water;Frost;Light;Dark;Sand;Flame;Wind,Rare,"MIF,1.44,3"
+Blingsley,Mineshaft,1,1,FALSE,Light;Frost;Nature;Flame;Wind;Water;Dark;Sand,Rare,"CR,35.7,1;"
+Sojo,Elevator,1,1,FALSE,Flame;Wind;Nature;Light;Dark;Sand;Frost;Water,Rare,"CR,19.2,1;"
+Jeff,Elevator,1,1,FALSE,Water;Frost;Nature;Flame;Dark;Wind;Light;Sand,Rare,"CR,29.7,1;SUCR,12.2,3"
+1DL3,Mineshaft,1,1,FALSE,Light;Frost;Nature;Flame;Wind;Water;Dark;Sand,Rare,"MIF,1.44,3"
+Chris Capella,Warehouse,1,1,FALSE,Wind;Water;Flame;Light;Dark;Sand;Nature;Frost,Rare,
+Al Titude,Warehouse,1,1,FALSE,Dark;Flame;Frost;Wind;Sand;Water;Nature;Light,Rare,"CR,29.7,1"
+Goodman Jr.,Mineshaft,1,1,FALSE,Frost;Nature;Light;Dark;Wind;Water;Flame;Sand,Common,
+Mrs. Goodman,Elevator,1,1,FALSE,Sand;Frost;Dark;Flame;Light;Wind;Nature;Water,Common,
+Gordon,Mineshaft,1,1,FALSE,Flame;Nature;Light;Dark;Wind;Sand;Frost;Water,Common,"SUCR,14.7,1"
+Mr. Goodman,Warehouse,1,1,FALSE,Nature;Frost;Light;Dark;Sand;Water;Flame;Wind,Common,
+Chester,Mineshaft,1,1,FALSE,Wind;Flame;Light;Dark;Sand;Water;Nature;Frost,Common,"CR,23.4,1"
+Mark,Warehouse,1,1,FALSE,Nature;Frost;Light;Dark;Sand;Water;Flame;Wind,Common,
+Lee Vatori,Elevator,1,1,FALSE,Water;Nature;Frost;Flame;Dark;Wind;Light;Sand,Common,
+Eternity,Mineshaft,1,1,FALSE,Wind;Sand;Water;Flame;Light;Dark;Nature;Frost,Legendary,"CR,84.8,3;CIF,1.6,5"
+Poseidon,Warehouse,1,1,FALSE,Water;Dark;Wind;Nature;Frost;Flame;Light;Sand,Legendary,"CR,84.8,3;CIF,1.6,5"
+Asterion,Mineshaft,1,1,FALSE,Nature;Sand;Dark;Frost;Light;Water;Flame;Wind,Legendary,"CR,84.8,3;SUCR,52.2,5"
+Dav Riptide,Elevator,1,1,FALSE,Sand;Light;Dark;Frost;Flame;Wind;Nature;Water,Epic,"CR,43.7,3"
+Krampus,Elevator,1,1,FALSE,Dark;Wind;Sand;Frost;Flame;Water;Nature;Light,Epic,"CR,43.7,3;CIF,1.5,5"
+R. bit,Warehouse,1,1,FALSE,Light;Nature;Flame;Frost;Wind;Water;Dark;Sand,Epic,"CR,43.7,3;CIF,1.5,5"
+Freesia,Mineshaft,1,1,FALSE,Light;Wind;Frost;Nature;Flame;Water;Dark;Sand,Epic,"SUCR,8.9,1;CR,59.2,5"
+Henry,Mineshaft,5,20,FALSE,Flame;Light;Nature;Dark;Wind;Sand;Frost;Water,Rare,
+Om'nix,Mineshaft,1,1,FALSE,Flame;Light;Nature;Dark;Wind;Sand;Frost;Water,Legendary,"CR,43.7,1;SUCR,36.1,3;CIF,1.6,5"
+Abeo Meremikwu,Mineshaft,1,1,FALSE,Nature;Frost;Water;Light;Dark;Sand;Flame;Wind,Epic,"CR,23,1;SUCR,22,3;"

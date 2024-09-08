@@ -80,7 +80,7 @@
                     <DataGridTemplateColumn Header="Assigned SM">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding AssignedSM.Name}"/>
+                                <TextBlock Text="{Binding AssignedSM.Abbreviation}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
