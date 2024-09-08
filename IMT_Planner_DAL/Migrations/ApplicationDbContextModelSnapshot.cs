@@ -86,7 +86,7 @@ namespace IMT_Planner_DAL.Migrations
                     b.Property<int>("PassiveAttributeNameId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("RankRequirement")
+                    b.Property<int>("PromoRequirement")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("SuperManagerId")
