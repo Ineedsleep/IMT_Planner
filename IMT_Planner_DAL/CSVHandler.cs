@@ -73,72 +73,6 @@ public class CSVHandler
 
             return superManagers;
         }
-
-
-        // using (var reader = new StreamReader(filePath))
-        // using (var csv = new CsvHelper.CsvReader(reader, CultureInfo.InvariantCulture))
-        // {
-        //     csv.Context.RegisterClassMap<SuperManagerImportModelMap>();
-        //     var records = csv.GetRecords<SuperManagerImportModel>().ToList();
-        //
-        //     var superManagers = new List<SuperManager>();
-        //     try
-        //     {
-        //         foreach (var record in records)
-        //         {
-        //             var superManager = new SuperManager
-        //             {
-        //                 Name = record.SuperManagerName,
-        //                 Area = record.SuperManagerArea,
-        //                 Rarity = record.Rarity,
-        //                 Rank = new Rank { CurrentRank = record.CurrentRank },
-        //                 Promoted = record.Promoted,
-        //                 Level = record.Level,
-        //             };
-        //         
-        //             superManager.SuperManagerElements = record.Elements.Split(';')
-        //                 .Select((e, i) =>
-        //                 {
-        //                     var element = elements.FirstOrDefault(element => element.Name == e) ?? elements.First();
-        //                     return new SuperManagerElement
-        //                     {
-        //                         SuperManager = superManager,
-        //                         SuperManagerId = superManager.SuperManagerId,
-        //                         Element = element,
-        //                         ElementId = element.ElementId,
-        //                         EffectivenessType = superManager.Rarity switch
-        //                         {
-        //                             Rarity.Common => (i < 1) ? "SE" : (i < 6) ? "PE" : "NVE",
-        //                             Rarity.Rare => (i < 2) ? "SE" : (i < 6) ? "PE" : "NVE",
-        //                             Rarity.Epic => (i < 3) ? "SE" : (i < 6) ? "PE" : "NVE",
-        //                             Rarity.Legendary => (i < 4) ? "SE" : (i < 6) ? "PE" : "NVE",
-        //                             _ => "SE" // Default value
-        //                         }
-        //                     };
-        //                 }).ToList();
-        //
-        //             if (superManager.SuperManagerElements.Count > 4)
-        //             {
-        //                 var rankRequirement = GetRankRequirement(superManager.Rarity);
-        //                 for (int i = 0; i < rankRequirement.Length; i++)
-        //                 {
-        //                     superManager.SuperManagerElements.ElementAt(i).RankRequirement = rankRequirement[i];
-        //                 }    
-        //             }
-        //         
-        //         
-        //             superManagers.Add(superManager);
-        //         }
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         Console.WriteLine(e);
-        //         return superManagers;
-        //     }
-        //
-        //     return superManagers;
-        //}
-        return new List<SuperManager>();
     }
 
     public ICollection<Passive> ParsePassives(string passivesString)
@@ -152,8 +86,14 @@ public class CSVHandler
             if (fields.Length == 3 && _passiveAttributeNames.ContainsKey(fields[0]))
             {
                 var abbreviation = fields[0].Trim();
-                var attributeValue = fields[1] == "null" ? (double?)null : double.Parse(fields[1]);
-                var rankRequirement = int.Parse(fields[2]);
+                var attributeValueString = fields[1].Trim();
+                var rankRequirement = int.Parse(fields[2], CultureInfo.InvariantCulture);
+
+                double? attributeValue = null;
+                if (!string.Equals(attributeValueString, "null", StringComparison.OrdinalIgnoreCase))
+                {
+                    attributeValue = double.Parse(attributeValueString, CultureInfo.InvariantCulture);
+                }
 
                 var passiveAttribute = _passiveAttributeNames[abbreviation];
 
