@@ -68,6 +68,11 @@ public class CSVHandler
                     }
                 }
 
+                foreach (var passive in superManager.Passives)
+                {
+                    passive.SuperManager = superManager;
+                    passive.SuperManagerId = superManager.SuperManagerId;
+                }
                 superManagers.Add(superManager);
             }
 
@@ -102,7 +107,7 @@ public class CSVHandler
                     PassiveAttributeNameId = passiveAttribute.Id,
                     AttributeValue = attributeValue,
                     RankRequirement = rankRequirement,
-                    Name = passiveAttribute
+                    Name = passiveAttribute,
                 };
                 passives.Add(passive);
             }
@@ -134,6 +139,9 @@ public class CSVHandler
         using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
         {
             csv.Context.RegisterClassMap<SuperManagerImportModelMap>();
+            // Write the header for the CSV file
+            csv.WriteHeader<SuperManagerImportModel>();
+            csv.NextRecord();
             foreach (var superManager in superManagers)
             {
                 var importModel = new SuperManagerImportModel

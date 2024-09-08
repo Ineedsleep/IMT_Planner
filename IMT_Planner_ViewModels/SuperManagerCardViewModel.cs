@@ -143,7 +143,7 @@ public class SuperManagerCardViewModel : ObservableObject
         {
             tmp.Add(new SuperManagerElementViewModel(ele,SEElements.Count));
         }
-        foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "PE" || element.RankRequirement >= element.SuperManager.Rank.CurrentRank ))
+        foreach (var ele in SuperManager.SuperManagerElements.Where(element => element.EffectivenessType == "PE" || element.RankRequirement > element.SuperManager.Rank.CurrentRank ))
         {
             PEElements.Add(new SuperManagerElementViewModel(ele,PEElements.Count));
         }
@@ -153,6 +153,10 @@ public class SuperManagerCardViewModel : ObservableObject
         }
 
         SEElements = new ObservableCollection<SuperManagerElementViewModel>(tmp.OrderBy(e => e.RankRequirement).ToList());
+        OnPropertyChanged(nameof(SEElements));
+        OnPropertyChanged(nameof(PEElements));
+        OnPropertyChanged(nameof(NVEElements));
+        
     }
 
     public SuperManagerCardViewModel(SuperManager superManager,SuperManagerSelectionService _superManagerSelectionService)
@@ -166,7 +170,7 @@ public class SuperManagerCardViewModel : ObservableObject
 
     private void CardUpdate()
     { 
-        SplitElements();
+    
        OnPropertyChanged(nameof(Elements));
        OnPropertyChanged(nameof(Promoted));
        OnPropertyChanged(nameof(Level));
@@ -176,6 +180,7 @@ public class SuperManagerCardViewModel : ObservableObject
        OnPropertyChanged(nameof(Name));
        OnPropertyChanged(nameof(Group));
        OnPropertyChanged(nameof(SuperManager));
-  
+       SplitElements();
+       OnPropertyChanged(nameof(Elements));
     }
 }
