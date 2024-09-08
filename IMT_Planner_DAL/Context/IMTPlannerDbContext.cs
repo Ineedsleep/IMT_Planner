@@ -67,7 +67,7 @@ namespace IMT_Planner_DAL.Context
             {
                 entity.HasKey(pa => pa.Id); // Define primary key
                 entity.Property(pa => pa.AttributeValue);
-                entity.Property(pa => pa.RankRequirement).IsRequired();
+                entity.Property(pa => pa.PromoRequirement).IsRequired();
 
                 // Define relationship with SuperManager
                 entity.HasOne(pa => pa.SuperManager)

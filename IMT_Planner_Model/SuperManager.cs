@@ -5,7 +5,7 @@ namespace IMT_Planner_Model;
 
 public class SuperManager
 {
-    public SuperManager(string? name, Rank? rank, bool promoted
+    public SuperManager(string? name, Rank? rank, int promoted
         ,Rarity rarity, Areas area)
     {
         Name = name;
@@ -32,7 +32,7 @@ public class SuperManager
     public ICollection<SuperManagerElement>? SuperManagerElements { get; set; }
     public string? Name { get; set; }
     public Rank? Rank { get; set; }
-    public bool Promoted { get; set; }
+    public int Promoted { get; set; }
     public byte Level { get; set; }
     public int CurrentFragments { get; set; }
   //  public Equipment Equipment { get; set; }

@@ -9,7 +9,7 @@ public class SuperManagerImportModel
     public Areas SuperManagerArea { get; set; }
     public int CurrentRank { get; set; }
     public byte Level { get; set; }
-    public bool Promoted { get; set; }
+    public int Promoted { get; set; }
     public string Group { get; set; }
     public string Elements { get; set; }
     public string Passives { get; set; }

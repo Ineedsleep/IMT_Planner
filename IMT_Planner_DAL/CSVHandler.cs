@@ -106,7 +106,7 @@ public class CSVHandler
                 {
                     PassiveAttributeNameId = passiveAttribute.Id,
                     AttributeValue = attributeValue,
-                    RankRequirement = rankRequirement,
+                    PromoRequirement = rankRequirement,
                     Name = passiveAttribute,
                 };
                 passives.Add(passive);
@@ -164,7 +164,7 @@ public class CSVHandler
 
     private string StringifyPassives(ICollection<Passive> passives)
     {
-        return string.Join(";", passives.Select(p => $"{p.Name.Abbreviation},{p.AttributeValue},{p.RankRequirement}"));
+        return string.Join(";", passives.Select(p => $"{p.Name.Abbreviation},{p.AttributeValue},{p.PromoRequirement}"));
     }
 
     private string StringifyElements(ICollection<SuperManagerElement>? superManagerSuperManagerElements)

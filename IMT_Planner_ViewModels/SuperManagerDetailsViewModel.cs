@@ -147,7 +147,7 @@ public class SuperManagerDetailsViewModel : ObservableObject
     }
 
     //Enum Values for Comboboxes
-    public bool Promoted
+    public int Promoted
     {
         get => CurrentSuperManager.Promoted;
         set

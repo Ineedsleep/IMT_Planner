@@ -169,7 +169,7 @@ namespace IMT_Planner_DAL.Migrations
                     b.Property<byte>("Priority")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Promoted")
+                    b.Property<int>("Promoted")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("Rank")

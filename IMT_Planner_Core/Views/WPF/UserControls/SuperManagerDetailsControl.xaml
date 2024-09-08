@@ -8,6 +8,7 @@
              xmlns:rules="clr-namespace:IMT_Planner.Views.WPF.Rules"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:userControls="clr-namespace:IMT_Planner.Views.WPF.UserControls"
+             xmlns:converter="clr-namespace:IMT_Planner.Views.Converter"
 
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
@@ -66,7 +67,15 @@
                 <ComboBox ItemsSource="{Binding Areas}" SelectedItem="{Binding Area, UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
             <GroupBox Header="Promoted">
-                <CheckBox IsChecked="{Binding Promoted}" />
+                <TextBox>
+                    <TextBox.Text>
+                        <Binding Path="Promoted" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <rules:RangeValidationRule Minimum="0" Maximum="5" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </GroupBox>
             <!-- Other properties editors go here -->
             <GroupBox Header="Element">

@@ -151,7 +151,7 @@ public class CardFilterModel
 
         if (HasIncomeFactor ?? false)
         {
-            predicate = predicate.And(sm => sm.Passives.Any(p => p.Name.Abbreviation == "MIF" || p.Name.Abbreviation == "CIF"  &&  p.RankRequirement <= sm.Rank.CurrentRank));
+            predicate = predicate.And(sm => sm.Passives.Any(p => (p.Name.Id == 1 &&  p.PromoRequirement <= sm.Promoted)|| (p.Name.Id == 2  &&  p.PromoRequirement <= sm.Promoted)));
         }
 
         if (PassiveMultiplier.HasValue && HasIncomeFactor != null && HasIncomeFactor.Value)
@@ -161,7 +161,7 @@ public class CardFilterModel
         
         if (HasCostReduction ?? false)
         {
-            predicate = predicate.And(sm => sm.Passives.Any(p => p.Name.Abbreviation == "CR" &&  p.RankRequirement <= sm.Rank.CurrentRank));
+            predicate = predicate.And(sm => sm.Passives.Any(p => p.Name.Id == 3 &&  p.PromoRequirement <= sm.Promoted));
         }
 
         if (CRValue.HasValue && HasCostReduction != null && HasCostReduction.Value)
@@ -170,7 +170,7 @@ public class CardFilterModel
         }
         if (HasShaftUnlockReduction ?? false)
         {
-            predicate = predicate.And(sm => sm.Passives.Any(p => p.Name.Abbreviation == "SUCR"  &&  p.RankRequirement <= sm.Rank.CurrentRank));
+            predicate = predicate.And(sm => sm.Passives.Any(p => p.Name.Id == 4  &&  p.PromoRequirement <= sm.Promoted));
         }
 
         if (ShaftUnlockReduction.HasValue && HasShaftUnlockReduction != null && HasShaftUnlockReduction.Value)

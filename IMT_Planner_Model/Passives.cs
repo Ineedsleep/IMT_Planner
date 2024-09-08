@@ -7,7 +7,7 @@ public class Passive
     // Foreign key to PassiveAttributeName
     public int PassiveAttributeNameId { get; set; }
     public double? AttributeValue { get; set; } // Value of the attribute
-    public int RankRequirement { get; set; } // Rank requirement for the attribute
+    public int PromoRequirement { get; set; } // Rank requirement for the attribute
 
     // Navigation property
     public SuperManager SuperManager { get; set; }

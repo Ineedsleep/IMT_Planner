@@ -106,7 +106,7 @@ public class SuperManagerCardViewModel : ObservableObject
         }
     }
 
-    public bool Promoted
+    public int Promoted
     {
         get => SuperManager.Promoted;
         set
