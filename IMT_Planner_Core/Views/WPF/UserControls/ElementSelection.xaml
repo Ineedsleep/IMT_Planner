@@ -35,7 +35,7 @@
                     <DataTemplate>
                         <Grid>
                             <StackPanel>
-                                <Label Content="{Binding PromoRequirement}"></Label>
+                                <Label Content="{Binding RankRequirement}"></Label>
                                 <Image Source="{Binding ImagePath}" Margin="16,8,16,8" Width="24" Height="24" ToolTip="{Binding Abbreviation}"/>
                             </StackPanel>
                             <!-- <ComboBox  SelectedIndex="{Binding DataContext. SelectedIndex, Mode=TwoWay,  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" -->
