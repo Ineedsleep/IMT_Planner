@@ -33,6 +33,7 @@ public class SuperManagerSelectionService
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection = new();
     private ICollection<SuperManager> _backupManagerCollection;
     private List<Element> ElementCollection = new List<Element>();
+    private List<PassiveAttributeName> PassiveNameCollection = new List<PassiveAttributeName>();
 
     public SuperManagerSelectionService(CSVHandler csvHandler)
     {
@@ -84,6 +85,13 @@ public class SuperManagerSelectionService
         foreach (var element in allElements)
         {
             ElementCollection.Add(element);
+        }
+    }
+    public void CreatePassiveNameCollection(IEnumerable<PassiveAttributeName> passiveNames)
+    {
+        foreach (var element in passiveNames)
+        {
+            PassiveNameCollection.Add(element);
         }
     }
     private void CheckInvalidElements(SuperManager sm)
@@ -139,19 +147,6 @@ public class SuperManagerSelectionService
             }
         }
     }
-
-    static string[] elements = new string[]
-    {
-        "Nature",
-        "Frost",
-        "Flame",
-        "Light",
-        "Dark",
-        "Wind",
-        "Sand",
-        "Water"
-    };
-
     private static int[] GetRankRequirement(Rarity rarity)
     {
         switch (rarity)
@@ -257,7 +252,7 @@ public class SuperManagerSelectionService
     {
         try
         {
-            IEnumerable<SuperManager> csvContent = _csvHandler.ReadAndParseCsv(filePath,ElementCollection);
+            IEnumerable<SuperManager> csvContent = _csvHandler.ReadAndParseCsv(filePath,ElementCollection,PassiveNameCollection);
             SuperManagerCollection.Clear();
             foreach (var sm in csvContent)
             {

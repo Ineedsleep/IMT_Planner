@@ -7,12 +7,13 @@ public class SuperManagerRepositoryService
 {
     private readonly IRepository<SuperManager> _smRepository;
     private readonly IRepository<Element> _elementRepository;
+    private readonly IRepository<PassiveAttributeName> _passiveNameRepository;
 
-    public SuperManagerRepositoryService(IRepository<SuperManager> repository,IRepository<Element> eleRepository)
+    public SuperManagerRepositoryService(IRepository<SuperManager> repository,IRepository<Element> eleRepository, IRepository<PassiveAttributeName> passiveNameRepository)
     {
         _smRepository = repository ?? throw new ArgumentNullException(nameof(repository));
         _elementRepository = eleRepository ?? throw new ArgumentNullException(nameof(eleRepository));
-        
+        _passiveNameRepository = passiveNameRepository;
     }
     
     // Gets all SuperManagers
@@ -60,5 +61,10 @@ public class SuperManagerRepositoryService
     public IEnumerable<Element> GetAllElements()
     {
         return _elementRepository.GetAll();
+    }
+
+    public IEnumerable<PassiveAttributeName> GetAllPassiveNames()
+    {
+        return _passiveNameRepository.GetAll();
     }
 }

@@ -159,10 +159,6 @@ namespace IMT_Planner_DAL.Migrations
                     b.Property<int>("CurrentFragments")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Equipment")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<byte>("Level")
                         .HasColumnType("INTEGER");
 

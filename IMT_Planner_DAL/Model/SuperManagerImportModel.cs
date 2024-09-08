@@ -12,5 +12,5 @@ public class SuperManagerImportModel
     public bool Promoted { get; set; }
     public string Group { get; set; }
     public string Elements { get; set; }
-    public string SuperManagerRarity { get; set; }
-}
+    public string Passives { get; set; }
+}//Abbreviation1,10.5,2;Abbreviation2,null,3

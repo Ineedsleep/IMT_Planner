@@ -35,7 +35,7 @@ public class SuperManager
     public bool Promoted { get; set; }
     public byte Level { get; set; }
     public int CurrentFragments { get; set; }
-    public Equipment Equipment { get; set; }
+  //  public Equipment Equipment { get; set; }
     public ICollection<Passive> Passives { get; set; } = new List<Passive>();
     public Rarity Rarity { get; set; }
     public Areas Area { get; set; }

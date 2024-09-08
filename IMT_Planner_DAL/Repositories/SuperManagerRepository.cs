@@ -37,50 +37,148 @@ public class SuperManagerRepository : IRepository<SuperManager>
         _context.SaveChanges();
     }
 
+    
     public void InsertMany(IEnumerable<SuperManager> superManagers)
+{
+    try
     {
-        try
+        foreach (var sm in superManagers)
         {
-            foreach (var sm in superManagers)
+            // Check if SuperManager already exists
+            var existingSuperManager = _context.SuperManagers
+                .Include(s => s.SuperManagerElements)
+                .Include(s => s.Passives)
+                .ThenInclude(p => p.Name)
+                .FirstOrDefault(existingSm => existingSm.SuperManagerId == sm.SuperManagerId);
+
+            if (existingSuperManager != null)
             {
-                // Attach Elements to the context
+                // Update existing SuperManager
+                _context.Entry(existingSuperManager).CurrentValues.SetValues(sm);
+
+                // Update SuperManagerElements
                 foreach (var sme in sm.SuperManagerElements)
                 {
-                    if (_context.Elements.Local.All(e => e.ElementId != sme.Element.ElementId)) // Check if not already tracked
+                    if (!existingSuperManager.SuperManagerElements.Any(e => e.ElementId == sme.ElementId))
                     {
-                        _context.Elements.Attach(sme.Element);
+                        if (_context.Elements.Local.All(e => e.ElementId != sme.Element.ElementId))
+                        {
+                            _context.Elements.Attach(sme.Element);
+                        }
+                        existingSuperManager.SuperManagerElements.Add(sme);
                     }
                 }
 
-                // Attach Passives and their PassiveAttributeName to the context
+                // Update Passives
                 foreach (var passive in sm.Passives)
                 {
-                    if (_context.Passives.Local.All(p => p.Id != passive.Id)) // Check if not already tracked
+                    var existingPassive = existingSuperManager.Passives
+                        .FirstOrDefault(p => p.PassiveAttributeNameId == passive.PassiveAttributeNameId);
+                        
+                    if (existingPassive != null)
+                    {
+                        _context.Entry(existingPassive).CurrentValues.SetValues(passive);
+                    }
+                    else
                     {
                         if (_context.PassiveAttributeNames.Local.All(pan => pan.Id != passive.PassiveAttributeNameId))
                         {
-                            _context.PassiveAttributeNames.Attach(passive.Name); // Attach PassiveAttributeName
+                            _context.PassiveAttributeNames.Attach(passive.Name);
                         }
-                        _context.Passives.Attach(passive); // Attach Passive
+                        existingSuperManager.Passives.Add(passive);
                     }
                 }
 
-                // Add SuperManager and its relationships to the context
-                _context.SuperManagers.Add(sm);
+                _dbSet.Update(existingSuperManager);
+                continue;
             }
 
-            // Save all changes once at the end, ensuring transactions work efficiently
-            _context.SaveChanges();
+            // Attach new Elements to the context
+            foreach (var sme in sm.SuperManagerElements)
+            {
+                if (_context.Elements.Local.All(e => e.ElementId != sme.Element.ElementId)) // Check if not already tracked
+                {
+                    _context.Elements.Attach(sme.Element);
+                }
+            }
+
+            // Attach new Passives and their PassiveAttributeName to the context
+            foreach (var passive in sm.Passives)
+            {
+                if (_context.PassiveAttributeNames.Local.All(pan => pan.Id != passive.PassiveAttributeNameId))
+                {
+                    _context.PassiveAttributeNames.Attach(passive.Name);
+                }
+
+                if (_context.Passives.Local.All(p => p.Id != passive.Id))
+                {
+                    _context.Passives.Attach(passive);
+                }
+            }
+
+            // Add new SuperManager and its relationships to the context
+            _context.SuperManagers.Add(sm);
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-            throw;
-        }
-        
-        // _dbSet.AddRange(superManagers);
-        // _context.SaveChanges();
+
+        // Save all changes once at the end, ensuring transactions work efficiently
+        _context.SaveChanges();
     }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }
+}
+    
+    // public void InsertMany(IEnumerable<SuperManager> superManagers)
+    // {
+    //     try
+    //     {
+    //         foreach (var sm in superManagers)
+    //         {
+    //             // Check for existing SuperManagerId
+    //             if (_context.SuperManagers.Any(existingSm => existingSm.SuperManagerId == sm.SuperManagerId))
+    //             {
+    //                 _dbSet.Update(sm);
+    //                 continue;
+    //             }
+    //             // Attach Elements to the context
+    //             foreach (var sme in sm.SuperManagerElements)
+    //             {
+    //                 if (_context.Elements.Local.All(e => e.ElementId != sme.Element.ElementId)) // Check if not already tracked
+    //                 {
+    //                     _context.Elements.Attach(sme.Element);
+    //                 }
+    //             }
+    //
+    //             // Attach Passives and their PassiveAttributeName to the context
+    //             foreach (var passive in sm.Passives)
+    //             {
+    //                 if (_context.Passives.Local.All(p => p.Id != passive.Id))
+    //                 {
+    //                     if (_context.PassiveAttributeNames.Local.All(pan => pan.Id != passive.PassiveAttributeNameId))
+    //                     {
+    //                         _context.PassiveAttributeNames.Attach(passive.Name);
+    //                     }
+    //                     _context.Passives.Attach(passive);
+    //                 }
+    //             }
+    //
+    //             // Add SuperManager and its relationships to the context
+    //             //_context.SuperManagers.Add(sm);
+    //             Insert(sm);
+    //         }
+    //
+    //         // Save all changes once at the end, ensuring transactions work efficiently
+    //        // _context.SaveChanges();
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Console.WriteLine(e.Message);
+    //     }
+    //     
+    //     // _dbSet.AddRange(superManagers);
+    //     // _context.SaveChanges();
+    // }
 
     public IEnumerable<SuperManager> GetAllWithElements()
     {
