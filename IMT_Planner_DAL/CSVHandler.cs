@@ -40,26 +40,33 @@ public class CSVHandler
                   
                     //   Priority = im.Priority
                 };
-                superManager.SuperManagerElements = im.Elements.Split(';')
-                    .Select((e, i) =>
-                    {
-                        var element = elements.FirstOrDefault(element => element.Name == e) ?? elements.First();
-                        return new SuperManagerElement
+                try
+                {
+                    superManager.SuperManagerElements = im.Elements.Split(';')
+                        .Select((e, i) =>
                         {
-                            SuperManager = superManager,
-                            SuperManagerId = superManager.SuperManagerId,
-                            Element = element,
-                            ElementId = element.ElementId,
-                            EffectivenessType = superManager.Rarity switch
+                            var element = elements.FirstOrDefault(element => element.Name == e);
+                            return new SuperManagerElement
                             {
-                                Rarity.Common => (i < 1) ? "SE" : (i < 6) ? "PE" : "NVE",
-                                Rarity.Rare => (i < 2) ? "SE" : (i < 6) ? "PE" : "NVE",
-                                Rarity.Epic => (i < 3) ? "SE" : (i < 6) ? "PE" : "NVE",
-                                Rarity.Legendary => (i < 4) ? "SE" : (i < 6) ? "PE" : "NVE",
-                                _ => "SE" // Default value
-                            }
-                        };
-                    }).ToList();
+                                SuperManager = superManager,
+                                SuperManagerId = superManager.SuperManagerId,
+                                Element = element,
+                                ElementId = element.ElementId,
+                                EffectivenessType = superManager.Rarity switch
+                                {
+                                    Rarity.Common => (i < 1) ? "SE" : (i < 6) ? "PE" : "NVE",
+                                    Rarity.Rare => (i < 2) ? "SE" : (i < 6) ? "PE" : "NVE",
+                                    Rarity.Epic => (i < 3) ? "SE" : (i < 6) ? "PE" : "NVE",
+                                    Rarity.Legendary => (i < 4) ? "SE" : (i < 6) ? "PE" : "NVE",
+                                    _ => "SE" // Default value
+                                }
+                            };
+                        }).ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
 
                 if (superManager.SuperManagerElements.Count > 4)
                 {
