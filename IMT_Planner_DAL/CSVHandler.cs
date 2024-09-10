@@ -10,13 +10,12 @@ namespace IMT_Planner_DAL;
 
 public class CSVHandler
 {
-    private Dictionary<string, PassiveAttributeName> _passiveAttributeNames;
 
  public IEnumerable<SuperManager> ReadAndParseCsv(string filePath, IEnumerable<Element> elements,
     IEnumerable<PassiveAttributeName> passiveAttributeNames)
 {
     var elementsDict = elements.ToDictionary(e => e.Name, StringComparer.OrdinalIgnoreCase);
-    _passiveAttributeNames =
+   var passiveAttributeNamesDic =
         passiveAttributeNames.ToDictionary(p => p.Abbreviation, StringComparer.OrdinalIgnoreCase);
     
     using (var reader = new StreamReader(filePath))
@@ -37,7 +36,7 @@ public class CSVHandler
                 Level = im.Level,
                 Promoted = im.Promoted,
                 Unlocked = im.Unlocked,
-                Passives = ParsePassives(im.Passives)
+                Passives = ParsePassives(im.Passives,passiveAttributeNamesDic)
             };
 
             try
@@ -96,7 +95,7 @@ public class CSVHandler
     }
 }
 
-    public ICollection<Passive> ParsePassives(string passivesString)
+    public ICollection<Passive> ParsePassives(string passivesString, Dictionary<string,PassiveAttributeName>passiveAttributeNamesDic)
     {
         var passives = new List<Passive>();
         var parsedPassives = passivesString.Split(';'); // Assuming passives are separated by semicolons in the string
@@ -104,7 +103,7 @@ public class CSVHandler
         foreach (var passiveData in parsedPassives)
         {
             var fields = passiveData.Split(','); // Assuming fields are separated by commas within each passive
-            if (fields.Length == 3 && _passiveAttributeNames.ContainsKey(fields[0]))
+            if (fields.Length == 3 && passiveAttributeNamesDic.ContainsKey(fields[0]))
             {
                 var abbreviation = fields[0].Trim();
                 var attributeValueString = fields[1].Trim();
@@ -116,7 +115,7 @@ public class CSVHandler
                     attributeValue = double.Parse(attributeValueString, CultureInfo.InvariantCulture);
                 }
 
-                var passiveAttribute = _passiveAttributeNames[abbreviation];
+                var passiveAttribute = passiveAttributeNamesDic[abbreviation];
 
                 var passive = new Passive
                 {

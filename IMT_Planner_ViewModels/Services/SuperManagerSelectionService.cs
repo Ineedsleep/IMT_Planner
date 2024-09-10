@@ -215,8 +215,8 @@ public class SuperManagerSelectionService
     // Define event
     public event Action<string> SuperManagerChanged;
     public event Action SuperManagerCardUpdated;
-
     public event Action ElementsChanged;
+    public event Action FilterChanged;
 
     // Define delegate
     public delegate void SuperManagerChangedHandler(object sender, EventArgs e);
@@ -224,6 +224,7 @@ public class SuperManagerSelectionService
     private void NotifySuperManagerChanged(string name) => SuperManagerChanged?.Invoke(name);
     private void NotifySuperManagerCardUpdate() => SuperManagerCardUpdated?.Invoke();
     private void NotifyElementsUpdate() => ElementsChanged?.Invoke();
+    private void NotifyFilterUpdate() => FilterChanged?.Invoke();
 
     // Add methods to manipulate the model here. 
     // For example, suppose SuperManager has a method to update its status
@@ -235,16 +236,9 @@ public class SuperManagerSelectionService
     public void UpdateCard(SuperManager superManager)
     {
         var targetVM = _superManagerCollection.SingleOrDefault(vm => vm.SuperManager == superManager);
-
         if (targetVM != null)
         {
-            // Modify the VM properties based on provided SuperManager properties.
-            // Here just as an example, `Area` property is updated.
             NotifySuperManagerCardUpdate();
-        }
-        else
-        {
-            // Handle the scenario when no such SuperManagerCardViewModel can be found.
         }
     }
 
@@ -296,5 +290,6 @@ public class SuperManagerSelectionService
                 SuperManagerCollection.Add(smv);
             }
         }
+        NotifyFilterUpdate();
     }
 }

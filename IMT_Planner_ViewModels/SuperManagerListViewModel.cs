@@ -14,8 +14,6 @@ public class SuperManagerListViewModel: ObservableObject
     private ObservableCollection<SuperManagerCardViewModel> _superManagerCollection;   
     private readonly SuperManagerSelectionService _superManagerSelectionService;
     private readonly SuperManagerRepositoryService _repositoryService;
-    public ICommand ExportToCSVCommand { get; private set; }
-    public ICommand LoadCommand { get; private set; }
     public ICommand ImportCommand { get; private set; }
 
     public ObservableCollection<SuperManagerCardViewModel> SuperManagerCollection
@@ -36,9 +34,6 @@ public class SuperManagerListViewModel: ObservableObject
         _superManagerSelectionService.SuperManagerChanged -= HandleSuperManagerSelectionChanged;
         _superManagerSelectionService.SuperManagerChanged += HandleSuperManagerSelectionChanged;
         _superManagerCollection = new ObservableCollection<SuperManagerCardViewModel> ();
-        LoadCommand = new RelayCommand<string>(async path => LoadSuperManagersAsync(path));
-        ImportCommand = new RelayCommand<string>(async path => ImportSuperManagers());
-        ExportToCSVCommand = new RelayCommand(ExportSuperManagerToCSV);
         SelectSuperManagerCommand = new RelayCommand<SuperManagerCardViewModel>(SelectSuperManagerViewModel);
         try
         {
@@ -53,11 +48,7 @@ public class SuperManagerListViewModel: ObservableObject
         }
     }
 
-    private void ImportSuperManagers()
-    {
-        IEnumerable<SuperManager> tmp = SuperManagerCollection.Select(s => s.SuperManager);
-        _repositoryService.ImportSuperManagers(tmp);
-    }
+
 
     public IRelayCommand SelectSuperManagerCommand { get; }
     
@@ -66,21 +57,9 @@ public class SuperManagerListViewModel: ObservableObject
     {
         _superManagerSelectionService.UpdateSelectedSuperManager(superManagerViewModel);
     }
+
     private void HandleSuperManagerSelectionChanged(string name)
     {
        OnPropertyChanged(name);
-    }
-    
-    private void ExportSuperManagerToCSV()
-    { 
-        
-        var filePath = $@".\Resources\SM_Sheet_{DateTime.Now:yy-MM-dd}.csv";
-        _superManagerSelectionService.ExportToCSV(filePath);
-    }
-
-    private void LoadSuperManagersAsync(string filePath)
-    {    
-        filePath = @".\Resources\SM_Sheet_Default.csv";
-         _superManagerSelectionService.LoadSuperManagersFromFileAsync(filePath);
     }
 }

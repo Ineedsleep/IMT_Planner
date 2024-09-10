@@ -13,6 +13,9 @@
     MinWidth="1600"
     MinHeight="600"
     mc:Ignorable="d">
+    <Window.Resources>
+        <converter:CurrentToMaxMultiValueConverter x:Key="CurrentToMaxMultiValueConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3.5*" />
@@ -30,6 +33,29 @@
                 <MenuItem Command="{Binding ImportCommand}" Header="_Import" />
             </MenuItem>
         </Menu>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,24,0">
+          <TextBlock Text="Unlocked: " FontSize="16" FontWeight="Bold"></TextBlock>
+            <TextBlock FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,24,0">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource CurrentToMaxMultiValueConverter}">
+                        <Binding Path="UnlockedSmCount" />
+                        <Binding Path="TotalSmCount" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            
+            <TextBlock Text="Promoted: " FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24,0,0,0"></TextBlock>
+            <TextBlock FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource CurrentToMaxMultiValueConverter}">
+                        <Binding Path="CurrentPromoCount" />
+                        <Binding Path="TotalPromoCount" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+        
+        <!--All usercontrol links-->
         <Grid Grid.Column="0" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />

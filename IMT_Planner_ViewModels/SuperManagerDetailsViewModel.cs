@@ -189,19 +189,6 @@ public class SuperManagerDetailsViewModel : ObservableObject
     //Command Methods
     private void Update()
     {
-        CurrentSuperManager.SuperManagerElements.Clear();
-        foreach (var element in _superManagerSelectionService.SEElements)
-        {
-            CurrentSuperManager.SuperManagerElements.Add(element.Element);
-        }
-        foreach (var element in _superManagerSelectionService.PEElements)
-        {
-            CurrentSuperManager.SuperManagerElements.Add(element.Element);
-        }
-        foreach (var element in _superManagerSelectionService.NVEElements)
-        {
-            CurrentSuperManager.SuperManagerElements.Add(element.Element);
-        }
         _repositoryService.UpdateSuperManager(CurrentSuperManager);
         _superManagerSelectionService.UpdateCard(CurrentSuperManager);
     }

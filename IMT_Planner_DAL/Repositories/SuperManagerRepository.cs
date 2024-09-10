@@ -50,8 +50,24 @@ public void InsertMany(IEnumerable<SuperManager> superManagers)
         var elementDict = _context.Elements.Local.ToDictionary(e => e.Name, StringComparer.OrdinalIgnoreCase);
         var passiveAttributeDict = _context.PassiveAttributeNames.Local.ToDictionary(p => p.Abbreviation, StringComparer.OrdinalIgnoreCase);
 
+        
         foreach (var superManager in superManagers)
         {
+            var existingSuperManager = _context.SuperManagers
+                .FirstOrDefault(sm => sm.Name == superManager.Name && sm.Rarity == superManager.Rarity && sm.Area == superManager.Area);
+
+            if (existingSuperManager != null)
+            {
+                // Update the existing SuperManager with the new values
+                existingSuperManager.Name = superManager.Name;
+                existingSuperManager.Rarity = superManager.Rarity;
+                existingSuperManager.Area = superManager.Area;
+                // update other properties if needed...
+
+                _context.Update(existingSuperManager);
+                continue;
+            }
+            
             // Attach or update elements to avoid tracking issues
             foreach (var superManagerElement in superManager.SuperManagerElements)
             {
