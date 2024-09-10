@@ -25,7 +25,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                        <Border
+                        <Border Width="180"
                             Margin="12"
                             Padding="8"
                             BorderBrush="{Binding CurrentRank, Converter={StaticResource RankToBrushConverter}}"
