@@ -105,7 +105,7 @@
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Grid Margin="5">
+                                    <Grid Margin="5" >
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" /> <!-- Header row -->
                                             <RowDefinition Height="Auto" /> <!-- Income factor filter -->
@@ -128,9 +128,10 @@
                                             <!-- Content on the left side -->
                                             <TextBlock Text="IF" VerticalAlignment="Center" Margin="0,0,5,0"
                                                        HorizontalAlignment="Left"    ToolTip="Has MIF / CIF as passive" />
-                                            <CheckBox HorizontalAlignment="Right"
-                                                      IsChecked="{Binding HasIncomeFactor, Mode=TwoWay, Converter={StaticResource NullToFalseConverter}}"
-                                                      VerticalAlignment="Center" />
+                                            <StackPanel  HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                <CheckBox
+                                                          IsChecked="{Binding HasIncomeFactor, Mode=TwoWay, Converter={StaticResource NullToFalseConverter}}"
+                                                          VerticalAlignment="Center" /></StackPanel>
                                         </StackPanel>
 
                                         <TextBlock Grid.Row="1" Grid.Column="1" Text="Value:"

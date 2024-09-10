@@ -23,7 +23,7 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.02*" />
+            <RowDefinition Height="0.02*" MinHeight="25" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Menu Grid.Column="0" DockPanel.Dock="Top" Grid.Row="0" Grid.ColumnSpan="3">
@@ -33,9 +33,10 @@
                 <MenuItem Command="{Binding ImportCommand}" Header="_Import" />
             </MenuItem>
         </Menu>
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,24,0">
-          <TextBlock Text="Unlocked: " FontSize="16" FontWeight="Bold"></TextBlock>
-            <TextBlock FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,24,0">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal"  Margin="0,0,24,0">
+            <TextBlock Text="Unlocked: " FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
+            <TextBlock FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock.Text>
                     <MultiBinding Converter="{StaticResource CurrentToMaxMultiValueConverter}">
                         <Binding Path="UnlockedSmCount" />
@@ -43,8 +44,9 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            
-            <TextBlock Text="Promoted: " FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24,0,0,0"></TextBlock>
+        </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="24,0,0,0">    
+            <TextBlock Text="Promoted: " FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBlock FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" >
                 <TextBlock.Text>
                     <MultiBinding Converter="{StaticResource CurrentToMaxMultiValueConverter}">
@@ -54,7 +56,7 @@
                 </TextBlock.Text>
             </TextBlock>
         </StackPanel>
-        
+        </StackPanel>
         <!--All usercontrol links-->
         <Grid Grid.Column="0" Grid.Row="1">
             <Grid.RowDefinitions>
