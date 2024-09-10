@@ -47,8 +47,8 @@ public class SuperManagerRepository : IRepository<SuperManager>
     
 public void InsertMany(IEnumerable<SuperManager> superManagers)
     {
-        var elementDict = _context.Elements.AsNoTracking().ToDictionary(e => e.Name, StringComparer.OrdinalIgnoreCase);
-        var passiveAttributeDict = _context.PassiveAttributeNames.AsNoTracking().ToDictionary(p => p.Abbreviation, StringComparer.OrdinalIgnoreCase);
+        var elementDict = _context.Elements.Local.ToDictionary(e => e.Name, StringComparer.OrdinalIgnoreCase);
+        var passiveAttributeDict = _context.PassiveAttributeNames.Local.ToDictionary(p => p.Abbreviation, StringComparer.OrdinalIgnoreCase);
 
         foreach (var superManager in superManagers)
         {
@@ -57,7 +57,6 @@ public void InsertMany(IEnumerable<SuperManager> superManagers)
             {
                 if (elementDict.TryGetValue(superManagerElement.Element.Name, out var existingElement))
                 {
-                    _context.Attach(existingElement);
                     superManagerElement.Element = existingElement;
                 }
                 else
@@ -73,7 +72,7 @@ public void InsertMany(IEnumerable<SuperManager> superManagers)
             {
                 if (passiveAttributeDict.TryGetValue(passive.Name.Abbreviation, out var existingPassiveAttribute))
                 {
-                    _context.Attach(existingPassiveAttribute);
+                   
                     passive.Name = existingPassiveAttribute;
                 }
                 else
@@ -84,11 +83,11 @@ public void InsertMany(IEnumerable<SuperManager> superManagers)
                 }
             }
 
-            //_context.SuperManagers.Add(superManager);
-            Insert(superManager);
+            _context.SuperManagers.Add(superManager);
+            //Insert(superManager);
         }
 
-        //_context.SaveChanges(); // Save elements and passives changes.
+        _context.SaveChanges(); // Save elements and passives changes.
     }
 
 

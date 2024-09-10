@@ -2,15 +2,6 @@
 
 public class Element
 {
-    public Element(string name)
-    {
-        Name = name;
-    }
-
-    public Element()
-    {
-    }
-
     public int ElementId { get; set; }
     public string Name { get; set; }
 
@@ -20,17 +11,11 @@ public class Element
 
 public class SuperManagerElement
 {
-   // public int SuperManagerId { get => SuperManager.SuperManagerId; set => SuperManager.SuperManagerId = value; }
     public int SuperManagerId { get; set; }
     public SuperManager SuperManager { get; set; }
     public int ElementId { get; set; }
     public Element Element { get; set; }
     public int RankRequirement { get; set; }
-
     public string EffectivenessType { get; set; }
-
-    public SuperManagerElement()
-    {
-        
-    }
+    
 }

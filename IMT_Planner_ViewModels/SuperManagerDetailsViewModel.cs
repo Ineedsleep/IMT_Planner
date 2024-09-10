@@ -136,7 +136,11 @@ public class SuperManagerDetailsViewModel : ObservableObject
 
     public byte Level
     {
-        get => CurrentSuperManager.Level;
+        get
+        {
+            if (CurrentSuperManager != null) return CurrentSuperManager.Level;
+            else return 0;
+        }
         set
         {
             if (CurrentSuperManager.Level != value)
@@ -163,7 +167,7 @@ public class SuperManagerDetailsViewModel : ObservableObject
     
     public bool Unlocked
     {
-        get => CurrentSuperManager.Unlocked;
+        get => CurrentSuperManager?.Unlocked == true;
         set
         {
             if (CurrentSuperManager.Unlocked != value)

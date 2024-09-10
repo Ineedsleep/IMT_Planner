@@ -42,12 +42,7 @@ public class SuperManagerSelectionService
 
     public SuperManager CurrentSuperManager
     {
-        get
-        {
-            if (_superManager != null)
-                return _superManager;
-            return new SuperManager();
-        }
+        get => _superManager;
         set
         {
             _superManager = value;
@@ -57,7 +52,7 @@ public class SuperManagerSelectionService
 
     public ObservableCollection<SuperManagerCardViewModel> SuperManagerCollection
     {
-        get { return AdjustFilter(_superManagerCollection); }
+        get => AdjustFilter(_superManagerCollection);
         set
         {
             _superManagerCollection = value;

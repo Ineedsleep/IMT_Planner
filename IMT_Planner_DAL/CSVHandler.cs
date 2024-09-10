@@ -12,40 +12,41 @@ public class CSVHandler
 {
     private Dictionary<string, PassiveAttributeName> _passiveAttributeNames;
 
-    public IEnumerable<SuperManager> ReadAndParseCsv(string filePath, IEnumerable<Element> elements,
-        IEnumerable<PassiveAttributeName> passiveAttributeNames)
+ public IEnumerable<SuperManager> ReadAndParseCsv(string filePath, IEnumerable<Element> elements,
+    IEnumerable<PassiveAttributeName> passiveAttributeNames)
+{
+    var elementsDict = elements.ToDictionary(e => e.Name, StringComparer.OrdinalIgnoreCase);
+    _passiveAttributeNames =
+        passiveAttributeNames.ToDictionary(p => p.Abbreviation, StringComparer.OrdinalIgnoreCase);
+    
+    using (var reader = new StreamReader(filePath))
+    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
     {
-        _passiveAttributeNames =
-            passiveAttributeNames.ToDictionary(p => p.Abbreviation, StringComparer.OrdinalIgnoreCase);
-        using (var reader = new StreamReader(filePath))
-        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+        csv.Context.RegisterClassMap<SuperManagerImportModelMap>();
+        var importModels = csv.GetRecords<SuperManagerImportModel>().ToList();
+        var superManagers = new List<SuperManager>();
+
+        foreach (var im in importModels)
         {
-            csv.Context.RegisterClassMap<SuperManagerImportModelMap>();
-            var importModels = csv.GetRecords<SuperManagerImportModel>().ToList();
-
-            var superManagers = new List<SuperManager>();
-
-            foreach (var im in importModels)
+            var superManager = new SuperManager
             {
-                var superManager = new SuperManager
-                {
-                    Name = im.SuperManagerName,
-                    Rarity = im.Rarity,
-                    Area = im.SuperManagerArea,
-                    Rank = new Rank { CurrentRank = im.CurrentRank },
-                    Level = im.Level,
-                    Promoted = im.Promoted,
-                    Unlocked = im.Unlocked,
-                    Passives = ParsePassives(im.Passives)
-                  
-                    //   Priority = im.Priority
-                };
-                try
-                {
-                    superManager.SuperManagerElements = im.Elements.Split(';')
-                        .Select((e, i) =>
+                Name = im.SuperManagerName,
+                Rarity = im.Rarity,
+                Area = im.SuperManagerArea,
+                Rank = new Rank { CurrentRank = im.CurrentRank },
+                Level = im.Level,
+                Promoted = im.Promoted,
+                Unlocked = im.Unlocked,
+                Passives = ParsePassives(im.Passives)
+            };
+
+            try
+            {
+                superManager.SuperManagerElements = im.Elements.Split(';')
+                    .Select((e, i) =>
+                    {
+                        if (elementsDict.TryGetValue(e, out var element))
                         {
-                            var element = elements.FirstOrDefault(element => element.Name == e);
                             return new SuperManagerElement
                             {
                                 SuperManager = superManager,
@@ -61,33 +62,39 @@ public class CSVHandler
                                     _ => "SE" // Default value
                                 }
                             };
-                        }).ToList();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-
-                if (superManager.SuperManagerElements.Count > 4)
-                {
-                    var rankRequirement = GetRankRequirement(superManager.Rarity);
-                    for (int i = 0; i < rankRequirement.Length; i++)
-                    {
-                        superManager.SuperManagerElements.ElementAt(i).RankRequirement = rankRequirement[i];
-                    }
-                }
-
-                foreach (var passive in superManager.Passives)
-                {
-                    passive.SuperManager = superManager;
-                    passive.SuperManagerId = superManager.SuperManagerId;
-                }
-                superManagers.Add(superManager);
+                        }
+                        else
+                        {
+                            throw new Exception($"Element '{e}' not found in the database.");
+                        }
+                    }).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                continue; // Skip this entity and continue with the next
             }
 
-            return superManagers;
+            if (superManager.SuperManagerElements.Count > 4)
+            {
+                var rankRequirement = GetRankRequirement(superManager.Rarity);
+                for (int i = 0; i < rankRequirement.Length; i++)
+                {
+                    superManager.SuperManagerElements.ElementAt(i).RankRequirement = rankRequirement[i];
+                }
+            }
+
+            foreach (var passive in superManager.Passives)
+            {
+                passive.SuperManager = superManager;
+                passive.SuperManagerId = superManager.SuperManagerId;
+            }
+            superManagers.Add(superManager);
         }
+
+        return superManagers;
     }
+}
 
     public ICollection<Passive> ParsePassives(string passivesString)
     {
