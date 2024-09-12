@@ -164,7 +164,18 @@ public class SuperManagerDetailsViewModel : ObservableObject
             }
         }
     }
-    
+    public int CurrentFragments
+    {
+        get => CurrentSuperManager.CurrentFragments;
+        set
+        {
+            if (CurrentSuperManager.CurrentFragments != value)
+            {
+                CurrentSuperManager.CurrentFragments = value;
+                OnPropertyChanged(nameof(CurrentFragments));
+            }
+        }
+    }
     public bool Unlocked
     {
         get => CurrentSuperManager?.Unlocked == true;

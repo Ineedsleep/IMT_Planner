@@ -5,6 +5,8 @@ namespace IMT_Planner_Model;
 
 public class SuperManager
 {
+    private bool _unlocked;
+
     public SuperManager(string? name, Rank? rank, int promoted
         ,Rarity rarity, Areas area)
     {
@@ -40,11 +42,21 @@ public class SuperManager
     public Areas Area { get; set; }
  
     public byte Priority { get; set; }
+
     /// <summary>
     /// If this is true the first initial 30 frags are collected and the sm can be crafted
     /// </summary>
-    public bool Unlocked { get; set; }
-    
+    public bool Unlocked
+    {
+        get => _unlocked;
+        set
+        {
+            _unlocked = value;
+            
+            if (_unlocked == false && value == true)
+                Rank.CurrentRank = 0;
+        }
+    }
 }
 
 

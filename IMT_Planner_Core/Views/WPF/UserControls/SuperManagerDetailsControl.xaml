@@ -13,6 +13,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
+        <converter:CurrentToMaxMultiValueConverter x:Key="CurrentToMaxMultiValueConverter" />
         <Style x:Key="BaseButtonStyle" TargetType="Button">
             <Setter Property="Padding" Value="10,5" />
             <Setter Property="Margin" Value="5" />
@@ -20,19 +21,32 @@
             <Setter Property="MinWidth" Value="100" />
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
+        <Style x:Key="RoundedBorderStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Margin" Value="20" />
+        </Style>
+        <Style x:Key="ProgressBarStyle" TargetType="ProgressBar">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Foreground" Value="ForestGreen"/>
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+        </Style>
+
     </UserControl.Resources>
     <Grid>
+     
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"  MinHeight="280"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" x:Name="EditManagerPanel"  Margin="10" MaxWidth="600">
-  
+        <StackPanel Grid.Row="0" Grid.Column="0" x:Name="EditManagerPanel" Margin="10" MaxWidth="600">
+
             <!-- Editor for Name property -->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Label
@@ -44,7 +58,16 @@
                     IsChecked="{Binding Unlocked}"
                     VerticalAlignment="Center" HorizontalAlignment="Right"
                     Margin="10,0,0,0" />
-            </StackPanel>      <!-- <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/> -->
+            </StackPanel>
+            <!-- <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/> -->
+            <GroupBox Header="Area">
+                <ComboBox ItemsSource="{Binding Areas}"
+                          SelectedItem="{Binding Area, UpdateSourceTrigger=PropertyChanged}" />
+            </GroupBox>
+            <GroupBox Header="Rarity">
+                <ComboBox ItemsSource="{Binding Rarities}"
+                          SelectedItem="{Binding Rarity, UpdateSourceTrigger=PropertyChanged}" />
+            </GroupBox>
             <GroupBox Header="Level">
                 <TextBox>
                     <TextBox.Text>
@@ -55,25 +78,6 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-            </GroupBox>
-            
-            <GroupBox Header="Rank">
-                <TextBox>
-                    <TextBox.Text>
-                        <Binding Path="Rank.CurrentRank" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <rules:RangeValidationRule Minimum="0" Maximum="5" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </GroupBox>
-            <!-- Editor for Rarity property -->
-            <GroupBox Header="Rarity">
-                <ComboBox ItemsSource="{Binding Rarities}" SelectedItem="{Binding Rarity, UpdateSourceTrigger=PropertyChanged}"/>
-            </GroupBox>
-            <GroupBox Header="Area">
-                <ComboBox ItemsSource="{Binding Areas}" SelectedItem="{Binding Area, UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
             <GroupBox Header="Promoted">
                 <TextBox>
@@ -86,15 +90,60 @@
                     </TextBox.Text>
                 </TextBox>
             </GroupBox>
-            <!-- Other properties editors go here -->
-            <GroupBox Header="Element">
-                <userControls:ElementSelection Grid.Row="1"></userControls:ElementSelection></GroupBox>
-            <!-- Command button for UpdateName -->
-   
+            <GroupBox Header="Rank">
+                <TextBox>
+                    <TextBox.Text>
+                        <Binding Path="Rank.CurrentRank" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <rules:RangeValidationRule Minimum="0" Maximum="5" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </GroupBox>
+            <GroupBox Header="Fragments">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0">
+                    <TextBox.Text>
+                        <Binding Path="CurrentFragments" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <rules:RangeValidationRule Minimum="0" Maximum="5" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Label HorizontalAlignment="Right" Grid.Column="1">
+                    <Label.Content>
+                        <MultiBinding Converter="{StaticResource CurrentToMaxMultiValueConverter}">
+                            <Binding Path="CurrentFragments" />
+                            <Binding Path="Rank.FragmentsNeededToLevelUp" />
+                        </MultiBinding>
+                    </Label.Content>
+                </Label>
+            </Grid>
+                </GroupBox>
+        
         </StackPanel>
-<StackPanel Grid.Column="1" Grid.Row="0"  Margin="10,64,10,10" >
-    <userControls:CostDetailControl/>
-</StackPanel>
-        <Button Grid.Row="2" Grid.Column="1" Command="{Binding UpdateCommand}"  HorizontalAlignment="Right" Style="{StaticResource BaseButtonStyle}" Margin="16">Update</Button>
+        <Grid Grid.Column="1" Grid.Row="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox  Header="Element" MinHeight="170">
+            <userControls:ElementSelection Grid.Row="1"></userControls:ElementSelection>
+        </GroupBox>
+
+        <Button Grid.Row="1" Command="{Binding UpdateCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Style="{StaticResource BaseButtonStyle}" Margin="16">
+            Update
+        </Button>
+        </Grid>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <userControls:CostDetailControl />
+        </StackPanel>
     </Grid>
 </UserControl>
