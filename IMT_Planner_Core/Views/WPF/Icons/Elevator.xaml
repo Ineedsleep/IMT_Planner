@@ -1,0 +1,31 @@
+<UserControl x:Class="IMT_Planner.Views.WPF.Icons.Elevator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:IMT_Planner.Views.WPF.Icons"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Canvas
+            Width="48"
+            Height="48">
+            <Canvas.LayoutTransform>
+                <MatrixTransform Matrix="Identity" />
+            </Canvas.LayoutTransform>
+            <Path
+                Data="M7,2L11,6H8V10H6V6H3L7,2M17,10L13,6H16V2H18V6H21L17,10M7,12H17A2,2 0 0,1 19,14V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V14A2,2 0 0,1 7,12M7,14V20H17V14H7Z"
+                Stroke="{x:Null}"
+                Fill="#FF000000"
+                Stretch="Uniform"
+                Width="48"
+                Height="48"
+                SnapsToDevicePixels="False"
+                UseLayoutRounding="False"
+                StrokeThickness="0"
+                StrokeStartLineCap="flat"
+                StrokeEndLineCap="flat"
+                StrokeLineJoin="miter" />
+        </Canvas>
+    </Grid>
+</UserControl>

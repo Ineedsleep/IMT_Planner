@@ -8,6 +8,7 @@
     xmlns:local="clr-namespace:IMT_Planner"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+    xmlns:chrono="clr-namespace:IMT_Planner.Views.WPF.UserControls.ChronoTab"
     xmlns:userControls="clr-namespace:IMT_Planner.Views.WPF.UserControls"
     Title="MainWindow"
     MinWidth="1600"
@@ -24,7 +25,7 @@
       </Grid>
             </TabItem>
             <TabItem Header="Chrono Mine Planner">
-                <userControls:ChronoPlannerControl/>
+                <chrono:ChronoOverview/>
             </TabItem>
         </TabControl>
         
