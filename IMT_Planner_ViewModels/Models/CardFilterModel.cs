@@ -1,3 +1,4 @@
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq.Expressions;
 using IMT_Planner_Model;
 using LinqKit;
@@ -6,44 +7,17 @@ namespace IMT_Planner_ViewModels.Models;
 
 public class CardFilterModel
 {
-    private int? _levelMin;
-    private int? _levelMax;
-    private int? _rankRangeMin;
-    private int? _rankRangeMax;
     private Areas? _area;
     private Rarity? _rarity;
-    private int? _promoted;
-    private bool? _hasIncomeFactor;
-    private double? _passiveMultiplier;
-    private bool? _hasCostReduction;
-    private double? _costReductionValue;
-    private bool? _hasShaftUnlockReduction;
-    private double? _shaftUnlockReduction;
     private string? _effectiveness;
+    
+    public int? LevelMin { get; set; }
 
-    public int? LevelMin
-    {
-        get => _levelMin;
-        set => _levelMin = value;
-    }
+    public int? LevelMax { get; set; }
 
-    public int? LevelMax
-    {
-        get => _levelMax;
-        set => _levelMax = value;
-    }
+    public int? RankRangeMin { get; set; }
 
-    public int? RankRangeMin
-    {
-        get => _rankRangeMin;
-        set => _rankRangeMin = value;
-    }
-
-    public int? RankRangeMax
-    {
-        get => _rankRangeMax;
-        set => _rankRangeMax = value;
-    }
+    public int? RankRangeMax { get; set; }
 
     public Areas? Area
     {
@@ -69,52 +43,27 @@ public class CardFilterModel
         }
     }
 
-    public int? Promoted
-    {
-        get => _promoted;
-        set => _promoted = value;
-    }
+    public int? Promoted { get; set; }
 
-    public bool? HasIncomeFactor
-    {
-        get => _hasIncomeFactor;
-        set => _hasIncomeFactor = value;
-    }
+    public bool? HasIncomeFactor { get; set; }
 
-    public double? PassiveMultiplier
-    {
-        get => _passiveMultiplier;
-        set => _passiveMultiplier = value;
-    }
+    public double? PassiveMultiplier { get; set; }
 
-    public bool? HasCostReduction
-    {
-        get => _hasCostReduction;
-        set => _hasCostReduction = value;
-    }
+    public bool? HasCostReduction { get; set; }
 
-    public double? CRValue
-    {
-        get => _costReductionValue;
-        set => _costReductionValue = value;
-    }
+    public double? CRValue { get; set; }
 
 
-    public bool? HasShaftUnlockReduction
-    {
-        get => _hasShaftUnlockReduction;
-        set => _hasShaftUnlockReduction = value;
-    }
+    public bool? HasShaftUnlockReduction { get; set; }
 
-    public double? ShaftUnlockReduction
-    {
-        get => _shaftUnlockReduction;
-        set => _shaftUnlockReduction = value;
-    }
+    public double? ShaftUnlockReduction { get; set; }
 
     public Expression<Func<SuperManager, bool>> GetExpression()
     {
         var elementNames = SelectedElement?.ElementName; //Elements?.Select(e => e.Element.Name).ToList();
+        var selectedTags =    Tags?.Where(obj => obj.Active)
+            .Select(obj => obj.Name)
+            .ToList(); //Elements?.Select(e => e.Element.Name).ToList();
 
         var predicate = PredicateBuilder.New<SuperManager>(true);
         if (LevelMin.HasValue)
@@ -137,7 +86,13 @@ public class CardFilterModel
                                                                && Effectiveness.Contains(x.EffectivenessType)
                                                                && x.RankRequirement <= manager.Rank.CurrentRank));
         }
-
+        
+        if (Tags != null && Tags.Select(x => x.Active == true).Any())
+        {
+            predicate = predicate.And(sm => sm.Tags
+                .Split(";",StringSplitOptions.RemoveEmptyEntries)
+                .Any(tag => selectedTags != null && selectedTags.Contains(tag)));
+        }
         if (HasIncomeFactor ?? false)
         {
             predicate = predicate.And(sm => sm.Passives.Any(p =>
@@ -189,5 +144,13 @@ public class CardFilterModel
     {
         get => _effectiveness;
         set => _effectiveness = value == string.Empty ? null : value;
+    }
+
+    public List<FilterTag>? Tags { get; set; } = new();
+
+    public class FilterTag
+    {
+        public bool Active { get; set; }
+        public string? Name { get; set; }
     }
 }

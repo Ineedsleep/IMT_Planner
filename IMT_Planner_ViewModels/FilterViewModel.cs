@@ -14,27 +14,45 @@ public class FilterViewModel : ObservableObject
 {
     private readonly SuperManagerSelectionService _superManagerSelectionService;
     private readonly SuperManagerRepositoryService _repositoryService;
+    private readonly IOrderedEnumerable<string> _allTags;
+    private readonly List<ElementViewModel?> _elementList;
     public ICommand ApplyFilterCommand { get; private set; }
     public ICommand ResetFiltersCommand { get; private set; }
 
     public ObservableCollection<CardFilterModel> CardFilters { get; set; } = new ObservableCollection<CardFilterModel>()
         { new CardFilterModel() };
-    public FilterViewModel(SuperManagerSelectionService superManagerSelectionService, SuperManagerRepositoryService repositoryService)
+
+    public FilterViewModel(SuperManagerSelectionService superManagerSelectionService,
+        SuperManagerRepositoryService repositoryService)
     {
         _superManagerSelectionService = superManagerSelectionService;
         _repositoryService = repositoryService;
         ApplyFilterCommand = new RelayCommand(ApplyFilters);
         ResetFiltersCommand = new RelayCommand(ResetFilters);
         var tmp = _repositoryService.GetAllElements().ToList();
-        List<ElementViewModel?> elementList = new List<ElementViewModel?>();
-        elementList.Add(null);
+       _allTags = _superManagerSelectionService.GetAllTags();
+
+
+      _elementList = new List<ElementViewModel?>();
+        _elementList.Add(null);
         foreach (var element in tmp)
         {
-            elementList.Add(new ElementViewModel(element));
+            _elementList.Add(new ElementViewModel(element));
         }
+
+        InitializeFilterViewModel();
+    }
+
+    private void InitializeFilterViewModel()
+    {
         foreach (var filter in CardFilters)
         {
-            filter.ElementBase = elementList;
+            filter.ElementBase = _elementList;
+
+            foreach (var tag in _allTags)
+            {
+                filter.Tags.Add(new CardFilterModel.FilterTag() { Active = false, Name = tag });
+            }
         }
     }
 
@@ -42,7 +60,7 @@ public class FilterViewModel : ObservableObject
     private void ResetFilters()
     {
         int count = CardFilters.Count;
-        
+
         CardFilters.Clear();
         for (int i = 0; i < count; i++)
         {
@@ -50,6 +68,7 @@ public class FilterViewModel : ObservableObject
         }
         OnPropertyChanged(nameof(CardFilters));
         _superManagerSelectionService.ApplyFilters(CardFilters.First().GetExpression());
+        InitializeFilterViewModel();
     }
 
     private void ApplyFilters()
@@ -61,6 +80,7 @@ public class FilterViewModel : ObservableObject
             var filterExpression = filter.GetExpression();
             masterPredicate = masterPredicate.And(filterExpression);
         }
+
         _superManagerSelectionService.ApplyFilters(masterPredicate);
     }
 }

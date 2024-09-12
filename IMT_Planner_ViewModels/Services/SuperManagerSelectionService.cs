@@ -4,7 +4,9 @@ using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.IO;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Windows.Media.TextFormatting;
+using System.Xml.XPath;
 using CsvHelper;
 using CsvHelper.Configuration;
 using IMT_Planner_DAL;
@@ -291,5 +293,16 @@ public class SuperManagerSelectionService
             }
         }
         NotifyFilterUpdate();
+    }
+
+    public IOrderedEnumerable<string> GetAllTags()
+    {
+        List<string> tags = new List<string>();
+        foreach (SuperManagerCardViewModel smvm in SuperManagerCollection)
+        {
+            tags.AddRange(smvm.Tags);
+        }
+       var  result = tags.Distinct().OrderBy(tag => tag);
+       return result;
     }
 }

@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Threading.Tasks;
+using System.Windows.Resources;
 using IMT_Planner_Model;
 using IMT_Planner_ViewModels.Services;
 
@@ -115,6 +116,21 @@ public class SuperManagerCardViewModel : ObservableObject
                 OnPropertyChanged(nameof(Promoted));
         }
     }
+    
+    public ICollection<string> Tags
+    {
+        get => SuperManager.Tags.Split(";").ToList();
+        set
+        {
+
+            
+            SuperManager.Tags = string.Join(";", value);;
+            OnPropertyChanged(nameof(Tags));
+        }
+    }
+    
+    
+    
     public bool Unlocked
     {
         get => SuperManager.Unlocked;
