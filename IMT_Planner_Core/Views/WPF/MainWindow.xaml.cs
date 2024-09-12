@@ -14,6 +14,5 @@ public partial class MainWindow
     public MainWindow()
     {
         InitializeComponent();
-        DataContext = ((App)Application.Current).ServiceProvider.GetService<MainWindowViewModel>();
     }
 }

@@ -47,7 +47,7 @@ public partial class App : Application
         services.AddSingleton<IMT_Planner_DAL.CSVHandler>();
         
         
-        services.AddTransient<IMT_Planner_ViewModels.MainWindowViewModel>();
+        services.AddTransient<IMT_Planner_ViewModels.SuperManagerPlannerViewModel>();
         services.AddTransient<IMT_Planner_ViewModels.SuperManagerDetailsViewModel>();
         services.AddSingleton<IMT_Planner_ViewModels.SuperManagerListViewModel>();
         services.AddSingleton<IMT_Planner_ViewModels.SuperManagerElementViewModel>();

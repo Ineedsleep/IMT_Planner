@@ -6,7 +6,7 @@ using Microsoft.Toolkit.Mvvm.Input;
 
 namespace IMT_Planner_ViewModels;
 
-public class MainWindowViewModel : ObservableObject
+public class SuperManagerPlannerViewModel : ObservableObject
 {
 
     private readonly SuperManagerSelectionService _superManagerSelectionService;
@@ -16,7 +16,7 @@ public class MainWindowViewModel : ObservableObject
     public ICommand LoadCommand { get; private set; }
     public ICommand ImportCommand { get; private set; }
 
-    public MainWindowViewModel(SuperManagerSelectionService smSelectionService,
+    public SuperManagerPlannerViewModel(SuperManagerSelectionService smSelectionService,
         SuperManagerRepositoryService repositoryService)
     {
 

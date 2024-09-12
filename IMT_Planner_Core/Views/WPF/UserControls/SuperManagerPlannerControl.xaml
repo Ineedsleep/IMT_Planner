@@ -1,0 +1,94 @@
+<UserControl x:Class="IMT_Planner.Views.WPF.UserControls.SuperManagerPlannerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls"
+             mc:Ignorable="d"
+             xmlns:converter="clr-namespace:IMT_Planner.Views.Converter"  
+             xmlns:userControls="clr-namespace:IMT_Planner.Views.WPF.UserControls"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converter:CurrentToMaxMultiValueConverter x:Key="CurrentToMaxMultiValueConverter" />
+    </UserControl.Resources>
+    <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3.5*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.02*" MinHeight="25" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Menu Grid.Column="0" DockPanel.Dock="Top" Grid.Row="0" Grid.ColumnSpan="3">
+                <MenuItem Header="_File">
+                    <MenuItem Command="{Binding ExportToCSVCommand}" Header="_ExportToCSV" />
+                    <MenuItem Command="{Binding LoadCommand}" Header="_Load" />
+                    <MenuItem Command="{Binding ImportCommand}" Header="_Import" />
+                </MenuItem>
+            </Menu>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" Margin="0,0,24,0">
+                    <TextBlock Text="Unlocked: " FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontWeight="Bold">
+                    </TextBlock>
+                    <TextBlock FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource CurrentToMaxMultiValueConverter}">
+                                <Binding Path="UnlockedSmCount" />
+                                <Binding Path="TotalSmCount" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right"
+                            Margin="24,0,0,0">
+                    <TextBlock Text="Promoted: " FontSize="16" FontWeight="Bold" VerticalAlignment="Center"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <TextBlock FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource CurrentToMaxMultiValueConverter}">
+                                <Binding Path="CurrentPromoCount" />
+                                <Binding Path="TotalPromoCount" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <!--All usercontrol links-->
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="0">
+                    <userControls:SuperManagerCardCollection />
+                </ScrollViewer>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Text="Sum of blue gem costs: " VerticalAlignment="Center"></TextBlock>
+                    <Label Content="xxx" VerticalAlignment="Center" />
+                    <TextBlock Text="Sum of red gem costs: " VerticalAlignment="Center"></TextBlock>
+                    <Label Content="xxx" VerticalAlignment="Center" />
+                    <TextBlock Text="Sum of blue crystal costs: " VerticalAlignment="Center"></TextBlock>
+                    <Label Content="xxx" VerticalAlignment="Center" />
+                    <TextBlock Text="Sum of red crystal costs: " VerticalAlignment="Center"></TextBlock>
+                    <Label Content="xxx" VerticalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+            <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <Grid Grid.Row="1" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.8*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <userControls:SuperManagerDetailsControl />
+                </ScrollViewer>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <userControls:FilterSelection />
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+</UserControl>
