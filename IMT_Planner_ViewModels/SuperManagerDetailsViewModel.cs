@@ -45,6 +45,7 @@ public class SuperManagerDetailsViewModel : ObservableObject
         OnPropertyChanged(nameof(Level));
         OnPropertyChanged(nameof(Promoted));
         OnPropertyChanged(nameof(Unlocked));
+        OnPropertyChanged(nameof(Tags));
     }
 
 
@@ -90,6 +91,18 @@ public class SuperManagerDetailsViewModel : ObservableObject
             if (CurrentSuperManager.Name != value)
             {
                 CurrentSuperManager.Name = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    public string? Tags
+    {
+        get => CurrentSuperManager.Tags;
+        set
+        {
+            if (CurrentSuperManager.Tags != value)
+            {
+                CurrentSuperManager.Tags = value;
                 OnPropertyChanged();
             }
         }
@@ -196,6 +209,7 @@ public class SuperManagerDetailsViewModel : ObservableObject
     {
         get { return Enum.GetValues(typeof(Areas)).Cast<Areas>(); }
     }
+
     
     //Command Methods
     private void Update()

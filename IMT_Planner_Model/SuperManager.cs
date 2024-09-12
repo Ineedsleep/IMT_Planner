@@ -40,8 +40,10 @@ public class SuperManager
     public ICollection<Passive> Passives { get; set; } = new List<Passive>();
     public Rarity Rarity { get; set; }
     public Areas Area { get; set; }
- 
     public byte Priority { get; set; }
+    
+    //Todo quick and dirty should be refactored in a better logic in an external table
+    public string Tags { get; set; }
 
     /// <summary>
     /// If this is true the first initial 30 frags are collected and the sm can be crafted

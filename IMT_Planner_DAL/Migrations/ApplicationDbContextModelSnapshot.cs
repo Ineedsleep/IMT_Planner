@@ -179,6 +179,10 @@ namespace IMT_Planner_DAL.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Tags")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("Unlocked")
                         .HasColumnType("INTEGER");
 

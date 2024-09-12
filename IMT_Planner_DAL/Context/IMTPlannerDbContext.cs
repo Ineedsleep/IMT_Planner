@@ -61,6 +61,7 @@ namespace IMT_Planner_DAL.Context
                 entity.Property(sm => sm.Rarity).HasConversion(rarityConverter);
                 entity.Property(sm => sm.Area).HasConversion(areaConverter);
                 entity.Property(sm => sm.Priority);
+                entity.Property(sm => sm.Tags);
             });
 
             modelBuilder.Entity<Passive>(entity =>

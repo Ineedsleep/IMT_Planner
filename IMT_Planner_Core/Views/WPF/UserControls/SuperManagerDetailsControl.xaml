@@ -127,7 +127,7 @@
             </Grid>
             </GroupBox>
             <GroupBox Header="Tags / Groups" Height="64">
-                <TextBox  TextWrapping="Wrap" ToolTip="Type any kind of Keyword to assign it to the manager, can be used for filtering - Separate with ;">
+                <TextBox Text="{Binding Tags}"  TextWrapping="Wrap" ToolTip="Type any kind of Keyword to assign it to the manager, can be used for filtering - Separate with ;">
                 </TextBox>
             </GroupBox>
             <Button Command="{Binding UpdateCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
