@@ -83,8 +83,12 @@
                 <RowDefinition Height="0.8*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <userControls:SuperManagerDetailsControl Grid.Row="0" />
-            <userControls:FilterSelection Grid.Row="1" />
+            <ScrollViewer Grid.Row="0"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <userControls:SuperManagerDetailsControl/>
+            </ScrollViewer>
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <userControls:FilterSelection  />
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
