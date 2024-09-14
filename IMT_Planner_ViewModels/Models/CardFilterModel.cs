@@ -1,6 +1,7 @@
 using System.DirectoryServices.ActiveDirectory;
 using System.Linq.Expressions;
 using IMT_Planner_Model;
+using IMT_Planner_ViewModels.GeneralViewModels;
 using LinqKit;
 
 namespace IMT_Planner_ViewModels.Models;

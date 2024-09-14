@@ -1,9 +1,9 @@
-using System.Collections.ObjectModel;
-using System.Windows.Automation.Provider;
 using IMT_Planner_Model;
 using IMT_Planner_ViewModels.Models;
 using IMT_Planner_ViewModels.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+
+namespace IMT_Planner_ViewModels.MainViewModels;
 
 public class SuperManagerFilterViewModel : ObservableObject
 {
@@ -36,5 +36,5 @@ public class SuperManagerFilterViewModel : ObservableObject
     {
         var filterExpression = FilterModel.GetExpression();
         _selectionService.ApplyFilters(filterExpression);
-     }  
+    }  
 }

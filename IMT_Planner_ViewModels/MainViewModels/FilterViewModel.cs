@@ -1,14 +1,14 @@
 using System.Collections.ObjectModel;
-using System.Linq.Expressions;
 using System.Windows.Input;
 using IMT_Planner_Model;
+using IMT_Planner_ViewModels.GeneralViewModels;
 using IMT_Planner_ViewModels.Models;
 using IMT_Planner_ViewModels.Services;
 using LinqKit;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 
-namespace IMT_Planner_ViewModels;
+namespace IMT_Planner_ViewModels.MainViewModels;
 
 public class FilterViewModel : ObservableObject
 {

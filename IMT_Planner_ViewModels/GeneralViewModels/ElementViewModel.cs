@@ -1,11 +1,9 @@
-using System.Collections.ObjectModel;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using IMT_Planner_Model;
-using IMT_Planner_ViewModels.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 
-namespace IMT_Planner_ViewModels;
+namespace IMT_Planner_ViewModels.GeneralViewModels;
 
 public class ElementViewModel : ObservableObject
 {
@@ -13,8 +11,8 @@ public class ElementViewModel : ObservableObject
 
     public ElementViewModel()
     {
-        
     }
+
     public ElementViewModel(Element element)
     {
         _element = element;
@@ -28,6 +26,8 @@ public class ElementViewModel : ObservableObject
             else return "";
         }
     }
+
+    public Element? Element => _element;
 
     public ImageSource ImagePath
     {

@@ -1,9 +1,9 @@
 using System.Collections.ObjectModel;
-using IMT_Planner_Model;
+using IMT_Planner_ViewModels.GeneralViewModels;
 using IMT_Planner_ViewModels.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 
-namespace IMT_Planner_ViewModels;
+namespace IMT_Planner_ViewModels.MainViewModels;
 
 public class SMElementalListViewModel : ObservableObject
 {

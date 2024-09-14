@@ -1,13 +1,10 @@
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Windows.Input;
-using CsvHelper;
-using IMT_Planner_Model;
 using IMT_Planner_ViewModels.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 
-namespace IMT_Planner_ViewModels;
+namespace IMT_Planner_ViewModels.MainViewModels;
 
 public class SuperManagerListViewModel: ObservableObject
 {

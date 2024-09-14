@@ -3,6 +3,9 @@ using IMT_Planner_DAL.Context;
 using Microsoft.Extensions.DependencyInjection;
 using IMT_Planner_DAL.Repositories;
 using IMT_Planner_Model;
+using IMT_Planner_ViewModels.ChronoViewModels;
+using IMT_Planner_ViewModels.GeneralViewModels;
+using IMT_Planner_ViewModels.MainViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace IMT_Planner;
@@ -47,13 +50,13 @@ public partial class App : Application
         services.AddSingleton<IMT_Planner_DAL.CSVHandler>();
         
         
-        services.AddTransient<IMT_Planner_ViewModels.SuperManagerPlannerViewModel>();
-        services.AddTransient<IMT_Planner_ViewModels.SuperManagerDetailsViewModel>();
-        services.AddSingleton<IMT_Planner_ViewModels.SuperManagerListViewModel>();
-        services.AddSingleton<IMT_Planner_ViewModels.SuperManagerElementViewModel>();
-        services.AddSingleton<IMT_Planner_ViewModels.SMElementalListViewModel>();
-        services.AddSingleton<IMT_Planner_ViewModels.FilterViewModel>();
-        services.AddSingleton<IMT_Planner_ViewModels.ChronoMineViewModel>();
+        services.AddTransient<SuperManagerPlannerViewModel>();
+        services.AddTransient<SuperManagerDetailsViewModel>();
+        services.AddSingleton<SuperManagerListViewModel>();
+        services.AddSingleton<SuperManagerElementViewModel>();
+        services.AddSingleton<SMElementalListViewModel>();
+        services.AddSingleton<FilterViewModel>();
+        services.AddSingleton<ChronoMineEntityViewModel>();
         // Add other services or view models as needed.
         
         

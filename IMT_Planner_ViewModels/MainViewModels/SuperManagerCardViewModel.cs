@@ -1,14 +1,10 @@
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Input;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.Toolkit.Mvvm.Input;
-using System.Threading.Tasks;
-using System.Windows.Resources;
 using IMT_Planner_Model;
+using IMT_Planner_ViewModels.GeneralViewModels;
 using IMT_Planner_ViewModels.Services;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
-namespace IMT_Planner_ViewModels;
+namespace IMT_Planner_ViewModels.MainViewModels;
 
 public class SuperManagerCardViewModel : ObservableObject
 {

@@ -4,7 +4,7 @@ using IMT_Planner_ViewModels.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 
-namespace IMT_Planner_ViewModels;
+namespace IMT_Planner_ViewModels.MainViewModels;
 
 public class SuperManagerPlannerViewModel : ObservableObject
 {

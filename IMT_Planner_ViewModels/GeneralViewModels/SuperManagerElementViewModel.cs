@@ -2,9 +2,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using IMT_Planner_Model;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Microsoft.VisualBasic.CompilerServices;
 
-namespace IMT_Planner_ViewModels;
+namespace IMT_Planner_ViewModels.GeneralViewModels;
 
 public class SuperManagerElementViewModel : ObservableObject
 {

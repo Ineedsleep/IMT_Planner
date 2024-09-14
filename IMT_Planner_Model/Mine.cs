@@ -2,7 +2,7 @@
 
 public class Mine
 {
-    public List<MineShaft> MineShafts { get; set; }
-    public MineShaft Elevator { get; set; }
-    public MineShaft Warehouse { get; set; }
+    public List<MineEntity> MineShafts { get; set; }
+    public MineEntity Elevator { get; set; }
+    public MineEntity Warehouse { get; set; }
 }

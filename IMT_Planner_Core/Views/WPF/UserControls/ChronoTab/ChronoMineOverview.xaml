@@ -8,7 +8,25 @@
              xmlns:icons="clr-namespace:IMT_Planner.Views.WPF.Icons"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="600">
-
+    <UserControl.Resources>
+        <DataTemplate x:Key="CostTemplate">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Unlock Cost:" />
+                    <Label Content="{Binding OpeningCost}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Max Cost:" />
+                    <Label Content="{Binding MaxCost}" />
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="ElementTemplate">
+            <StackPanel Orientation="Horizontal" ToolTip="{Binding ElementName}">
+                <Image Source="{Binding ImagePath}" Width="24" Height="24" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -25,15 +43,30 @@
                     <Label Content="E" HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontSize="24"
                            FontWeight="Bold" />
-                    <icons:Elevator HorizontalAlignment="Left" HorizontalContentAlignment="Left"
-                                    VerticalAlignment="Center" />
+                    <Grid>
+                        <icons:Elevator HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                                        VerticalAlignment="Center" />
+                        <ContentControl Content="{Binding Elevator.Element}"
+                                        ContentTemplate="{StaticResource ElementTemplate}"
+                                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Margin="0,0,4,12" />
+                    </Grid>
+                    <ContentControl Content="{Binding Elevator}" ContentTemplate="{StaticResource CostTemplate}" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="32,32,0,0">
                     <Label Content="W" HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontSize="24"
                            FontWeight="Bold" />
-                    <icons:MinecartLoaded HorizontalAlignment="Center" HorizontalContentAlignment="Center"
-                                          VerticalAlignment="Center" />
+
+                    <Grid>
+                        <icons:MinecartLoaded HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        <ContentControl Content="{Binding Warehouse.Element}"
+                                        ContentTemplate="{StaticResource ElementTemplate}"
+                                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Margin="0,0,4,12" />
+                    </Grid>
+                    <ContentControl Content="{Binding Warehouse}" ContentTemplate="{StaticResource CostTemplate}" />
                 </StackPanel>
 
             </Grid>
@@ -52,10 +85,18 @@
                             <StackPanel Orientation="Horizontal" Margin="10">
                                 <!-- Left side: Minecart UserControl -->
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="{Binding }" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                           FontSize="24"
+                                    <Label Content="{Binding Number }" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="24" Width="40" HorizontalContentAlignment="Right"
                                            FontWeight="Bold" />
-                                    <icons:Minecart />
+                                    <Grid>
+                                        <icons:Minecart />
+                                        <ContentControl Content="{Binding Element}"
+                                                        ContentTemplate="{StaticResource ElementTemplate}"
+                                                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                        Margin="0,0,4,12" />
+                                    </Grid>
+                                    <ContentControl Content="{Binding}" ContentTemplate="{StaticResource CostTemplate}" />
                                 </StackPanel>
                                 <!-- Middle: Supermanager name and EffectivenessType -->
                                 <StackPanel Orientation="Vertical" Margin="10,0">
@@ -76,95 +117,11 @@
                                 <!-- Line Separator -->
 
                             </StackPanel>
-                            <Line X1="0" Y1="0" X2="300" Y2="0" Stroke="Black" StrokeThickness="1" Margin="10,0" />
+                            <Line X1="0" Y1="0" X2="500" Y2="0" Stroke="Black" StrokeThickness="1" Margin="10,0" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
     </Grid>
-    <!-- <Grid> -->
-    <!--     <Grid.RowDefinitions> -->
-    <!--         <RowDefinition Height="*"/> -->
-    <!--         <RowDefinition Height="*"/> -->
-    <!--         <RowDefinition Height="*"/> -->
-    <!--         <RowDefinition Height="*"/> -->
-    <!--     </Grid.RowDefinitions> -->
-    <!--     <Grid.ColumnDefinitions> -->
-    <!--         <ColumnDefinition Width="*"/> -->
-    <!--         <ColumnDefinition Width="*"/> -->
-    <!--         <ColumnDefinition Width="*"/> -->
-    <!--         <ColumnDefinition Width="*"/> -->
-    <!--     </Grid.ColumnDefinitions> -->
-    <!--      -->
-    <!--     <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Name="Elevator"> -->
-    <!--         <Label Content="Elevator"/> -->
-    <!--         <StackPanel Orientation="Horizontal"> -->
-    <!--             <Label MinWidth="100" Content="Element"></Label> -->
-    <!--             <Label MinWidth="100" Content="Fire"></Label> -->
-    <!--         </StackPanel> -->
-    <!--     </StackPanel> -->
-    <!--     <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Name="Warehouse"> -->
-    <!--         <Label Content="Warehouse"/> -->
-    <!--         <StackPanel Orientation="Horizontal"> -->
-    <!--             <Label MinWidth="100" Content="Element"></Label> -->
-    <!--             <Label MinWidth="100" Content="Fire"></Label> -->
-    <!--         </StackPanel> -->
-    <!--     </StackPanel> -->
-    <!--     <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="4"> -->
-    <!--         <DataGrid ItemsSource="{Binding MineShafts}" AutoGenerateColumns="False"> -->
-    <!--             <DataGrid.Columns> -->
-    <!--                 <DataGridTemplateColumn Header="Shaft Number"> -->
-    <!--                     <DataGridTemplateColumn.CellTemplate> -->
-    <!--                         <DataTemplate> -->
-    <!--                             <TextBlock Text="{Binding ShaftNumber}"/> -->
-    <!--                         </DataTemplate> -->
-    <!--                     </DataGridTemplateColumn.CellTemplate> -->
-    <!--                 </DataGridTemplateColumn> -->
-    <!--                  -->
-    <!--                 <DataGridTemplateColumn Header="Level"> -->
-    <!--                     <DataGridTemplateColumn.CellTemplate> -->
-    <!--                         <DataTemplate> -->
-    <!--                             <TextBlock Text="{Binding Level}"/> -->
-    <!--                         </DataTemplate> -->
-    <!--                     </DataGridTemplateColumn.CellTemplate> -->
-    <!--                 </DataGridTemplateColumn> -->
-    <!-- -->
-    <!--                 <DataGridTemplateColumn Header="Opening Cost"> -->
-    <!--                     <DataGridTemplateColumn.CellTemplate> -->
-    <!--                         <DataTemplate> -->
-    <!--                             <TextBlock Text="{Binding OpeningCost}"/> -->
-    <!--                         </DataTemplate> -->
-    <!--                     </DataGridTemplateColumn.CellTemplate> -->
-    <!--                 </DataGridTemplateColumn> -->
-    <!-- -->
-    <!--                 <DataGridTemplateColumn Header="Max Cost"> -->
-    <!--                     <DataGridTemplateColumn.CellTemplate> -->
-    <!--                         <DataTemplate> -->
-    <!--                             <TextBlock Text="{Binding MaxCost}"/> -->
-    <!--                         </DataTemplate> -->
-    <!--                     </DataGridTemplateColumn.CellTemplate> -->
-    <!--                 </DataGridTemplateColumn> -->
-    <!-- -->
-    <!--                 <DataGridTemplateColumn Header="Element"> -->
-    <!--                     <DataGridTemplateColumn.CellTemplate> -->
-    <!--                         <DataTemplate> -->
-    <!--                             ~1~ You may need to adapt this line to present your 'Element' object's properties correctly @1@ -->
-    <!--                             <TextBlock Text="{Binding Element.Name}"/> -->
-    <!--                         </DataTemplate> -->
-    <!--                     </DataGridTemplateColumn.CellTemplate> -->
-    <!--                 </DataGridTemplateColumn> -->
-    <!--                 <DataGridTemplateColumn Header="Assigned SM"> -->
-    <!--                     <DataGridTemplateColumn.CellTemplate> -->
-    <!--                         <DataTemplate> -->
-    <!--                             <TextBlock Text="{Binding AssignedSM.Abbreviation}"/> -->
-    <!--                         </DataTemplate> -->
-    <!--                     </DataGridTemplateColumn.CellTemplate> -->
-    <!--                 </DataGridTemplateColumn> -->
-    <!--             </DataGrid.Columns> -->
-    <!--         </DataGrid> -->
-    <!--     </StackPanel> -->
-    <!-- </Grid> -->
-
-
 </UserControl>
