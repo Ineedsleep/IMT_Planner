@@ -1,0 +1,55 @@
+<UserControl x:Class="IMT_Planner.Views.WPF.UserControls.ChronoTab.ElementAssignment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <DataTemplate x:Key="CustomComboBoxItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding ImagePath}" Width="24" Height="24" ToolTip="{Binding Name}" />
+                <TextBlock Text="{Binding Name}" Margin="5,0,0,0" VerticalAlignment="Center" />
+            </StackPanel>
+        </DataTemplate>
+        
+        <Style x:Key="CustomComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="SelectedIndex" 
+                    Value="{Binding SelectedIndex, Mode=TwoWay}" />
+            <Setter Property="SelectedItem" 
+                    Value="{Binding SelectedElement}" />
+            <Setter Property="ItemsSource" 
+                    Value="{Binding ElementCollection}" />
+            <Setter Property="ItemTemplate" Value="{StaticResource CustomComboBoxItemTemplate}" />
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Width" Value="54" />
+            <Setter Property="Height" Value="32" />
+        </Style>
+
+        <DataTemplate x:Key="ComboBoxWithLabelTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{Binding Name}" Width="36" VerticalAlignment="Center" />
+                <ComboBox Style="{StaticResource CustomComboBoxStyle}" HorizontalAlignment="Right"
+                          VerticalAlignment="Center" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <GroupBox Header="Element Assignment">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ItemsControl Grid.Column="1"  ItemsSource="{Binding Items}" ItemTemplate="{StaticResource ComboBoxWithLabelTemplate}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>      
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

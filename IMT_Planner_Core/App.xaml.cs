@@ -59,6 +59,7 @@ public partial class App : Application
         services.AddSingleton<FilterViewModel>();
         services.AddSingleton<ChronoMineEntityViewModel>();
         services.AddSingleton<SuperManagerAssignmentViewModel>();
+        services.AddSingleton<ElementAssignmentViewModel>();
         // Add other services or view models as needed.
         
         
