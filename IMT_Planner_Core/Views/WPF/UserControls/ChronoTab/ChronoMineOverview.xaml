@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls"
              xmlns:shapes="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shapes"
              xmlns:icons="clr-namespace:IMT_Planner.Views.WPF.Icons"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="600">
     <UserControl.Resources>
@@ -21,8 +22,13 @@
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
-        <DataTemplate x:Key="ElementTemplate">
+        <DataTemplate x:Key="ElementTemplateHorizontal">
             <StackPanel Orientation="Horizontal" ToolTip="{Binding ElementName}">
+                <Image Source="{Binding ImagePath}" Width="24" Height="24" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="ElementTemplateVertical">
+            <StackPanel Orientation="Vertical" ToolTip="{Binding ElementName}">
                 <Image Source="{Binding ImagePath}" Width="24" Height="24" />
             </StackPanel>
         </DataTemplate>
@@ -33,7 +39,7 @@
             <RowDefinition Height="48" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <StackPanel Grid.Row="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -44,14 +50,22 @@
                            FontSize="24"
                            FontWeight="Bold" />
                     <Grid>
-                        <icons:Elevator HorizontalAlignment="Left" HorizontalContentAlignment="Left"
-                                        VerticalAlignment="Center" />
+                        <Image Source="{Binding Elevator.ImageSource}" Width="48" Height="48" HorizontalAlignment="Left" 
+                               VerticalAlignment="Center" />
+                        <!-- <icons:Elevator HorizontalAlignment="Left" HorizontalContentAlignment="Left" -->
+                        <!--                 VerticalAlignment="Center" /> -->
                         <ContentControl Content="{Binding Elevator.Element}"
-                                        ContentTemplate="{StaticResource ElementTemplate}"
+                                        ContentTemplate="{StaticResource ElementTemplateVertical}"
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                                        Margin="0,0,4,12" />
+                                        Margin="0,8,8,0" />
                     </Grid>
                     <ContentControl Content="{Binding Elevator}" ContentTemplate="{StaticResource CostTemplate}" />
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="MouseLeftButtonUp">
+                            <b:InvokeCommandAction Command="{Binding DataContext.EntitySelectCommand, RelativeSource={RelativeSource AncestorType=StackPanel}}"
+                                                   CommandParameter="{Binding Elevator}" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="32,32,0,0">
                     <Label Content="W" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -59,18 +73,24 @@
                            FontWeight="Bold" />
 
                     <Grid>
-                        <icons:MinecartLoaded HorizontalAlignment="Center" HorizontalContentAlignment="Center"
-                                              VerticalAlignment="Center" />
+                        <Image Source="{Binding Warehouse.ImageSource}" Width="48" Height="48" HorizontalAlignment="Left" 
+                               VerticalAlignment="Center" />
                         <ContentControl Content="{Binding Warehouse.Element}"
-                                        ContentTemplate="{StaticResource ElementTemplate}"
+                                        ContentTemplate="{StaticResource ElementTemplateVertical}"
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                                        Margin="0,0,4,12" />
+                                        Margin="0,0,0,0" />
                     </Grid>
                     <ContentControl Content="{Binding Warehouse}" ContentTemplate="{StaticResource CostTemplate}" />
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="MouseLeftButtonUp">
+                            <b:InvokeCommandAction Command="{Binding DataContext.EntitySelectCommand, RelativeSource={RelativeSource AncestorType=StackPanel}}"
+                                                   CommandParameter="{Binding Warehouse}" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
                 </StackPanel>
 
             </Grid>
-        </Grid>
+        </StackPanel>
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Grid.Row="2">
             <ItemsControl ItemsSource="{Binding MineShaftCollection}">
@@ -90,11 +110,12 @@
                                            FontSize="24" Width="40" HorizontalContentAlignment="Right"
                                            FontWeight="Bold" />
                                     <Grid>
-                                        <icons:Minecart />
+                                        <Image Source="{Binding ImageSource}" Width="48" Height="48" HorizontalAlignment="Left" 
+                                               VerticalAlignment="Center" />
                                         <ContentControl Content="{Binding Element}"
-                                                        ContentTemplate="{StaticResource ElementTemplate}"
+                                                        ContentTemplate="{StaticResource ElementTemplateHorizontal}"
                                                         HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                        Margin="0,0,4,12" />
+                                                        Margin="16,24,0,0" />
                                     </Grid>
                                     <ContentControl Content="{Binding}" ContentTemplate="{StaticResource CostTemplate}" />
                                 </StackPanel>
@@ -118,6 +139,12 @@
 
                             </StackPanel>
                             <Line X1="0" Y1="0" X2="500" Y2="0" Stroke="Black" StrokeThickness="1" Margin="10,0" />
+                            <b:Interaction.Triggers>
+                                <b:EventTrigger EventName="MouseLeftButtonUp">
+                                    <b:InvokeCommandAction Command="{Binding DataContext.EntitySelectCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                           CommandParameter="{Binding}" />
+                                </b:EventTrigger>
+                            </b:Interaction.Triggers>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

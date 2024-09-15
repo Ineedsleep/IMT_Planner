@@ -90,5 +90,6 @@ public class MineEntityViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
-
+    
+    public string? ImageSource => $@"../../../../Resources/Sprites/General/{Area.ToString()}.png";
 }

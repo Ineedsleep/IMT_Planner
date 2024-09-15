@@ -47,6 +47,7 @@ public partial class App : Application
         // Register your services and ViewModels here
         services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerSelectionService>();
         services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerRepositoryService>();
+        services.AddSingleton<IMT_Planner_ViewModels.Services.ChronoSelectionService>();
         services.AddSingleton<IMT_Planner_DAL.CSVHandler>();
         
         
@@ -57,6 +58,7 @@ public partial class App : Application
         services.AddSingleton<SMElementalListViewModel>();
         services.AddSingleton<FilterViewModel>();
         services.AddSingleton<ChronoMineEntityViewModel>();
+        services.AddSingleton<SuperManagerAssignmentViewModel>();
         // Add other services or view models as needed.
         
         

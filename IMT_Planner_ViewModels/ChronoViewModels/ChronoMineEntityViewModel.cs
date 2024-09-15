@@ -1,21 +1,35 @@
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using IMT_Planner_Model;
 using IMT_Planner_ViewModels.GeneralViewModels;
+using IMT_Planner_ViewModels.Services;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 
 namespace IMT_Planner_ViewModels.ChronoViewModels;
 
 public class ChronoMineEntityViewModel : ObservableObject
 {
+    private readonly ChronoSelectionService _chronoSelectionService;
+ public ICommand EntitySelectCommand {get; private set;}
     public ObservableCollection<MineEntityViewModel> MineShaftCollection { get; set; } =
         new ObservableCollection<MineEntityViewModel>();
 
     public MineEntityViewModel Elevator { get; set; }
     public MineEntityViewModel Warehouse { get; set; }
 
-    public ChronoMineEntityViewModel()
+    public ChronoMineEntityViewModel(ChronoSelectionService chronoSelectionService)
     {
+        _chronoSelectionService = chronoSelectionService;
+        EntitySelectCommand = new RelayCommand<MineEntityViewModel>(EntitySelected);
         InitEntities();
+    }
+
+    private void EntitySelected(MineEntityViewModel entity)
+    {
+        Console.WriteLine($"Selected entity area: {entity.Area}");
+        Console.WriteLine($"Selected entity element: {entity.Element.ElementName}");
+        _chronoSelectionService.UpdateCollections(entity.Area, entity.Element.ElementName);
     }
 
     private void InitEntities()

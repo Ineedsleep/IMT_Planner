@@ -55,6 +55,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <!--Elements-->
       <None Remove="Resources\Elements\Nature.png" />
       <Resource Include="Resources\Elements\Nature.png" />
       <None Remove="Resources\Elements\Dark.png" />
@@ -71,7 +72,49 @@
       <Resource Include="Resources\Elements\Water.png" />
       <None Remove="Resources\Elements\Wind.png" />
       <Resource Include="Resources\Elements\Wind.png" />
+        <!--Elements End-->
       <None Remove="Resources\Lock.png" />
+        <!--SM-->
+      <None Remove="Resources\Sprites\Urca.png" />
+      <Resource Include="Resources\Sprites\General\BlueCrystal.png" />
+      <Resource Include="Resources\Sprites\General\Elevator.png" />
+      <Resource Include="Resources\Sprites\General\Mineshaft.png" />
+      <Resource Include="Resources\Sprites\General\RedCrystal.png" />
+      <Resource Include="Resources\Sprites\General\Warehouse.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\EricaQuill.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Ember.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\LordBeiroth.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\SamanthaReiss.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\SirLorenzo.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Urca.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Utux.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\DamianJones.png" />
+      <None Remove="Resources\Sprites\BlueCrystal.png" />
+      <None Remove="Resources\Sprites\SamanthaReiss.png" />
+      <None Remove="Resources\Sprites\Ember.png" />
+      <None Remove="Resources\Sprites\EricaQuill.png" />
+      <None Remove="Resources\Sprites\DamianJones.png" />
+      <None Remove="Resources\Sprites\LordBeiroth.png" />
+      <None Remove="Resources\Sprites\RedCrystal.png" />
+      <None Remove="Resources\Sprites\SirLorenzo.png" />
+      <None Remove="Resources\Sprites\Utux.png" />
+      <None Remove="Resources\Sprites\Elevator.png" />
+      <None Remove="Resources\Sprites\Mineshaft.png" />
+      <None Remove="Resources\Sprites\Warehouse.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\Asterion.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Asterion.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\Eternity.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Eternity.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\LunaStella.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\LunaandStella.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\Omnix.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Omnix.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\Poseidon.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Poseidon.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\ProfessorImpossible.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\ProfessorImpossible.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\SamReiss.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\SamReiss.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -79,6 +122,10 @@
       <Content Include="Resources\SM_Sheet_Default.csv">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\Sprites\SuperManagers\Common\" />
     </ItemGroup>
 
 </Project>

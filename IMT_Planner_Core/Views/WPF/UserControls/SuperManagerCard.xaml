@@ -13,156 +13,144 @@
         <converter:RarityToBackgroundConverter x:Key="RarityToBackgroundConverter" />
     </UserControl.Resources>
     <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1.5*" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-                                <TextBlock
-                                    Grid.ColumnSpan="2"
-                                    HorizontalAlignment="Center"
-                                    FontSize="16"
-                                    FontWeight="Bold" MaxWidth="100"
-                                    Text="{Binding Name}" />
+        <TextBlock
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            FontSize="16" TextWrapping="WrapWithOverflow"
+            FontWeight="Bold" MaxWidth="100"
+            Text="{Binding Name}" />
 
-                                <TextBlock
-                                    Grid.Row="1"
-                                    HorizontalAlignment="Left"
-                                    FontWeight="Bold"
-                                    Text="Rarity: " />
-                                <TextBlock
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    Text="{Binding Rarity}" />
+        <Grid Grid.Column="0" Grid.Row="2" Grid.RowSpan="3" Width="80" Height="80" VerticalAlignment="Center">
+            <Image Source="{Binding ImageSource}" Stretch="Uniform" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+        <!-- <TextBlock -->
+        <!--     Grid.Row="2" -->
+        <!--     Grid.Column="1" -->
+        <!--     HorizontalAlignment="Right" -->
+        <!--     Text="{Binding Area}" /> -->
+<Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" ToolTip="{Binding Area}" Height="28" Width="28" VerticalAlignment="Top" HorizontalAlignment="Right" Source="{Binding AreaSource}"></Image>
+        <TextBlock
+            Grid.Row="3" Grid.Column="1"
+            HorizontalAlignment="Left"
+            FontWeight="Bold"
+            Text="Rank: " />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            Text="{Binding CurrentRank, UpdateSourceTrigger=PropertyChanged}" />
 
-                                <TextBlock
-                                    Grid.Row="2"
-                                    HorizontalAlignment="Left"
-                                    FontWeight="Bold"
-                                    Text="Area: " />
-                                <TextBlock
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    Text="{Binding Area}" />
+        <TextBlock
+            Grid.Row="4" Grid.Column="1"
+            HorizontalAlignment="Left"
+            FontWeight="Bold"
+            Text="Level: " />
+        <TextBlock
+            Grid.Row="4"
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            Text="{Binding Level}" />
 
-                                <TextBlock
-                                    Grid.Row="3"
-                                    HorizontalAlignment="Left"
-                                    FontWeight="Bold"
-                                    Text="Rank: " />
-                                <TextBlock
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    Text="{Binding CurrentRank, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Column="1"
+                   Grid.Row="5"
+                   HorizontalAlignment="Left"
+                   FontWeight="Bold"
+                   Text="Promoted: " />
+        <TextBlock
+            Grid.Row="5"
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            Text="{Binding Promoted}" />
+        <Grid Grid.Row="6" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-                                <TextBlock
-                                    Grid.Row="4"
-                                    HorizontalAlignment="Left"
-                                    FontWeight="Bold"
-                                    Text="Level: " />
-                                <TextBlock
-                                    Grid.Row="4"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    Text="{Binding Level}" />
+            <Label Grid.Column="0" Content="SE" FontSize="16" FontStyle="Oblique"
+                   VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <ItemsControl Grid.Column="1" ItemsSource="{Binding SEElements}"
+                          HorizontalAlignment="Right">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image Width="24" Height="24" Source="{Binding ImagePath}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
 
-                                <TextBlock
-                                    Grid.Row="5"
-                                    HorizontalAlignment="Left"
-                                    FontWeight="Bold"
-                                    Text="Promoted: " />
-                                <TextBlock
-                                    Grid.Row="5"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    Text="{Binding Promoted}" />
-                                <Grid Grid.Row="6" Grid.ColumnSpan="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
+        <Grid Grid.Row="7" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0" Content="SE" FontSize="16" FontStyle="Oblique"
-                                           VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <ItemsControl Grid.Column="1" ItemsSource="{Binding SEElements}"
-                                                  HorizontalAlignment="Right">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Orientation="Horizontal" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Image Width="24" Height="24" Source="{Binding ImagePath}" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </Grid>
+            <Label Grid.Column="0" Content="PE" FontSize="16" FontStyle="Oblique"
+                   VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <ItemsControl Grid.Column="1" ItemsSource="{Binding PEElements}"
+                          HorizontalAlignment="Right">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image Width="24" Height="24" Source="{Binding ImagePath}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
 
-                                <Grid Grid.Row="7" Grid.ColumnSpan="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="3*" />
-                                    </Grid.ColumnDefinitions>
+        <Grid Grid.Row="8" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0" Content="PE" FontSize="16" FontStyle="Oblique"
-                                           VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <ItemsControl Grid.Column="1" ItemsSource="{Binding PEElements}"
-                                                  HorizontalAlignment="Right">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Orientation="Horizontal" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Image Width="24" Height="24" Source="{Binding ImagePath}" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </Grid>
-
-                                <Grid Grid.Row="8" Grid.ColumnSpan="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Column="0" Content="NVE" FontSize="16" FontStyle="Oblique"
-                                           VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <ItemsControl Grid.Column="1" ItemsSource="{Binding NVEElements}"
-                                                  HorizontalAlignment="Right">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Orientation="Horizontal" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Image Width="24" Height="24" Source="{Binding ImagePath}" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </Grid>
-                            </Grid>
+            <Label Grid.Column="0" Content="NVE" FontSize="16" FontStyle="Oblique"
+                   VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <ItemsControl Grid.Column="1" ItemsSource="{Binding NVEElements}"
+                          HorizontalAlignment="Right">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image Width="24" Height="24" Source="{Binding ImagePath}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
 </UserControl>

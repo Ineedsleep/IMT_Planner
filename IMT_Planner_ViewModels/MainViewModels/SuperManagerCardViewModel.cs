@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using IMT_Planner_Model;
 using IMT_Planner_ViewModels.GeneralViewModels;
 using IMT_Planner_ViewModels.Services;
@@ -53,6 +54,15 @@ public class SuperManagerCardViewModel : ObservableObject
             }
         }
     }
+    
+    public string? ImageSource
+    { 
+        get
+        {
+            var cleanName = Regex.Replace(_superManager.Name, @"[^A-Za-z0-9]", "");
+            return $@"../../../Resources/Sprites/SuperManagers/{_superManager.Rarity}/{cleanName}.png";
+        }
+    }
 
     public Rarity Rarity
     {
@@ -79,7 +89,8 @@ public class SuperManagerCardViewModel : ObservableObject
             }
         }
     }
-    
+    public string? AreaSource => $@"../../../Resources/Sprites/General/{_superManager.Area.ToString()}.png";
+
     public int CurrentRank
     {
         get => SuperManager.Rank.CurrentRank;

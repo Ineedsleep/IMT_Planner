@@ -56,7 +56,14 @@ public class SuperManagerSelectionService
 
     public ObservableCollection<SuperManagerCardViewModel> SuperManagerCollection
     {
-        get => AdjustFilter(_superManagerCollection);
+        get
+        {
+            _superManagerCollection = AdjustFilter(_superManagerCollection);
+            if(_superManagerCollection.Count == 0)
+                return _superManagerCollection;
+            _superManagerCollection = SortCollection(_superManagerCollection);
+            return _superManagerCollection;
+        }
         set
         {
             _superManagerCollection = value;
@@ -229,14 +236,7 @@ public class SuperManagerSelectionService
     private void NotifySuperManagerCardUpdate() => SuperManagerCardUpdated?.Invoke();
     private void NotifyElementsUpdate() => ElementsChanged?.Invoke();
     private void NotifyFilterUpdate() => FilterChanged?.Invoke();
-
-    // Add methods to manipulate the model here. 
-    // For example, suppose SuperManager has a method to update its status
-    public void UpdateName(string newName)
-    {
-        CurrentSuperManager.Name = newName;
-    }
-
+    
     public void UpdateCard(SuperManager superManager)
     {
         var targetVM = _superManagerCollection.SingleOrDefault(vm => vm.SuperManager == superManager);
@@ -294,7 +294,26 @@ public class SuperManagerSelectionService
                 SuperManagerCollection.Add(smv);
             }
         }
+
         NotifyFilterUpdate();
+    }
+
+    public ObservableCollection<SuperManagerCardViewModel> SortCollection(
+        ObservableCollection<SuperManagerCardViewModel> collection)
+    {
+        var tmp = collection.ToList();
+     
+        tmp = tmp
+            .OrderBy(x => x.Rarity)
+            .ThenBy(x => x.Unlocked)
+            .ToList();
+        tmp = tmp
+            .OrderBy(sm => sm.Unlocked == false)
+            .ThenByDescending(sm => sm.Rarity)
+            .ToList();
+      ObservableCollection<SuperManagerCardViewModel> result = new ObservableCollection<SuperManagerCardViewModel>(tmp);
+ 
+        return result;
     }
 
     public IOrderedEnumerable<string> GetAllTags()
@@ -304,7 +323,8 @@ public class SuperManagerSelectionService
         {
             tags.AddRange(smvm.Tags);
         }
-       var  result = tags.Distinct().OrderBy(tag => tag);
-       return result;
+
+        var result = tags.Distinct().OrderBy(tag => tag);
+        return result;
     }
 }
