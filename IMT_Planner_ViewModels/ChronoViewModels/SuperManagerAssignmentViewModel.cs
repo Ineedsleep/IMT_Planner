@@ -24,6 +24,7 @@ public class SuperManagerAssignmentViewModel : ObservableObject
       OnPropertyChanged(nameof(SuperManagerSECollection));
       OnPropertyChanged(nameof(SuperManagerPECollection));
       OnPropertyChanged(nameof(SuperManagerNVECollection));
+      OnPropertyChanged(nameof(IsFilled));
     }
 
     public ObservableCollection<SuperManagerCardViewModel> SuperManagerSECollection
@@ -57,6 +58,9 @@ public class SuperManagerAssignmentViewModel : ObservableObject
         {
             _chronoSelectionService.UnlockedNVESuperManagerCards = value;
             OnPropertyChanged();
+            
         }
     }
+
+    public bool IsFilled => SuperManagerPECollection.Any();
 }

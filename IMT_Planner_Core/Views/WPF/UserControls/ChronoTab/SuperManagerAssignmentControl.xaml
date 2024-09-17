@@ -63,9 +63,11 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" FontSize="20" FontWeight="Bold" Content="SE List" Margin="0,0,0,16" />
+                    <Label Grid.Row="0" FontSize="20" FontWeight="Bold" Content="SE List" Margin="0,0,0,16"
+                           Visibility="{Binding IsFilled, 
+                                                Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" />
                     <Border Grid.Row="1" Margin="10" BorderThickness="1">
-                        <ItemsControl x:Name="ItemsControlSuperManager1"
+                        <ItemsControl 
                                       ItemsSource="{Binding SuperManagerSECollection}"
                                       ItemTemplate="{StaticResource SuperManagerTemplate}">
                             <ItemsControl.ItemsPanel>
@@ -82,9 +84,12 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" FontSize="20" FontWeight="Bold" Content="PE List" Margin="0,0,0,16" />
+                    <Label Grid.Row="0" FontSize="20" FontWeight="Bold" Content="PE List" Margin="0,0,0,16"
+                           Visibility="{Binding IsFilled, 
+                                                Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" />
+                         
                     <Border Grid.Row="1" Margin="10" BorderThickness="1">
-                        <ItemsControl x:Name="ItemsControlSuperManager2"
+                        <ItemsControl 
                                       ItemsSource="{Binding SuperManagerPECollection}"
                                       ItemTemplate="{StaticResource SuperManagerTemplate}">
                             <ItemsControl.ItemsPanel>
@@ -101,9 +106,12 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" FontSize="20" FontWeight="Bold" Content="NVE List" Margin="0,0,0,16" />
+                    <Label Grid.Row="0" FontSize="20" FontWeight="Bold" Content="NVE List"   
+                           Visibility="{Binding IsFilled, 
+                                                Converter={StaticResource BooleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}" 
+                           Margin="0,0,0,16" />
                     <Border Grid.Row="1" Margin="10" BorderThickness="1">
-                        <ItemsControl x:Name="ItemsControlSuperManager3"
+                        <ItemsControl
                                       ItemsSource="{Binding SuperManagerNVECollection}"
                                       ItemTemplate="{StaticResource SuperManagerTemplate}">
                             <ItemsControl.ItemsPanel>
