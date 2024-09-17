@@ -57,6 +57,19 @@ public class MineEntityViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
+    public string AreaShortCut
+    {
+        get
+        {
+            switch (MineEntity.Area)
+            {
+                case Areas.Mineshaft: return $"MS {Number}:";
+                case Areas.Elevator: return "E:";
+                case Areas.Warehouse: return "W:";
+                default: return "";
+            }
+        }
+    }
 
     public SuperManager AssignedSuperManager
     {
@@ -90,5 +103,6 @@ public class MineEntityViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
-
+    
+    public string? ImageSource => $@"../../../../Resources/Sprites/General/{Area.ToString()}.png";
 }

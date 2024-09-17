@@ -60,14 +60,14 @@
                     Margin="10,0,0,0" />
             </StackPanel>
             <!-- <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/> -->
-            <GroupBox Header="Area">
-                <ComboBox ItemsSource="{Binding Areas}"
-                          SelectedItem="{Binding Area, UpdateSourceTrigger=PropertyChanged}" />
-            </GroupBox>
-            <GroupBox Header="Rarity">
-                <ComboBox ItemsSource="{Binding Rarities}"
-                          SelectedItem="{Binding Rarity, UpdateSourceTrigger=PropertyChanged}" />
-            </GroupBox>
+            <!-- <GroupBox Header="Area"> -->
+            <!--     <ComboBox ItemsSource="{Binding Areas}" -->
+            <!--               SelectedItem="{Binding Area, UpdateSourceTrigger=PropertyChanged}" /> -->
+            <!-- </GroupBox> -->
+            <!-- <GroupBox Header="Rarity"> -->
+            <!--     <ComboBox ItemsSource="{Binding Rarities}" -->
+            <!--               SelectedItem="{Binding Rarity, UpdateSourceTrigger=PropertyChanged}" /> -->
+            <!-- </GroupBox> -->
             <GroupBox Header="Level">
                 <TextBox>
                     <TextBox.Text>

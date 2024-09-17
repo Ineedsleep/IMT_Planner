@@ -88,7 +88,7 @@ public class CardFilterModel
                                                                && x.RankRequirement <= manager.Rank.CurrentRank));
         }
         
-        if (Tags != null && Tags.Select(x => x.Active == true).Any())
+        if (Tags != null && Tags.Any(x => x.Active == true))
         {
             predicate = predicate.And(sm => sm.Tags
                 .Split(";",StringSplitOptions.RemoveEmptyEntries)

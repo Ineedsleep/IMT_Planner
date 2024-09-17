@@ -42,6 +42,11 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+      <Page Update="Views\WPF\UserControls\ChronoTab\ElementAssignment.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
     <ItemGroup>
@@ -55,6 +60,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <!--Elements-->
       <None Remove="Resources\Elements\Nature.png" />
       <Resource Include="Resources\Elements\Nature.png" />
       <None Remove="Resources\Elements\Dark.png" />
@@ -71,7 +77,170 @@
       <Resource Include="Resources\Elements\Water.png" />
       <None Remove="Resources\Elements\Wind.png" />
       <Resource Include="Resources\Elements\Wind.png" />
+        <!--Elements End-->
       <None Remove="Resources\Lock.png" />
+        <!--SM-->
+      <None Remove="Resources\Sprites\Urca.png" />
+      <Resource Include="Resources\Sprites\General\BlueCrystal.png" />
+      <Resource Include="Resources\Sprites\General\Elevator.png" />
+      <Resource Include="Resources\Sprites\General\Mineshaft.png" />
+      <Resource Include="Resources\Sprites\General\RedCrystal.png" />
+      <Resource Include="Resources\Sprites\General\Warehouse.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\EricaQuill.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Ember.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\LordBeiroth.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\SamanthaReiss.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\SirLorenzo.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Urca.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Utux.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\DamianJones.png" />
+      <None Remove="Resources\Sprites\BlueCrystal.png" />
+      <None Remove="Resources\Sprites\SamanthaReiss.png" />
+      <None Remove="Resources\Sprites\Ember.png" />
+      <None Remove="Resources\Sprites\EricaQuill.png" />
+      <None Remove="Resources\Sprites\DamianJones.png" />
+      <None Remove="Resources\Sprites\LordBeiroth.png" />
+      <None Remove="Resources\Sprites\RedCrystal.png" />
+      <None Remove="Resources\Sprites\SirLorenzo.png" />
+      <None Remove="Resources\Sprites\Utux.png" />
+      <None Remove="Resources\Sprites\Elevator.png" />
+      <None Remove="Resources\Sprites\Mineshaft.png" />
+      <None Remove="Resources\Sprites\Warehouse.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\Asterion.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Asterion.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\Eternity.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Eternity.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\LunaStella.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\LunaandStella.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\Omnix.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Omnix.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\Poseidon.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\Poseidon.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\ProfessorImpossible.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\ProfessorImpossible.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Legendary\SamReiss.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Legendary\SamReiss.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Common\Chester.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Common\Chester.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Common\GoodmanJr.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Common\GoodmanJr.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Common\Gordon.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Common\Gordon.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Common\LeeVatori.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Common\LeeVatori.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Common\Mark.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Common\Mark.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Common\MrGoodman.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Common\MrGoodman.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Common\MrsGoodman.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Common\MrsGoodman.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\AbeoMeremikwu.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\AbeoMeremikwu.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Krampus.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Krampus.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Rayman.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Rayman.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Rbit.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Rbit.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\1DL3.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\1DL3.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\AlTitude.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\AlTitude.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\Blingsley.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\Blingsley.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\ChrisCapella.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\ChrisCapella.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\Jeff.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\Jeff.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\MrTurner.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\MrTurner.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\RangerSue.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\RangerSue.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\SirHenry.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\SirHenry.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\Sojo.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\Sojo.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\Zi.JPEG" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\Zi.JPEG" />
+      <None Remove="Resources\Sprites\SuperManagers\Rare\ZiGalvani.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Rare\ZiGalvani.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Afi.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Afi.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Amora.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Amora.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Beiro.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Beiro.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\CliffWalker.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\CliffWalker.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\DaveRiptide.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\DaveRiptide.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\DrLilly.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\DrLilly.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\DrNova.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\DrNova.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\DrSteiner.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\DrSteiner.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\EzioAuditore.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\EzioAuditore.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\FloatingAgatha.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\FloatingAgatha.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Freesia.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Freesia.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Glimmer.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Glimmer.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\GreenIdler.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\GreenIdler.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Jackal.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Jackal.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\JadeKim.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\JadeKim.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\LavenderWick.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\LavenderWick.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Luxario.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Luxario.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\MadEyeDrake.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\MadEyeDrake.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Marrena.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Marrena.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\MayaGelata.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\MayaGelata.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\MelodyRivers.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\MelodyRivers.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\OctaviaDeVere.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\OctaviaDeVere.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\OresamaDaichi.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\OresamaDaichi.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Pebble.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Pebble.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\PhineasCogsmith.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\PhineasCogsmith.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\ProfessorMaple.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\ProfessorMaple.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\QueenAurora.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\QueenAurora.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\RabbitBlingsley.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\RabbitBlingsley.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\RayRift.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\RayRift.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\SamFisher.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\SamFisher.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\SantaClaus.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\SantaClaus.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Thalia.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Thalia.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\UlaGalvani.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\UlaGalvani.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Untitled.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\VioletEvergreen.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\VioletEvergreen.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\WolfgangClawson.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\WolfgangClawson.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Zephyria.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Zephyria.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Zoe365.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Zoe365.png" />
+      <None Remove="Resources\Sprites\SuperManagers\Epic\Santa2020.png" />
+      <Resource Include="Resources\Sprites\SuperManagers\Epic\Santa2020.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -79,6 +248,10 @@
       <Content Include="Resources\SM_Sheet_Default.csv">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\Sprites\SuperManagers\Common\" />
     </ItemGroup>
 
 </Project>
