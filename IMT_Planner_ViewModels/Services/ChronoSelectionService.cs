@@ -1,13 +1,16 @@
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Xml.Linq;
 using IMT_Planner_Model;
+using IMT_Planner_ViewModels.GeneralViewModels;
 using IMT_Planner_ViewModels.MainViewModels;
 
 namespace IMT_Planner_ViewModels.Services;
 
 public class ChronoSelectionService
 {
-    public ObservableCollection<SuperManagerCardViewModel> UnlockedSuperManagerCards { get; set; } =
+    public ObservableCollection<SuperManagerCardViewModel> _unlockedSuperManagerCards =
         new ObservableCollection<SuperManagerCardViewModel>();
 
     public ObservableCollection<SuperManagerCardViewModel> UnlockedSESuperManagerCards { get; set; } =
@@ -16,14 +19,72 @@ public class ChronoSelectionService
         new ObservableCollection<SuperManagerCardViewModel>();
     public ObservableCollection<SuperManagerCardViewModel> UnlockedNVESuperManagerCards { get; set; } =
         new ObservableCollection<SuperManagerCardViewModel>();
-    private List<SuperManagerCardViewModel> _backupCollection { get; set; }
+    
+    public ObservableCollection<MineEntityViewModel> MineShaftCollection { get; set; } =
+        new ObservableCollection<MineEntityViewModel>();
+    public ObservableCollection<ElementViewModel> ElementCollection { get; set; } =
+    new ObservableCollection<ElementViewModel>();
+    public MineEntityViewModel Elevator { get; set; }
+    public MineEntityViewModel Warehouse { get; set; }
+    
     public event Action EntityChanged;
     private void NotifySuperManagerCardUpdate() => EntityChanged?.Invoke();
 
     public ChronoSelectionService()
     {
+    
+        MineShaftCollection.CollectionChanged += MineShaftCollection_CollectionChanged;
+    }
+    
+    private void MineShaftCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        switch (e.Action)
+        {
+            case NotifyCollectionChangedAction.Add:
+                foreach (MineEntityViewModel item in e.NewItems)
+                {
+                    // Handle new items
+                    if(item.Number < 7)
+                    SubscribeToItemChanges(item);
+                }
+                break;
+
+            case NotifyCollectionChangedAction.Remove:
+                foreach (MineEntityViewModel item in e.OldItems)
+                {
+                    // Handle removed items
+                    UnsubscribeFromItemChanges(item);
+                }
+                break;
+
+            // Handle other actions as needed (e.g., Replace, Move, Reset)
+
+            default:
+                break;
+        }
+    }
+    
+    private void SubscribeToItemChanges(MineEntityViewModel item)
+    {
+        item.PropertyChanged += Item_PropertyChanged;
     }
 
+    private void UnsubscribeFromItemChanges(MineEntityViewModel item)
+    {
+        item.PropertyChanged -= Item_PropertyChanged;
+    }
+
+    private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        var item = sender as MineEntityViewModel;
+        var element = item.Element;
+        for (int i = item.Number + 5; i < MineShaftCollection.Count;i = i + 6)
+        {
+            MineShaftCollection.ElementAt(i).Element = element;
+        }
+        // Handle property changes for individual items
+        // For example, update related items if certain properties change
+    }
     public void UpdateCollections(Areas entityArea, string elementElementName)
     {
         // Clear the existing collection
@@ -31,7 +92,7 @@ public class ChronoSelectionService
         UnlockedPESuperManagerCards.Clear();
         UnlockedNVESuperManagerCards.Clear();
         // Filter the backup collection based on the given area and element name
-        var filteredSuperManagers = _backupCollection
+        var filteredSuperManagers = _unlockedSuperManagerCards
             .Where(sm => sm.Area == entityArea)
             .ToList();
 
@@ -48,14 +109,38 @@ public class ChronoSelectionService
 
         NotifySuperManagerCardUpdate();
     }
+    public void InitEntities()
+    {
+        for (int i = 0; i < 50; i++)
+        {
+            MineEntityViewModel mineEntity = new MineEntityViewModel(new MineEntity())
+            {
+                Number = i + 1, Area = Areas.Mineshaft, OpeningCost = 0, MaxCost = 1000,
+                Element = 
+                    new ElementViewModel(new Element() { Name = $"Flame" })
+            };
+            MineShaftCollection.Add(mineEntity);
+        }
 
+        Elevator = new MineEntityViewModel(new MineEntity())
+        {
+            Area = Areas.Elevator, OpeningCost = 0, MaxCost = 101,
+            Element = 
+                new ElementViewModel(new Element() { Name = $"Nature" })
+        };
+        Warehouse = new MineEntityViewModel(new MineEntity())
+        {
+            Area = Areas.Warehouse, OpeningCost = 0, MaxCost = 102,
+            Element = 
+                new ElementViewModel(new Element() { Name = $"Water" })
+        };
+        
+    }
     public void CreateChronoSmList(ICollection<SuperManagerCardViewModel> collection)
     {
         foreach (var sm in collection.Where(x => x.Unlocked).ToList())
         {
-            UnlockedSuperManagerCards.Add(sm);
+            _unlockedSuperManagerCards.Add(sm);
         }
-
-        _backupCollection = UnlockedSuperManagerCards.ToList();
     }
 }

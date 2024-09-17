@@ -16,11 +16,12 @@
         
         <Style x:Key="CustomComboBoxStyle" TargetType="{x:Type ComboBox}">
             <Setter Property="SelectedIndex" 
-                    Value="{Binding SelectedIndex, Mode=TwoWay}" />
+                    Value="{Binding SelectedIndex, Mode=TwoWay, FallbackValue=0}" />
             <Setter Property="SelectedItem" 
-                    Value="{Binding SelectedElement}" />
+                    Value="{Binding Element}" />
             <Setter Property="ItemsSource" 
-                    Value="{Binding ElementCollection}" />
+                    Value="{Binding Path=DataContext.ElementCollection, 
+                        RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
             <Setter Property="ItemTemplate" Value="{StaticResource CustomComboBoxItemTemplate}" />
             <Setter Property="Margin" Value="8" />
             <Setter Property="Width" Value="54" />
@@ -29,7 +30,7 @@
 
         <DataTemplate x:Key="ComboBoxWithLabelTemplate">
             <StackPanel Orientation="Horizontal">
-                <Label Content="{Binding Name}" Width="36" VerticalAlignment="Center" />
+                <Label Content="{Binding AreaShortCut}" Width="36" VerticalAlignment="Center" />
                 <ComboBox Style="{StaticResource CustomComboBoxStyle}" HorizontalAlignment="Right"
                           VerticalAlignment="Center" />
             </StackPanel>
