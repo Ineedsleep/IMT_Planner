@@ -26,7 +26,8 @@ public class ChronoSelectionService
     new ObservableCollection<ElementViewModel>();
     public MineEntityViewModel Elevator { get; set; }
     public MineEntityViewModel Warehouse { get; set; }
-    
+    public int SelectedPattern { get; set; } = 6;
+
     public event Action EntityChanged;
     private void NotifySuperManagerCardUpdate() => EntityChanged?.Invoke();
 
@@ -36,55 +37,7 @@ public class ChronoSelectionService
         MineShaftCollection.CollectionChanged += MineShaftCollection_CollectionChanged;
     }
     
-    private void MineShaftCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        switch (e.Action)
-        {
-            case NotifyCollectionChangedAction.Add:
-                foreach (MineEntityViewModel item in e.NewItems)
-                {
-                    // Handle new items
-                    if(item.Number < 7)
-                    SubscribeToItemChanges(item);
-                }
-                break;
-
-            case NotifyCollectionChangedAction.Remove:
-                foreach (MineEntityViewModel item in e.OldItems)
-                {
-                    // Handle removed items
-                    UnsubscribeFromItemChanges(item);
-                }
-                break;
-
-            // Handle other actions as needed (e.g., Replace, Move, Reset)
-
-            default:
-                break;
-        }
-    }
     
-    private void SubscribeToItemChanges(MineEntityViewModel item)
-    {
-        item.PropertyChanged += Item_PropertyChanged;
-    }
-
-    private void UnsubscribeFromItemChanges(MineEntityViewModel item)
-    {
-        item.PropertyChanged -= Item_PropertyChanged;
-    }
-
-    private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
-    {
-        var item = sender as MineEntityViewModel;
-        var element = item.Element;
-        for (int i = item.Number + 5; i < MineShaftCollection.Count;i = i + 6)
-        {
-            MineShaftCollection.ElementAt(i).Element = element;
-        }
-        // Handle property changes for individual items
-        // For example, update related items if certain properties change
-    }
     public void UpdateCollections(Areas entityArea, string elementElementName)
     {
         // Clear the existing collection
@@ -142,5 +95,57 @@ public class ChronoSelectionService
         {
             _unlockedSuperManagerCards.Add(sm);
         }
+    }
+    
+    
+    private void MineShaftCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        switch (e.Action)
+        {
+            case NotifyCollectionChangedAction.Add:
+                foreach (MineEntityViewModel item in e.NewItems)
+                {
+                    // Handle new items
+                    if(item.Number < 9)
+                        SubscribeToItemChanges(item);
+                }
+                break;
+
+            case NotifyCollectionChangedAction.Remove:
+                foreach (MineEntityViewModel item in e.OldItems)
+                {
+                    // Handle removed items
+                    UnsubscribeFromItemChanges(item);
+                }
+                break;
+
+            // Handle other actions as needed (e.g., Replace, Move, Reset)
+
+            default:
+                break;
+        }
+    }
+    
+    private void SubscribeToItemChanges(MineEntityViewModel item)
+    {
+        item.PropertyChanged += Item_PropertyChanged;
+    }
+
+    private void UnsubscribeFromItemChanges(MineEntityViewModel item)
+    {
+        item.PropertyChanged -= Item_PropertyChanged;
+    }
+
+    private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        var item = sender as MineEntityViewModel;
+        var element = item.Element;
+        //pattern -1 other is pattern
+        for (int i = item.Number + SelectedPattern-1; i < MineShaftCollection.Count;i = i + SelectedPattern)
+        {
+            MineShaftCollection.ElementAt(i).Element = element;
+        }
+        // Handle property changes for individual items
+        // For example, update related items if certain properties change
     }
 }

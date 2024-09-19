@@ -29,8 +29,6 @@ public class SuperManagerAssignmentViewModel : ObservableObject
 
     public ObservableCollection<SuperManagerCardViewModel> SuperManagerSECollection
     {
-        //ToDo: complete list of managers, need to be filtered so only SE from current clicked element are displayed 
-        //Filter area and element and unlocked
         get => _chronoSelectionService.UnlockedSESuperManagerCards;
         set
         {
@@ -40,8 +38,6 @@ public class SuperManagerAssignmentViewModel : ObservableObject
     }
     public ObservableCollection<SuperManagerCardViewModel> SuperManagerPECollection
     {
-        //ToDo: complete list of managers, need to be filtered so only SE from current clicked element are displayed 
-        //Filter area and element and unlocked
         get => _chronoSelectionService.UnlockedPESuperManagerCards;
         set
         {
@@ -51,8 +47,6 @@ public class SuperManagerAssignmentViewModel : ObservableObject
     }
     public ObservableCollection<SuperManagerCardViewModel> SuperManagerNVECollection
     {
-        //ToDo: complete list of managers, need to be filtered so only SE from current clicked element are displayed 
-        //Filter area and element and unlocked
         get => _chronoSelectionService.UnlockedNVESuperManagerCards;
         set
         {
@@ -63,4 +57,5 @@ public class SuperManagerAssignmentViewModel : ObservableObject
     }
 
     public bool IsFilled => SuperManagerPECollection.Any();
+    
 }
