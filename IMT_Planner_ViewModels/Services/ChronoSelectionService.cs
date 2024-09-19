@@ -52,9 +52,9 @@ public class ChronoSelectionService
         // Add the filtered super managers to the unlocked collection
         foreach (var sm in filteredSuperManagers)
         {
-            if (sm.SEElements.Any(x => x.EffectivenessType == "SE" && x.Name == elementElementName))
+            if (sm.SEElements.Any(x => x.EffectivenessType == "SE" && x.Name == elementElementName && x.Element.RankRequirement <= sm.CurrentRank))
                 UnlockedSESuperManagerCards.Add(sm);
-            else if (sm.PEElements.Any(x => x.EffectivenessType == "PE" && x.Name == elementElementName))
+            else if (sm.PEElements.Any(x => x.EffectivenessType == "PE" && x.Name == elementElementName ||  (x.EffectivenessType == "SE" && x.Name == elementElementName && x.Element.RankRequirement >= sm.CurrentRank)))
                 UnlockedPESuperManagerCards.Add(sm);
             else
                 UnlockedNVESuperManagerCards.Add(sm);
