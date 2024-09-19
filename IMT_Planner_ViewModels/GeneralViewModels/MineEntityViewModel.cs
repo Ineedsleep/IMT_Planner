@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using IMT_Planner_Model;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 
@@ -79,9 +80,22 @@ public class MineEntityViewModel : ObservableObject
             if (Equals(value,  MineEntity.AssignedSM)) return;
             MineEntity.AssignedSM = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(AssignedSuperManagerImageSource));
         }
     }
+    public string? AssignedSuperManagerImageSource
+    { 
+        get
+        {
+            if (AssignedSuperManager != null)
+            {
+                var cleanName = Regex.Replace(AssignedSuperManager.Name, @"[^A-Za-z0-9]", "");
+                return $@"../../../../Resources/Sprites/SuperManagers/{AssignedSuperManager.Rarity}/{cleanName}.png";
+            }
 
+            return $@"../../../../Resources/Sprites/SuperManagers/Epic/RabbitBlingsley.png";
+        }
+    }
     public double MaxCost
     {
         get =>  MineEntity.MaxCost;

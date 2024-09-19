@@ -50,7 +50,8 @@
                            FontSize="24"
                            FontWeight="Bold" />
                     <Grid>
-                        <Image Source="{Binding Elevator.ImageSource}" Width="48" Height="48" HorizontalAlignment="Left" 
+                        <Image Source="{Binding Elevator.ImageSource}" Width="48" Height="48"
+                               HorizontalAlignment="Left"
                                VerticalAlignment="Center" />
                         <!-- <icons:Elevator HorizontalAlignment="Left" HorizontalContentAlignment="Left" -->
                         <!--                 VerticalAlignment="Center" /> -->
@@ -59,11 +60,17 @@
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
                                         Margin="0,8,8,0" />
                     </Grid>
-                    <ContentControl Content="{Binding Elevator}" ContentTemplate="{StaticResource CostTemplate}" />
+                    <Grid  Width="70" Height="70" VerticalAlignment="Center">
+                        <Image Source="{Binding  Elevator.AssignedSuperManagerImageSource}" Stretch="Uniform"
+                               HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </Image>
+                    </Grid>
+                    <!-- <ContentControl Content="{Binding Elevator}" ContentTemplate="{StaticResource CostTemplate}" /> -->
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="MouseLeftButtonUp">
-                            <b:InvokeCommandAction Command="{Binding DataContext.EntitySelectCommand, RelativeSource={RelativeSource AncestorType=StackPanel}}"
-                                                   CommandParameter="{Binding Elevator}" />
+                            <b:InvokeCommandAction
+                                Command="{Binding DataContext.EntitySelectCommand, RelativeSource={RelativeSource AncestorType=StackPanel}}"
+                                CommandParameter="{Binding Elevator}" />
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </StackPanel>
@@ -73,18 +80,25 @@
                            FontWeight="Bold" />
 
                     <Grid>
-                        <Image Source="{Binding Warehouse.ImageSource}" Width="48" Height="48" HorizontalAlignment="Left" 
+                        <Image Source="{Binding Warehouse.ImageSource}" Width="48" Height="48"
+                               HorizontalAlignment="Left"
                                VerticalAlignment="Center" />
                         <ContentControl Content="{Binding Warehouse.Element}"
                                         ContentTemplate="{StaticResource ElementTemplateVertical}"
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
                                         Margin="0,0,0,0" />
                     </Grid>
-                    <ContentControl Content="{Binding Warehouse}" ContentTemplate="{StaticResource CostTemplate}" />
+                    <Grid  Width="70" Height="70" VerticalAlignment="Center">
+                        <Image Source="{Binding  Warehouse.AssignedSuperManagerImageSource}" Stretch="Uniform"
+                               HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </Image>
+                    </Grid>
+                    <!-- <ContentControl Content="{Binding Warehouse}" ContentTemplate="{StaticResource CostTemplate}" /> -->
                     <b:Interaction.Triggers>
                         <b:EventTrigger EventName="MouseLeftButtonUp">
-                            <b:InvokeCommandAction Command="{Binding DataContext.EntitySelectCommand, RelativeSource={RelativeSource AncestorType=StackPanel}}"
-                                                   CommandParameter="{Binding Warehouse}" />
+                            <b:InvokeCommandAction
+                                Command="{Binding DataContext.EntitySelectCommand, RelativeSource={RelativeSource AncestorType=StackPanel}}"
+                                CommandParameter="{Binding Warehouse}" />
                         </b:EventTrigger>
                     </b:Interaction.Triggers>
                 </StackPanel>
@@ -110,20 +124,23 @@
                                            FontSize="24" Width="40" HorizontalContentAlignment="Right"
                                            FontWeight="Bold" />
                                     <Grid>
-                                        <Image Source="{Binding ImageSource}" Width="48" Height="48" HorizontalAlignment="Left" 
+                                        <Image Source="{Binding ImageSource}" Width="48" Height="48"
+                                               HorizontalAlignment="Left"
                                                VerticalAlignment="Center" />
                                         <ContentControl Content="{Binding Element}"
                                                         ContentTemplate="{StaticResource ElementTemplateHorizontal}"
                                                         HorizontalAlignment="Center" VerticalAlignment="Center"
                                                         Margin="16,24,0,0" />
                                     </Grid>
-                                    <ContentControl Content="{Binding}" ContentTemplate="{StaticResource CostTemplate}" />
+                                    <!-- <ContentControl Content="{Binding}" ContentTemplate="{StaticResource CostTemplate}" /> -->
                                 </StackPanel>
                                 <!-- Middle: Supermanager name and EffectivenessType -->
-                                <StackPanel Orientation="Vertical" Margin="10,0">
-                                    <Label Content="{Binding Supermanager.Name}" />
-                                    <Label Content="{Binding Supermanager.EffectivenessType}" />
-                                </StackPanel>
+                                <Grid  Width="70" Height="70" VerticalAlignment="Center">
+                                    <Image Source="{Binding  AssignedSuperManagerImageSource}" Stretch="Uniform"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    </Image>
+                              </Grid>
+
 
                                 <!-- Right: Passives as a string list -->
                                 <StackPanel Orientation="Vertical" Margin="10,0">
@@ -141,8 +158,9 @@
                             <Line X1="0" Y1="0" X2="500" Y2="0" Stroke="Black" StrokeThickness="1" Margin="10,0" />
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="MouseLeftButtonUp">
-                                    <b:InvokeCommandAction Command="{Binding DataContext.EntitySelectCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                                           CommandParameter="{Binding}" />
+                                    <b:InvokeCommandAction
+                                        Command="{Binding DataContext.EntitySelectCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding}" />
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                         </Grid>

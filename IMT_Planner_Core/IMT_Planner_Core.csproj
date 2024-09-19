@@ -42,7 +42,7 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-      <Page Update="Views\WPF\UserControls\ChronoTab\ElementAssignment.xaml">
+      <Page Update="Views\WPF\UserControls\ChronoTab\ElementAssignmentControl.xaml">
         <Generator>MSBuild:Compile</Generator>
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>

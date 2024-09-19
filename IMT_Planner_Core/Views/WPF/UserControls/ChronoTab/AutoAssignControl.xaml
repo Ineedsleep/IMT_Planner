@@ -1,0 +1,83 @@
+<UserControl x:Class="IMT_Planner.Views.WPF.UserControls.ChronoTab.AutoAssignControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:IMT_Planner.Views.WPF.UserControls.ChronoTab"
+             mc:Ignorable="d"
+             d:DesignHeight="150" d:DesignWidth="600">
+    <Grid>
+        <GroupBox Header="Auto Assignment">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="Criteria">
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Margin="16,0,16,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="MIF/CIF"></ComboBoxItem>
+                            <ComboBoxItem Content="CR"></ComboBoxItem>
+                            <ComboBoxItem Content="EQ Holder"></ComboBoxItem>
+                        </ComboBox.Items>
+                    </ComboBox>
+                    <ComboBox Margin="16,0,16,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="MIF/CIF"></ComboBoxItem>
+                            <ComboBoxItem Content="CR"></ComboBoxItem>
+                            <ComboBoxItem Content="EQ Holder"></ComboBoxItem>
+                        </ComboBox.Items>
+                    </ComboBox>
+                    <ComboBox Margin="16,0,16,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="MIF/CIF"></ComboBoxItem>
+                            <ComboBoxItem Content="CR"></ComboBoxItem>
+                            <ComboBoxItem Content="EQ Holder"></ComboBoxItem>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+                    </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="Order">
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left">
+                    <ComboBox Margin="16,0,16,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Legendary"></ComboBoxItem>
+                            <ComboBoxItem Content="Epic"></ComboBoxItem>
+                            <ComboBoxItem Content="Rare"></ComboBoxItem>
+                            <ComboBoxItem Content="Item4"></ComboBoxItem>
+                            <ComboBoxItem Content="Item5"></ComboBoxItem>
+                            <ComboBoxItem Content="Item6"></ComboBoxItem>
+                        </ComboBox.Items>
+                    </ComboBox>
+                    <ComboBox Margin="16,0,16,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Item1"></ComboBoxItem>
+                            <ComboBoxItem Content="Item2"></ComboBoxItem>
+                            <ComboBoxItem Content="Item3"></ComboBoxItem>
+                            <ComboBoxItem Content="Item4"></ComboBoxItem>
+                            <ComboBoxItem Content="Item5"></ComboBoxItem>
+                            <ComboBoxItem Content="Item6"></ComboBoxItem>
+                        </ComboBox.Items>
+                    </ComboBox>
+                    <ComboBox Margin="16,0,16,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Item1"></ComboBoxItem>
+                            <ComboBoxItem Content="Item2"></ComboBoxItem>
+                            <ComboBoxItem Content="Item3"></ComboBoxItem>
+                            <ComboBoxItem Content="Item4"></ComboBoxItem>
+                            <ComboBoxItem Content="Item5"></ComboBoxItem>
+                            <ComboBoxItem Content="Item6"></ComboBoxItem>
+                        </ComboBox.Items>
+                    </ComboBox>
+                </StackPanel>
+            </GroupBox>
+          <Button Grid.Row="1" Grid.Column="1" Content="Assign" HorizontalAlignment="Right" Command="{Binding AutoAssignCommand}"/>      
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

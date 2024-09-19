@@ -16,7 +16,10 @@
             <RowDefinition Height="7*"></RowDefinition>
         </Grid.RowDefinitions>
         <local:ChronoMineOverview Grid.RowSpan="2"  Grid.Column="0"></local:ChronoMineOverview>
-        <local:ElementAssignment  Grid.Row="0" Grid.Column="1"></local:ElementAssignment>
+       <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+        <local:ElementAssignmentControl></local:ElementAssignmentControl>
+        <local:AutoAssignControl></local:AutoAssignControl>
+       </StackPanel>
         <local:SuperManagerAssignmentControl  Grid.Row="1" Grid.Column="1"></local:SuperManagerAssignmentControl>
     </Grid>
 </UserControl>

@@ -35,7 +35,6 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services)
     {
-        //Repos
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IRepository<SuperManager>, SuperManagerRepository>(); 
         services.AddDbContext<IMTPlannerDbContext>(options =>
@@ -44,7 +43,6 @@ public partial class App : Application
             options.EnableSensitiveDataLogging();
             
         });
-        // Register your services and ViewModels here
         services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerSelectionService>();
         services.AddSingleton<IMT_Planner_ViewModels.Services.SuperManagerRepositoryService>();
         services.AddSingleton<IMT_Planner_ViewModels.Services.ChronoSelectionService>();
@@ -60,7 +58,7 @@ public partial class App : Application
         services.AddSingleton<ChronoMineEntityViewModel>();
         services.AddSingleton<SuperManagerAssignmentViewModel>();
         services.AddSingleton<ElementAssignmentViewModel>();
-        // Add other services or view models as needed.
+        services.AddSingleton<AutoAssignViewModel>();
         
         
 
