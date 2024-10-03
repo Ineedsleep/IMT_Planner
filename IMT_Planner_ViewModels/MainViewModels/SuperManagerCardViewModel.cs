@@ -211,6 +211,8 @@ public class SuperManagerCardViewModel : ObservableObject
        OnPropertyChanged(nameof(Name));
        OnPropertyChanged(nameof(Group));
        OnPropertyChanged(nameof(SuperManager));
+       OnPropertyChanged(nameof(Unlocked));
+       OnPropertyChanged(nameof(Tags));
        SplitElements();
        OnPropertyChanged(nameof(Elements));
     }

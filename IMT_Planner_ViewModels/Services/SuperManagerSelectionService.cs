@@ -219,6 +219,7 @@ public class SuperManagerSelectionService
     public event Action ElementsChanged;
     public event Action FilterChanged;
     public event Action CollectionChanged;
+    public event Action TagsChanged;
 
     // Define delegate
     public delegate void SuperManagerChangedHandler(object sender, EventArgs e);
@@ -228,6 +229,7 @@ public class SuperManagerSelectionService
     private void NotifyElementsUpdate() => ElementsChanged?.Invoke();
     private void NotifyFilterUpdate() => FilterChanged?.Invoke();
     private void CollectionUpdate() => CollectionChanged?.Invoke();
+    private void TagsUpdate() => TagsChanged?.Invoke();
 
     public void UpdateCard(SuperManager superManager)
     {
@@ -235,6 +237,7 @@ public class SuperManagerSelectionService
         if (targetVM != null)
         {
             NotifySuperManagerCardUpdate();
+            TagsUpdate();
         }
     }
 

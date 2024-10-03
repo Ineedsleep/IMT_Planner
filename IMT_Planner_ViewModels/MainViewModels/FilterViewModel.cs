@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using IMT_Planner_Model;
@@ -14,7 +15,7 @@ public class FilterViewModel : ObservableObject
 {
     private readonly SuperManagerSelectionService _superManagerSelectionService;
     private readonly SuperManagerRepositoryService _repositoryService;
-    private readonly IOrderedEnumerable<string> _allTags;
+    private IOrderedEnumerable<string> _allTags;
     private readonly List<ElementViewModel?> _elementList;
     public ICommand ApplyFilterCommand { get; private set; }
     public ICommand ResetFiltersCommand { get; private set; }
@@ -29,11 +30,13 @@ public class FilterViewModel : ObservableObject
         _repositoryService = repositoryService;
         ApplyFilterCommand = new RelayCommand(ApplyFilters);
         ResetFiltersCommand = new RelayCommand(ResetFilters);
+        _superManagerSelectionService.TagsChanged -= HandleTagsUpdate;
+        _superManagerSelectionService.TagsChanged += HandleTagsUpdate;
         var tmp = _repositoryService.GetAllElements().ToList();
-       _allTags = _superManagerSelectionService.GetAllTags();
+        _allTags = _superManagerSelectionService.GetAllTags();
 
 
-      _elementList = new List<ElementViewModel?>();
+        _elementList = new List<ElementViewModel?>();
         _elementList.Add(null);
         foreach (var element in tmp)
         {
@@ -41,6 +44,22 @@ public class FilterViewModel : ObservableObject
         }
 
         InitializeFilterViewModel();
+    }
+
+    private void HandleTagsUpdate()
+    {
+        _allTags = _superManagerSelectionService.GetAllTags();
+        foreach (var filter in CardFilters)
+        {
+            filter.Tags.Clear();
+            foreach (var tag in _allTags)
+            {
+                if (tag != string.Empty)
+                    filter.Tags.Add(new CardFilterModel.FilterTag() { Active = false, Name = tag });
+            }
+        }
+
+        OnPropertyChanged(nameof(CardFilters));
     }
 
     private void InitializeFilterViewModel()
@@ -51,7 +70,8 @@ public class FilterViewModel : ObservableObject
 
             foreach (var tag in _allTags)
             {
-                filter.Tags.Add(new CardFilterModel.FilterTag() { Active = false, Name = tag });
+                if (tag != string.Empty)
+                    filter.Tags.Add(new CardFilterModel.FilterTag() { Active = false, Name = tag });
             }
         }
     }
@@ -66,6 +86,7 @@ public class FilterViewModel : ObservableObject
         {
             CardFilters.Add(new CardFilterModel());
         }
+
         OnPropertyChanged(nameof(CardFilters));
         _superManagerSelectionService.ApplyFilters(CardFilters.First().GetExpression());
         InitializeFilterViewModel();
