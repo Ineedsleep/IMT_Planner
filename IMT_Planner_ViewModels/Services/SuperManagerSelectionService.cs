@@ -294,6 +294,7 @@ public class SuperManagerSelectionService
         }
 
         NotifyFilterUpdate();
+        CollectionUpdate();
     }
 
     public ObservableCollection<SuperManagerCardViewModel> SortCollection(
