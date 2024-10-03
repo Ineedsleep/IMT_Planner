@@ -131,7 +131,7 @@ public class CSVHandler
         return passives;
     }
 
-    private static int[] GetRankRequirement(Rarity rarity)
+    private static int[] GetRankRequirement(Rarity? rarity)
     {
         switch (rarity)
         {

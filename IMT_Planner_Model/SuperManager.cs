@@ -34,16 +34,16 @@ public class SuperManager
     public ICollection<SuperManagerElement>? SuperManagerElements { get; set; }
     public string? Name { get; set; }
     public Rank? Rank { get; set; }
-    public int Promoted { get; set; }
+    public int? Promoted { get; set; }
     public byte Level { get; set; }
-    public int CurrentFragments { get; set; }
+    public int CurrentFragments { get; set; } = 0;
     public ICollection<Passive> Passives { get; set; } = new List<Passive>();
-    public Rarity Rarity { get; set; }
-    public Areas Area { get; set; }
+    public Rarity? Rarity { get; set; }
+    public Areas? Area { get; set; }
     public byte Priority { get; set; }
     
     //Todo quick and dirty should be refactored in a better logic in an external table
-    public string Tags { get; set; }
+    public string Tags { get; set; } = string.Empty;
 
     /// <summary>
     /// If this is true the first initial 30 frags are collected and the sm can be crafted
@@ -54,8 +54,9 @@ public class SuperManager
         set
         {
             _unlocked = value;
-            
-            if (_unlocked == false && value == true)
+
+            if (_unlocked != false || value != true) return;
+            if (Rank != null)
                 Rank.CurrentRank = 0;
         }
     }

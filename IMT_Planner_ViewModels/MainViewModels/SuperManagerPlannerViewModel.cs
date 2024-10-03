@@ -32,6 +32,7 @@ public class SuperManagerPlannerViewModel : ObservableObject
         _superManagerSelectionService.SuperManagerCardUpdated += HandleSuperManagerSelectionChanged;
         _superManagerSelectionService.FilterChanged += HandleSuperManagerSelectionChanged;
         _superManagerSelectionService.FilterChanged += HandleSuperManagerSelectionChanged;
+
     }
 
     private void HandleSuperManagerSelectionChanged()
@@ -66,7 +67,7 @@ public class SuperManagerPlannerViewModel : ObservableObject
     {
         get => _superManagerSelectionService.SuperManagerCollection.Count * 5;
     }
-    public int CurrentPromoCount
+    public int? CurrentPromoCount
     {
         get => _superManagerSelectionService.SuperManagerCollection.Sum(x => x.Promoted);
     }

@@ -1,20 +1,10 @@
-using System.Collections;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Metrics;
-using System.Globalization;
-using System.IO;
+using System.Diagnostics;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using System.Windows.Media.TextFormatting;
-using System.Xml.XPath;
-using CsvHelper;
-using CsvHelper.Configuration;
 using IMT_Planner_DAL;
 using IMT_Planner_Model;
 using IMT_Planner_ViewModels.GeneralViewModels;
-using IMT_Planner_ViewModels.Helper;
 using IMT_Planner_ViewModels.MainViewModels;
-using LinqKit;
 
 namespace IMT_Planner_ViewModels.Services;
 
@@ -59,7 +49,7 @@ public class SuperManagerSelectionService
         get
         {
             _superManagerCollection = AdjustFilter(_superManagerCollection);
-            if(_superManagerCollection.Count == 0)
+            if (_superManagerCollection.Count == 0)
                 return _superManagerCollection;
             _superManagerCollection = SortCollection(_superManagerCollection);
             return _superManagerCollection;
@@ -156,7 +146,7 @@ public class SuperManagerSelectionService
         }
     }
 
-    private static int[] GetRankRequirement(Rarity rarity)
+    private static int[] GetRankRequirement(Rarity? rarity)
     {
         switch (rarity)
         {
@@ -174,7 +164,7 @@ public class SuperManagerSelectionService
     }
 
 
-    private Tuple<int, int, int> GetElementCount(Rarity rarity)
+    private Tuple<int, int, int> GetElementCount(Rarity? rarity)
     {
         int counter = 0;
         Tuple<int, int, int> elementCount;
@@ -228,6 +218,7 @@ public class SuperManagerSelectionService
     public event Action SuperManagerCardUpdated;
     public event Action ElementsChanged;
     public event Action FilterChanged;
+    public event Action CollectionChanged;
 
     // Define delegate
     public delegate void SuperManagerChangedHandler(object sender, EventArgs e);
@@ -236,7 +227,8 @@ public class SuperManagerSelectionService
     private void NotifySuperManagerCardUpdate() => SuperManagerCardUpdated?.Invoke();
     private void NotifyElementsUpdate() => ElementsChanged?.Invoke();
     private void NotifyFilterUpdate() => FilterChanged?.Invoke();
-    
+    private void CollectionUpdate() => CollectionChanged?.Invoke();
+
     public void UpdateCard(SuperManager superManager)
     {
         var targetVM = _superManagerCollection.SingleOrDefault(vm => vm.SuperManager == superManager);
@@ -259,11 +251,17 @@ public class SuperManagerSelectionService
             }
 
             _backupManagerCollection = SuperManagerCollection.Select(sm => sm.SuperManager).ToList();
+
         }
         catch (Exception ex)
         {
-            // Log the error
-            // throw; // If you want to rethrow the exception to be handled in the calling code.
+            if (Debugger.IsAttached)
+                throw;
+        }
+        finally
+        {
+            CollectionUpdate();
+            NotifyFilterUpdate();
         }
     }
 
@@ -302,7 +300,7 @@ public class SuperManagerSelectionService
         ObservableCollection<SuperManagerCardViewModel> collection)
     {
         var tmp = collection.ToList();
-     
+
         tmp = tmp
             .OrderBy(x => x.Rarity)
             .ThenBy(x => x.Unlocked)
@@ -311,8 +309,9 @@ public class SuperManagerSelectionService
             .OrderBy(sm => sm.Unlocked == false)
             .ThenByDescending(sm => sm.Rarity)
             .ToList();
-      ObservableCollection<SuperManagerCardViewModel> result = new ObservableCollection<SuperManagerCardViewModel>(tmp);
- 
+        ObservableCollection<SuperManagerCardViewModel> result =
+            new ObservableCollection<SuperManagerCardViewModel>(tmp);
+
         return result;
     }
 

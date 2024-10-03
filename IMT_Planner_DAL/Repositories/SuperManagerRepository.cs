@@ -106,59 +106,6 @@ public void InsertMany(IEnumerable<SuperManager> superManagers)
         _context.SaveChanges(); // Save elements and passives changes.
     }
 
-
-    
-    // public void InsertMany(IEnumerable<SuperManager> superManagers)
-    // {
-    //     try
-    //     {
-    //         foreach (var sm in superManagers)
-    //         {
-    //             // Check for existing SuperManagerId
-    //             if (_context.SuperManagers.Any(existingSm => existingSm.SuperManagerId == sm.SuperManagerId))
-    //             {
-    //                 _dbSet.Update(sm);
-    //                 continue;
-    //             }
-    //             // Attach Elements to the context
-    //             foreach (var sme in sm.SuperManagerElements)
-    //             {
-    //                 if (_context.Elements.Local.All(e => e.ElementId != sme.Element.ElementId)) // Check if not already tracked
-    //                 {
-    //                     _context.Elements.Attach(sme.Element);
-    //                 }
-    //             }
-    //
-    //             // Attach Passives and their PassiveAttributeName to the context
-    //             foreach (var passive in sm.Passives)
-    //             {
-    //                 if (_context.Passives.Local.All(p => p.Id != passive.Id))
-    //                 {
-    //                     if (_context.PassiveAttributeNames.Local.All(pan => pan.Id != passive.PassiveAttributeNameId))
-    //                     {
-    //                         _context.PassiveAttributeNames.Attach(passive.Name);
-    //                     }
-    //                     _context.Passives.Attach(passive);
-    //                 }
-    //             }
-    //
-    //             // Add SuperManager and its relationships to the context
-    //             //_context.SuperManagers.Add(sm);
-    //             Insert(sm);
-    //         }
-    //
-    //         // Save all changes once at the end, ensuring transactions work efficiently
-    //        // _context.SaveChanges();
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         Console.WriteLine(e.Message);
-    //     }
-    //     
-    //     // _dbSet.AddRange(superManagers);
-    //     // _context.SaveChanges();
-    // }
-
     public IEnumerable<SuperManager> GetAllWithElements()
     {
         var sms = _context.SuperManagers

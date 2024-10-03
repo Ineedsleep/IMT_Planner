@@ -64,7 +64,7 @@ public class SuperManagerCardViewModel : ObservableObject
         }
     }
 
-    public Rarity Rarity
+    public Rarity? Rarity
     {
         get => SuperManager.Rarity;
         set
@@ -77,9 +77,9 @@ public class SuperManagerCardViewModel : ObservableObject
         }
     }
 
-    public Areas Area
+    public Areas? Area
     {
-        get => SuperManager.Area;
+        get => SuperManager .Area;
         set
         {
             if (SuperManager.Area != value)
@@ -114,7 +114,7 @@ public class SuperManagerCardViewModel : ObservableObject
         }
     }
 
-    public int Promoted
+    public int? Promoted
     {
         get => SuperManager.Promoted;
         set

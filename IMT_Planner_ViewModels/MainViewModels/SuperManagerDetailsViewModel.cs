@@ -9,7 +9,6 @@ namespace IMT_Planner_ViewModels.MainViewModels;
 
 public class SuperManagerDetailsViewModel : ObservableObject
 {
-    
     private string _group;
     public IRelayCommand UpdateCommand { get; }
 
@@ -17,17 +16,17 @@ public class SuperManagerDetailsViewModel : ObservableObject
     private readonly SuperManagerSelectionService _superManagerSelectionService;
     private readonly SuperManagerRepositoryService _repositoryService;
 
-    public SuperManagerDetailsViewModel(SuperManagerSelectionService superManagerSelectionService, SuperManagerRepositoryService repositoryService)
+    public SuperManagerDetailsViewModel(SuperManagerSelectionService superManagerSelectionService,
+        SuperManagerRepositoryService repositoryService)
     {
         _superManagerSelectionService = superManagerSelectionService;
         _repositoryService = repositoryService;
         _superManagerSelectionService.SuperManagerChanged -= HandleSuperManagerSelectionChanged;
         _superManagerSelectionService.SuperManagerChanged += HandleSuperManagerSelectionChanged;
         UpdateCommand = new RelayCommand(Update);
-    }  
+    }
 
 
-    
     private void HandleSuperManagerSelectionChanged(string obj)
     {
         OnPropertyChanged(obj);
@@ -50,12 +49,13 @@ public class SuperManagerDetailsViewModel : ObservableObject
     public ObservableCollection<SuperManagerElementViewModel> SEElements
     {
         get => _superManagerSelectionService.SEElements;
-    } 
+    }
 
     public ObservableCollection<SuperManagerElementViewModel> NVEElements
     {
         get => _superManagerSelectionService.NVEElements;
-    }  
+    }
+
     public ObservableCollection<SuperManagerElementViewModel> PEElements
     {
         get => _superManagerSelectionService.PEElements;
@@ -64,11 +64,7 @@ public class SuperManagerDetailsViewModel : ObservableObject
     public SuperManager CurrentSuperManager
     {
         get { return _superManagerSelectionService.CurrentSuperManager; }
-        set
-        {
-            _superManagerSelectionService.CurrentSuperManager = value;
-
-        }
+        set { _superManagerSelectionService.CurrentSuperManager = value; }
     }
 
     public string Group
@@ -93,9 +89,15 @@ public class SuperManagerDetailsViewModel : ObservableObject
             }
         }
     }
-    public string? Tags
+
+    public string Tags
     {
-        get => CurrentSuperManager.Tags;
+        get
+        {
+            if (CurrentSuperManager?.Tags != null) 
+                return CurrentSuperManager?.Tags;
+            return "";
+        }
         set
         {
             if (CurrentSuperManager.Tags != value)
@@ -106,27 +108,30 @@ public class SuperManagerDetailsViewModel : ObservableObject
         }
     }
 
-    public Rarity Rarity
+    public Rarity? Rarity
     {
-        get => CurrentSuperManager.Rarity;
+        get => CurrentSuperManager?.Rarity;
         set
         {
-            if (CurrentSuperManager.Rarity != value)
+            if (CurrentSuperManager?.Rarity != value)
             {
-                CurrentSuperManager.Rarity = value;
+                if (CurrentSuperManager != null)
+                    CurrentSuperManager.Rarity = value;
+
                 OnPropertyChanged(nameof(Rarity));
             }
         }
     }
 
-    public Areas Area
+    public Areas? Area
     {
-        get => CurrentSuperManager.Area;
+        get => CurrentSuperManager?.Area;
         set
         {
-            if (CurrentSuperManager.Area != value)
+            if (CurrentSuperManager?.Area != value)
             {
-                CurrentSuperManager.Area = value;
+                if (CurrentSuperManager != null)
+                    CurrentSuperManager.Area = value;
                 OnPropertyChanged(nameof(Area));
             }
         }
@@ -134,7 +139,7 @@ public class SuperManagerDetailsViewModel : ObservableObject
 
     public Rank? Rank
     {
-        get => CurrentSuperManager.Rank;
+        get => CurrentSuperManager?.Rank;
         set
         {
             if (CurrentSuperManager.Rank != value)
@@ -163,9 +168,9 @@ public class SuperManagerDetailsViewModel : ObservableObject
     }
 
     //Enum Values for Comboboxes
-    public int Promoted
+    public int? Promoted
     {
-        get => CurrentSuperManager.Promoted;
+        get => CurrentSuperManager?.Promoted;
         set
         {
             if (CurrentSuperManager.Promoted != value)
@@ -175,18 +180,26 @@ public class SuperManagerDetailsViewModel : ObservableObject
             }
         }
     }
-    public int CurrentFragments
+
+    public int? CurrentFragments
     {
-        get => CurrentSuperManager.CurrentFragments;
+        get => CurrentSuperManager?.CurrentFragments;
         set
         {
             if (CurrentSuperManager.CurrentFragments != value)
             {
-                CurrentSuperManager.CurrentFragments = value;
+                if (value == null)
+                    CurrentSuperManager.CurrentFragments = 0;
+                else
+                {
+                    CurrentSuperManager.CurrentFragments = (int)value;
+                }
+
                 OnPropertyChanged(nameof(CurrentFragments));
             }
         }
     }
+
     public bool Unlocked
     {
         get => CurrentSuperManager?.Unlocked == true;
@@ -199,16 +212,18 @@ public class SuperManagerDetailsViewModel : ObservableObject
             }
         }
     }
+
     public IEnumerable<Rarity> Rarities
     {
         get { return Enum.GetValues(typeof(Rarity)).Cast<Rarity>(); }
     }
+
     public IEnumerable<Areas> Areas
     {
         get { return Enum.GetValues(typeof(Areas)).Cast<Areas>(); }
     }
 
-    
+
     //Command Methods
     private void Update()
     {
