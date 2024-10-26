@@ -33,7 +33,7 @@ public class SuperManagerListViewModel: ObservableObject
         _superManagerSelectionService.SuperManagerChanged += HandleSuperManagerSelectionChanged;
         _superManagerSelectionService.CollectionChanged -= HandleCollectionChanged;
         _superManagerSelectionService.CollectionChanged += HandleCollectionChanged;
-        _superManagerCollection = new ObservableCollection<SuperManagerCardViewModel> ();
+        _superManagerCollection = new ObservableCollection<SuperManagerCardViewModel>();
         SelectSuperManagerCommand = new RelayCommand<SuperManagerCardViewModel>(SelectSuperManagerViewModel);
         try
         {
@@ -45,7 +45,7 @@ public class SuperManagerListViewModel: ObservableObject
         }
         catch (Exception e)
         {
-            Console.WriteLine("No Supermanagers in DB yet, load from default csv file and save into DB");
+            Console.WriteLine("No Super managers in DB yet, load from default csv file and save into DB");
             if(_superManagerSelectionService.SuperManagerCollection.Count == 0)
                 _superManagerSelectionService.LoadSuperManagersFromFileAsync(@".\Resources\SM_Sheet_Default.csv");
             IEnumerable<SuperManager> tmp = _superManagerSelectionService.SuperManagerCollection.Select(s => s.SuperManager);

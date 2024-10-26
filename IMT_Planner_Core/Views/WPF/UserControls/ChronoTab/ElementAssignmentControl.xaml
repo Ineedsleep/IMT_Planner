@@ -39,19 +39,59 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <GroupBox Header="Element Assignment">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ComboBox Grid.Row="0" SelectedItem="{Binding SelectedChronoDate}" Width="100" Height="32"
+                          VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ComboBox.Items>
+                        <ComboBoxItem>2024-10-03</ComboBoxItem>
+                        <ComboBoxItem>2024-09-20</ComboBoxItem>
+                        <ComboBoxItem>2024-09-08</ComboBoxItem>
+                        <ComboBoxItem>2024-08-22</ComboBoxItem>
+                    </ComboBox.Items>
+                </ComboBox>
+                <StackPanel Orientation="Horizontal"  Grid.Row="1">
+                    <Button Content="Load" HorizontalAlignment="Right" Width="50" Height="28" Margin="4,0,4,0"
+                            VerticalAlignment="Bottom">
+                    </Button> 
+                    <Button Content="Delete" HorizontalAlignment="Right" Width="50" Height="28" Margin="4,0,4,0"
+                            VerticalAlignment="Bottom">
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Element Assignment" Grid.Column="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                    <RadioButton Content="4" GroupName="PatternGroup" IsChecked="{Binding SelectedPattern, Converter={StaticResource PatternConverter}, ConverterParameter=4, Mode=TwoWay}" Margin="2"/>
-                    <RadioButton Content="5" GroupName="PatternGroup" IsChecked="{Binding SelectedPattern, Converter={StaticResource PatternConverter}, ConverterParameter=5, Mode=TwoWay}" Margin="2"/>
-                    <RadioButton Content="6" GroupName="PatternGroup" IsChecked="{Binding SelectedPattern, Converter={StaticResource PatternConverter}, ConverterParameter=6, Mode=TwoWay}" Margin="2"/>
-                    <RadioButton Content="7" GroupName="PatternGroup" IsChecked="{Binding SelectedPattern, Converter={StaticResource PatternConverter}, ConverterParameter=7, Mode=TwoWay}" Margin="2"/>
-                    <RadioButton Content="8" GroupName="PatternGroup" IsChecked="{Binding SelectedPattern, Converter={StaticResource PatternConverter}, ConverterParameter=8, Mode=TwoWay}" Margin="2"/>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <RadioButton Content="4" GroupName="PatternGroup"
+                                 IsChecked="{Binding SelectedPattern, Converter={StaticResource PatternConverter}, ConverterParameter=4, Mode=TwoWay}"
+                                 Margin="2" />
+                    <RadioButton Content="5" GroupName="PatternGroup"
+                                 IsChecked="{Binding SelectedPattern, Converter={StaticResource PatternConverter}, ConverterParameter=5, Mode=TwoWay}"
+                                 Margin="2" />
+                    <RadioButton Content="6" GroupName="PatternGroup"
+                                 IsChecked="{Binding SelectedPattern, Converter={StaticResource PatternConverter}, ConverterParameter=6, Mode=TwoWay}"
+                                 Margin="2" />
+                    <RadioButton Content="7" GroupName="PatternGroup"
+                                 IsChecked="{Binding SelectedPattern, Converter={StaticResource PatternConverter}, ConverterParameter=7, Mode=TwoWay}"
+                                 Margin="2" />
+                    <RadioButton Content="8" GroupName="PatternGroup"
+                                 IsChecked="{Binding SelectedPattern, Converter={StaticResource PatternConverter}, ConverterParameter=8, Mode=TwoWay}"
+                                 Margin="2" />
                 </StackPanel>
                 <ItemsControl Grid.Column="1" ItemsSource="{Binding ElementBoxes}"
                               ItemTemplate="{StaticResource ComboBoxWithLabelTemplate}" Margin="16,0,0,0">
@@ -61,6 +101,9 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
+                <Button Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="50" Height="32"
+                        Grid.Column="2">
+                </Button>
             </Grid>
         </GroupBox>
     </Grid>
