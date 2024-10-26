@@ -10,7 +10,7 @@ Luna and Stella,Elevator,0,0,0,Light;Nature;Frost;Water;Flame;Wind;Dark;Sand,Leg
 Eternity,Mineshaft,0,0,0,Wind;Sand;Water;Flame;Light;Dark;Nature;Frost,Legendary,"CR,84.8,3;CIF,1.6,5",TRUE
 Poseidon,Warehouse,0,0,0,Water;Dark;Wind;Nature;Frost;Flame;Light;Sand,Legendary,"CR,84.8,3;CIF,1.6,5",TRUE
 Asterion,Mineshaft,0,0,0,Nature;Sand;Dark;Frost;Light;Water;Flame;Wind,Legendary,"CR,84.8,3;SUCR,52.2,5",TRUE
-Om'nix,Mineshaft,0,0,0,Flame;Light;Nature;Dark;Wind;Sand;Frost;Water,Legendary,"CR,43.7,1;SUCR,36.1,3;CIF,1.6,5",FALSE
+Om'nix,Mineshaft,0,0,0,Flame;Light;Nature;Dark;Wind;Sand;Frost;Water,Legendary,"CR,43.7,1;SUCR,36.1,3;CIF,1.6,5",TRUE
 Zoe_365,Mineshaft,0,0,0,Frost;Light;Wind;Nature;Dark;Water;Flame;Sand,Epic,"CR,59.2,1;MIF,1.98,5",TRUE
 Cliff Walker,Mineshaft,0,0,0,Frost;Light;Water;Nature;Dark;Wind;Flame;Sand,Epic,"CR,59.2,3;CIF,1.5,5",TRUE
 Floating Agatha,Mineshaft,0,0,0,Dark;Frost;Wind;Flame;Sand;Water;Nature;Light,Epic,"CR,59.2,1;CIF,1.5,5",TRUE
